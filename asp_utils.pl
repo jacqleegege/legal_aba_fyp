@@ -136,9 +136,11 @@ dump_rules(Rs) :-
   dump_rules(Rs,'asp.clingo') .
 dump_rules(Rs,File) :-
   tell(File),
-  aba_rules(Rs,A),
+  aba_rules(Rs,A), utl_rules(Rs,U),
+  %preds_in_rules(A,[],Preds1),
+  %preds_in_rules(U,Preds1,Preds),
+  %write_show(Preds),
   dump_rules_aux(A),
-  utl_rules(Rs,U),
   nl, write('% utility rules'), nl,
   dump_rules_aux(U),
   told.  
@@ -174,6 +176,11 @@ write_bd([H]) :-
 write_bd([H|T]) :-
   write(H), write(', '),
   write_bd(T).
+
+write_show([]).
+write_show([P/N|Ps]) :-
+   write('#show '), write(P/N), write('.'), nl,
+  write_show(Ps).
 
 % check if C is a contrary of an assumption
 is_contrary(C,R) :-
@@ -295,3 +302,35 @@ show_term(A) :-
   copy_term(A,CpyA),
   numbervars(CpyA,0,_),
   write(CpyA).
+
+% MODE: preds_in_rules(+Rs,+InPreds, -OutPreds)
+% SEMANTICS: OutPreds is the list of predicates occurring in Rs and in InPreds
+preds_in_rules([],Preds,Preds).
+preds_in_rules([rule(_,contrary(A,C),_)|Rs],InPreds,OutPreds) :-
+  !,
+  add_pred(A,InPreds,InPreds1),
+  add_pred(C,InPreds1,InPreds2),  
+  preds_in_rules(Rs,InPreds2,OutPreds).
+preds_in_rules([rule(_,{H},_)|Rs],InPreds,OutPreds) :-
+  !,
+  add_pred(H,InPreds,InPreds1),
+  preds_in_rules(Rs,InPreds1,OutPreds).
+preds_in_rules([rule(_,H,_)|Rs],InPreds,OutPreds) :-
+  functor(H,P,N), 
+  memberchk(P/N,[false/0,assumption/1,domain/1]),
+  !,
+  preds_in_rules(Rs,InPreds,OutPreds).
+preds_in_rules([rule(_,H,_)|Rs],InPreds,OutPreds) :-
+  !,
+  add_pred(H,InPreds,InPreds1),
+  preds_in_rules(Rs,InPreds1,OutPreds).
+preds_in_rules([directive(_,_)|Rs],InPreds,OutPreds) :-
+  preds_in_rules(Rs,InPreds,OutPreds).
+%
+add_pred(A,InPreds,OutPreds) :-
+	functor(A,P,N),
+	( memberchk(P/N,InPreds)  ->
+		OutPreds = InPreds
+  ;
+		OutPreds = [P/N|InPreds]
+  ).

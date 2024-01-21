@@ -17,10 +17,14 @@ folding(Rs,R, F) :-
 % H: head of the clause to be folded
 % Ts: To be folded
 % Fs: result
+% non-deterministic
+:- discontiguous folding/4.
 folding(Rs,H,Ts, Fs) :-
-  fold(Rs,H,Ts, Zs),
+  lopt(folding_mode(nd)),
+  tokens(T),
+  fold_all(T,Rs,H,[],Ts, Zs),
   folding_aux(Rs,H,Zs, Fs).
-% folding auxiliary predicate
+% fold_all auxiliary predicate
 folding_aux(_,_,Fs, Fs).
 folding_aux(Rs,H,[T|Ts], Fs) :-
   folding(Rs,H,[T|Ts], Fs).
@@ -28,13 +32,8 @@ folding_aux(Rs,H,Ts, Fs1) :-
   nselect(P,Ts, E,R),
   folding(Rs,H,R, Fs),
   combine(P,E,Fs, Fs1). 
-
-% fold(+Rs,+H,+Ts, -Zs)
-fold(Rs,H,Ts, Zs) :-
-  lopt(folding_mode(nd)),
-  tokens(T), 
-  fold_all(T,Rs,H,[],Ts, Zs).
-fold(Rs,H,Ts, Zs) :-
+% greedy
+folding(Rs,H,Ts, Zs) :-
   lopt(folding_mode(greedy)),
   fold_greedy(Rs,H,[],Ts, Zs),
   !.   
