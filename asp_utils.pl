@@ -40,6 +40,7 @@ rule_id(I) :-
 % new_rule(H,B, R): R is the term representing
 % a rule whose head is H and body is B
 new_rule(H,B, R) :-
+  ( is_list(B) -> true; throw(new_rule:not_a_list(B)) ),
   rule_id(I),
   normalize_head(H, H1,B1),
   append(B1,B,B3),
@@ -122,14 +123,15 @@ conj_to_list(B,L) :-
   ).
 % perform checks on rules
 check_rules(Rules) :-
-  check_domain_existence(Rules).
+  true.
+  %check_domain_existence(Rules).
 % check existend of predicate 'domain/1' 
-check_domain_existence(Rules) :-
-  ( member(rule(_,domain(_),_),Rules) -> 
-    true 
-  ;
-    ( nl, write('domain/1 is undefined!'), halt )
-  ).
+%check_domain_existence(Rules) :-
+%  ( member(rule(_,domain(_),_),Rules) -> 
+%    true 
+%  ;
+%    ( nl, write('domain/1 is undefined!'), halt )
+%  ).
 
 % SEMANTICS: writes all rules to file
 dump_rules(Rs) :-
@@ -206,7 +208,7 @@ asp_plus(Ri,Ep,En,Ts, Ro) :-
   utl_rules_append(Ri,G,Ri1),
   asp(Ri1,Ep,En, Ro).
 % asp_star: ASP* (w/primed predicates)
-asp_star(Ri,Ep,En, Ro) :-
+asp_star(Ri,Ep,En, Ro) :- 
   % Cs: set of contrary predicates
   utl_rules(Ri, U),
   findall(F1/N1, ( member(rule(_,contrary(_,C),_),U), functor(C,F1,N1) ), Cs),
@@ -222,7 +224,8 @@ asp_star(Ri,Ep,En, Ro) :-
 generators([], []).
 generators([F/N|Fs], [G,O|Gs]) :-
   functor(P,F,N),
-  generator(P, G),
+  %generator(P, G),
+  new_rule({P},[domain(P)], G),
   O=directive(minimize,{1,P:P}),
   generators(Fs, Gs).
 
@@ -232,8 +235,9 @@ generators_pp([F/N|Fs], [R,G,O|Gs]) :-
   atom_concat(F,'_P',FP), 
   length(A,N),
   PP =.. [FP|A],
-  generator(PP, G),
+  %generator(PP, G),
   P =.. [F|A],
+  new_rule({PP},[domain(P)], G),
   new_rule(P,[PP],R),   % p :- p_P
   O=directive(minimize,{1,PP:PP}),
   generators_pp(Fs, Gs).

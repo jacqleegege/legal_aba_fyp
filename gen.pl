@@ -62,7 +62,7 @@ gen3(Ri,Ep,En,F,APF, Rf) :-
   write('gen3: found: '), show_term(AP), write(' ... '),
   entails(Ri1,Ep,En), % if Ri1 w/mg_alpha does not entails E+,E-,
   !,
-  write('OK, assumption introduction result: '), show_rule(FwAP), nl,
+  write('OK, assumption introduction result: '), show_rule(FwAP), nl, trace,
   gen7(Ri1,Ep,En, Rf). % go to subsumption
 gen3(_Ri,_Ep,_En,F,_APF, _Rf) :-
   F = rule(_,_,B),
@@ -125,9 +125,12 @@ new_assumption(Ri,Ep,En,F, Ra,Rg,A,FwA) :-
   copy_term(A1,A2),
   assumption_contrary(A2,C2),
   new_rule(contrary(A2,C2),[assumption(A2)],U2),
+  % create domain/1 utility clause
+  copy_term((A,B),(A3,B3)),
+  new_rule(domain(A3),B3,U3),
   % create Ra (Ri w/assumption)
   aba_rules_append(Ri,[FwA], Ri1),    
-  utl_rules_append(Ri1,[U1,U2], Ra),
+  utl_rules_append(Ri1,[U1,U2,U3], Ra),
   % create Rg (Ra w/generator of c_alpha)
   functor(C2,CNewName,N),
   asp_plus(Ra,Ep,En,[CNewName/N], Rg).
