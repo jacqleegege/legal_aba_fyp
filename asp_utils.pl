@@ -1,10 +1,8 @@
 :- module(asp_utils,
-    [  is_contrary/2
-    ,  asp/2
+    [  asp/2
     ,  asp/4
     ,  asp_star/4
     ,  asp_plus/5
-    ,  domain_preds/2
     ,  dump_rules/1
     ,  dump_rules/2
     ,  new_rule/3
@@ -123,25 +121,22 @@ conj_to_list(B,L) :-
   ).
 % perform checks on rules
 check_rules(Rules) :-
-  true.
-  %check_domain_existence(Rules).
+  check_domain_existence(Rules).
 % check existend of predicate 'domain/1' 
-%check_domain_existence(Rules) :-
-%  ( member(rule(_,domain(_),_),Rules) -> 
-%    true 
-%  ;
-%    ( nl, write('domain/1 is undefined!'), halt )
-%  ).
-
+check_domain_existence(Rules) :-
+ member(rule(_,assumption(A),_),Rules),
+ copy_term(A,A1),
+ \+ member(rule(_,domain(A),_),Rules),
+ numbervars(A1,0,_),
+ nl, write('domain/1 for '), write(A1), write(' undefined!'), nl, nl, halt.
+check_domain_existence(_).
+ 
 % SEMANTICS: writes all rules to file
 dump_rules(Rs) :-
   dump_rules(Rs,'asp.clingo') .
 dump_rules(Rs,File) :-
   tell(File),
   aba_rules(Rs,A), utl_rules(Rs,U),
-  %preds_in_rules(A,[],Preds1),
-  %preds_in_rules(U,Preds1,Preds),
-  %write_show(Preds),
   dump_rules_aux(A),
   nl, write('% utility rules'), nl,
   dump_rules_aux(U),
@@ -184,20 +179,13 @@ write_show([P/N|Ps]) :-
    write('#show '), write(P/N), write('.'), nl,
   write_show(Ps).
 
-% check if C is a contrary of an assumption
-is_contrary(C,R) :-
-  ground(C),
-  functor(C,F,N), % C is a ground term whose functor is F/N
-  functor(T,F,N), % T is a nonground term whose functor is F/N
-  utl_rules(R,A),
-  member(rule(_,contrary(_,T),_),A).
-
 % asp: ASP encoding of Ri
 asp(Ri, Ro) :-
-  utl_rules(Ri,Us),
-  % add asp rules enconding attacks to assumptions: alpha :- not c_alpha
-  attacks(Us, As),           % (b.1)
-  utl_rules_append(Ri,As,Ro).
+  aba_rules(Ri,Ai),
+  utl_rules(Ri,Ui),
+  asp_utl_rules(Ui, Uo),     % (b.1)
+  aba_rules(Ro,Ai),
+  utl_rules(Ro,Uo).
 asp(Ri,Ep,En, Ro) :-
   ic(Ep,En, I),              % (c), (d)
   utl_rules_append(Ri,I,Ri1),
@@ -208,61 +196,80 @@ asp_plus(Ri,Ep,En,Ts, Ro) :-
   utl_rules_append(Ri,G,Ri1),
   asp(Ri1,Ep,En, Ro).
 % asp_star: ASP* (w/primed predicates)
-asp_star(Ri,Ep,En, Ro) :- 
+asp_star(Ri,Ep,En, Ro) :-
   % Cs: set of contrary predicates
   utl_rules(Ri, U),
-  findall(F1/N1, ( member(rule(_,contrary(_,C),_),U), functor(C,F1,N1) ), Cs),
-  append(Ep,En,E), % E is the list of positive and negative examples
-  % Ps: set of predicates in Ep and En (different from contraries)
-  setof(F2/N2,[P]^( member(P,E), functor(P,F2,N2), \+ member(F2,Cs) ), Ps),
-  append(Ps,Cs,Ts),
-  generators_pp(Ts, Gs),     % (e)
+  findall((A/N,C/N), ( member(rule(_,contrary(Alpha,C_Alpha),_),U), functor(Alpha,A,N), functor(C_Alpha,C,N) ), Cs),
+  generators_pp(Cs, Gs),     % (e)
   utl_rules_append(Ri,Gs, Ri1),
-  asp(Ri1,Ep,En, Ro).
+  ep_generators_pp(Ep, Gs1), 
+  utl_rules_append(Ri1,Gs1, Ri2),
+  asp(Ri2,Ep,En, Ro).
 
 %
 generators([], []).
-generators([F/N|Fs], [G,O|Gs]) :-
-  functor(P,F,N),
-  %generator(P, G),
-  new_rule({P},[domain(P)], G),
-  O=directive(minimize,{1,P:P}),
+generators([(A/N,C/N)|Fs], [G,O|Gs]) :-
+  length(V,N),
+  AP =..[A|V],
+  CP =..[C|V],
+  new_rule({CP},[domain(AP)], G),
+  O=directive(minimize,{1,CP:CP}),
   generators(Fs, Gs).
 
 %
 generators_pp([], []).
-generators_pp([F/N|Fs], [R,G,O|Gs]) :-
-  atom_concat(F,'_P',FP), 
-  length(A,N),
-  PP =.. [FP|A],
-  %generator(PP, G),
-  P =.. [F|A],
-  new_rule({PP},[domain(P)], G),
-  new_rule(P,[PP],R),   % p :- p_P
-  O=directive(minimize,{1,PP:PP}),
+generators_pp([(A/N,C/N)|Fs], [G,R,O|Gs]) :-
+  length(V,N),
+  AP =..[A|V],
+  CP =..[C|V],
+  atom_concat(C,'_P',C_P),
+  C_PP =.. [C_P|V],
+  new_rule({C_PP},[domain(AP)], G),
+  copy_term((CP,C_PP),(CP1,C_PP1)),
+  new_rule(CP1,[C_PP1],R),          % p :- p_P
+  O=directive(minimize,{1,C_PP:C_PP}),
   generators_pp(Fs, Gs).
 
 %
-generator(P, G) :-
-  term_variables(P,V),
-  domain_preds(V, D),
-  new_rule({P},D, G).
-
-% 
-domain_preds([], []).
-domain_preds([V|Vs], [domain(V)|Ds]) :-
-  domain_preds(Vs, Ds).
+ep_generators_pp(Ep, [G|Gs]) :-
+  findall(E1, ( member(E,Ep), E =..[F|A], atom_concat(F,'_P',F_P), E1 =..[F_P|A]), EpP),
+  ep_choice(EpP, EpG), 
+  new_rule({EpG},[], G),
+  setof((F/N,F_P/N), [E]^( member(E,Ep), functor(E,F,N), atom_concat(F,'_P',F_P) ), Fs), 
+  ep_generators_pp_aux(Fs, Gs).
 
 %
-attacks([], []).
-attacks([U|Us], [R|Rs]) :-
-  U = rule(_,contrary(A,C),_),
+ep_choice([E],E).
+ep_choice([E|Es],(E;Gs)) :-
+  ep_choice(Es,Gs).
+
+%
+ep_generators_pp_aux([], []).
+ep_generators_pp_aux([(F/N,F_P/N)|Ls], [R,directive(minimize,{1,F_PP:F_PP})|Gs]) :-
+  length(V,N),
+  FP =.. [F|V],
+  F_PP =.. [F_P|V],
+  new_rule(FP,[F_PP],R), 
+  ep_generators_pp_aux(Ls, Gs).
+
+%
+asp_utl_rules([], []).
+asp_utl_rules([U|UsI], [R|UsO]) :-
+  % convert contrary/2 into ASP rules encoding attacks to assumptions
+  % i.e., contrary(Alpha,C_Alpha) into Alpha :- not C_Alpha, domain(Alpha)
+  U = rule(_,contrary(Alpha,C_Alpha),_),
   !,
-  copy_term((A,C),(CpyA,CpyC)),
-  new_rule(CpyA,[not CpyC, assumption(CpyA)], R),
-  attacks(Us, Rs).
-attacks([_|Us], As) :-
-  attacks(Us, As).
+  copy_term((Alpha,C_Alpha),(Alpha1,C_Alpha1)),
+  new_rule(Alpha1,[not C_Alpha1, domain(Alpha1)], R),
+  asp_utl_rules(UsI, UsO).
+asp_utl_rules([U|UsI], UsO) :-
+  % delete assumption/1
+  U = rule(_,assumption(_),_),
+  !,
+  asp_utl_rules(UsI, UsO).
+asp_utl_rules([U|UsI], [U|UsO]) :-
+  % keep any other utility rule
+  asp_utl_rules(UsI, UsO).
 
 % ic(+Ep,+En, I), I is the list of integrity constratints
 % generated from positive Ep and negative examples En
@@ -306,35 +313,3 @@ show_term(A) :-
   copy_term(A,CpyA),
   numbervars(CpyA,0,_),
   write(CpyA).
-
-% MODE: preds_in_rules(+Rs,+InPreds, -OutPreds)
-% SEMANTICS: OutPreds is the list of predicates occurring in Rs and in InPreds
-preds_in_rules([],Preds,Preds).
-preds_in_rules([rule(_,contrary(A,C),_)|Rs],InPreds,OutPreds) :-
-  !,
-  add_pred(A,InPreds,InPreds1),
-  add_pred(C,InPreds1,InPreds2),  
-  preds_in_rules(Rs,InPreds2,OutPreds).
-preds_in_rules([rule(_,{H},_)|Rs],InPreds,OutPreds) :-
-  !,
-  add_pred(H,InPreds,InPreds1),
-  preds_in_rules(Rs,InPreds1,OutPreds).
-preds_in_rules([rule(_,H,_)|Rs],InPreds,OutPreds) :-
-  functor(H,P,N), 
-  memberchk(P/N,[false/0,assumption/1,domain/1]),
-  !,
-  preds_in_rules(Rs,InPreds,OutPreds).
-preds_in_rules([rule(_,H,_)|Rs],InPreds,OutPreds) :-
-  !,
-  add_pred(H,InPreds,InPreds1),
-  preds_in_rules(Rs,InPreds1,OutPreds).
-preds_in_rules([directive(_,_)|Rs],InPreds,OutPreds) :-
-  preds_in_rules(Rs,InPreds,OutPreds).
-%
-add_pred(A,InPreds,OutPreds) :-
-	functor(A,P,N),
-	( memberchk(P/N,InPreds)  ->
-		OutPreds = InPreds
-  ;
-		OutPreds = [P/N|InPreds]
-  ).

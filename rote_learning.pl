@@ -33,13 +33,20 @@ roLe(Ri,Ep,En, Ro) :-
   % learn contraries (c_alpha)
   asp_star(Ri,Ep,En, S),
   compute_conseq(S, [CS]),          % fails if S is unsatisfiable
-  findall(R2, ( member(Cp,CS),      % Cp is a conseq. of R extended w/generators & ic
-                Cp =.. [Pp|Ap],
-                atom_concat(P1,'_P',Pp),
-                C1 =.. [P1|Ap],
-                is_contrary(C1,Ri), % C1 is a contrary of an assumption
-                \+ member(C1,CA),   % C1 1is not a conseq. of R
-                e_rote_learn(C1,R2) % R2 is the rote learning of C
+  utl_rules(Ri,U),
+  findall(R2, ( % C_Alpha is a contrary of an assumption
+                member(rule(_,contrary(_,C_Alpha),_),U),
+                copy_term(C_Alpha,C_Alpha1),
+                C_Alpha1 =.. [C|V],
+                % C_AlphaP is the primed version of C_Alpha1
+                atom_concat(C,'_P',CP),
+                C_AlphaP =.. [CP|V],
+                % C_AlphaP is a conseq. of R extended w/generators & ic
+                member(C_AlphaP,CS),
+                % C_Alpha1 is not a conseq. of R (the member above instantiates the arguments of C_Alpha1)
+                \+ member(C_Alpha1,CA),
+                % R2 is the rote learning of C 
+                e_rote_learn(C_Alpha1,R2) 
               ), LC),
   % add learnt positive and contraries to Ri
   aba_rules_append(Ri,LP,R1), aba_rules_append(R1,LC,Ro),

@@ -45,16 +45,13 @@ aba_asp(BK,Ep,En, Ro) :-
 aba_asp_proc(BK,R1,Ep,En, Ro) :-
   roLe(R1,Ep,En, R2),    % RoLe 
   genT(R2,Ep,En, Ro),    % GEN
-  ( atom_concat(BN,'.pl',BK) ->
-    atom_concat(BN,'.sol.pl',Out)
-  ;
-    atom_concat(BK,'.sol.pl',Out)
-  ),
+  atom_concat(BK,'.sol',Out),
   retract(sol_counter(N)), M is N+1, assert(sol_counter(M)),
   nl, write('Writing solution no. '), write(M), write(' to '), write(Out), nl, nl,
   dump_rules(Ro,Out),
   asp(Ro,RoASP),
-  dump_rules(RoASP).
+  atom_concat(BK,'.sol.asp',OutASP),
+  dump_rules(RoASP,OutASP).
 aba_asp_proc(_,_,_,_, _) :-
   sol_counter(N),
   nl, 

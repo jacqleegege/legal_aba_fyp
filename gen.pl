@@ -50,7 +50,11 @@ gen2(Ri,Ep,En,F, Rf) :-
   write('gen2: generating NEW assumption: '), show_term(A), nl,
   write(' assumption introduction result: '), show_rule(FwAP), nl,
   compute_conseq(Rg, Cs),
-  member(RgAS, Cs),
+  ( Cs \==[] -> 
+    member(RgAS, Cs)
+    ; 
+    ( write('gen2: There is no AS!'), nl, halt ) 
+  ), 
   gen4(Ri,Ep,En,F,Ra,A,RgAS, Rf).
 % gen3 - OLD assumption found
 gen3(Ri,Ep,En,F,APF, Rf) :-
@@ -62,7 +66,7 @@ gen3(Ri,Ep,En,F,APF, Rf) :-
   write('gen3: found: '), show_term(AP), write(' ... '),
   entails(Ri1,Ep,En), % if Ri1 w/mg_alpha does not entails E+,E-,
   !,
-  write('OK, assumption introduction result: '), show_rule(FwAP), nl, trace,
+  write('OK, assumption introduction result: '), show_rule(FwAP), nl,
   gen7(Ri1,Ep,En, Rf). % go to subsumption
 gen3(_Ri,_Ep,_En,F,_APF, _Rf) :-
   F = rule(_,_,B),
@@ -112,18 +116,16 @@ new_assumption(Ri,Ep,En,F, Ra,Rg,A,FwA) :-
   F = rule(_,H,B),
   term_variables(B,V),
   % new assumption
-  gen_new_name(ANewName),
-  A =.. [ANewName|V],
+  gen_new_name(Alpha),
+  A =.. [Alpha|V],
   new_rule(H,[A|B], FwA),
-  length(V,N),
   % create assumption/1 utility clause
   copy_term(A,A1),
-  term_variables(A1,V1),
-  domain_preds(V1, D1),
-  new_rule(assumption(A1),D1,U1),
+  new_rule(assumption(A1),[],U1),
   % create contrary/2 utility clause
-  copy_term(A1,A2),
-  assumption_contrary(A2,C2),
+  atom_concat('c_',Alpha,C_Alpha),
+  copy_term((A,V),(A2,V2)),
+  C2 =.. [C_Alpha|V2],
   new_rule(contrary(A2,C2),[assumption(A2)],U2),
   % create domain/1 utility clause
   copy_term((A,B),(A3,B3)),
@@ -131,22 +133,10 @@ new_assumption(Ri,Ep,En,F, Ra,Rg,A,FwA) :-
   % create Ra (Ri w/assumption)
   aba_rules_append(Ri,[FwA], Ri1),    
   utl_rules_append(Ri1,[U1,U2,U3], Ra),
+
+    length(V,N), 
   % create Rg (Ra w/generator of c_alpha)
-  functor(C2,CNewName,N),
-  asp_plus(Ra,Ep,En,[CNewName/N], Rg).
-%
-assumption_contrary(Alpha,C_Alpha) :-
-  nonvar(Alpha),
-  !,
-  Alpha =.. [AlphaF|Args],
-  atom_concat('c_',AlphaF,C_AlphaF),
-  C_Alpha =.. [C_AlphaF|Args].
-assumption_contrary(Alpha,C_Alpha) :-
-  nonvar(C_Alpha),
-  !,
-  C_Alpha =.. [C_AlphaF|Args],
-  atom_concat('c_',AlphaF,C_AlphaF),
-  Alpha =.. [AlphaF|Args].
+  asp_plus(Ra,Ep,En,[(Alpha/N,C_Alpha/N)], Rg).
 
 
 %
@@ -211,8 +201,8 @@ nonintensional(R) :-
 % looking for a more general alpha 
 exists_assumption_sechk(AlphaF/N,R,A, AlphaPF/N) :-
   utl_rules(R,U),
-  member(rule(_,assumption(AlphaP),_),U),
-  functor(AlphaP,AlphaPF,N),
+  member(rule(_,assumption(Alpha),_),U),
+  functor(Alpha,AlphaPF,N),
   AlphaPF \== AlphaF,
   mg_alpha(AlphaPF/N,AlphaF/N,A).
 % exists_assumption_sechk utility predicate
@@ -227,19 +217,19 @@ mg_alpha(AlphaPF/N,AlphaF/N,A) :-
 mg_alpha(_,_,_).
 
 % looking for an existing alpha for F
-exists_assumption_relto(R,F, Alpha/N) :-
+exists_assumption_relto(R,F, A/N) :-
   aba_rules(R, AR),
   utl_rules(R, UR),
   % rule to be folded
   F = rule(_,_,B1),
   % take any rule in AR and its assumption in UR
   member(rule(_,_,B2),AR),
-  member(rule(_,assumption(A2),_),UR),
-  copy_term(A2,A2Cpy),
-  select(A2Cpy,B2,R2),
+  member(rule(_,assumption(Alpha),_),UR),
+  copy_term(Alpha,Alpha1),
+  select(Alpha1,B2,R2),
   % B1 and R2 (B2 w/o assumption) are variant
   permutation_variant(B1,R2),
-  functor(A2Cpy,Alpha,N).
+  functor(Alpha,A,N).
 
 
 % MODE: permutation_functor(+T1,+T2, -T3)
