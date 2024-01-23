@@ -253,23 +253,32 @@ ep_generators_pp_aux([(F/N,F_P/N)|Ls], [R,directive(minimize,{1,F_PP:F_PP})|Gs])
   ep_generators_pp_aux(Ls, Gs).
 
 %
-asp_utl_rules([], []).
-asp_utl_rules([U|UsI], [R|UsO]) :-
+asp_utl_rules(UsI, UsO) :-
+  select(rule(_,domain(Alpha1),B),UsI,UsI1),
+  !,
+  asp_utl_rules_aux(Alpha1,B,UsI1,UsO).
+asp_utl_rules(Us, Us).
+
+asp_utl_rules_aux(Alpha,B,UsI, [R|UsO]) :-
+  copy_term((Alpha,B),(Alpha1,B1)),
+  select(rule(_,assumption(Alpha1),_),UsI,UsI1),
+  select(rule(_,contrary(Alpha1,C_Alpha1),_),UsI1,UsI2),
+  !,
   % convert contrary/2 into ASP rules encoding attacks to assumptions
   % i.e., contrary(Alpha,C_Alpha) into Alpha :- not C_Alpha, domain(Alpha)
-  U = rule(_,contrary(Alpha,C_Alpha),_),
+  new_rule(Alpha1,[not C_Alpha1|B1], R),
+  asp_utl_rules_aux(Alpha,B,UsI2, UsO).
+asp_utl_rules_aux(Alpha,B,UsI, [R|UsO]) :-
+  copy_term((Alpha,B),(Alpha1,B1)),
+  select(rule(I,{P},[domain(Alpha1)]),UsI,UsI1),
   !,
-  copy_term((Alpha,C_Alpha),(Alpha1,C_Alpha1)),
-  new_rule(Alpha1,[not C_Alpha1, domain(Alpha1)], R),
+  % convert contrary/2 into ASP rules encoding attacks to assumptions
+  % i.e., contrary(Alpha,C_Alpha) into Alpha :- not C_Alpha, domain(Alpha)
+  R = rule(I,{P},B1),
+  asp_utl_rules_aux(Alpha,B,UsI1, UsO).
+asp_utl_rules_aux(_Alpha,_B,UsI, UsO) :-
   asp_utl_rules(UsI, UsO).
-asp_utl_rules([U|UsI], UsO) :-
-  % delete assumption/1
-  U = rule(_,assumption(_),_),
-  !,
-  asp_utl_rules(UsI, UsO).
-asp_utl_rules([U|UsI], [U|UsO]) :-
-  % keep any other utility rule
-  asp_utl_rules(UsI, UsO).
+
 
 % ic(+Ep,+En, I), I is the list of integrity constratints
 % generated from positive Ep and negative examples En
