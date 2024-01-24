@@ -4,13 +4,14 @@
 arc(1,3).
 arc(3,4).
 arc(2,2).
+arc(4,3).
 
 node(1).
 node(2).
 node(3).
 node(4).
 
-domain(X) :- node(X).
+%domain(X) :- node(X).
 
 % E+ = {path(2,2), path(1,3), path(3,4), path(1,4)}
 % E- = {path(3,1), path(1,2), path(4,1)}
@@ -24,7 +25,7 @@ domain(X) :- node(X).
 
 % ERROR (Wrong query: path not defined, 7 is not in the domain)
 
-% aba_asp('../examples/path1.bk.pl',[path(2,2), path(1,3), path(3,4), path(1,4)],[path(3,1), path(1,2), path(4,1)]).
+% aba_asp('../examples/path1.bk.pl',[path(2,2), path(1,3), path(3,4), path(1,4), path(3,3)],[path(3,1), path(1,2), path(4,1)]).
 
 /*
 path(A,B) :- arc(A,B).

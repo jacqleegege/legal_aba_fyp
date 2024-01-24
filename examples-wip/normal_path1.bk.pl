@@ -23,7 +23,7 @@ node(6).
 node(7).
 node(8).
 
-domain(X) :- node(X).
+%domain(X) :- node(X).
 
 %E+ = {normal_path(1,3),normal_path(3,7),normal_path(1,7)}
 
