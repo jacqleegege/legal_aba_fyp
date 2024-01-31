@@ -257,6 +257,10 @@ asp_utl_rules(UsI, UsO) :-
   select(rule(_,domain(Alpha1),B),UsI,UsI1),
   !,
   asp_utl_rules_aux(Alpha1,B,UsI1,UsO).
+asp_utl_rules(UsI, UsO) :-
+  select(rule(_,gen(_),_),UsI,UsI1),
+  !,
+  asp_utl_rules(UsI1, UsO).
 asp_utl_rules(Us, Us).
 
 asp_utl_rules_aux(Alpha,B,UsI, [R|UsO]) :-

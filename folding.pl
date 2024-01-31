@@ -4,13 +4,29 @@
 :- dynamic tokens/1.
 tokens(1).
 
-% folding(+Rs,+R, -F)
+% folding(+Ri,+R, -F)
 % Rs: rules for folding, and
 % F is the result of applying folding to R
-folding(Rs,R, F) :-
+folding(Ri,R, F) :-
+  lopt(folding_mode(nd)),
+  aba_rules(Ri,Rs), % AR = ABA Rules
   copy_term(R,rule(_,H,Ts)),
   folding(Rs,H,Ts, Fs),
   new_rule(H,Fs,F).
+% greedy
+% folding(Ri,R, F) :-
+%   lopt(folding_mode(greedy)),
+%   aba_rules(Ri,Rs), % AR = ABA Rules
+%   copy_term(R,rule(_,H,Ts)),
+%   fold_greedy(Rs,H,[],Ts, Fs),
+%   !,
+%   new_rule(H,Fs,F).   
+folding(Ri,R, F) :-
+  lopt(folding_mode(greedy)),
+  utl_rules(Ri,U),
+  R = rule(I,_,_),
+  member(rule(_,gen(G),[id(I)|_]),U),
+  copy_term(G,F).
 
 % folding(+Rs,+H,+Ts, -Fs)
 % Rs: rules for folding
@@ -20,7 +36,6 @@ folding(Rs,R, F) :-
 % non-deterministic
 :- discontiguous folding/4.
 folding(Rs,H,Ts, Fs) :-
-  lopt(folding_mode(nd)),
   tokens(T),
   fold_all(T,Rs,H,[],Ts, Zs),
   folding_aux(Rs,H,Zs, Fs).
@@ -32,11 +47,6 @@ folding_aux(Rs,H,Ts, Fs1) :-
   nselect(P,Ts, E,R),
   folding(Rs,H,R, Fs),
   combine(P,E,Fs, Fs1). 
-% greedy
-folding(Rs,H,Ts, Zs) :-
-  lopt(folding_mode(greedy)),
-  fold_greedy(Rs,H,[],Ts, Zs),
-  !.   
 
 % nselect(+P,+Ts, -E,-R)
 % Ts is a list consisting of at least two elements,

@@ -9,6 +9,6 @@ superpenguin(A) :- A=x_pinga.
 bird(A) :- penguin(A).
 penguin(A) :- superpenguin(A).
 
-domain(A) :- bird(A).
+%domain(A) :- bird(A).
 
 % aba_asp('./examples/flies_birds.bk.pl',[flies(woodstock),flies(gwaihir),flies(x_pingu),flies(x_pinga)],[flies(pingu),flies(pinga)]).

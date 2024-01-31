@@ -3,6 +3,8 @@ current_new_pred(0).
 
 :- consult(folding).
 
+:- use_module(library(dialect/hprolog),[ memberchk_eq/2 ]).
+
 % Gen procedure
 genT(R2,Ep,En, Ro) :-
   gen(R2,Ep,En, Ro).
@@ -18,13 +20,12 @@ genT(R2,Ep,En, Ro) :-
 
 % gen
 gen(Ri,Ep,En, Rf) :-
-  select_nonintensional(Ri, S,Ri1), % Ri1 = Ri\S
+  select_foldable(Ri, S,Ri1), % Ri1 = Ri\S
   !,
-  write('gen: non-intensional selection: '), show_rule(S), nl,
+  write('gen: folding selection: '), show_rule(S), nl,
   % folding
-  aba_rules(Ri1,AR), % AR = ABA Rules
   write(' begin folding'), nl, 
-  folding(AR,S, F),  % F = fold-all(S)
+  folding(Ri1,S, F),  % F = fold-all(S)
   write(' folding result: '), show_rule(F), nl,
   gen2(Ri1,Ep,En,F, Rf).
 gen(Ri,_Ep,_En, Ri) :-
@@ -133,8 +134,7 @@ new_assumption(Ri,Ep,En,F, Ra,Rg,A,FwA) :-
   % create Ra (Ri w/assumption)
   aba_rules_append(Ri,[FwA], Ri1),    
   utl_rules_append(Ri1,[U1,U2,U3], Ra),
-
-    length(V,N), 
+  length(V,N), 
   % create Rg (Ra w/generator of c_alpha)
   asp_plus(Ra,Ep,En,[(Alpha/N,C_Alpha/N)], Rg).
 
@@ -154,6 +154,71 @@ gen_new_name(NewName) :-
   number_codes(M,C),
   atom_codes(A,C),
   atom_concat('alpha_',A,NewName).
+
+% select_foldable(+R, -S,-Ri)
+select_foldable(R, S,R1) :-
+  lopt(folding_mode(nd)),
+  !,
+  select_nonintensional(R, S,R1). 
+% select_foldable(R, S,R1) :-
+%   lopt(folding_mode(greedy)),
+%   !,
+%   select_nonintensional(R, S,R1). 
+select_foldable(R, S,R1) :-
+  lopt(folding_mode(greedy)),
+  !,
+  select_foldable_greedy(R, S,R1).
+select_foldable_greedy(R, S,R1) :-
+  select_nonintensional(R, S,R1),
+  S = rule(I,_,_),
+  utl_rules(R1,U),
+  % there exists a generalisation for I
+  member(rule(_,gen(_),[id(I)|_]),U).
+select_foldable_greedy(R, S,R2) :-
+  write('gen: initializing generalisations'), nl,
+  aba_rules(R,A),
+  % select all nonintensional rules and 
+  findall(N, ( member(N,A), nonintensional(N) ), L), L=[_|_],
+  % add their generalisations to the utility rules
+  generate_generalisations(L,R, G),
+  filter_generalisations(G,R, R1),
+  select_foldable_greedy(R1, S,R2).
+%
+generate_generalisations([],_, []).
+generate_generalisations([S|Ss],R, [G|Gs]) :- 
+  aba_rules(R,A),
+  copy_term(S,rule(I,H,Ts)),
+  select(rule(I,_,_),A,AR),
+  fold_greedy(AR,H,[],Ts, Fs),
+  !,
+  new_rule(H,Fs,F),
+  findall(P1/N1,(member(A1,Fs),functor(A1,P1,N1)),L1),
+  new_rule(gen(F),[id(I)|L1], G),
+  write(' generalisation: '), show_rule(G), nl, 
+  generate_generalisations(Ss,R, Gs).
+%
+filter_generalisations(L1,R1, R3) :-
+  select(rule(I1,gen(G1),[ID|P1]),L1,L2),
+  select(rule(_,gen(G2),[id(I)|P2]),L2,L3),
+  subset(P1,P2), % P1 is a subset of P2
+  mgr(G1,G2),
+  % remove the nonintensional rule I from A
+  aba_rules(R1,A1),
+  select(rule(I,_,_),A1,A2),
+  !,
+  write(' '), show_rule(G1), write(' is more general than '), show_rule(G2), nl,
+  utl_rules(R1,U1),
+  aba_rules(R2,A2),
+  utl_rules(R2,U1),
+  filter_generalisations([rule(I1,gen(G1),[ID|P1])|L3],R2, R3).
+filter_generalisations(L1,R1, R2) :-
+  utl_rules_append(R1,L1,R2).
+%
+mgr(G1,G2) :-
+  copy_term(G1,rule(_,H1,B1)),
+  copy_term(G2,rule(_,H2,B2)),
+  H1 = H2,
+  subsumes_chk_conj(B1,B2).
 
 % select_nonintensional(+R, -S,-R1)
 % S is a non-intensional learnt rule in R and R1 is R\S
@@ -266,3 +331,33 @@ permutation_variant(L1,L2) :-
   length(T1,N), length(T2,N),
   permutation_functor(L1,L2, P1), % P1 is a permutation of L1
   P1 =@= L2.                      % P1 is a variant of L2
+
+% MODE: subsumes_chk_conj(+T1,+T2)
+% TYPE: subsumes_chk_conj(list(term),list(term))
+% SEMANTICS: list T1 subsumes list T2, that is, there exists a sublist T3
+% consisting of elements in T2 which is subsumed by T1.
+subsumes_chk_conj(A,B) :-
+  sort(A,S1),
+  sort(B,S2),
+  subsumes_list(S1,S2,SL),
+  subsumes_chk(S1,SL).
+
+% MODE: subsumes_list(+T1,+T2, -T3,-T4)
+% TYPE: subsumes_list(list(term),list(term),list(term),list(term))
+% SEMANTICS: T3 is a list consisting of elements in T2 each of which
+% is subsumed by an element in T1. T4 is T2\T3.
+subsumes_list([],_,[]).
+subsumes_list([G|T],B,[S|SL]) :-
+  select_subsumed(G,B,S,R),
+  subsumes_list(T,R,SL).
+
+% MODE: select_subsumed(+T1,+L1, -T2,-L2)
+% TYPE: select_subsumed(term,list(term),term,list(term))
+% SEMANTICS: T2 is an element in L1 s.t. T1 subsumes T2, L2 is L1\T2.
+select_subsumed(G,[S|T],S,T) :-
+  subsumes_chk(G,S).
+select_subsumed(G,[H|T],S,[H|T1]) :-
+  % elements are sorted, if H has the same functor of K keep going on looking for a subsumed element in L1
+  functor(G,P1,N1),
+  functor(H,P1,N1),
+  select_subsumed(G,T,S,T1).
