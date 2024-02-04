@@ -8,7 +8,7 @@
     ,  new_rule/3
     ,  normalize_args/3
     ,  normalize_eqs/3
-    ,  read_rules/2
+    ,  read_bk/2
     ,  rules_aba_utl/2
     ,  utl_rules/2
     ,  utl_rules_append/3
@@ -72,41 +72,52 @@ normalize_eqs([E|L],NI, NO) :-
 
 %
 rules_aba_utl([], asp_enc([],[])).
-rules_aba_utl([R|Rs], asp_enc(A,[R|U])) :-
-  R = rule(_,H,_),
-  functor(H,F,_),
-  member(F,[assumption,contrary,domain]),
+rules_aba_utl([R|Rs], asp_enc([R|A],U)) :-
+  R = rule(_,_,_),
   !,
   rules_aba_utl(Rs, asp_enc(A,U)).
-rules_aba_utl([R|Rs], asp_enc([R|A],U)) :-
+rules_aba_utl([R|Rs], asp_enc(A,[R|U])) :-
   rules_aba_utl(Rs, asp_enc(A,U)).
 
-% read_rules(+File, -Rules):
+% read_bk(+File, -Rules):
 % read a read of rules of from File and
 % generate a list of rule/3 terms representing them.
-read_rules(File, Rules) :-
+read_bk(File, Rules) :-
   catch( open(File, read, Stream, [alias(bk)]), Catcher,
          (write(open(File, read, Stream)), write(': '), write(Catcher), nl, fail)),
   retractall(rlid(_)),
-  read_rules_aux(Stream,Rules),
+  read_bk_aux(Stream,Rules),
   check_rules(Rules),
   rid(ID),
   assert(rlid(ID)), % ID of the first learnt rule
   close(Stream).
-% read_rules/2 utility predicate: 
+% read_bk/2 utility predicate: 
 % read all terms from Stream and
 % generate the corresponding rule/3 terms
-read_rules_aux(Stream, [R|Rs]) :-
+read_bk_aux(Stream, [R|Rs]) :-
   read(Stream,Term),
   Term \== end_of_file,
   !,
-  ( Term  = ( Head :- Body ) ->
-    ( conj_to_list(Body,B), new_rule(Head,B, R) )
+  bk_term(Term,R),
+  read_bk_aux(Stream, Rs).
+read_bk_aux(_, []).
+%
+bk_term(Term, R) :-
+  Term = ( Head :- Body ),
+  !,
+  functor(Head,P,N),
+  ( member(P/N,[contrary/2,assumption/2,domain/2]) ->
+    bk_term(Head,Body,R)
   ;
-    new_rule(Term,[], R)
-  ),
-  read_rules_aux(Stream, Rs).
-read_rules_aux(_, []).
+    ( conj_to_list(Body,B), new_rule(Head,B, R) )
+  ).
+bk_term(Term, R) :-
+  new_rule(Term,[], R).
+%
+bk_term(contrary(A,C),[assumption(A)],contrary(A,C)).
+bk_term(assumption(A),D,assumption(A,D)).
+bk_term(domain(D),B,domain(D,B)).
+
 % conj_to_list(C, L): 
 % C is a conjunction of the form (A1,...,An);
 % L is a list of the form [A1,...,An]
@@ -124,7 +135,7 @@ check_rules(Rules) :-
   check_domain_existence(Rules).
 % check existend of predicate 'domain/1' 
 check_domain_existence(Rules) :-
- member(rule(_,assumption(A),_),Rules),
+ member(assumption(A),Rules),
  copy_term(A,A1),
  \+ member(rule(_,domain(A),_),Rules),
  numbervars(A1,0,_),
@@ -166,6 +177,9 @@ dump_rule(R) :-
   R = directive(D,A),
   !,
   write('#'), write(D), write(' '), write(A), write('.'), nl.
+dump_rule(R) :-
+  write(R), nl.
+
 % dump_rule/1 utility predicate
 write_bd([H]) :-
   !,
@@ -199,7 +213,7 @@ asp_plus(Ri,Ep,En,Ts, Ro) :-
 asp_star(Ri,Ep,En, Ro) :-
   % Cs: set of contrary predicates
   utl_rules(Ri, U),
-  findall((A/N,C/N), ( member(rule(_,contrary(Alpha,C_Alpha),_),U), functor(Alpha,A,N), functor(C_Alpha,C,N) ), Cs),
+  findall((A/N,C/N), ( member(contrary(Alpha,C_Alpha),U), functor(Alpha,A,N), functor(C_Alpha,C,N) ), Cs),
   generators_pp(Cs, Gs),     % (e)
   utl_rules_append(Ri,Gs, Ri1),
   ep_generators_pp(Ep, Gs1), 
@@ -254,7 +268,7 @@ ep_generators_pp_aux([(F/N,F_P/N)|Ls], [R,directive(minimize,{1,F_PP:F_PP})|Gs])
 
 %
 asp_utl_rules(UsI, UsO) :-
-  select(rule(_,domain(Alpha1),B),UsI,UsI1),
+  select(domain(Alpha1,B),UsI,UsI1),
   !,
   asp_utl_rules_aux(Alpha1,B,UsI1,UsO).
 asp_utl_rules(UsI, UsO) :-
@@ -265,8 +279,8 @@ asp_utl_rules(Us, Us).
 
 asp_utl_rules_aux(Alpha,B,UsI, [R|UsO]) :-
   copy_term((Alpha,B),(Alpha1,B1)),
-  select(rule(_,assumption(Alpha1),_),UsI,UsI1),
-  select(rule(_,contrary(Alpha1,C_Alpha1),_),UsI1,UsI2),
+  select(assumption(Alpha1),UsI,UsI1),
+  select(contrary(Alpha1,C_Alpha1),UsI1,UsI2),
   !,
   % convert contrary/2 into ASP rules encoding attacks to assumptions
   % i.e., contrary(Alpha,C_Alpha) into Alpha :- not C_Alpha, domain(Alpha)
@@ -276,8 +290,6 @@ asp_utl_rules_aux(Alpha,B,UsI, [R|UsO]) :-
   copy_term((Alpha,B),(Alpha1,B1)),
   select(rule(I,{P},[domain(Alpha1)]),UsI,UsI1),
   !,
-  % convert contrary/2 into ASP rules encoding attacks to assumptions
-  % i.e., contrary(Alpha,C_Alpha) into Alpha :- not C_Alpha, domain(Alpha)
   R = rule(I,{P},B1),
   asp_utl_rules_aux(Alpha,B,UsI1, UsO).
 asp_utl_rules_aux(_Alpha,_B,UsI, UsO) :-

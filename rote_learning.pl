@@ -35,7 +35,7 @@ roLe(Ri,Ep,En, Ro) :-
   compute_conseq(S, [CS]),          % fails if S is unsatisfiable
   utl_rules(Ri,U),
   findall(R2, ( % C_Alpha is a contrary of an assumption
-                member(rule(_,contrary(_,C_Alpha),_),U),
+                member(contrary(_,C_Alpha),U),
                 copy_term(C_Alpha,C_Alpha1),
                 C_Alpha1 =.. [C|V],
                 % C_AlphaP is the primed version of C_Alpha1

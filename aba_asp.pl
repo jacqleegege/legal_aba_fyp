@@ -36,7 +36,7 @@ aba_asp(BK,Ep,En, Ro) :-
   nl, write('Current learning options:'), nl,
   listing(lopt/1),
   %
-  read_rules(BK, Rs),    % encode the background theory as terms of the form rule(ID,Head,Body)
+  read_bk(BK, Rs),    % encode the background theory as terms of the form rule(ID,Head,Body)
   rules_aba_utl(Rs, R1), % partition the list of rules Rs into two sublists ABA and UTL
                          % ABA = rules of the ABA framework
                          % UTL = utility rules (e.g., domain, assumption, contrary)
@@ -47,7 +47,7 @@ aba_asp_proc(BK,R1,Ep,En, Ro) :-
   genT(R2,Ep,En, Ro),    % GEN
   atom_concat(BK,'.sol',Out),
   retract(sol_counter(N)), M is N+1, assert(sol_counter(M)),
-  nl, write('Writing solution no. '), write(M), write(' to '), write(Out), nl, nl,
+  nl, write('Writing solution no. '), write(M), write(' to '), write(Out), nl, nl, trace,
   dump_rules(Ro,Out),
   asp(Ro,RoASP),
   atom_concat(BK,'.sol.asp',OutASP),

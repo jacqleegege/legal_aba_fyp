@@ -122,15 +122,15 @@ new_assumption(Ri,Ep,En,F, Ra,Rg,A,FwA) :-
   new_rule(H,[A|B], FwA),
   % create assumption/1 utility clause
   copy_term(A,A1),
-  new_rule(assumption(A1),[],U1),
+  U1=assumption(A1),
   % create contrary/2 utility clause
   atom_concat('c_',Alpha,C_Alpha),
   copy_term((A,V),(A2,V2)),
   C2 =.. [C_Alpha|V2],
-  new_rule(contrary(A2,C2),[assumption(A2)],U2),
+  U2=contrary(A2,C2),
   % create domain/1 utility clause
   copy_term((A,B),(A3,B3)),
-  new_rule(domain(A3),B3,U3),
+  U3=domain(A3,B3),
   % create Ra (Ri w/assumption)
   aba_rules_append(Ri,[FwA], Ri1),    
   utl_rules_append(Ri1,[U1,U2,U3], Ra),
@@ -266,7 +266,7 @@ nonintensional(R) :-
 % looking for a more general alpha 
 exists_assumption_sechk(AlphaF/N,R,A, AlphaPF/N) :-
   utl_rules(R,U),
-  member(rule(_,assumption(Alpha),_),U),
+  member(assumption(Alpha),U),
   functor(Alpha,AlphaPF,N),
   AlphaPF \== AlphaF,
   mg_alpha(AlphaPF/N,AlphaF/N,A).
@@ -289,7 +289,7 @@ exists_assumption_relto(R,F, A/N) :-
   F = rule(_,_,B1),
   % take any rule in AR and its assumption in UR
   member(rule(_,_,B2),AR),
-  member(rule(_,assumption(Alpha),_),UR),
+  member(assumption(Alpha),UR),
   copy_term(Alpha,Alpha1),
   select(Alpha1,B2,R2),
   % B1 and R2 (B2 w/o assumption) are variant
