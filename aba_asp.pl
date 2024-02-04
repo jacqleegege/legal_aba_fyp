@@ -47,7 +47,7 @@ aba_asp_proc(BK,R1,Ep,En, Ro) :-
   genT(R2,Ep,En, Ro),    % GEN
   atom_concat(BK,'.sol',Out),
   retract(sol_counter(N)), M is N+1, assert(sol_counter(M)),
-  nl, write('Writing solution no. '), write(M), write(' to '), write(Out), nl, nl, trace,
+  nl, write('Writing solution no. '), write(M), write(' to '), write(Out), nl, nl,
   dump_rules(Ro,Out),
   asp(Ro,RoASP),
   atom_concat(BK,'.sol.asp',OutASP),

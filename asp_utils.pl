@@ -106,17 +106,21 @@ bk_term(Term, R) :-
   Term = ( Head :- Body ),
   !,
   functor(Head,P,N),
-  ( member(P/N,[contrary/2,assumption/2,domain/2]) ->
+  ( member(P/N,[contrary/2,domain/1]) ->
     bk_term(Head,Body,R)
   ;
     ( conj_to_list(Body,B), new_rule(Head,B, R) )
   ).
 bk_term(Term, R) :-
-  new_rule(Term,[], R).
+  ( functor(Term,assumption,1) ->
+    bk_term(Term,[],R)
+  ;
+    new_rule(Term,[], R)
+  ).
 %
-bk_term(contrary(A,C),[assumption(A)],contrary(A,C)).
-bk_term(assumption(A),D,assumption(A,D)).
-bk_term(domain(D),B,domain(D,B)).
+bk_term(contrary(A,C),assumption(A),contrary(A,C)).
+bk_term(assumption(A),[],assumption(A)).
+bk_term(domain(P),D,domain(P,[D])).
 
 % conj_to_list(C, L): 
 % C is a conjunction of the form (A1,...,An);
@@ -133,13 +137,13 @@ conj_to_list(B,L) :-
 % perform checks on rules
 check_rules(Rules) :-
   check_domain_existence(Rules).
-% check existend of predicate 'domain/1' 
+% check existend of predicate 'domain' 
 check_domain_existence(Rules) :-
  member(assumption(A),Rules),
  copy_term(A,A1),
- \+ member(rule(_,domain(A),_),Rules),
+ \+ member(domain(A,_),Rules),
  numbervars(A1,0,_),
- nl, write('domain/1 for '), write(A1), write(' undefined!'), nl, nl, halt.
+ nl, write('domain for '), write(A1), write(' undefined!'), nl, nl, halt.
 check_domain_existence(_).
  
 % SEMANTICS: writes all rules to file
