@@ -39,7 +39,6 @@ Setting learning options:
 
 The Background Knowledge is an ABA framework including the following additional predicates:
 
-* `assumption(A)` representing that `A` is an assumption;
+* `assumption(A)` representing that `A` is an assumption
 * `contrary(A,C)` representing that `C` is the contrary of `A`, and it is defined by a rule of the form 
 `contrary(A,C) :- assumption(A).` 
-* `domain(X)` representing the domain of the ABA framework. 

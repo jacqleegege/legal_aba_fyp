@@ -23,14 +23,11 @@ gen(Ri,Ep,En, Rf) :-
   select_foldable(Ri, S,Ri1), % Ri1 = Ri\S
   !,
   write('gen: folding selection: '), show_rule(S), nl,
-  % folding
-  write(' begin folding'), nl, 
+  % fgenrite(' begin folding'), nl, 
   folding(Ri1,S, F),  % F = fold-all(S)
   write(' folding result: '), show_rule(F), nl,
   gen2(Ri1,Ep,En,F, Rf).
-gen(Ri,_Ep,_En, Ri) :-
-  asp(Ri,ASP),
-  dump_rules(ASP).
+gen(Ri,_Ep,_En, Ri).
 % gen2
 gen2(Ri,Ep,En,F, Rf) :-
   aba_rules_append(Ri,[F], Ri1),
@@ -120,23 +117,24 @@ new_assumption(Ri,Ep,En,F, Ra,Rg,A,FwA) :-
   gen_new_name(Alpha),
   A =.. [Alpha|V],
   new_rule(H,[A|B], FwA),
-  % create assumption/1 utility clause
+  % create assumption(alpha).
   copy_term(A,A1),
   U1=assumption(A1),
-  % create contrary/2 utility clause
+  % create alpha :- not c_alpha, B.
+  copy_term((A,B),(A2,B2)),
+  A2 =.. [Alpha|V2],
   atom_concat('c_',Alpha,C_Alpha),
-  copy_term((A,V),(A2,V2)),
   C2 =.. [C_Alpha|V2],
-  U2=contrary(A2,C2),
-  % create domain/1 utility clause
-  copy_term((A,B),(A3,B3)),
-  U3=domain(A3,B3),
+  new_rule(A2,[not C2|B2], U2),
+  % create contrary(alpha,c_alpha).
+  copy_term((A2,C2),(A3,C3)),
+  U3=contrary(A3,C3),
   % create Ra (Ri w/assumption)
-  aba_rules_append(Ri,[FwA], Ri1),    
-  utl_rules_append(Ri1,[U1,U2,U3], Ra),
-  length(V,N), 
+  aba_rules_append(Ri,[FwA,U1,U3], Ri1),    
+  utl_rules_append(Ri1,[U2], Ra),
+  copy_term((C2,B2),(C3,B3)),
   % create Rg (Ra w/generator of c_alpha)
-  asp_plus(Ra,Ep,En,[(Alpha/N,C_Alpha/N)], Rg).
+  asp_plus(Ra,Ep,En,[(C3,B3)], Rg).
 
 
 %
@@ -265,7 +263,7 @@ nonintensional(R) :-
 
 % looking for a more general alpha 
 exists_assumption_sechk(AlphaF/N,R,A, AlphaPF/N) :-
-  utl_rules(R,U),
+  aba_rules(R,U),
   member(assumption(Alpha),U),
   functor(Alpha,AlphaPF,N),
   AlphaPF \== AlphaF,
@@ -284,12 +282,11 @@ mg_alpha(_,_,_).
 % looking for an existing alpha for F
 exists_assumption_relto(R,F, A/N) :-
   aba_rules(R, AR),
-  utl_rules(R, UR),
   % rule to be folded
   F = rule(_,_,B1),
   % take any rule in AR and its assumption in UR
   member(rule(_,_,B2),AR),
-  member(assumption(Alpha),UR),
+  member(assumption(Alpha),AR),
   copy_term(Alpha,Alpha1),
   select(Alpha1,B2,R2),
   % B1 and R2 (B2 w/o assumption) are variant

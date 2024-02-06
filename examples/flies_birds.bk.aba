@@ -11,4 +11,4 @@ penguin(A) :- superpenguin(A).
 
 %domain(A) :- bird(A).
 
-% aba_asp('./examples/flies_birds.bk.pl',[flies(woodstock),flies(gwaihir),flies(x_pingu),flies(x_pinga)],[flies(pingu),flies(pinga)]).
+% aba_asp('./examples/flies_birds.bk',[flies(woodstock),flies(gwaihir),flies(x_pingu),flies(x_pinga)],[flies(pingu),flies(pinga)]).

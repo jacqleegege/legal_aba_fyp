@@ -3,6 +3,7 @@
     ,  asp/4
     ,  asp_star/4
     ,  asp_plus/5
+    ,  dump_rule/1
     ,  dump_rules/1
     ,  dump_rules/2
     ,  new_rule/3
@@ -70,10 +71,17 @@ normalize_eqs([V=C|L],NI, [V1=V|NO]) :-
 normalize_eqs([E|L],NI, NO) :-
   normalize_eqs(L,[E|NI], NO).
 
+% new_asp_rule(H,B, R): R is the term representing
+% an asp rule whose head is H and body is B
+new_asp_rule(H,B, R) :-
+  ( is_list(B) -> true; throw(new_rule:not_a_list(B)) ),
+  R = asp_rule(H,B).
+
 %
 rules_aba_utl([], asp_enc([],[])).
 rules_aba_utl([R|Rs], asp_enc([R|A],U)) :-
-  R = rule(_,_,_),
+  functor(R,F,N),
+  memberchk(F/N,[rule/3,assumption/1,contrary/2]),
   !,
   rules_aba_utl(Rs, asp_enc(A,U)).
 rules_aba_utl([R|Rs], asp_enc(A,[R|U])) :-
@@ -82,7 +90,8 @@ rules_aba_utl([R|Rs], asp_enc(A,[R|U])) :-
 % read_bk(+File, -Rules):
 % read a read of rules of from File and
 % generate a list of rule/3 terms representing them.
-read_bk(File, Rules) :-
+read_bk(FileName, Rules) :-
+  atom_concat(FileName,'.aba',File),
   catch( open(File, read, Stream, [alias(bk)]), Catcher,
          (write(open(File, read, Stream)), write(': '), write(Catcher), nl, fail)),
   retractall(rlid(_)),
@@ -105,22 +114,18 @@ read_bk_aux(_, []).
 bk_term(Term, R) :-
   Term = ( Head :- Body ),
   !,
-  functor(Head,P,N),
-  ( member(P/N,[contrary/2,domain/1]) ->
-    bk_term(Head,Body,R)
+  conj_to_list(Body,B),
+  ( functor(Head,contrary,2) ->
+    R = Head
   ;
-    ( conj_to_list(Body,B), new_rule(Head,B, R) )
+    new_rule(Head,B, R)
   ).
 bk_term(Term, R) :-
   ( functor(Term,assumption,1) ->
-    bk_term(Term,[],R)
+    R = Term
   ;
     new_rule(Term,[], R)
   ).
-%
-bk_term(contrary(A,C),assumption(A),contrary(A,C)).
-bk_term(assumption(A),[],assumption(A)).
-bk_term(domain(P),D,domain(P,[D])).
 
 % conj_to_list(C, L): 
 % C is a conjunction of the form (A1,...,An);
@@ -135,16 +140,8 @@ conj_to_list(B,L) :-
     L=[B]
   ).
 % perform checks on rules
-check_rules(Rules) :-
-  check_domain_existence(Rules).
-% check existend of predicate 'domain' 
-check_domain_existence(Rules) :-
- member(assumption(A),Rules),
- copy_term(A,A1),
- \+ member(domain(A,_),Rules),
- numbervars(A1,0,_),
- nl, write('domain for '), write(A1), write(' undefined!'), nl, nl, halt.
-check_domain_existence(_).
+check_rules(_Rules) :-
+  true.
  
 % SEMANTICS: writes all rules to file
 dump_rules(Rs) :-
@@ -153,7 +150,7 @@ dump_rules(Rs,File) :-
   tell(File),
   aba_rules(Rs,A), utl_rules(Rs,U),
   dump_rules_aux(A),
-  nl, write('% utility rules'), nl,
+  nl,
   dump_rules_aux(U),
   told.  
 % write rules
@@ -167,22 +164,30 @@ dump_rules_aux([R|Rs]) :-
 dump_rule(R) :-
   R = rule(_,H,B),
   !,
-  ( H == false -> 
-    true % integriry constraint
-  ; 
-    write(H)      % head of the rule
-  ),
+  write(H),      % head of the rule
   ( B==[] ->
     ( write('.'), nl ) % fact or int. constr. 
   ;
     ( write(' :- '), write_bd(B) ) % rule w/nonempty body
   ).
 dump_rule(R) :-
+  R = ic(B),
+  !,
+  ( write(' :- '), write_bd(B) ). 
+dump_rule(R) :-
   R = directive(D,A),
   !,
   write('#'), write(D), write(' '), write(A), write('.'), nl.
 dump_rule(R) :-
-  write(R), nl.
+  % ignore assumption/1 and contrary/2
+  functor(R,F,N),
+  memberchk(F/N,[assumption/1,contrary/2]).
+dump_rule(R) :-
+  write('ERROR: unrecognized rule: '), 
+  copy_term(R,CpyR),
+  numbervars(CpyR,0,_), 
+  write(CpyR),
+  halt.
 
 % dump_rule/1 utility predicate
 write_bd([H]) :-
@@ -201,9 +206,10 @@ write_show([P/N|Ps]) :-
 asp(Ri, Ro) :-
   aba_rules(Ri,Ai),
   utl_rules(Ri,Ui),
-  asp_utl_rules(Ui, Uo),     % (b.1)
-  aba_rules(Ro,Ai),
-  utl_rules(Ro,Uo).
+  % select only rule/1
+  findall(rule(I,H,B),member(rule(I,H,B),Ai),Ao),     % (b.1)
+  aba_rules(Ro,Ao),
+  utl_rules(Ro,Ui).
 asp(Ri,Ep,En, Ro) :-
   ic(Ep,En, I),              % (c), (d)
   utl_rules_append(Ri,I,Ri1),
@@ -216,8 +222,9 @@ asp_plus(Ri,Ep,En,Ts, Ro) :-
 % asp_star: ASP* (w/primed predicates)
 asp_star(Ri,Ep,En, Ro) :-
   % Cs: set of contrary predicates
-  utl_rules(Ri, U),
-  findall((A/N,C/N), ( member(contrary(Alpha,C_Alpha),U), functor(Alpha,A,N), functor(C_Alpha,C,N) ), Cs),
+  aba_rules(Ri, A),
+  findall((Alpha,C_Alpha,B), 
+    ( member(contrary(Alpha,C_Alpha),A), member(rule(_,_,BwA),A), select(Alpha,BwA,B) ), Cs),
   generators_pp(Cs, Gs),     % (e)
   utl_rules_append(Ri,Gs, Ri1),
   ep_generators_pp(Ep, Gs1), 
@@ -226,26 +233,24 @@ asp_star(Ri,Ep,En, Ro) :-
 
 %
 generators([], []).
-generators([(A/N,C/N)|Fs], [G,O|Gs]) :-
-  length(V,N),
-  AP =..[A|V],
-  CP =..[C|V],
-  new_rule({CP},[domain(AP)], G),
+generators([(CP,B)|Fs], [G,O|Gs]) :-
+  new_rule({CP},B, G),
   O=directive(minimize,{1,CP:CP}),
   generators(Fs, Gs).
 
 %
 generators_pp([], []).
-generators_pp([(A/N,C/N)|Fs], [G,R,O|Gs]) :-
-  length(V,N),
-  AP =..[A|V],
+generators_pp([(AP,CP,B)|Fs], [G,R,A,O|Gs]) :-
   CP =..[C|V],
   atom_concat(C,'_P',C_P),
   C_PP =.. [C_P|V],
-  new_rule({C_PP},[domain(AP)], G),
+  new_rule({C_PP},B, G),            % {p_P} :- B
   copy_term((CP,C_PP),(CP1,C_PP1)),
   new_rule(CP1,[C_PP1],R),          % p :- p_P
-  O=directive(minimize,{1,C_PP:C_PP}),
+  copy_term((AP,CP,B),(AP2,CP2,B2)), 
+  new_rule(AP2,[not CP2|B2], A),
+  copy_term(C_PP,C_PP3),
+  O=directive(minimize,{1,C_PP3:C_PP3}),
   generators_pp(Fs, Gs).
 
 %
@@ -270,49 +275,16 @@ ep_generators_pp_aux([(F/N,F_P/N)|Ls], [R,directive(minimize,{1,F_PP:F_PP})|Gs])
   new_rule(FP,[F_PP],R), 
   ep_generators_pp_aux(Ls, Gs).
 
-%
-asp_utl_rules(UsI, UsO) :-
-  select(domain(Alpha1,B),UsI,UsI1),
-  !,
-  asp_utl_rules_aux(Alpha1,B,UsI1,UsO).
-asp_utl_rules(UsI, UsO) :-
-  select(rule(_,gen(_),_),UsI,UsI1),
-  !,
-  asp_utl_rules(UsI1, UsO).
-asp_utl_rules(Us, Us).
-
-asp_utl_rules_aux(Alpha,B,UsI, [R|UsO]) :-
-  copy_term((Alpha,B),(Alpha1,B1)),
-  select(assumption(Alpha1),UsI,UsI1),
-  select(contrary(Alpha1,C_Alpha1),UsI1,UsI2),
-  !,
-  % convert contrary/2 into ASP rules encoding attacks to assumptions
-  % i.e., contrary(Alpha,C_Alpha) into Alpha :- not C_Alpha, domain(Alpha)
-  new_rule(Alpha1,[not C_Alpha1|B1], R),
-  asp_utl_rules_aux(Alpha,B,UsI2, UsO).
-asp_utl_rules_aux(Alpha,B,UsI, [R|UsO]) :-
-  copy_term((Alpha,B),(Alpha1,B1)),
-  select(rule(I,{P},[domain(Alpha1)]),UsI,UsI1),
-  !,
-  R = rule(I,{P},B1),
-  asp_utl_rules_aux(Alpha,B,UsI1, UsO).
-asp_utl_rules_aux(_Alpha,_B,UsI, UsO) :-
-  asp_utl_rules(UsI, UsO).
-
-
 % ic(+Ep,+En, I), I is the list of integrity constratints
 % generated from positive Ep and negative examples En
 ic([],[], []).
-ic([],[N|Ns], [R|Rs]) :-
-  new_rule(false,[N], R),
+ic([],[N|Ns], [ic([N])|Rs]) :-
   ic([],Ns, Rs).
-ic([P|Ps],Ns, [R|Rs]) :-
-  new_rule(false,[not P], R),
+ic([P|Ps],Ns, [ic([not P])|Rs]) :-
   ic(Ps,Ns, Rs).
 
 %
-ic(B, R) :-
-  new_rule(false,B, R).
+ic(B, ic(B)).
 
 % aba_rules(+ABAF, A), A is the list of ABA rules in ABAF
 aba_rules(asp_enc(A,_), A).
