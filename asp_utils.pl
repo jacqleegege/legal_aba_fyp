@@ -78,14 +78,15 @@ new_asp_rule(H,B, R) :-
   R = asp_rule(H,B).
 
 %
-rules_aba_utl([], asp_enc([],[])).
-rules_aba_utl([R|Rs], asp_enc([R|A],U)) :-
-  functor(R,F,N),
-  memberchk(F/N,[rule/3,assumption/1,contrary/2]),
-  !,
-  rules_aba_utl(Rs, asp_enc(A,U)).
-rules_aba_utl([R|Rs], asp_enc(A,[R|U])) :-
-  rules_aba_utl(Rs, asp_enc(A,U)).
+rules_aba_utl(Rs, asp_enc(Rs,Us)) :-
+  findall(R, 
+    ( member(contrary(Alpha,C_Alpha),Rs), 
+      member(rule(_,_,BwA),Rs), 
+      select(Alpha,BwA,B),
+      copy_term((Alpha,C_Alpha,B),(Alpha1,C_Alpha1,B1)),
+      new_rule(Alpha1,[not C_Alpha1|B1], R) 
+    ), 
+  Us).
 
 % read_bk(+File, -Rules):
 % read a read of rules of from File and
@@ -179,14 +180,17 @@ dump_rule(R) :-
   !,
   write('#'), write(D), write(' '), write(A), write('.'), nl.
 dump_rule(R) :-
-  % ignore assumption/1 and contrary/2
+  % ignore assumption/1, contrary/2, gen/2
   functor(R,F,N),
-  memberchk(F/N,[assumption/1,contrary/2]).
+  memberchk(F/N,[assumption/1,contrary/2,gen/2]),
+  !.
 dump_rule(R) :-
+  told,
   write('ERROR: unrecognized rule: '), 
   copy_term(R,CpyR),
   numbervars(CpyR,0,_), 
   write(CpyR),
+  nl,
   halt.
 
 % dump_rule/1 utility predicate

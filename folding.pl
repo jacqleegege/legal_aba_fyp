@@ -25,7 +25,7 @@ folding(Ri,R, F) :-
   lopt(folding_mode(greedy)),
   utl_rules(Ri,U),
   R = rule(I,_,_),
-  member(rule(_,gen(G),[id(I)|_]),U),
+  member(gen(G,[id(I)|_]),U),
   copy_term(G,F).
 
 % folding(+Rs,+H,+Ts, -Fs)

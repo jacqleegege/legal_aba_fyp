@@ -16,10 +16,10 @@ cn(X) :- domain(X), alpha(X).
 domain(a).
 domain(b).
 
-assumption(alpha(X)) :- domain(X).
+assumption(alpha(X)).
 contrary(alpha(X),c_alpha(X)) :- assumption(alpha(X)).
 
-% aba_asp('./examples/aacbr2.bk.pl',[cn(b)],[cn(a)]).
+% aba_asp('./examples/aacbr2.bk',[cn(b)],[cn(a)]).
 
 /* brave
 

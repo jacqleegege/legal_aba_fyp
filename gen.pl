@@ -171,7 +171,7 @@ select_foldable_greedy(R, S,R1) :-
   S = rule(I,_,_),
   utl_rules(R1,U),
   % there exists a generalisation for I
-  member(rule(_,gen(_),[id(I)|_]),U).
+  member(gen(_,[id(I)|_]),U).
 select_foldable_greedy(R, S,R2) :-
   write('gen: initializing generalisations'), nl,
   aba_rules(R,A),
@@ -191,13 +191,14 @@ generate_generalisations([S|Ss],R, [G|Gs]) :-
   !,
   new_rule(H,Fs,F),
   findall(P1/N1,(member(A1,Fs),functor(A1,P1,N1)),L1),
-  new_rule(gen(F),[id(I)|L1], G),
-  write(' generalisation: '), show_rule(G), nl, 
+  G=gen(F,[id(I)|L1]),
+  write(' ffp: '), 
+  copy_term(G,G1), numbervars(G1,0,_), write(G1), nl,
   generate_generalisations(Ss,R, Gs).
 %
 filter_generalisations(L1,R1, R3) :-
-  select(rule(I1,gen(G1),[ID|P1]),L1,L2),
-  select(rule(_,gen(G2),[id(I)|P2]),L2,L3),
+  select(gen(G1,[ID|P1]),L1,L2),
+  select(gen(G2,[id(I)|P2]),L2,L3),
   subset(P1,P2), % P1 is a subset of P2
   mgr(G1,G2),
   % remove the nonintensional rule I from A
@@ -208,7 +209,7 @@ filter_generalisations(L1,R1, R3) :-
   utl_rules(R1,U1),
   aba_rules(R2,A2),
   utl_rules(R2,U1),
-  filter_generalisations([rule(I1,gen(G1),[ID|P1])|L3],R2, R3).
+  filter_generalisations([gen(G1,[ID|P1])|L3],R2, R3).
 filter_generalisations(L1,R1, R2) :-
   utl_rules_append(R1,L1,R2).
 %
