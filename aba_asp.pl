@@ -37,6 +37,7 @@ aba_asp(BK,Ep,En, Ro) :-
   listing(lopt/1),
   %
   read_bk(BK, Rs),    % encode the background theory as terms of the form rule(ID,Head,Body)
+  check_aba(Rs,Ep,En),
   rules_aba_utl(Rs, R1), % partition the list of rules Rs into two sublists ABA and UTL
                          % ABA = rules of the ABA framework
                          % UTL = utility rules (e.g., domain, assumption, contrary)
@@ -137,3 +138,53 @@ write_ac([R|Rs]) :-
 write_ac([_|Rs]) :-
   write_ac(Rs). 
 
+%
+check_aba(Rules,Ep,En) :-
+  collect_consts(Rules,[], Cs),
+  append(Ep,En,E),
+  check_ep_consts(E,Cs).
+
+%
+collect_consts([],Ci, Co) :-
+  sort(Ci,Co).
+collect_consts([R|Rs],Ci, Co) :-
+  R = rule(_,_,B),
+  !,  
+  collect_consts_aux(B, Cs),
+  append(Ci,Cs, Ci1),
+  collect_consts(Rs,Ci1, Co).
+collect_consts([_|Rs],Ci, Co) :-
+  collect_consts(Rs,Ci, Co).  
+% assumption: rules are normalized
+% (i.e., constants occur in the body 
+% of rules as equalities of the form 
+% Var=constant)
+collect_consts_aux([], []).
+collect_consts_aux([X=C|Bs], [C|Cs]) :-
+  var(X),
+  ground(C),
+  !,
+  collect_consts_aux(Bs, Cs).
+collect_consts_aux([_|Bs], Cs) :-
+  collect_consts_aux(Bs, Cs).
+
+%
+check_ep_consts([],_).
+check_ep_consts([E|Es],Ci) :-
+  E =.. [_|Args],
+  check_ep_consts_aux(Args,Ci),
+  check_ep_consts(Es,Ci).
+
+%
+check_ep_consts_aux([],_).
+check_ep_consts_aux([Arg|Args],Ci) :-
+  nonvar(Arg),
+  !,
+  ( member(Arg,Ci) ->
+    check_ep_consts_aux(Args,Ci)
+  ;
+    ( write('ERROR: unknown constant: '), write(Arg), nl, nl, halt )
+  ).
+check_ep_consts_aux([Arg|Args],Ci) :-
+  var(Arg),
+  check_ep_consts_aux(Args,Ci).  

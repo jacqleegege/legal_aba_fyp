@@ -96,8 +96,7 @@ read_bk(FileName, Rules) :-
   catch( open(File, read, Stream, [alias(bk)]), Catcher,
          (write(open(File, read, Stream)), write(': '), write(Catcher), nl, fail)),
   retractall(rlid(_)),
-  read_bk_aux(Stream,Rules),
-  check_rules(Rules),
+  read_bk_aux(Stream, Rules),
   rid(ID),
   assert(rlid(ID)), % ID of the first learnt rule
   close(Stream).
@@ -139,10 +138,7 @@ conj_to_list(B,L) :-
     ( B = (B1,B2), L=[B1|H], conj_to_list(B2,H) )
   ;
     L=[B]
-  ).
-% perform checks on rules
-check_rules(_Rules) :-
-  true.
+  ).  
  
 % SEMANTICS: writes all rules to file
 dump_rules(Rs) :-
