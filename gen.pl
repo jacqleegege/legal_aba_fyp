@@ -174,7 +174,7 @@ select_foldable_greedy(R, S,R1) :-
   member(gen(_,[id(I)|_]),U).
 select_foldable_greedy(R, S,R2) :-
   write('gen: initializing generalisations'), nl,
-  aba_rules(R,A),
+  aba_rules(R,A), 
   % select all nonintensional rules and 
   findall(N, ( member(N,A), nonintensional(N) ), L), L=[_|_],
   % add their generalisations to the utility rules
@@ -260,7 +260,8 @@ nonintensional(R) :-
   J>=I,
   member((V=C),B),
   var(V),
-  ground(C).   
+  ground(C),
+  !.   
 
 % looking for a more general alpha 
 exists_assumption_sechk(AlphaF/N,R,A, AlphaPF/N) :-
