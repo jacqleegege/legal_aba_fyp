@@ -226,6 +226,7 @@ match([B|Bs],As,Ts, Ls) :-
    match(Bs,As,Ts1, Ls).
   
 %
+not_foldable(_,[]).
 not_foldable(X,Es) :-
    member(Y,Es), 
    variant(X,Y),
