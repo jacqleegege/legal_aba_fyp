@@ -155,7 +155,7 @@ gen_new_name(NewName) :-
 
 % select_foldable(+R, -S,-Ri)
 select_foldable(R, S,R1) :-
-  lopt(folding_mode(nd)),
+  ( lopt(folding_mode(nd)) ; lopt(folding_mode(all)) ),
   !,
   select_nonintensional(R, S,R1). 
 % select_foldable(R, S,R1) :-

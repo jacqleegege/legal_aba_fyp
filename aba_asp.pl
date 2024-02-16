@@ -65,7 +65,7 @@ aba_asp_proc(_,_,_,_, _) :-
 %
 :- dynamic lopt/1.
 set_lopt(folding_mode(X)) :-
-  member(X,[nd,greedy]),
+  member(X,[nd,greedy,all]),
   !,
   !,
   retractall(lopt(folding_mode(_))),

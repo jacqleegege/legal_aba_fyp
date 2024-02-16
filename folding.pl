@@ -27,6 +27,13 @@ folding(Ri,R, F) :-
   R = rule(I,_,_),
   member(gen(G,[id(I)|_]),U),
   copy_term(G,F).
+%
+folding(Ri,R, F) :-
+  lopt(folding_mode(all)),
+  aba_rules(Ri,Rs),
+  copy_term(R,rule(_,H,Ts)),
+  fold(Rs,[],Ts,[], Fs),
+  new_rule(H,Fs,F).
 
 % folding(+Rs,+H,+Ts, -Fs)
 % Rs: rules for folding
@@ -173,3 +180,54 @@ intersection([_|L],L2,L3) :-
 
 % append_difflist
 append_difflist(L1-T1, T1-T2, L1-T2).
+
+%
+% Rs: rules for folding
+% As: folded elements
+% Ts: elements to be folded
+% FsI: elements obtained by folding
+fold(Rs,As,[T|Ts],FsI, FsO) :- 
+  select_rule(Rs,T,R),    % R is a (copy of a) clause in Rs that can be used for folding T
+  R=rule(_,H,[T|Bs]),     % select_rule sorts the elements in the body so that the head of Bs matches T     
+  match(Bs,As,Ts, Ns),    % Ns consists of equalities in Bs that do not match with any element in As@Ts
+  \+ memberchk_eq(H,FsI),   % H does not belong to the list of elements obtained by folding
+  append(Ts,Ns, Ts1),     % New elements to be folded Ts@Ns
+  fold(Rs,[T|As],Ts1,[H|FsI], FsO).
+fold(Rs,As,[_|Ts],FsI, FsO) :- 
+  fold(Rs,As,Ts,FsI, FsO).
+fold(_,[_|_],[],Fs, Fs).   % [] nothing left to be folded, [_|_] something has been folded
+                           % Note fold is called with As=[]
+
+%
+select_rule(Rs,T,R1) :-
+  member(R,Rs),
+  R = rule(I,H,Bs),
+  select(B,Bs,Bs1),
+  variant(T,B),
+  copy_term((H,B,Bs1),(CpyH,CpyB,CpyBs)),
+  R1 = rule(I,CpyH,[CpyB|CpyBs]).
+
+%
+match([],_,_,[]).
+match([B|Bs],As,Ts, [B|Ls]) :-
+   functor(B,=,2),
+   not_foldable(B,As),
+   not_foldable(B,Ts),
+   match(Bs,As,Ts, Ls).
+match([B|Bs],As,Ts, Ls) :- 
+   select(T,As,As1),
+   variant(B,T),
+   B=T,
+   match(Bs,As1,Ts, Ls).
+match([B|Bs],As,Ts, Ls) :- 
+   select(T,Ts,Ts1),
+   variant(B,T),
+   B=T,
+   match(Bs,As,Ts1, Ls).
+  
+%
+not_foldable(X,Es) :-
+   member(Y,Es), 
+   variant(X,Y),
+   !,
+   fail.
