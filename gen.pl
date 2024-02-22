@@ -23,7 +23,7 @@ gen(Ri,Ep,En, Rf) :-
   select_foldable(Ri, S,Ri1), % Ri1 = Ri\S
   !,
   write('gen: folding selection: '), show_rule(S), nl,
-  % fgenrite(' begin folding'), nl, 
+  write(' begin folding'), nl, 
   folding(Ri1,S, F),  % F = fold-all(S)
   write(' folding result: '), show_rule(F), nl,
   gen2(Ri1,Ep,En,F, Rf).
