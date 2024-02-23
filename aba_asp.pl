@@ -4,16 +4,16 @@
 
 :- initialization(set_lopt(folding_mode(nd))).
 :- initialization(set_lopt(folding_steps(10))).
+:- initialization(set_lopt(folding_selection(any))).
 :- initialization(set_lopt(asm_intro(relto))).
 :- initialization(set_lopt(learning_mode(cautious))).
 
 :- initialization(listing(lopt/1)).
 
-% aba_asp(+BK,+Ep,+En, -Ro)
+% aba_asp(+BK,+Ep,+En)
 % BK: file including the background knowledge
 % Ep: positive examples
 % En: negative examples
-% Ro: learnt ABA framework
 aba_asp(BK,Ep,En) :-
   aba_asp(BK,Ep,En, _Ro).
 
@@ -67,7 +67,6 @@ aba_asp_proc(_,_,_,_, _) :-
 set_lopt(folding_mode(X)) :-
   member(X,[nd,greedy,all]),
   !,
-  !,
   retractall(lopt(folding_mode(_))),
   assert(lopt(folding_mode(X))).
 set_lopt(folding_steps(X)) :-
@@ -83,7 +82,12 @@ set_lopt(learning_mode(X)) :-
   member(X,[brave,cautious]),
   !,
   retractall(lopt(learning_mode(_))),
-  assert(lopt(learning_mode(X))).  
+  assert(lopt(learning_mode(X))).
+set_lopt(folding_selection(X)) :-
+  member(X,[any,mgr]),
+  !,
+  retractall(lopt(folding_selection(_))),
+  assert(lopt(folding_selection(X))).    
 set_lopt(X) :-
   throw(wrong_lopt(X)).  
 
@@ -133,7 +137,7 @@ write_ac([R|Rs]) :-
   copy_term(R,CpyR),
   numbervars(CpyR,0,_),
   CpyR = contrary(A,_),
-  write(CpyR), write(' :- '), write(A),  write('.'), nl,
+  write(CpyR), write(' :- '), write(assumption(A)),  write('.'), nl,
   write_ac(Rs).
 write_ac([_|Rs]) :-
   write_ac(Rs). 

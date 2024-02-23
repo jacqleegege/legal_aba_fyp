@@ -20,14 +20,18 @@ genT(R2,Ep,En, Ro) :-
 
 % gen
 gen(Ri,Ep,En, Rf) :-
+  ( lopt(folding_selection(mgr)) -> init_mgr(Ri,Ri1) ; Ri=Ri1 ),
+  gen1(Ri1,Ep,En, Rf).  
+% gen 1
+gen1(Ri,Ep,En, Rf) :-
   select_foldable(Ri, S,Ri1), % Ri1 = Ri\S
   !,
-  write('gen: folding selection: '), show_rule(S), nl,
+  write('gen1: folding selection: '), show_rule(S), nl,
   write(' begin folding'), nl, 
   folding(Ri1,S, F),  % F = fold-all(S)
   write(' folding result: '), show_rule(F), nl,
   gen2(Ri1,Ep,En,F, Rf).
-gen(Ri,_Ep,_En, Ri).
+gen1(Ri,_Ep,_En, Ri).
 % gen2
 gen2(Ri,Ep,En,F, Rf) :-
   aba_rules_append(Ri,[F], Ri1),
@@ -155,32 +159,30 @@ gen_new_name(NewName) :-
 
 % select_foldable(+R, -S,-Ri)
 select_foldable(R, S,R1) :-
-  ( lopt(folding_mode(nd)) ; lopt(folding_mode(all)) ),
+  lopt(folding_selection(any)),
   !,
   select_nonintensional(R, S,R1). 
-% select_foldable(R, S,R1) :-
-%   lopt(folding_mode(greedy)),
-%   !,
-%   select_nonintensional(R, S,R1). 
 select_foldable(R, S,R1) :-
-  lopt(folding_mode(greedy)),
-  !,
-  select_foldable_greedy(R, S,R1).
-select_foldable_greedy(R, S,R1) :-
+  lopt(folding_selection(mgr)),
   select_nonintensional(R, S,R1),
   S = rule(I,_,_),
   utl_rules(R1,U),
   % there exists a generalisation for I
   member(gen(_,[id(I)|_]),U).
-select_foldable_greedy(R, S,R2) :-
+
+%
+init_mgr(R,R1) :-
   write('gen: initializing generalisations'), nl,
   aba_rules(R,A), 
   % select all nonintensional rules and 
-  findall(N, ( member(N,A), nonintensional(N) ), L), L=[_|_],
-  % add their generalisations to the utility rules
-  generate_generalisations(L,R, G),
-  filter_generalisations(G,R, R1),
-  select_foldable_greedy(R1, S,R2).
+  findall(N, ( member(N,A), nonintensional(N) ), L),
+  ( L=[] -> R=R1
+  ;
+    ( % add their generalisations to the utility rules
+      generate_generalisations(L,R, G),
+      filter_generalisations(G,R, R1)
+    )
+  ).
 %
 generate_generalisations([],_, []).
 generate_generalisations([S|Ss],R, [G|Gs]) :- 

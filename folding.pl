@@ -7,6 +7,7 @@ tokens(1).
 % folding(+Ri,+R, -F)
 % Rs: rules for folding, and
 % F is the result of applying folding to R
+% nd (w/tokens)
 folding(Ri,R, F) :-
   lopt(folding_mode(nd)),
   aba_rules(Ri,Rs), % AR = ABA Rules
@@ -14,20 +15,22 @@ folding(Ri,R, F) :-
   folding(Rs,H,Ts, Fs),
   new_rule(H,Fs,F).
 % greedy
-% folding(Ri,R, F) :-
-%   lopt(folding_mode(greedy)),
-%   aba_rules(Ri,Rs), % AR = ABA Rules
-%   copy_term(R,rule(_,H,Ts)),
-%   fold_greedy(Rs,H,[],Ts, Fs),
-%   !,
-%   new_rule(H,Fs,F).   
 folding(Ri,R, F) :-
   lopt(folding_mode(greedy)),
+  lopt(folding_selection(mgr)),
   utl_rules(Ri,U),
   R = rule(I,_,_),
   member(gen(G,[id(I)|_]),U),
   copy_term(G,F).
-%
+folding(Ri,R, F) :-
+  lopt(folding_mode(greedy)),
+  lopt(folding_selection(any)),
+  aba_rules(Ri,Rs), % AR = ABA Rules
+  copy_term(R,rule(_,H,Ts)),
+  fold_greedy(Rs,H,[],Ts, Fs),
+  !,
+  new_rule(H,Fs,F).   
+% all
 folding(Ri,R, F) :-
   lopt(folding_mode(all)),
   aba_rules(Ri,Rs),
