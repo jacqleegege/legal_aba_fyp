@@ -7,7 +7,7 @@ current_new_pred(0).
 
 % Gen procedure
 genT(R2,Ep,En, Ro) :-
-  gen(R2,Ep,En, Ro).
+  gen1(R2,Ep,En, Ro).
 genT(R2,Ep,En, Ro) :-
   lopt(folding_mode(nd)),
   retract(tokens(T)), % max number of folding
@@ -18,10 +18,6 @@ genT(R2,Ep,En, Ro) :-
   assert(tokens(T1)),
   genT(R2,Ep,En, Ro).
 
-% gen
-gen(Ri,Ep,En, Rf) :-
-  ( lopt(folding_selection(mgr)) -> init_mgr(Ri,Ri1) ; Ri=Ri1 ),
-  gen1(Ri1,Ep,En, Rf).  
 % gen 1
 gen1(Ri,Ep,En, Rf) :-
   select_foldable(Ri, S,Ri1), % Ri1 = Ri\S
@@ -105,12 +101,13 @@ gen6(Ra,Ep,En,A,RgAS, Rf) :-
   % rote learning
   findall(R, ( functor(C,C_A,N),member(C,RgAS), e_rote_learn(C,R) ), Rs),
   aba_rules_append(Ra,Rs,Ra1),
-  ( lopt(learning_mode(cautious)) -> entails(Ra1,Ep,En) ; true ),
-  gen7(Ra1,Ep,En, Rf). % go to subsumption
+  ( lopt(learning_mode(cautious)) -> entails(Ra1,Ep,En) ; true  ),
+  ( lopt(folding_selection(mgr)) -> init_mgr(Ra1,Ra2) ; Ra1=Ra2 ),
+  gen7(Ra2,Ep,En, Rf). % go to subsumption
 % gen7 - subsumption
 gen7(Ri,Ep,En, Rf) :-
   subsumption(Ri,Ep,En, Ri1),
-  gen(Ri1,Ep,En, Rf). % back to gen
+  gen1(Ri1,Ep,En, Rf). % back to gen
 
 
 new_assumption(Ri,Ep,En,F, Ra,Rg,A,FwA) :-
@@ -160,27 +157,36 @@ gen_new_name(NewName) :-
 % select_foldable(+R, -S,-Ri)
 select_foldable(R, S,R1) :-
   lopt(folding_selection(any)),
+  aba_rules(R,A),
+  select(S,A, A1),
+  nonintensional(S),
   !,
-  select_nonintensional(R, S,R1). 
+  utl_rules(R,U),
+  aba_rules(R1,A1),
+  utl_rules(R1,U).  
 select_foldable(R, S,R1) :-
   lopt(folding_selection(mgr)),
-  select_nonintensional(R, S,R1),
-  S = rule(I,_,_),
-  utl_rules(R1,U),
+  aba_rules(R,A), utl_rules(R,U),
+  select(S,A, A1),
+  nonintensional(S),
+  S = rule(I,_,_), 
   % there exists a generalisation for I
-  member(gen(_,[id(I)|_]),U).
+  member(gen(_,[id(I)|_]),U),
+  !,
+  aba_rules(R1,A1), utl_rules(R1,U).
 
 %
 init_mgr(R,R1) :-
   write('gen: initializing generalisations'), nl,
-  aba_rules(R,A), 
+  aba_rules(R,A),
   % select all nonintensional rules and 
   findall(N, ( member(N,A), nonintensional(N) ), L),
   ( L=[] -> R=R1
   ;
     ( % add their generalisations to the utility rules
       generate_generalisations(L,R, G),
-      filter_generalisations(G,R, R1)
+      filter_generalisations(G, G1),
+      utl_rules_append(R,G1,R1)
     )
   ).
 %
@@ -193,27 +199,22 @@ generate_generalisations([S|Ss],R, [G|Gs]) :-
   !,
   new_rule(H,Fs,F),
   findall(P1/N1,(member(A1,Fs),functor(A1,P1,N1)),L1),
-  G=gen(F,[id(I)|L1]),
+  functor(H,P,N),
+  G=gen(F,[id(I),P/N|L1]),
   write(' ffp: '), 
   copy_term(G,G1), numbervars(G1,0,_), write(G1), nl,
   generate_generalisations(Ss,R, Gs).
 %
-filter_generalisations(L1,R1, R3) :-
-  select(gen(G1,[ID|P1]),L1,L2),
-  select(gen(G2,[id(I)|P2]),L2,L3),
+filter_generalisations(L1, R3) :-
+  select(gen(G1,[ID1,P/N|P1]),L1,L2),
+  select(gen(G2,[_ID,P/N|P2]),L2,L3),
   subset(P1,P2), % P1 is a subset of P2
   mgr(G1,G2),
-  % remove the nonintensional rule I from A
-  aba_rules(R1,A1),
-  select(rule(I,_,_),A1,A2),
   !,
   write(' '), show_rule(G1), write(' is more general than '), show_rule(G2), nl,
-  utl_rules(R1,U1),
-  aba_rules(R2,A2),
-  utl_rules(R2,U1),
-  filter_generalisations([gen(G1,[ID|P1])|L3],R2, R3).
-filter_generalisations(L1,R1, R2) :-
-  utl_rules_append(R1,L1,R2).
+  filter_generalisations([gen(G1,[ID1,P/N|P1])|L3], R3).
+filter_generalisations(L1, L1).
+
 %
 mgr(G1,G2) :-
   copy_term(G1,rule(_,H1,B1)),
@@ -221,17 +222,6 @@ mgr(G1,G2) :-
   H1 = H2,
   subsumes_chk_conj(B1,B2).
 
-% select_nonintensional(+R, -S,-R1)
-% S is a non-intensional learnt rule in R and R1 is R\S
-select_nonintensional(R, S,R1) :-
-  aba_rules(R,A),
-  select(S,A, A1),
-  nonintensional(S),
-  !,
-  utl_rules(R,U),
-  aba_rules(R1,A1),
-  utl_rules(R1,U).
- 
 % subsumption(+Ri, -Ro)
 % Ro is the result obained by removing all subsumed nonintensional rules from Ri
 subsumption(Ri,Ep,En, Ro) :-

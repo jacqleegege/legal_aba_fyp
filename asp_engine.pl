@@ -41,7 +41,7 @@ compute_conseq(Rs, Cs) :-
   read_all(Cs), % Cs is a singleton
   seen,
   shell('rm clingo.stderr.log',_).
-compute_conseq(_, _) :-
+compute_conseq(_, []) :-
   shell('cat cc.clingo | grep \'^UNSATISFIABLE\' > /dev/null',EXIT_CODE),
   EXIT_CODE == 0,
   !.

@@ -44,8 +44,13 @@ aba_asp(BK,Ep,En, Ro) :-
   aba_asp_proc(BK,R1,Ep,En, Ro).
 %
 aba_asp_proc(BK,R1,Ep,En, Ro) :-
-  roLe(R1,Ep,En, R2),    % RoLe 
-  genT(R2,Ep,En, Ro),    % GEN
+  statistics(runtime,[T1,_]), % start time
+  roLe(R1,Ep,En, R2),    % RoLe
+  ( lopt(folding_selection(mgr)) -> init_mgr(R2,R3) ; R2=R3 ),
+  genT(R3,Ep,En, Ro),    % GEN
+  statistics(runtime,[T2,_]), % end time
+  T is T2-T1,
+  nl, write('Learning CPU time (ms): '), write(T), nl,
   atom_concat(BK,'.sol.aba',Out),
   retract(sol_counter(N)), M is N+1, assert(sol_counter(M)),
   nl, write('Writing solution no. '), write(M), write(' to '), write(Out), nl, nl,
