@@ -48,6 +48,9 @@ aba_asp_proc(BK,R1,Ep,En, Ro) :-
   roLe(R1,Ep,En, R2),    % RoLe
   ( lopt(folding_selection(mgr)) -> init_mgr(R2,R3) ; R2=R3 ),
   genT(R3,Ep,En, Ro),    % GEN
+  nl,
+  write('Positive examples: '), length(Ep,EpN), write(EpN), nl,
+  write('Negative examples: '), length(En,EnN), write(EnN), nl,
   statistics(runtime,[T2,_]), % end time
   T is T2-T1,
   nl, write('Learning CPU time (ms): '), write(T), nl,

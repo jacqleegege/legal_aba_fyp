@@ -102,7 +102,7 @@ gen6(Ra,Ep,En,A,RgAS, Rf) :-
   findall(R, ( functor(C,C_A,N),member(C,RgAS), e_rote_learn(C,R) ), Rs),
   aba_rules_append(Ra,Rs,Ra1),
   ( lopt(learning_mode(cautious)) -> entails(Ra1,Ep,En) ; true  ),
-  ( lopt(folding_selection(mgr)) -> init_mgr(Ra1,Ra2) ; Ra1=Ra2 ),
+  ( lopt(folding_selection(mgr)) -> update_mgr(Ra1,Rs,Ra2) ; Ra1=Ra2 ),
   gen7(Ra2,Ep,En, Rf). % go to subsumption
 % gen7 - subsumption
 gen7(Ri,Ep,En, Rf) :-
@@ -189,6 +189,11 @@ init_mgr(R,R1) :-
       utl_rules_append(R,G1,R1)
     )
   ).
+update_mgr(R,L,R1) :-
+  write('gen: updating generalisations'), nl,
+  generate_generalisations(L,R, G),
+  filter_generalisations(G, G1),
+  utl_rules_append(R,G1,R1).
 %
 generate_generalisations([],_, []).
 generate_generalisations([S|Ss],R, [G|Gs]) :- 
