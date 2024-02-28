@@ -151,11 +151,9 @@ write_ac([_|Rs]) :-
   write_ac(Rs). 
 
 %
-check_aba(Rules,Ep,En) :-
+check_aba(Rules,Ep,_En) :-
   collect_consts(Rules,[], Cs),
-  append(Ep,En,E),
-  check_ep_consts(E,Cs),
-  check_to_be_learnt(Rules,Ep).
+  check_ep_consts(Ep,Cs).
 
 %
 collect_consts([],Ci, Co) :-
@@ -163,8 +161,7 @@ collect_consts([],Ci, Co) :-
 collect_consts([R|Rs],Ci, Co) :-
   R = rule(_,_,B),
   !,  
-  collect_consts_aux(B, Cs),
-  append(Ci,Cs, Ci1),
+  collect_consts_aux(B,Ci, Ci1),
   collect_consts(Rs,Ci1, Co).
 collect_consts([_|Rs],Ci, Co) :-
   collect_consts(Rs,Ci, Co).  
@@ -172,14 +169,14 @@ collect_consts([_|Rs],Ci, Co) :-
 % (i.e., constants occur in the body 
 % of rules as equalities of the form 
 % Var=constant)
-collect_consts_aux([], []).
-collect_consts_aux([X=C|Bs], [C|Cs]) :-
+collect_consts_aux([],Ci, Ci).
+collect_consts_aux([X=C|Bs],Ci, Cs) :-
   var(X),
   ground(C),
   !,
-  collect_consts_aux(Bs, Cs).
-collect_consts_aux([_|Bs], Cs) :-
-  collect_consts_aux(Bs, Cs).
+  collect_consts_aux(Bs,[C|Ci], Cs).
+collect_consts_aux([_|Bs],Ci, Cs) :-
+  collect_consts_aux(Bs,Ci, Cs).
 
 %
 check_ep_consts([],_).
@@ -201,14 +198,3 @@ check_ep_consts_aux([Arg|Args],Ci) :-
 check_ep_consts_aux([Arg|Args],Ci) :-
   var(Arg),
   check_ep_consts_aux(Args,Ci).
-
-%
-:- dynamic tbl_occurs_in_BK/0.
-check_to_be_learnt(Rules,Ep) :-
-  member(E,Ep), 
-  functor(E,F,N),
-  member(rule(_,H,_),Rules),
-  functor(H,F,N),
-  !,
-  assert(tbl_occurs_in_BK).
-check_to_be_learnt(_,_).   

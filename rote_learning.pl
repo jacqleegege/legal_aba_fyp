@@ -3,9 +3,23 @@
 :- use_module('asp_utils').
 :- use_module('asp_engine').
 
+:- dynamic tbl_occurs_in_BK/0.
+roLe(Ri,Ep,En, Ro) :-
+  bk_preds(Ps),
+  findall(F/N, ( member(E,Ep), functor(E,F,N) ), EPs),
+  sort(EPs,SEPs),
+  member(P,SEPs),
+  member(P,Ps),
+  !,
+  assert(tbl_occurs_in_BK),
+  roLe_aux(Ri,Ep,En, Ro).
+roLe(Ri,Ep,_En, Ro) :- 
+  findall(R, ( member(E,Ep), e_rote_learn(E,R) ), LC),
+  aba_rules_append(Ri,LC,Ro).
+
 % roLe(+Ri,+Ep,+En, -Ro)
 % rote learning of Ep and En
-roLe(Ri,Ep,En, Ro) :-
+roLe_aux(Ri,Ep,En, Ro) :-
   lopt(learning_mode(brave)),
   !,
   asp_star(Ri,Ep,En, S),
@@ -20,7 +34,7 @@ roLe(Ri,Ep,En, Ro) :-
   % add learnt positive and contraries to Ri
   aba_rules_append(Ri,LC,Ro).
 
-roLe(Ri,Ep,En, Ro) :-
+roLe_aux(Ri,Ep,En, Ro) :-
   lopt(learning_mode(cautious)),
   !,
   % learn positive examples

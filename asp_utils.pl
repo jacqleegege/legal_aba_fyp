@@ -20,6 +20,7 @@
     ,  op(300,fy,not)
     ,  rlid/1
     ,  ic/2
+    ,  bk_preds/1
     ]).
 
 :- use_module(library(dialect/hprolog),
@@ -29,6 +30,8 @@
 rid(1).
 
 :- dynamic rlid/1.
+
+:- dynamic bk_preds/1.
 
 % rule_id(I): I is a fresh new rule identifier 
 rule_id(I) :-
@@ -99,7 +102,8 @@ read_bk(FileName, Rules) :-
   read_bk_aux(Stream, Rules),
   rid(ID),
   assert(rlid(ID)), % ID of the first learnt rule
-  close(Stream).
+  close(Stream),
+  preds_in_BK(Rules).
 % read_bk/2 utility predicate: 
 % read all terms from Stream and
 % generate the corresponding rule/3 terms
@@ -138,7 +142,20 @@ conj_to_list(B,L) :-
     ( B = (B1,B2), L=[B1|H], conj_to_list(B2,H) )
   ;
     L=[B]
-  ).  
+  ).
+
+%
+preds_in_BK(Rules) :-
+  preds_in_BK(Rules,P),
+  sort(P,S),
+  assert(bk_preds(S)).
+preds_in_BK([],[]).
+preds_in_BK([rule(_,H,_)|Rs],[F/N|P]) :-
+  functor(H,F,N),
+  !,
+  preds_in_BK(Rs,P).
+preds_in_BK([_|Rs],P) :-
+  preds_in_BK(Rs,P).
  
 % SEMANTICS: writes all rules to file
 dump_rules(Rs) :-
