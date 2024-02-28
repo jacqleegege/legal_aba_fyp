@@ -40,7 +40,7 @@ aba_asp(BK,Ep,En, Ro) :-
   check_aba(Rs,Ep,En),
   rules_aba_utl(Rs, R1), % partition the list of rules Rs into two sublists ABA and UTL
                          % ABA = rules of the ABA framework
-                         % UTL = utility rules (e.g., domain, assumption, contrary)
+                         % UTL = utility rules (e.g., assumption, contrary)
   aba_asp_proc(BK,R1,Ep,En, Ro).
 %
 aba_asp_proc(BK,R1,Ep,En, Ro) :-
@@ -154,7 +154,8 @@ write_ac([_|Rs]) :-
 check_aba(Rules,Ep,En) :-
   collect_consts(Rules,[], Cs),
   append(Ep,En,E),
-  check_ep_consts(E,Cs).
+  check_ep_consts(E,Cs),
+  check_to_be_learnt(Rules,Ep).
 
 %
 collect_consts([],Ci, Co) :-
@@ -199,4 +200,15 @@ check_ep_consts_aux([Arg|Args],Ci) :-
   ).
 check_ep_consts_aux([Arg|Args],Ci) :-
   var(Arg),
-  check_ep_consts_aux(Args,Ci).  
+  check_ep_consts_aux(Args,Ci).
+
+%
+:- dynamic tbl_occurs_in_BK/0.
+check_to_be_learnt(Rules,Ep) :-
+  member(E,Ep), 
+  functor(E,F,N),
+  member(rule(_,H,_),Rules),
+  functor(H,F,N),
+  !,
+  assert(tbl_occurs_in_BK).
+check_to_be_learnt(_,_).   

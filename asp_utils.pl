@@ -176,9 +176,9 @@ dump_rule(R) :-
   !,
   write('#'), write(D), write(' '), write(A), write('.'), nl.
 dump_rule(R) :-
-  % ignore assumption/1, contrary/2, gen/2
+  % ignore assumption/1, contrary/2, gen/2, msr/2
   functor(R,F,N),
-  memberchk(F/N,[assumption/1,contrary/2,gen/2]),
+  memberchk(F/N,[assumption/1,contrary/2,gen/2,msr/2]),
   !.
 dump_rule(R) :-
   told,

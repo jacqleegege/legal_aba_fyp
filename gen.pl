@@ -20,14 +20,16 @@ genT(R2,Ep,En, Ro) :-
 
 % gen 1
 gen1(Ri,Ep,En, Rf) :-
+  write('gen1: folding selection'), nl, 
   select_foldable(Ri, S,Ri1), % Ri1 = Ri\S
   !,
-  write('gen1: folding selection: '), show_rule(S), nl,
+  write(' to fold: '), show_rule(S), nl,
   write(' begin folding'), nl, 
   folding(Ri1,S, F),  % F = fold-all(S)
   write(' folding result: '), show_rule(F), nl,
   gen2(Ri1,Ep,En,F, Rf).
-gen1(Ri,_Ep,_En, Ri).
+gen1(Ri,_Ep,_En, Ri) :-
+  write('gen1: noting to fold.'), nl. 
 % gen2
 gen2(Ri,Ep,En,F, Rf) :-
   aba_rules_append(Ri,[F], Ri1),
@@ -106,7 +108,8 @@ gen6(Ra,Ep,En,A,RgAS, Rf) :-
   gen7(Ra2,Ep,En, Rf). % go to subsumption
 % gen7 - subsumption
 gen7(Ri,Ep,En, Rf) :-
-  subsumption(Ri,Ep,En, Ri1),
+  write('gen7: checking subsumption'), nl,
+  ( tbl_occurs_in_BK -> subsumption(Ri,Ep,En, Ri1) ; Ri = Ri1 ),
   gen1(Ri1,Ep,En, Rf). % back to gen
 
 
@@ -173,7 +176,8 @@ select_foldable(R, S,R1) :-
   % there exists a generalisation for I
   member(gen(_,[id(I)|_]),U),
   !,
-  aba_rules(R1,A1), utl_rules(R1,U).
+  ( tbl_occurs_in_BK -> (A1=A2,U=U1) ; remove_msr(A1,U,id(I),A2,U1) ),
+  aba_rules(R1,A2), utl_rules(R1,U1).
 
 %
 init_mgr(R,R1) :-
@@ -212,12 +216,13 @@ generate_generalisations([S|Ss],R, [G|Gs]) :-
 %
 filter_generalisations(L1, R3) :-
   select(gen(G1,[ID1,P/N|P1]),L1,L2),
-  select(gen(G2,[_ID,P/N|P2]),L2,L3),
+  select(gen(G2,[ID2,P/N|P2]),L2,L3),
   subset(P1,P2), % P1 is a subset of P2
   mgr(G1,G2),
   !,
   write(' '), show_rule(G1), write(' is more general than '), show_rule(G2), nl,
-  filter_generalisations([gen(G1,[ID1,P/N|P1])|L3], R3).
+  update_msr(ID1,ID2,L3,L4),
+  filter_generalisations([gen(G1,[ID1,P/N|P1])|L4], R3).
 filter_generalisations(L1, L1).
 
 %
@@ -227,10 +232,25 @@ mgr(G1,G2) :-
   H1 = H2,
   subsumes_chk_conj(B1,B2).
 
+%
+update_msr(G,S,L, [msr(I,G)|L4]) :-
+  select(msr(I,S),L,L1),
+  !,
+  update_msr(G,S,L1, L4).
+update_msr(G,S,L, [msr(S,G)|L]).
+
+%
+remove_msr(A,U,id(I), Ao,Uo) :-
+  select(msr(id(J),id(I)),U,U1),
+  !,
+  select(rule(J,H,B),A,A1),
+  write(' removing more specific nonintensional rule '), show_rule(rule(J,H,B)), nl,
+  remove_msr(A1,U1,id(I), Ao,Uo).
+remove_msr(A,U,_, A,U).
+
 % subsumption(+Ri, -Ro)
 % Ro is the result obained by removing all subsumed nonintensional rules from Ri
 subsumption(Ri,Ep,En, Ro) :-
-  write('checking subsumption'), nl,
   aba_rules(Ri,A),   utl_rules(Ri, U),
   % Ri1 has an empty set of rules
   aba_rules(Ri1,[]), utl_rules(Ri1,U),
