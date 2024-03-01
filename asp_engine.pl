@@ -60,7 +60,7 @@ subsumed(Ri,Ep,En, R) :-
   !,
   R = rule(_,H,B),
   ic([not H|B],I),
-  aba_rules_append(Ri,[I], Ri1),
+  utl_rules_append(Ri,[I], Ri1),
   % asp w/ic for Ep and En
   asp(Ri1,Ep,En, Ro),
   % write rules to file
@@ -71,7 +71,6 @@ subsumed(Ri,Ep,En, R) :-
   EXIT_CODE == 0. % exit status of grep: 0 stands for 'One or more lines were selected.'
 subsumed(Ri1,_Ep,_En, R) :-
   lopt(learning_mode(cautious)),
-  !,
   asp(Ri1, Ri1A),
   % write rules to file
   dump_rules(Ri1A),
@@ -89,6 +88,7 @@ subsumed(Ri1,_Ep,_En, R) :-
   copy_term(R,CpyS),
   CpyS = rule(_,H,B),
   unify_eqs(B),
+  !,
   member(H,As).
 % subsumed (cautious) predicate
 unify_eqs([]).

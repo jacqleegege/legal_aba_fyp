@@ -10,3 +10,4 @@ bird(A) :- penguin(A).
 penguin(A) :- superpenguin(A).
 
 % aba_asp('./examples/flies_birds.bk',[flies(woodstock),flies(gwaihir),flies(x_pingu),flies(x_pinga)],[flies(pingu),flies(pinga)]).
+% aba_asp('./examples/flies_birds.bk',[flies(x_pingu),flies(woodstock),flies(gwaihir),flies(x_pinga)],[flies(pingu),flies(pinga)]).

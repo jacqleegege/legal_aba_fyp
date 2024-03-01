@@ -101,10 +101,16 @@ set_lopt(X) :-
 
 write_sol(Rs,File) :-
   tell(File),
-  aba_rules(Rs,A),
-  write_rules(A),
+  % intensional and nonintensional rules
+  aba_rules(Rs,R),
+  write_rules(R),
   nl,
-  write_ac(A),
+  % assumptions
+  aba_asms(Rs,A),
+  % contraries
+  aba_cnts(Rs,C),
+  append(A,C,AC),
+  write_ac(AC),
   told.
 
 % write rule

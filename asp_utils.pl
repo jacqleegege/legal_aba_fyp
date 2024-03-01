@@ -11,10 +11,32 @@
     ,  normalize_eqs/3
     ,  read_bk/2
     ,  rules_aba_utl/2
+    ,  aba_rules/2
+    ,  aba_i_rules/2
+    ,  aba_i_rules_append/3
+    ,  aba_i_rules_replace/3
+    ,  aba_i_rules_select/3
+    ,  aba_i_rules_member/2
+    ,  aba_ni_rules/2
+    ,  aba_ni_rules_append/3
+    ,  aba_ni_rules_replace/3
+    ,  aba_ni_rules_select/3
+    ,  aba_ni_rules_member/2
+    ,  aba_asms/2
+    ,  aba_asms_append/3
+    ,  aba_asms_replace/3
+    ,  aba_asms_select/3
+    ,  aba_asms_member/2
+    ,  aba_cnts/2
+    ,  aba_cnts_append/3
+    ,  aba_cnts_replace/3
+    ,  aba_cnts_select/3
+    ,  aba_cnts_member/2
     ,  utl_rules/2
     ,  utl_rules_append/3
-    ,  aba_rules/2
-    ,  aba_rules_append/3
+    ,  utl_rules_replace/3
+    ,  utl_rules_select/3
+    ,  utl_rules_member/2
     ,  show_rule/1
     ,  show_term/1
     ,  op(300,fy,not)
@@ -81,15 +103,18 @@ new_asp_rule(H,B, R) :-
   R = asp_rule(H,B).
 
 %
-rules_aba_utl(Rs, asp_enc(Rs,Us)) :-
-  findall(R, 
-    ( member(contrary(Alpha,C_Alpha),Rs), 
-      member(rule(_,_,BwA),Rs), 
+rules_aba_utl(Rs, aba_enc(R,[],A,C,U)) :-
+  findall(R1, (member(R1,Rs),functor(R1,rule,3)), R), 
+  findall(R2, (member(R2,Rs),functor(R2,assumption,1)), A), 
+  findall(R3, (member(R3,Rs),functor(R3,contrary,2)), C),
+  findall(N, 
+    ( member(contrary(Alpha,C_Alpha),C), 
+      member(rule(_,_,BwA),R), 
       select(Alpha,BwA,B),
       copy_term((Alpha,C_Alpha,B),(Alpha1,C_Alpha1,B1)),
-      new_rule(Alpha1,[not C_Alpha1|B1], R) 
+      new_rule(Alpha1,[not C_Alpha1|B1], N) 
     ), 
-  Us).
+  U).
 
 % read_bk(+File, -Rules):
 % read a read of rules of from File and
@@ -193,9 +218,9 @@ dump_rule(R) :-
   !,
   write('#'), write(D), write(' '), write(A), write('.'), nl.
 dump_rule(R) :-
-  % ignore assumption/1, contrary/2, gen/2, msr/2
+  % ignore gen/2, msr/2
   functor(R,F,N),
-  memberchk(F/N,[assumption/1,contrary/2,gen/2,msr/2]),
+  memberchk(F/N,[gen/2,msr/2]),
   !.
 dump_rule(R) :-
   told,
@@ -220,13 +245,7 @@ write_show([P/N|Ps]) :-
   write_show(Ps).
 
 % asp: ASP encoding of Ri
-asp(Ri, Ro) :-
-  aba_rules(Ri,Ai),
-  utl_rules(Ri,Ui),
-  % select only rule/1
-  findall(rule(I,H,B),member(rule(I,H,B),Ai),Ao),     % (b.1)
-  aba_rules(Ro,Ao),
-  utl_rules(Ro,Ui).
+asp(Ri, Ri).
 asp(Ri,Ep,En, Ro) :-
   ic(Ep,En, I),              % (c), (d)
   utl_rules_append(Ri,I,Ri1),
@@ -239,9 +258,10 @@ asp_plus(Ri,Ep,En,Ts, Ro) :-
 % asp_star: ASP* (w/primed predicates)
 asp_star(Ri,Ep,En, Ro) :-
   % Cs: set of contrary predicates
-  aba_rules(Ri, A),
+  aba_cnts(Ri, C),
+  aba_rules(Ri, R),
   findall((Alpha,C_Alpha,B), 
-    ( member(contrary(Alpha,C_Alpha),A), member(rule(_,_,BwA),A), select(Alpha,BwA,B) ), Cs),
+    ( member(contrary(Alpha,C_Alpha),C), member(rule(_,_,BwA),R), select(Alpha,BwA,B) ), Cs),
   generators_pp(Cs, Gs),     % (e)
   utl_rules_append(Ri,Gs, Ri1),
   ep_generators_pp(Ep, Gs1), 
@@ -303,21 +323,87 @@ ic([P|Ps],Ns, [ic([not P])|Rs]) :-
 %
 ic(B, ic(B)).
 
-% aba_rules(+ABAF, A), A is the list of ABA rules in ABAF
-aba_rules(asp_enc(A,_), A).
-% aba_rules_append(+ABA_Fwk_encI,+R, -ABA_Fwk_encO)
-% ABA_Fwk_encO is obtained from ABA_Fwk_encI by 
-% appending R to the ABA rules in ABA_Fwk_encI
-aba_rules_append(asp_enc(A1,U),A2, asp_enc(A3,U)) :-
-  append(A1,A2,A3).
-
-% utl_rules(+ABAF, U), U is the list of utility rules in ABAF
-utl_rules(asp_enc(_,U), U).
-% utl_rules_append(+ABA_Fwk_encI,+U, -ABA_Fwk_encO)
-% ABA_Fwk_encO is obtained from ABA_Fwk_encI by 
-% appending U to the utility rules in ABA_Fwk_encI
-utl_rules_append(asp_enc(A,U1),U2, asp_enc(A,U3)) :-
-  append(U1,U2,U3).
+% -----------------------------------------------------------------------------
+% aba_enc(I,N,A,C,U)
+% I list of intensional rules
+% N list of nonintensional rules
+% A list of assumptions
+% C list of contraries
+% U list of utility rules
+%
+% aba_rules(+ABAf, R), R is the list of ABA rules in ABAf
+aba_rules(aba_enc(I,N,_,_,_), R) :-
+  append(I,N,R).
+%
+% aba_i_rules(?ABAf1,?R)
+% aba_i_rules_append(?ABAf1,?R,?ABAf2)
+% aba_i_rules_replace(?ABAf1,?R,?ABAf2)
+% aba_i_rules_select(?R,?ABAf1,?ABAf2)
+% aba_i_rules_member(?R,?ABAf)
+aba_i_rules(aba_enc(I,_,_,_,_),I).
+aba_i_rules_append(aba_enc(I1,N,A,C,U),R, aba_enc(I2,N,A,C,U)) :-
+  append(I1,R,I2).
+aba_i_rules_replace(aba_enc(_,N,A,C,U),R, aba_enc(R,N,A,C,U)).
+aba_i_rules_select(R,aba_enc(I1,N,A,C,U), aba_enc(I2,N,A,C,U)) :-
+  select(R,I1,I2).
+aba_i_rules_member(R, aba_enc(I,_,_,_,_)) :-
+  member(R,I).
+%
+% aba_ni_rules(?ABAf1,?R)
+% aba_ni_rules_append(?ABAf1,?R,?ABAf2)
+% aba_ni_rules_replace(?ABAf1,?R,?ABAf2)
+% aba_ni_rules_select(?R,?ABAf1,?ABAf2)
+% aba_ni_rules_member(?R,?ABAf)
+aba_ni_rules(aba_enc(_,N,_,_,_),N).
+aba_ni_rules_append(aba_enc(I,N1,A,C,U),R, aba_enc(I,N2,A,C,U)) :-
+  append(N1,R,N2).
+aba_ni_rules_replace(aba_enc(I,_,A,C,U),R, aba_enc(I,R,A,C,U)).
+aba_ni_rules_select(R,aba_enc(I,N1,A,C,U), aba_enc(I,N2,A,C,U)) :-
+  select(R,N1,N2).
+aba_ni_rules_member(R, aba_enc(_,N,_,_,_)) :-
+  member(R,N).
+%
+% aba_asms(?ABAf1,?R)
+% aba_asms_append(?ABAf1,?R,?ABAf2)
+% aba_asms_replace(?ABAf1,?R,?ABAf2)
+% aba_asms_select(?R,?ABAf1,?ABAf2)
+% aba_asms_member(?R,?ABAf)
+aba_asms(aba_enc(_,_,A,_,_),A).
+aba_asms_append(aba_enc(I,N,A1,C,U),R, aba_enc(I,N,A2,C,U)) :-
+  append(A1,R,A2).
+aba_asms_replace(aba_enc(I,N,_,C,U),R, aba_enc(I,N,R,C,U)).
+aba_asms_select(R,aba_enc(I,N,A1,C,U), aba_enc(I,N,A2,C,U)) :-
+  select(R,A1,A2).
+aba_asms_member(R, aba_enc(_,_,A,_,_)) :-
+  member(R,A).
+%
+% aba_cnts(?ABAf1,?R)
+% aba_cnts_append(?ABAf1,?R,?ABAf2)
+% aba_cnts_replace(?ABAf1,?R,?ABAf2)
+% aba_cnts_select(?R,?ABAf1,?ABAf2)
+% aba_cnts_member(?R,?ABAf)
+aba_cnts(aba_enc(_,_,_,C,_),C).
+aba_cnts_append(aba_enc(I,N,A,C1,U),R, aba_enc(I,N,A,C2,U)) :-
+  append(C1,R,C2).
+aba_cnts_replace(aba_enc(I,N,A,_,U),R, aba_enc(I,N,A,R,U)).
+aba_cnts_select(R,aba_enc(I,N,A,C1,U), aba_enc(I,N,A,C2,U)) :-
+  select(R,C1,C2).
+aba_cnts_member(R, aba_enc(_,_,_,C,_)) :-
+  member(R,C).
+%
+% utl_rules(?ABAf,?R)
+% utl_rules_append(?ABAf1,?R,?ABAf2)
+% utl_rules_replace(?ABAf1,?R,?ABAf2)
+% utl_rules_select(?R,?ABAf1,?ABAf2)
+% utl_rules_member(?R,?ABAf)
+utl_rules(aba_enc(_,_,_,_,R), R).
+utl_rules_append(aba_enc(I,N,A,C,U1),R, aba_enc(I,N,A,C,U2)) :-
+  append(U1,R,U2).
+utl_rules_replace(aba_enc(I,N,A,C,_),R, aba_enc(I,N,A,C,R)).
+utl_rules_select(R,aba_enc(I,N,A,C,U1), aba_enc(I,N,A,C,U2)) :-
+  select(R,U1,U2).
+utl_rules_member(R, aba_enc(_,_,_,_,U)) :-
+  member(R,U).
 
 % pretty print a rule
 show_rule(R) :-

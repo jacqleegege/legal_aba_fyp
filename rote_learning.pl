@@ -15,7 +15,7 @@ roLe(Ri,Ep,En, Ro) :-
   roLe_aux(Ri,Ep,En, Ro).
 roLe(Ri,Ep,_En, Ro) :- 
   findall(R, ( member(E,Ep), e_rote_learn(E,R) ), LC),
-  aba_rules_append(Ri,LC,Ro).
+  aba_ni_rules_append(Ri,LC,Ro).
 
 % roLe(+Ri,+Ep,+En, -Ro)
 % rote learning of Ep and En
@@ -32,7 +32,7 @@ roLe_aux(Ri,Ep,En, Ro) :-
                 e_rote_learn(C2,R2) % R2 is the rote learning of C
               ), LC),
   % add learnt positive and contraries to Ri
-  aba_rules_append(Ri,LC,Ro).
+  aba_ni_rules_append(Ri,LC,Ro).
 
 roLe_aux(Ri,Ep,En, Ro) :-
   lopt(learning_mode(cautious)),
@@ -47,7 +47,7 @@ roLe_aux(Ri,Ep,En, Ro) :-
   % learn contraries (c_alpha)
   asp_star(Ri,Ep,En, S),
   compute_conseq(S, [CS]),          % fails if S is unsatisfiable
-  aba_rules(Ri,U),
+  aba_cnts(Ri,U),
   findall(R2, ( % C_Alpha is a contrary of an assumption
                 member(contrary(_,C_Alpha),U),
                 copy_term(C_Alpha,C_Alpha1),
@@ -63,7 +63,7 @@ roLe_aux(Ri,Ep,En, Ro) :-
                 e_rote_learn(C_Alpha1,R2) 
               ), LC),
   % add learnt positive and contraries to Ri
-  aba_rules_append(Ri,LP,R1), aba_rules_append(R1,LC,Ro),
+  aba_ni_rules_append(Ri,LP,R1), aba_ni_rules_append(R1,LC,Ro),
   % check entailment
   entails(Ro,Ep,En).
 
