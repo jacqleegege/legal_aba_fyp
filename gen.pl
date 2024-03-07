@@ -109,7 +109,7 @@ gen6(Ra,Ep,En,A,RgAS, Rf) :-
 % gen7 - subsumption
 gen7(Ri,Ep,En, Rf) :-
   write('gen7: checking subsumption'), nl,
-  ( ( lopt(folding_selection(mgr)), tbl_occurs_in_BK ) -> Ri = Ri1 ; subsumption(Ri,Ep,En, Ri1) ),
+  ( ( lopt(folding_selection(mgr)), \+ tbl_occurs_in_BK ) -> Ri=Ri1 ; subsumption(Ri,Ep,En, Ri1) ),
   gen1(Ri1,Ep,En, Rf). % back to gen
 
 
