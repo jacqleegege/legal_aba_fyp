@@ -9,4 +9,4 @@ square(square_1).
 circle(circle_7).
  
 
-% aba_asp('./examples/shapes1.bk',[c(i4)],[c(img_2)]).
+% aba_asp('./examples-wip/shapes1.bk',[c(i4)],[c(img_2)]).

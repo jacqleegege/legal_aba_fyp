@@ -1,0 +1,19 @@
+% SHAPES ABA Framework
+ 
+in(A,B) :- A=img_1,B=circle_1.
+in(A,B) :- A=img_2,B=square_1.
+ 
+circle(circle_1).
+square(square_1).
+ 
+blue(square_1).
+blue(circle_1).
+ 
+image(img_1).
+image(img_2).
+ 
+domain(X) :- blue(X).
+domain(X) :- image(X).
+ 
+% aba_asp('./examples-wip/shapes1.bk',[c(img_1)],[c(img_2)]).
+
