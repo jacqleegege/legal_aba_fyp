@@ -23,14 +23,14 @@ node(6).
 node(7).
 node(8).
 
-domain(X) :- node(X).
+%domain(X) :- node(X).
 
 %E+ = {normal_path(1,3),normal_path(3,7),normal_path(1,7)}
 
 %E- = {normal_path(1,2),normal_path(2,2),normal_path(2,5),normal_path(1,5),normal_path(3,4),normal_path(4,3),
 % normal_path(3,1),normal_path(5,7),normal_path(1,6)}
 
-/* aba_asp('../examples/normal_path1.bk.pl',
+/* aba_asp('./examples-wip/normal_path1.bk.pl',
 [normal_path(1,3),normal_path(3,7),normal_path(1,7)], 
 [normal_path(1,2),normal_path(2,2),normal_path(2,5),normal_path(1,5),normal_path(3,4),normal_path(4,3),
 normal_path(3,1),normal_path(5,7),normal_path(1,6)]).

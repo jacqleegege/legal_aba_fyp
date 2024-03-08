@@ -4,12 +4,38 @@
 :- dynamic tokens/1.
 tokens(1).
 
-% folding(+Rs,+R, -F)
+% folding(+Ri,+R, -F)
 % Rs: rules for folding, and
 % F is the result of applying folding to R
-folding(Rs,R, F) :-
+% nd (w/tokens)
+folding(Ri,R, F) :-
+  lopt(folding_mode(nd)),
+  aba_rules(Ri,Rs), % AR = ABA Rules
   copy_term(R,rule(_,H,Ts)),
   folding(Rs,H,Ts, Fs),
+  new_rule(H,Fs,F).
+% greedy
+folding(Ri,R, F) :-
+  lopt(folding_mode(greedy)),
+  lopt(folding_selection(mgr)),
+  utl_rules(Ri,U),
+  R = rule(I,_,_),
+  member(gen(G,[id(I)|_]),U),
+  copy_term(G,F).
+folding(Ri,R, F) :-
+  lopt(folding_mode(greedy)),
+  lopt(folding_selection(any)),
+  aba_rules(Ri,Rs), % AR = ABA Rules
+  copy_term(R,rule(_,H,Ts)),
+  fold_greedy(Rs,H,[],Ts, Fs),
+  !,
+  new_rule(H,Fs,F).   
+% all
+folding(Ri,R, F) :-
+  lopt(folding_mode(all)),
+  aba_rules(Ri,Rs),
+  copy_term(R,rule(_,H,Ts)),
+  fold(Rs,[],Ts,[], Fs),
   new_rule(H,Fs,F).
 
 % folding(+Rs,+H,+Ts, -Fs)
@@ -17,10 +43,13 @@ folding(Rs,R, F) :-
 % H: head of the clause to be folded
 % Ts: To be folded
 % Fs: result
+% non-deterministic
+:- discontiguous folding/4.
 folding(Rs,H,Ts, Fs) :-
-  fold(Rs,H,Ts, Zs),
+  tokens(T),
+  fold_all(T,Rs,H,[],Ts, Zs),
   folding_aux(Rs,H,Zs, Fs).
-% folding auxiliary predicate
+% fold_all auxiliary predicate
 folding_aux(_,_,Fs, Fs).
 folding_aux(Rs,H,[T|Ts], Fs) :-
   folding(Rs,H,[T|Ts], Fs).
@@ -28,16 +57,6 @@ folding_aux(Rs,H,Ts, Fs1) :-
   nselect(P,Ts, E,R),
   folding(Rs,H,R, Fs),
   combine(P,E,Fs, Fs1). 
-
-% fold(+Rs,+H,+Ts, -Zs)
-fold(Rs,H,Ts, Zs) :-
-  lopt(folding_mode(nd)),
-  tokens(T), 
-  fold_all(T,Rs,H,[],Ts, Zs).
-fold(Rs,H,Ts, Zs) :-
-  lopt(folding_mode(greedy)),
-  fold_greedy(Rs,H,[],Ts, Zs),
-  !.   
 
 % nselect(+P,+Ts, -E,-R)
 % Ts is a list consisting of at least two elements,
@@ -164,3 +183,58 @@ intersection([_|L],L2,L3) :-
 
 % append_difflist
 append_difflist(L1-T1, T1-T2, L1-T2).
+
+% fold(Rs,As,Ts,FsI, FsO)
+% Rs: rules for folding
+% As: folded elements
+% Ts: elements to be folded
+% FsI: already folded
+% FsO: fold result
+fold(Rs,As,[T|Ts],FsI, FsO) :- 
+  select_rule(Rs,T,R),    % R is a (copy of a) clause in Rs that can be used for folding T
+  R = rule(_,H,[T|Bs]),   % select_rule sorts the elements in the body so that the head of Bs matches T   
+  match(Bs,As,Ts, Ns),    % Ns consists of equalities in Bs that do not match with any element in As@Ts
+  \+ memberchk_eq(H,FsI), % H does not belong to the list of elements obtained by folding
+  append(Ts,Ns, Ts1),     % New elements to be folded Ts@Ns
+  fold(Rs,[T|As],Ts1,[H|FsI], FsO).
+fold(Rs,As,[_|Ts],FsI, FsO) :- 
+  fold(Rs,As,Ts,FsI, FsO).
+fold(_,[_|_],[],Fs, Fs).  % [] nothing left to be folded, [_|_] something has been folded
+                          % Note fold is called with As=[]
+
+%
+select_rule(Rs,T,R1) :-
+  member(R,Rs),
+  R = rule(I,H,Bs),
+  select(B,Bs,Bs1),
+  variant(T,B),
+  copy_term((H,B,Bs1),(CpyH,CpyB,CpyBs)),
+  R1 = rule(I,CpyH,[CpyB|CpyBs]).
+
+%
+match([],_,_,[]).
+match([B|Bs],As,Ts, Ls) :- 
+  select(T,As,As1),
+  subsumes_term(B,T), % B is more general than T
+  B=T,
+  match(Bs,As1,Ts, Ls).
+match([B|Bs],As,Ts, Ls) :- 
+  select(T,Ts,Ts1),
+  subsumes_term(B,T),
+  B=T,
+  match(Bs,As,Ts1, Ls).
+match([B|Bs],As,Ts, [B|Ls]) :-
+  functor(B,=,2),
+  does_not_subsume(B,As),
+  does_not_subsume(B,Ts),
+  match(Bs,As,Ts, Ls).
+
+% does_not_subsume(+X,+Ls)
+% there is no element Y in Ls s.t. X subsumes Y 
+does_not_subsume(_,[]).
+does_not_subsume(X,[Y|_]) :-
+  subsumes_term(X,Y),
+  !,
+  fail.
+does_not_subsume(X,[_|Ls]) :-
+  does_not_subsume(X,Ls).

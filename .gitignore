@@ -2,5 +2,5 @@
 cc.clingo
 clingo.stderr.*
 asp.clingo
-*.sol.pl
 cc.pl
+*.sol*

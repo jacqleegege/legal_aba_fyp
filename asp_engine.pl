@@ -13,7 +13,7 @@ compute_conseq(Rs, Cs) :-
   % write rules to file
   dump_rules(Rs),
   % invoke clingo to compute the consequences of Rs and write them to cc.clingo
-  shell('clingo asp.clingo --out-ifs=, --opt-mode=optN --quiet=1 > cc.clingo 2>> clingo.stderr.txt',_EXIT_CODE),
+  shell('clingo asp.clingo --out-ifs=, --opt-mode=optN --quiet=1 > cc.clingo 2>> clingo.stderr.txt',_),
   shell('cat cc.clingo | grep \'^OPTIMUM FOUND\'  > /dev/null',EXIT_CODE),
   EXIT_CODE == 0, % exit status of grep: 0 stands for 'One or more lines were selected.'
   !,
@@ -22,13 +22,14 @@ compute_conseq(Rs, Cs) :-
   see('cc.pl'),
   % read 'cc.clingo' and assert it into the database
   read_all(Cs),
-  seen.
+  seen,
+  shell('rm clingo.stderr.log',_).
 compute_conseq(Rs, Cs) :-
   lopt(learning_mode(cautious)),
   % write rules to file
   dump_rules(Rs),
   % invoke clingo to compute the consequences of Rs and write them to cc.clingo
-  shell('clingo asp.clingo --out-ifs=, --opt-mode=ignore --enum-mode=cautious > cc.clingo 2>> clingo.stderr.log',_EXIT_CODE),
+  shell('clingo asp.clingo --out-ifs=, --opt-mode=ignore --enum-mode=cautious > cc.clingo 2>> clingo.stderr.log',_),
   shell('cat cc.clingo | grep \'^SATISFIABLE\'  > /dev/null',EXIT_CODE),
   EXIT_CODE == 0, % exit status of grep: 0 stands for 'One or more lines were selected.'
   !,
@@ -38,8 +39,9 @@ compute_conseq(Rs, Cs) :-
   see('cc.pl'),
   % read 'cc.clingo' and assert it into the database
   read_all(Cs), % Cs is a singleton
-  seen.
-compute_conseq(_, _) :-
+  seen,
+  shell('rm clingo.stderr.log',_).
+compute_conseq(_, []) :-
   shell('cat cc.clingo | grep \'^UNSATISFIABLE\' > /dev/null',EXIT_CODE),
   EXIT_CODE == 0,
   !.
@@ -58,7 +60,7 @@ subsumed(Ri,Ep,En, R) :-
   !,
   R = rule(_,H,B),
   ic([not H|B],I),
-  aba_rules_append(Ri,[I], Ri1),
+  utl_rules_append(Ri,[I], Ri1),
   % asp w/ic for Ep and En
   asp(Ri1,Ep,En, Ro),
   % write rules to file
@@ -69,7 +71,6 @@ subsumed(Ri,Ep,En, R) :-
   EXIT_CODE == 0. % exit status of grep: 0 stands for 'One or more lines were selected.'
 subsumed(Ri1,_Ep,_En, R) :-
   lopt(learning_mode(cautious)),
-  !,
   asp(Ri1, Ri1A),
   % write rules to file
   dump_rules(Ri1A),
@@ -87,6 +88,7 @@ subsumed(Ri1,_Ep,_En, R) :-
   copy_term(R,CpyS),
   CpyS = rule(_,H,B),
   unify_eqs(B),
+  !,
   member(H,As).
 % subsumed (cautious) predicate
 unify_eqs([]).
