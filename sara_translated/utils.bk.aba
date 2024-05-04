@@ -1,0 +1,756 @@
+earlier(Result, Date1, Date2) :-
+    date(Date1), date(Date2), is_before(Date2,Date1), Result = Date2.
+earlier(Result, Date1, Date2) :-
+    date(Date1), date(Date2), is_before(Date1,Date2), Result = Date1.
+earlier(Result, Date1, Date2) :-
+	date(Date1), date(Date2), Date1 = Date2, Result = Date1.
+
+later(Result, Date1, Date2) :-
+	date(Date1), date(Date2), is_before(Date2,Date1), Result = Date1.
+later(Result, Date1, Date2) :-
+	date(Date1), date(Date2), is_before(Date1,Date2), Result = Date2.
+later(Result, Date1, Date2) :-
+	date(Date1), date(Date2), Date1 = Date2, Result = Date1.
+
+between(Y1,Y2,Year):- year(Y1),year(Y2),Year<Y2+1,Year>Y1-1.
+
+% time
+% day_to_stamp(Day, Stamp) :- % convert day in YYYY-MM-DD format to time stamp
+% 	split_string(Day,"-","",[YS,MS,DS]),
+% 	atom_number(YS,YI),
+% 	atom_number(MS,MI),
+% 	atom_number(DS,DI),
+% 	DI1=DI+1,
+% 	date_time_stamp(date(YI,MI,DI1,0,0,0,0,-,-), Stamp).
+
+is_before(Day1,Day2):-
+    date_split(Day1,Y1,M1,D1),
+    date_split(Day2,Y2,M2,D2),
+    Y1 < Y2.
+is_before(Day1,Day2):-
+    date_split(Day1,Y1,M1,D1),
+    date_split(Day2,Y2,M2,D2),
+    Y1 = Y2,M1 < M2.
+is_before(Day1,Day2):-
+    date_split(Day1,Y1,M1,D1),
+    date_split(Day2,Y2,M2,D2),
+    Y1 = Y2,M1 = M2,D1 < D2.
+
+% is_before(Day1,Day2) :- % Is true if Day2 occurs after Day1. Arguments are input as strings in format YYYY-MM-DD.
+%     nonvar(Day1), nonvar(Day2),
+% 	day_to_stamp(Day1,Stamp1),
+% 	day_to_stamp(Day2,Stamp2),
+%     Stamp1=<Stamp2.
+
+last_day_year(Year,Day):-
+    date_split(Day,Year,12,31).
+
+% last_day_year(Year,Day) :-
+% 	atom_string(Year,Year_s),
+% 	string_concat(Year_s,"-12-31",Day).
+
+first_day_year(Year,Day) :-
+	date_split(Day,Year,1,1).
+
+% first_day_year(Year,Day) :-
+% 	atom_string(Year,Year_s),
+% 	string_concat(Year_s,"-01-01",Day).
+
+% out of days in format YYYY-MM-DD, extract latest day
+% UNUSED
+% latest([],_). % just leave the output unbound
+
+% latest([Day|Days],Output) :- 
+%     (
+%         nonvar(Day),
+%         latest(Days,Day,Output)
+%     );
+%     (
+%         var(Day),
+%         latest(Days,Output)
+%     ).
+
+% latest([],Output,Output).
+
+% latest([Day|Days],Latest,Output) :-
+%     (
+%         nonvar(Day),
+%         (
+%             (
+%                 is_before(Day,Latest),
+%                 latest(Days,Latest,Output)
+%             );
+%             (
+%                 \+ is_before(Day,Latest),
+%                 latest(Days,Day,Output)
+%             )
+%         )
+%     );
+%     (
+%         var(Day),
+%         latest(Days,Latest,Output)
+%     ).
+
+% UNUSED
+% out of days in format YYYY-MM-DD, extract earliest date
+% earliest([],_). % just leave the output unbound
+
+% earliest([Day|Days],Output) :- 
+%     (
+%         nonvar(Day),
+%         earliest(Days,Day,Output)
+%     );
+%     (
+%         var(Day),
+%         earliest(Days,Output)
+%     ).
+
+% earliest([],Output,Output).
+
+% earliest([Day|Days],Earliest,Output) :-
+%     (
+%         nonvar(Day),
+%         (
+%             (
+%                 is_before(Earliest,Day),
+%                 earliest(Days,Earliest,Output)
+%             );
+%             (
+%                 \+ is_before(Earliest,Day),
+%                 earliest(Days,Day,Output)
+%             )
+%         )
+%     );
+%     (
+%         var(Day),
+%         earliest(Days,Earliest,Output)
+%     ).
+
+month_days(Month,Days):- Month=1, Days=31.
+month_days(Month,Days):- Month=2, Days=100.
+month_days(Month,Days):- Month=3, Days=31.
+month_days(Month,Days):- Month=4, Days=30.
+month_days(Month,Days):- Month=5, Days=31.
+month_days(Month,Days):- Month=6, Days=30.
+month_days(Month,Days):- Month=7, Days=31.
+month_days(Month,Days):- Month=8, Days=31.
+month_days(Month,Days):- Month=9, Days=30.
+month_days(Month,Days):- Month=10, Days=31.
+month_days(Month,Days):- Month=11, Days=30.
+month_days(Month,Days):- Month=12, Days=31.
+
+month_days_norm(1,31).
+month_days_norm(2,28).
+month_days_norm(3,31).
+month_days_norm(4,30).
+month_days_norm(5,31).
+month_days_norm(6,30).
+month_days_norm(7,31).
+month_days_norm(8,31).
+month_days_norm(9,30).
+month_days_norm(10,31).
+month_days_norm(11,30).
+month_days_norm(12,31).
+
+leap_year(A):-year(A),0 = A - 4 * (A/4).
+
+duration_days(FromDay,ToDay,Days,Increment):-
+    date_split(FromDay,Y1,M1,D1),
+    date_split(ToDay,Y2,M2,D2),
+    D2 >= D1,
+    Days= D2-D1,
+    Increment = 0.
+duration_days(FromDay,ToDay,Days,Increment):-
+    date_split(FromDay,Y1,M1,D1),
+    date_split(ToDay,Y2,M2,D2),
+    D1 > D2,
+    month_days(M1,Inc),
+    Inc=100,
+    leap_year(Y1),
+    Days = D2 + 29 - D1,
+    Increment = 1.
+duration_days(FromDay,ToDay,Days,Increment):-
+    date_split(FromDay,Y1,M1,D1),
+    date_split(ToDay,Y2,M2,D2),
+    D1 > D2,
+    month_days(M1,Inc),
+    Inc=100,
+    Days = D2 + 28 - D1,
+    Increment = 1.
+duration_days(FromDay,ToDay,Days,Increment):-
+    date_split(FromDay,Y1,M1,D1),
+    date_split(ToDay,Y2,M2,D2),
+    D1 > D2,
+    month_days(M1,Inc),
+    Days = D2 + Inc - D1,
+    Increment = 1.
+
+duration_months(FromDay,ToDay,Days,Months,Increment):-
+    date_split(FromDay,Y1,M1,D1),
+    date_split(ToDay,Y2,M2,D2),
+    duration_days(FromDay,ToDay,Days,Inc),
+    M1 + Inc > M2,
+    Months = M2 + 12 - M1 - Inc,
+    Increment = 1.
+duration_months(FromDay,ToDay,Days,Months,Increment):-
+    date_split(FromDay,Y1,M1,D1),
+    date_split(ToDay,Y2,M2,D2),
+    duration_days(FromDay,ToDay,Days,Inc),
+    M1 + Inc < M2+1,
+    Months = M2 - M1 - Inc,
+    Increment = 0.
+
+duration_years(FromDay,ToDay,Days,Months,Years):-
+    date_split(FromDay,Y1,M1,D1),
+    date_split(ToDay,Y2,M2,D2),
+    duration_months(FromDay,ToDay,Days,Months,Increment),
+    Years = Y2 - Y1 - Increment.
+
+% Duration function
+duration(Day1,Day2,Years,Months,Days):-
+    earlier(FromDay,Day1,Day2),
+    later(ToDay,Day1,Day2),
+    duration_years(FromDay,ToDay,Days,Months,Years).
+
+more_than_half_a_year(Years,Months):-
+    number(Years),number(Months),Years >= 1.
+more_than_half_a_year(Years,Months):-
+    number(Years),number(Months),Months >= 6.
+
+
+
+%week_number(Day,Week):-
+%    date_split(Day,Y,M,D),
+%    Total = #sum{Days,Month: Month<M, month_days_norm(Month,Days)},
+%    Week = (Total+D) / 7 + 1.
+
+% Less accurate version of week_number
+week_number(Day,Week):-
+    date_split(Day,Y,M,D),
+    Total=M*30,
+    Week = (Total+D) / 7 + 1.
+
+
+% Duration in years
+% duration(Day1,Day2,Year):-
+%     date_split(Day1,Y1,M1,D1),
+%     date_split(Day2,Y2,M2,D2),
+    % is_before(Day1,Day2),
+%     less_than_a_year(Day1,Day2),
+%     Year=Y2-Y1-1.
+% duration(Day1,Day2,Year):-
+%     date_split(Day1,Y1,M1,D1),
+%     date_split(Day2,Y2,M2,D2),
+%     is_before(Day1,Day2),
+%     not less_than_a_year(Day1,Day2),
+%     Year=Y2-Y1.
+% duration(Day1,Day2,Year):-
+%     date_split(Day1,Y1,M1,D1),
+%     date_split(Day2,Y2,M2,D2),
+%     is_before(Day2,Day1),
+%     less_than_a_year(Day2,Day1),
+%     Year=Y1-Y2-1.
+% duration(Day1,Day2,Year):-
+%     date_split(Day1,Y1,M1,D1),
+%     date_split(Day2,Y2,M2,D2),
+%     is_before(Day2,Day1),
+%     not less_than_a_year(Day2,Day1),
+%     Year=Y1-Y2.
+
+
+less_than_a_year(Day1,Day2):-
+    date_split(Day1,Y1,M1,D1),
+    date_split(Day2,Y2,M2,D2),
+    is_before(Day1,Day2),
+    M1 > M2.
+less_than_a_year(Day1,Day2):-
+    date_split(Day1,Y1,M1,D1),
+    date_split(Day2,Y2,M2,D2),
+    is_before(Day1,Day2),
+    M1 = M2, D1 > D2.
+    
+
+
+% TO BE CHANGED
+% duration(Day1,Day2,Duration) :- % duration in arbitrary units for days in YYYY-MM-DD format
+% 	day_to_stamp(Day1, Stamp1),
+% 	day_to_stamp(Day2, Stamp2),
+% 	Duration = Stamp2-Stamp1.
+
+% kinship
+is_child_of(X,Y,Day_start,Day_end) :- % X is the child of Y from Day_start to Day_end if...
+	% what kind of relationship exists between X and Y
+	child_or_parent(X,Y,Relationship),
+    not_same_person(X,Y),
+	relationship_start(Relationship,Day_start),
+	% if no end to Relationship then it's still ongoing
+    relationship_end(Relationship,Day_end).
+
+child_or_parent(X,Y,Relationship):-
+    % X is child of Y, or
+    son_or_daughter(Relationship),
+    agent_(Relationship,X),
+    patient_(Relationship,Y).
+child_or_parent(X,Y,Relationship):-
+    % Y is parent of X
+    father_or_mother(Relationship),
+    agent_(Relationship,Y),
+    patient_(Relationship,X).
+
+son_or_daughter(Relationship):-
+    son_(Relationship).
+son_or_daughter(Relationship):-
+    daughter_(Relationship).
+
+father_or_mother(Relationship):-
+    father_(Relationship).
+father_or_mother(Relationship):-
+    mother_(Relationship).
+
+relationship_start(Relationship,Day_start):-
+    relationship(Relationship),date(Day_start),not_start_(Relationship,_).
+relationship_start(Relationship,Day_start):-   
+    start_(Relationship,Day_start).
+
+relationship_end(Relationship,Day_end):-
+    relationship(Relationship),date(Day_end),not_end_(Relationship,_).
+relationship_end(Relationship,Day_end):-
+    end_(Relationship,Day_end). 
+
+is_sibling_of(X,Y,Day_start,Day_end) :- % X is the sibling of Y on from Day_start to Day_end if...
+	% there is a brother or sister relationship
+	brother_and_sister(Relationship),
+	% X is somehow involved in it
+	agent_or_patient(Relationship,X),
+	% and so is Y
+    agent_or_patient(Relationship,Y),
+    not_same_person(X,Y),
+	relationship_start(Relationship,Day_start),
+	% if no end to Relationship then it's still ongoing
+	relationship_end(Relationship,Day_end).
+
+brother_and_sister(Relationship):-
+    brother_(Relationship).
+brother_and_sister(Relationship):-
+    sister_(Relationship).
+
+agent_or_patient(Relationship,X):-
+    agent_(Relationship,X).
+agent_or_patient(Relationship,X):-
+    patient_(Relationship,X).
+
+is_descendent_of(X,Y,Day_start,Day_end) :- % X is a descendent of Y if
+	% as a base case, X is a descendent of Y if X is a child of Y
+    is_child_of(X,Y,Day_start,Day_end).
+is_descendent_of(X,Y,Day_start,Day_end) :- 
+	% else
+    is_child_of(Z,Y,_,_), % Z is a child of Y and
+    is_descendent_of(X,Z,Day_start,Day_end). % X is a descendent of Z
+
+is_stepsibling_of(X,Y,Day_start,Day_end) :- % X is stepsibling of Y if
+	is_child_of(Y,ParentY,Day_start_x,Day_end_x), % one of the parents of Y
+	is_child_of(X,ParentX,Day_start_y,Day_end_y), % and one of the parents of X
+	marriage_(Marriage), % got married
+	agent_(Marriage,ParentY),
+	agent_(Marriage,ParentX),
+    not_same_person(X,Y),
+    wedding_start(Marriage,Start_time),
+    later(Day_start_2,Day_start_x,Day_start_y),
+    later(Day_start,Day_start_2,Start_time),
+    wedding_end(Marriage,End_time),
+    earlier(Day_end_2,Day_end_x,Day_end_y),
+    earlier(Day_end,Day_end_2,End_time).
+
+wedding_start(Marriage,Day_start):-
+    marriage_(Marriage),date(Day_start),not_start_(Marriage,_).
+wedding_start(Marriage,Day_start):-   
+    start_(Marriage,Day_start).
+
+wedding_end(Marriage,Day_end):-
+    marriage_(Marriage),date(Day_end),not_end_(Marriage,_).
+wedding_end(Marriage,Day_end):-
+    end_(Marriage,Day_end). 
+
+is_sibling_in_law_of(X,Y,Day_start,Day_end) :- % symmetry of relationship
+    is_sibling_in_law_of_aux(X,Y,Day_start,Day_end).
+is_sibling_in_law_of(X,Y,Day_start,Day_end) :- % symmetry of relationship
+    is_sibling_in_law_of_aux(Y,X,Day_start,Day_end).
+
+is_sibling_in_law_of_aux(X,Y,Day_start,Day_end) :- % X is sibling in law of Y if
+	is_sibling_of(Y,SiblingY,Day_start_y,Day_end_y), % one of Y's siblings
+	marriage_(Marriage), % and X got married
+	agent_(Marriage,SiblingY),
+	agent_(Marriage,X),
+    not_same_person(X,Y),
+    wedding_start(Marriage,Start_time),
+    later(Day_start,Start_time,Day_start_y),
+	wedding_end(Marriage,End_time),
+    earlier(Day_end,End_time,Day_end_y).
+
+is_child_in_law_of(X,Y,Day_start,Day_end) :- % X is child in law of Y if
+	is_child_of(ChildY,Y,Day_start_y,Day_end_y), % one of the children of Y
+	marriage_(Marriage), % got married with X
+	agent_(Marriage,ChildY),
+	agent_(Marriage,X),
+    not_same_person(X,Y),
+    wedding_start(Marriage,Start_time),
+    later(Day_start,Start_time,Day_start_y),
+	wedding_end(Marriage,End_time),
+    earlier(Day_end,End_time,Day_end_y).
+
+is_parent_in_law_of(X,Y,Day_start,Day_end) :- % X is parent in law of Y if
+	is_child_of(Y,ParentY,Day_start_y,Day_end_y), % one of the parents of Y
+	marriage_(Marriage), % got married with X
+	agent_(Marriage,ParentY),
+	agent_(Marriage,X),
+    not_same_person(X,Y),
+    wedding_start(Marriage,Start_time),
+    later(Day_start,Start_time,Day_start_y),
+	wedding_end(Marriage,End_time),
+    earlier(Day_end,End_time,Day_end_y).
+
+is_stepparent_of(X,Y,Day_start,Day_end) :- % X is parent in law of Y if
+	is_child_of(Y,ParentY,Day_start_y,Day_end_y), % one of the parents of Y
+	marriage_(Marriage), % got married with X
+	agent_(Marriage,ParentY),
+	agent_(Marriage,X),
+	start_(Marriage,Start_time), % and their marriage holds on Day
+    later(Day_start,Start_time,Day_start_y),
+    not_same_person(X,Y),
+	wedding_end(Marriage,End_time),
+    earlier(Day_end,End_time,Day_end_y).
+
+% aggregation of income
+gross_income(Person,Year,Gross_income) :-
+	first_day_year(Year,First_day_year),
+    last_day_year(Year,Last_day_year),
+    % if the individual is filing a joint return with his spouse, sum both incomes
+    gross_income_joint(Person,Year,First_day_year,Last_day_year),
+    gross_income_individual(Person,Year,Income_individual),
+    gross_income_individual(Spouse,Year,Income_spouse),
+    Gross_income = Income_individual+Income_spouse.
+gross_income(Person,Year,Gross_income) :-
+	first_day_year(Year,First_day_year),
+    last_day_year(Year,Last_day_year),
+    % otherwise, it's just the individual's income
+    not_gross_income_joint(Person,Year,First_day_year,Last_day_year),
+    gross_income_individual(Person,Year,Gross_income).
+
+gross_income_joint(Person,Year,First_day_year,Last_day_year):-
+    s7703(Person,Spouse,_,Year),
+    joint_return_(Joint_return),
+    agent_(Joint_return,Person),
+    agent_(Joint_return,Spouse),
+    start_(Joint_return,First_day_year),
+    end_(Joint_return,Last_day_year).
+
+% gross_income_individual(Person,Year,Gross_income) :-
+%     person(Person),year(Year),
+%     first_day_year(Year,First_day_year),
+%     last_day_year(Year,Last_day_year),
+%     Incomes = #sum{Amount,Income : 
+%         income_(Income),
+%         agent_(Income,Person),
+%         amount_(Income,Amount),
+%         start_(Income,Start_time),
+%         is_before(First_day_year,Start_time),
+%         is_before(Start_time,Last_day_year)},
+%     Payments = #sum{Amount,Payment:
+%         payment_(Payment),
+%         patient_(Payment,Person),
+%         amount_(Payment,Amount),
+%         start_(Payment,Start_time),
+%         is_before(First_day_year,Start_time),
+%         is_before(Start_time,Last_day_year)},
+%     Gross_income = Incomes+Payments.
+
+% compute tax owed by a person for a given taxable year
+tax(Taxp,Taxy,Tax) :-
+    tax_s1(Taxp,Taxy,Income_tax),
+    tax_s3301(Taxp,Taxy,Employment_tax),
+    Tax = Income_tax+Employment_tax.
+
+tax_s1(Taxp,Taxy,Income_tax):-
+    s1(Taxp,Taxy,_,Income_tax).
+tax_s1(Taxp,Taxy,Income_tax):-
+    person(Taxp),year(Taxy),
+    not_s1(Taxp,Taxy,_,_),
+    Income_tax = 0.
+
+tax_s3301(Taxp,Taxy,Employment_tax):-
+    s3301(Taxp,Taxy,_,_,_,Employment_tax).
+tax_s3301(Taxp,Taxy,Employment_tax):-
+    person(Taxp),year(Taxy),
+    not_s3301(Taxp,Taxy,_,_,_,_),
+    Employment_tax = 0.
+
+same_person(P1,P2):-
+    person(P1),person(P2),P1=P2.
+
+same_marriage(M1,M2):-
+    marriage_(M1),marriage_(M2),M1=M2.
+
+
+assumption(not_same_person(P1,P2)).
+assumption(not_same_marriage(M1,M2)).
+assumption(not_s1(Taxp, Taxy, Taxinc, Tax)).
+assumption(not_s3301(Employer,Caly,Wages,Employee,Employment,Tax)).
+assumption(not_gross_income_joint(Person,Year,First_day_year,Last_day_year)).
+assumption(not_start_(Event,Time)).
+assumption(not_end_(Event,Time)).
+assumption(not_nonresident_alien_cant_file_jointly(Taxp,Spouse,First_day,Last_day)).
+assumption(not_single_return_joint_with_spouse(Joint_return, Taxp, Spouse, Taxy, First_day, Last_day)).
+assumption(not_s2_a(Taxp,Spouse,Taxy)).
+assumption(not_s2_b(Taxp,Dependent,Taxy)).
+assumption(not_s7703(Taxp,Spouse,Marriage,Taxy)).
+assumption(not_s2_a_2(Taxp,Spouse,Previous_marriage,Taxy)).
+assumption(not_s2_a_2_B(Taxp,Spouse,Taxy)).
+assumption(not_nonresident_alien_cant_file_jointly_2(Taxp,Spouse, Someone_is_nra, Start_nra, End_nra, Taxy, First_day_year, Last_day_year)).
+assumption(not_s2_b_3(Taxp,Dependent,Taxy)).
+assumption(not_s2_b_2_A(Taxp,Spouse,S98,Marriage,Taxy)).
+assumption(not_s2_b_2_B(Taxp,Spouse,Taxy)).
+assumption(not_spouse_dead(Spouse_dies,Spouse)).
+assumption(not_individual_married(Marriage,Taxp,Spouse,Start_marriage,Taxy,Spouse_dies,Death_time,Last_day_year)).
+assumption(not_s2_b_1_A_i_I_and_II(Dependent,Taxp,Taxy)).
+assumption(not_s152_b(Dependent,Taxp,Taxy)).
+assumption(not_s152_a_1(Dependent,Taxp,Taxy)).
+assumption(not_valid_relationship_s152_d_2(Dependent,Taxp)).
+assumption(not_s63_b(Taxp,Taxy,Taxinc,Grossinc)).
+assumption(not_s63_d(Taxp,Itemded,Total_amount,Taxy)).
+assumption(not_s63_c_6(Taxp,Taxy,Standed)).
+assumption(not_s63_c_5(Taxp,S45,Grossinc,Taxy,Bassd)).
+assumption(not_s63_c_2_B(Taxp,Taxy,Bassd)).
+assumption(not_s63_c_2_A(Taxp,Taxy,Multiplier)).
+assumption(not_s63_c_7_i(Taxy,Amount)).
+assumption(not_s63_c_7_ii(Taxy,Amount)).
+assumption(not_couple_joint_return(Joint_return,Taxp,Spouse,First_day_year,Last_day_year)).
+assumption(not_s63_f_3(Taxp,Taxy,Amount)).
+assumption(not_s63_f_1_A(Taxp,Taxy)).
+assumption(not_s63_f_1_B(Taxp,Spouse,Taxy)).
+assumption(not_s63_f_2_A(Taxp,Taxy)).
+assumption(not_s63_f_2_B(Taxp,Spouse,Taxy)).
+assumption(not_s68_f(Taxy)).
+assumption(not_s68_a(Taxp,Agi,Aa,Itemded,S7,Taxy)).
+assumption(not_joint_return_def(Taxp,Spouse,Taxy)).
+assumption(not_s151_joint_return(Taxp,First_day_year,Last_day_year,Taxy)).
+assumption(not_s151_b_joint_return(Taxp,Spouse,Taxy)).
+assumption(not_s152(Dependent,Taxp,Taxy)).
+assumption(not_s151_d_2(Taxp,Otaxp,Ea,Taxy)).
+assumption(not_s151_d_5(Ea,Taxy)).
+assumption(not_s151_d_3(Taxp,Exemption_in,Ea,Taxy)).
+assumption(not_s151_d_3_B_separate_return(Taxp,Taxy)).
+assumption(not_s151_d_3_B_joint_return(Taxp,Taxy,Spouse)).
+assumption(not_s152_b_1(Taxp,Otaxp,Taxy)).
+assumption(not_s152_b_2(Dependent,S21,Spouse,Taxy)).
+assumption(not_individual_death(Individual,Death_time)).
+assumption(not_s152_c_1_E_joint_return(Dependent,Spouse,Taxy)).
+assumption(not_s152_c_3_dependent_born(Dependent)).
+assumption(not_s152_c(Dependent,Taxp,Taxy)).
+assumption(not_s152_d_2_H_end_marriage(Dependent,Taxp,Last_day_year,First_day_year)).
+assumption(not_purpose_(Service, Label)).
+assumption(not_type_(Service,Type)).
+assumption(not_means_(Remuneration,Means)).
+assumption(not_s3306_b_2(Remuneration,Service,Employer,Employee,Payee,Plan)).
+assumption(not_plan_(Plan)).
+assumption(not_s3306_a_3(Employer,Wages,Caly)).
+assumption(not_s3306_b_7(Remuneration,Service,Employer,Employee,Medium,S92)).
+assumption(not_medium_is_cash(Medium)).
+assumption(not_s3306_b_10(Remuneration,Service,Employer,Employee,Payee,Plan)).
+assumption(not_s3306_b_11(Remuneration,Service,Medium)).
+assumption(not_s3306_b_15(Remuneration,Employer,Payee,Employee,Caly)).
+assumption(not_s3306_c_1(Service,Caly)).
+assumption(not_s3306_c_2(Service,Location,Caly)).
+assumption(not_s3306_c_5(Service,Employer,Employee,Workday)).
+assumption(not_s3306_c_6(Service)).
+assumption(not_s3306_c_7(Service,Employer)).
+assumption(not_s3306_c_10(Service,Employer,Employee,Workday)).
+assumption(not_s3306_c_11(Service,Employer)).
+assumption(not_s3306_c_13(Service,Employer,Employee,Workday)).
+assumption(not_s3306_c_16(Service,Employer)).
+assumption(not_s3306_c_21(Service,Employee,S235,Workday)).
+assumption(not_s3306_c_1_B_not(Service,Employee)).
+assumption(not_location_(Service,Location)).
+assumption(not_country_(Geographical_location,Country)).
+assumption(not_s3306_c_B_agreement(Location)).
+assumption(not_s3306_c_1_A_and_B(Service,Caly)).
+assumption(not_country_equals_usa(Location)).
+assumption(not_location_equals_usa(Location)).
+assumption(not_employer_is_usa_government(Service,Employer)).
+assumption(not_s7703_b(Taxp,Spouse,Taxy)).
+assumption(not_s7703_a_2(Taxp,Spouse,Marriage,S19,Taxy)).
+assumption(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year)).
+assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
+assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+
+
+contrary(not_same_person(P1,P2),same_person(P1,P2)):-
+    assumption(not_same_person(P1,P2)).
+contrary(not_same_marriage(M1,M2),same_marriage(M1,M2)):-
+    assumption(not_same_marriage(M1,M2)).
+contrary(not_s1(Taxp, Taxy, Taxinc, Tax), s1(Taxp, Taxy, Taxinc, Tax)) :-
+    assumption(not_s1(Taxp, Taxy, Taxinc, Tax)).
+contrary(not_s3301(Employer,Caly,Wages,Employee,Employment,Tax), s3301(Employer,Caly,Wages,Employee,Employment,Tax)) :-
+    assumption(not_s3301(Employer,Caly,Wages,Employee,Employment,Tax)).
+contrary(not_gross_income_joint(Person,Year,First_day_year,Last_day_year), gross_income_joint(Person,Year,First_day_year,Last_day_year)) :-
+    assumption(not_gross_income_joint(Person,Year,First_day_year,Last_day_year)).
+contrary(not_start_(Event,Time),start_(Event,Time)) :- 
+    assumption(not_start_(Event,Time)).
+contrary(not_end_(Event,Time),end_(Event,Time)) :- 
+    assumption(not_end_(Event,Time)).
+contrary(not_nonresident_alien_cant_file_jointly(Taxp,Spouse,First_day,Last_day), 
+        nonresident_alien_cant_file_jointly(Taxp,Spouse,First_day,Last_day)) :- 
+            assumption(not_nonresident_alien_cant_file_jointly(Taxp,Spouse,First_day,Last_day)).
+contrary(not_single_return_joint_with_spouse(Joint_return, Taxp, Spouse, Taxy, First_day, Last_day),
+        single_return_joint_with_spouse(Joint_return, Taxp, Spouse, Taxy, First_day, Last_day)) :-
+            assumption(not_single_return_joint_with_spouse(Joint_return, Taxp, Spouse, Taxy, First_day, Last_day)).
+contrary(not_s2_a(Taxp,Spouse,Taxy),s2_a(Taxp,Spouse,Taxy)):-
+    assumption(not_s2_a(Taxp,Spouse,Taxy)).
+contrary(not_s2_b(Taxp,Dependent,Taxy),s2_b(Taxp,Dependent,Taxy)):-
+    assumption(not_s2_b(Taxp,Dependent,Taxy)).
+contrary(not_s7703(Taxp,Spouse,Marriage,Taxy),s7703(Taxp,Spouse,Marriage,Taxy)):-
+    assumption(not_s7703(Taxp,Spouse,Marriage,Taxy)).
+contrary(not_s2_a_2(Taxp,Spouse,Previous_marriage,Taxy),s2_a_2(Taxp,Spouse,Previous_marriage,Taxy)):-
+    assumption(not_s2_a_2(Taxp,Spouse,Previous_marriage,Taxy)).
+contrary(not_s2_a_2_B(Taxp,Spouse,Taxy),s2_a_2_B(Taxp,Spouse,Taxy)):-
+    assumption(not_s2_a_2_B(Taxp,Spouse,Taxy)).
+contrary(not_nonresident_alien_cant_file_jointly_2(Taxp,Spouse, Someone_is_nra, Start_nra, End_nra, Taxy, First_day_year, Last_day_year), 
+        nonresident_alien_cant_file_jointly_2(Taxp,Spouse, Someone_is_nra, Start_nra, End_nra, Taxy, First_day_year, Last_day_year)) :- 
+            assumption(not_nonresident_alien_cant_file_jointly_2(Taxp,Spouse, Someone_is_nra, Start_nra, End_nra, Taxy, First_day_year, Last_day_year)).
+contrary(not_s2_b_3(Taxp,Dependent,Taxy),s2_b_3(Taxp,Dependent,Taxy)):-
+    assumption(not_s2_b_3(Taxp,Dependent,Taxy)).
+contrary(not_s2_b_2_A(Taxp,Spouse,S98,Marriage,Taxy),s2_b_2_A(Taxp,Spouse,S98,Marriage,Taxy)):-
+    assumption(not_s2_b_2_A(Taxp,Spouse,S98,Marriage,Taxy)).
+contrary(not_s2_b_2_B(Taxp,Spouse,Taxy),s2_b_2_B(Taxp,Spouse,Taxy)):-
+    assumption(not_s2_b_2_B(Taxp,Spouse,Taxy)).
+contrary(not_spouse_dead(Spouse_dies,Spouse),spouse_dead(Spouse_dies,Spouse)):-
+    assumption(not_spouse_dead(Spouse_dies,Spouse)).
+contrary(not_individual_married(Marriage,Taxp,Spouse,Start_marriage,Taxy,Spouse_dies,Death_time,Last_day_year),
+        individual_married(Marriage,Taxp,Spouse,Start_marriage,Taxy,Spouse_dies,Death_time,Last_day_year)):-
+            assumption(not_individual_married(Marriage,Taxp,Spouse,Start_marriage,Taxy,Spouse_dies,Death_time,Last_day_year)).
+contrary(not_s2_b_1_A_i_I_and_II(Dependent,Taxp,Taxy),s2_b_1_A_i_I_and_II(Dependent,Taxp,Taxy)):-
+    assumption(not_s2_b_1_A_i_I_and_II(Dependent,Taxp,Taxy)).
+contrary(not_s152_b(Dependent,Taxp,Taxy),s152_b(Dependent,Taxp,Taxy)):-
+    assumption(not_s152_b(Dependent,Taxp,Taxy)).
+contrary(not_s152_a_1(Dependent,Taxp,Taxy),s152_a_1(Dependent,Taxp,Taxy)):-
+    assumption(not_s152_a_1(Dependent,Taxp,Taxy)).
+contrary(not_valid_relationship_s152_d_2(Dependent,Taxp),valid_relationship_s152_d_2(Dependent,Taxp)):-
+    assumption(not_valid_relationship_s152_d_2(Dependent,Taxp)).
+contrary(not_s63_b(Taxp,Taxy,Taxinc,Grossinc),s63_b(Taxp,Taxy,Taxinc,Grossinc)) :-
+    assumption(not_s63_b(Taxp,Taxy,Taxinc,Grossinc)).
+contrary(not_s63_d(Taxp,Itemded,Total_amount,Taxy),s63_d(Taxp,Itemded,Total_amount,Taxy)) :-
+    assumption(not_s63_d(Taxp,Itemded,Total_amount,Taxy)).
+contrary(not_s63_c_6(Taxp,Taxy,Standed),s63_c_6(Taxp,Taxy,Standed)) :-
+    assumption(not_s63_c_6(Taxp,Taxy,Standed)).
+contrary(not_s63_c_5(Taxp,S45,Grossinc,Taxy,Bassd),s63_c_5(Taxp,S45,Grossinc,Taxy,Bassd)) :-
+    assumption(not_s63_c_5(Taxp,S45,Grossinc,Taxy,Bassd)).
+contrary(not_s63_c_2_B(Taxp,Taxy,Bassd),s63_c_2_B(Taxp,Taxy,Bassd)) :-
+    assumption(not_s63_c_2_B(Taxp,Taxy,Bassd)).
+contrary(not_s63_c_2_A(Taxp,Taxy,Multiplier),s63_c_2_A(Taxp,Taxy,Multiplier)) :-
+    assumption(not_s63_c_2_A(Taxp,Taxy,Multiplier)).
+contrary(not_s63_c_7_i(Taxy,Amount),s63_c_7_i(Taxy,Amount)) :-
+    assumption(not_s63_c_7_i(Taxy,Amount)).
+contrary(not_s63_c_7_ii(Taxy,Amount),s63_c_7_ii(Taxy,Amount)) :-
+    assumption(not_s63_c_7_ii(Taxy,Amount)).
+contrary(not_couple_joint_return(Joint_return,Taxp,Spouse,First_day_year,Last_day_year),
+        couple_joint_return(Joint_return,Taxp,Spouse,First_day_year,Last_day_year)) :-
+            assumption(not_couple_joint_return(Joint_return,Taxp,Spouse,First_day_year,Last_day_year)).
+contrary(not_s63_f_3(Taxp,Taxy,Amount),s63_f_3(Taxp,Taxy,Amount)) :-
+    assumption(not_s63_f_3(Taxp,Taxy,Amount)).
+contrary(not_s63_f_1_A(Taxp,Taxy),s63_f_1_A(Taxp,Taxy)) :-
+    assumption(not_s63_f_1_A(Taxp,Taxy)).
+contrary(not_s63_f_1_B(Taxp,Spouse,Taxy),s63_f_1_B(Taxp,Spouse,Taxy)) :-
+    assumption(not_s63_f_1_B(Taxp,Spouse,Taxy)).
+contrary(not_s63_f_2_A(Taxp,Taxy),s63_f_2_A(Taxp,Taxy)) :-
+    assumption(not_s63_f_2_A(Taxp,Taxy)).
+contrary(not_s63_f_2_B(Taxp,Spouse,Taxy),s63_f_2_B(Taxp,Spouse,Taxy)) :-
+    assumption(not_s63_f_2_B(Taxp,Spouse,Taxy)).
+contrary(not_s68_f(Taxy),s68_f(Taxy)) :-
+    assumption(not_s68_f(Taxy)).
+contrary(not_s68_a(Taxp,Agi,Aa,Itemded,S7,Taxy),s68_a(Taxp,Agi,Aa,Itemded,S7,Taxy)) :-
+    assumption(not_s68_a(Taxp,Agi,Aa,Itemded,S7,Taxy)).
+contrary(not_joint_return_def(Taxp,Spouse,Taxy),joint_return_def(Taxp,Spouse,Taxy)) :-
+    assumption(not_joint_return_def(Taxp,Spouse,Taxy)).
+contrary(not_s151_joint_return(Taxp,First_day_year,Last_day_year,Taxy),s151_joint_return(Taxp,First_day_year,Last_day_year,Taxy)) :-
+    assumption(not_s151_joint_return(Taxp,First_day_year,Last_day_year,Taxy)).
+contrary(not_s151_b_joint_return(Taxp,Spouse,Taxy),s151_b_joint_return(Taxp,Spouse,Taxy)) :-
+    assumption(not_s151_b_joint_return(Taxp,Spouse,Taxy)).
+contrary(not_s152(Dependent,Taxp,Taxy),s152(Dependent,Taxp,Taxy)) :-
+    assumption(not_s152(Dependent,Taxp,Taxy)).
+contrary(not_s151_d_2(Taxp,Otaxp,Ea,Taxy),s151_d_2(Taxp,Otaxp,Ea,Taxy)) :-
+    assumption(not_s151_d_2(Taxp,Otaxp,Ea,Taxy)).
+contrary(not_s151_d_5(Ea,Taxy),s151_d_5(Ea,Taxy)) :-
+    assumption(not_s151_d_5(Ea,Taxy)).
+contrary(not_s151_d_3(Taxp,Exemption_in,Ea,Taxy),s151_d_3(Taxp,Exemption_in,Ea,Taxy)) :-
+    assumption(not_s151_d_3(Taxp,Exemption_in,Ea,Taxy)).
+contrary(not_s151_d_3_B_separate_return(Taxp,Taxy),s151_d_3_B_separate_return(Taxp,Taxy)) :-
+    assumption(not_s151_d_3_B_separate_return(Taxp,Taxy)).
+contrary(not_s151_d_3_B_joint_return(Taxp,Taxy,Spouse),s151_d_3_B_joint_return(Taxp,Taxy,Spouse)) :-
+    assumption(not_s151_d_3_B_joint_return(Taxp,Taxy,Spouse)).
+contrary(not_purpose_(Service, Label),purpose_(Service, Label)) :-
+    assumption(not_purpose_(Service, Label)).
+contrary(not_type_(Service,Type),type_(Service,Type)) :-
+    assumption(not_type_(Service,Type)).
+contrary(not_means_(Remuneration,Means),means_(Remuneration,Means)) :-
+    assumption(not_means_(Remuneration,Means)).
+contrary(not_s3306_b_2(Remuneration,Service,Employer,Employee,Payee,Plan),s3306_b_2(Remuneration,Service,Employer,Employee,Payee,Plan)) :-
+    assumption(not_s3306_b_2(Remuneration,Service,Employer,Employee,Payee,Plan)).
+contrary(not_plan_(Plan),plan_(Plan)) :-
+    assumption(not_plan_(Plan)).
+contrary(not_s3306_a_3(Employer,Wages,Caly),s3306_a_3(Employer,Wages,Caly)) :-
+    assumption(not_s3306_a_3(Employer,Wages,Caly)).
+contrary(not_s3306_b_7(Remuneration,Service,Employer,Employee,Medium,S92),s3306_b_7(Remuneration,Service,Employer,Employee,Medium,S92)) :-
+    assumption(not_s3306_b_7(Remuneration,Service,Employer,Employee,Medium,S92)).
+contrary(not_medium_is_cash(Medium),medium_is_cash(Medium)) :-
+    assumption(not_medium_is_cash(Medium)).
+contrary(not_s3306_b_10(Remuneration,Service,Employer,Employee,Payee,Plan),s3306_b_10(Remuneration,Service,Employer,Employee,Payee,Plan)) :-
+    assumption(not_s3306_b_10(Remuneration,Service,Employer,Employee,Payee,Plan)).
+contrary(not_s3306_b_11(Remuneration,Service,Medium),s3306_b_11(Remuneration,Service,Medium)) :-
+    assumption(not_s3306_b_11(Remuneration,Service,Medium)).
+contrary(not_s3306_b_15(Remuneration,Employer,Payee,Employee,Caly),s3306_b_15(Remuneration,Employer,Payee,Employee,Caly)) :-
+    assumption(not_s3306_b_15(Remuneration,Employer,Payee,Employee,Caly)).
+contrary(not_s3306_c_1(Service,Caly),s3306_c_1(Service,Caly)) :-
+    assumption(not_s3306_c_1(Service,Caly)).
+contrary(not_s3306_c_2(Service,Location,Caly),s3306_c_2(Service,Location,Caly)) :-
+    assumption(not_s3306_c_2(Service,Location,Caly)).
+contrary(not_s3306_c_5(Service,Employer,Employee,Workday),s3306_c_5(Service,Employer,Employee,Workday)) :-
+    assumption(not_s3306_c_5(Service,Employer,Employee,Workday)).
+contrary(not_s3306_c_6(Service),s3306_c_6(Service)) :-
+    assumption(not_s3306_c_6(Service)).
+contrary(not_s3306_c_7(Service,Employer),s3306_c_7(Service,Employer)) :-
+    assumption(not_s3306_c_7(Service,Employer)).
+contrary(not_s3306_c_10(Service,Employer,Employee,Workday),s3306_c_10(Service,Employer,Employee,Workday)) :-
+    assumption(not_s3306_c_10(Service,Employer,Employee,Workday)).
+contrary(not_s3306_c_11(Service,Employer),s3306_c_11(Service,Employer)) :-
+    assumption(not_s3306_c_11(Service,Employer)).
+contrary(not_s3306_c_13(Service,Employer,Employee,Workday),s3306_c_13(Service,Employer,Employee,Workday)) :-
+    assumption(not_s3306_c_13(Service,Employer,Employee,Workday)).
+contrary(not_s3306_c_16(Service,Employer),s3306_c_16(Service,Employer)) :-
+    assumption(not_s3306_c_16(Service,Employer)).
+contrary(not_s3306_c_21(Service,Employee,S235,Workday),s3306_c_21(Service,Employee,S235,Workday)) :-
+    assumption(not_s3306_c_21(Service,Employee,S235,Workday)).
+contrary(not_s3306_c_1_B_not(Service,Employee),s3306_c_1_B_not(Service,Employee)) :-
+    assumption(not_s3306_c_1_B_not(Service,Employee)).
+contrary(not_location_(Service,Location),location_(Service,Location)) :-
+    assumption(not_location_(Service,Location)).
+contrary(not_country_(Geographical_location,Country),country_(Geographical_location,Country)) :-
+    assumption(not_country_(Geographical_location,Country)).
+contrary(not_s3306_c_B_agreement(Location),s3306_c_B_agreement(Location)) :-
+    assumption(not_s3306_c_B_agreement(Location)).
+contrary(not_s3306_c_1_A_and_B(Service,Caly),s3306_c_1_A_and_B(Service,Caly)) :-
+    assumption(not_s3306_c_1_A_and_B(Service,Caly)).
+contrary(not_country_equals_usa(Location),country_equals_usa(Location)) :-
+    assumption(not_country_equals_usa(Location)).
+contrary(not_location_equals_usa(Location),location_equals_usa(Location)) :-
+    assumption(not_location_equals_usa(Location)).
+contrary(not_employer_is_usa_government(Service,Employer),employer_is_usa_government(Service,Employer)) :-
+    assumption(not_employer_is_usa_government(Service,Employer)).
+contrary(not_s7703_b(Taxp,Spouse,Taxy),s7703_b(Taxp,Spouse,Taxy)) :-
+    assumption(not_s7703_b(Taxp,Spouse,Taxy)).
+contrary(not_s7703_a_2(Taxp,Spouse,Marriage,S19,Taxy),s7703_a_2(Taxp,Spouse,Marriage,S19,Taxy)) :-
+    assumption(not_s7703_a_2(Taxp,Spouse,Marriage,S19,Taxy)).
+contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year)) :-
+    assumption(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year)).
+contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
+    assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
+contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).

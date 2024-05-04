@@ -1,24 +1,26 @@
 % BK
-innocent(X) :- defendant(X), not_guilty(X).
+innocent(X) :- defendant(X), not_guilty(X), age(X,Y), Y>18.
 
-liar(alex).
+age(mary, 30).
 
-witness_con(mary,alex).
-witness_con(david,carol).
-witness_con(john,carol).
+% liar(alex).
 
-away(bob).
+% witness_con(mary,alex).
+% witness_con(david,carol).
+% witness_con(john,carol).
+
+% away(bob).
 
 defendant(mary).
-defendant(david).
-defendant(john).
+% defendant(david).
+% defendant(john).
 
-person(alex).
-person(bob).
-person(carol).
+% person(alex).
+% person(bob).
+% person(carol).
 person(mary).
-person(david).
-person(john).
+% person(david).
+% person(john).
 
 % assumption: not_guilty (ranges over defendant)
 assumption(not_guilty(X)).
