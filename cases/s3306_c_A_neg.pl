@@ -5,8 +5,8 @@
 % Section 3306(c)(A) applies to Alice employing Bob for the year 2017. Contradiction
 
 % Facts
-person(alice).
-person(bob).
+person(alice_s3306_c_A_neg).
+person(bob_s3306_c_A_neg).
 
 year(2017).
 date("2017-01-01").
@@ -22,20 +22,20 @@ location_name("toronto, ontario, canada").
 country_name("canada").
 finance(3200).
 
-service_(alice_employer).
-patient_(alice_employer,alice).
-agent_(alice_employer,bob).
-start_(alice_employer,"2017-02-01").
-end_(alice_employer,"2017-09-02").
-location_(alice_employer,"toronto, ontario, canada").
+service_(alice_employer_s3306_c_A_neg).
+patient_(alice_employer_s3306_c_A_neg,alice_s3306_c_A_neg).
+agent_(alice_employer_s3306_c_A_neg,bob_s3306_c_A_neg).
+start_(alice_employer_s3306_c_A_neg,"2017-02-01").
+end_(alice_employer_s3306_c_A_neg,"2017-09-02").
+location_(alice_employer_s3306_c_A_neg,"toronto, ontario, canada").
 country_("toronto, ontario, canada","canada").
-payment_(alice_pays).
-agent_(alice_pays,alice).
-patient_(alice_pays,bob).
-start_(alice_pays,"2017-09-02").
-purpose_(alice_pays,alice_employer).
-amount_(alice_pays,3200).
+payment_(alice_pays_s3306_c_A_neg).
+agent_(alice_pays_s3306_c_A_neg,alice_s3306_c_A_neg).
+patient_(alice_pays_s3306_c_A_neg,bob_s3306_c_A_neg).
+start_(alice_pays_s3306_c_A_neg,"2017-09-02").
+purpose_(alice_pays_s3306_c_A_neg,alice_employer_s3306_c_A_neg).
+amount_(alice_pays_s3306_c_A_neg,3200).
 
 % Test
-:- \+ s3306_c_A(alice_employer,alice,bob).
+:- \+ s3306_c_A(alice_employer_s3306_c_A_neg,alice_s3306_c_A_neg,bob_s3306_c_A_neg).
 :- halt.

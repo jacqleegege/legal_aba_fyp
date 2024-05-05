@@ -5,7 +5,7 @@
 % Under section 151(d)(3)(B), the applicable percentage for Alice for 2015 is equal to 118. Contradiction
 
 % Facts
-person(alice).
+person(alice_s151_d_3_B_neg).
 
 finance(395276).
 finance(250000).
@@ -16,13 +16,13 @@ date_split("2015-01-01", 2015, 1, 1).
 date("2015-12-31").
 date_split("2015-12-31", 2015, 12, 31).
 
-income_(alice_makes_money).
-agent_(alice_makes_money,alice).
-amount_(alice_makes_money,395276).
-start_(alice_makes_money,"2015-01-01").
-end_(alice_makes_money,"2015-12-31").
-s68_b(alice,2015,250000).
+income_(alice_makes_money_s151_d_3_B_neg).
+agent_(alice_makes_money_s151_d_3_B_neg,alice_s151_d_3_B_neg).
+amount_(alice_makes_money_s151_d_3_B_neg,395276).
+start_(alice_makes_money_s151_d_3_B_neg,"2015-01-01").
+end_(alice_makes_money_s151_d_3_B_neg,"2015-12-31").
+s68_b(alice_s151_d_3_B_neg,2015,250000).
 
 % Test
-:- \+ s151_d_3_B(118,alice,395276,2015,250000).
+:- \+ s151_d_3_B(118,alice_s151_d_3_B_neg,395276,2015,250000).
 :- halt.

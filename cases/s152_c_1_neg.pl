@@ -5,9 +5,9 @@
 % Under section 152(c)(1), Bob is a qualifying child of Alice for the year 2019. Contradiction
 
 % Facts
-person(alice).
-person(bob).
-person(charlie).
+person(alice_s152_c_1_neg).
+person(bob_s152_c_1_neg).
+person(charlie_s152_c_1_neg).
 
 year(2015).
 date("2015-09-01").
@@ -38,21 +38,21 @@ date_split("2020-01-01", 2020, 1, 1).
 date("2020-12-31").
 date_split("2020-12-31", 2020, 12, 31).
 
-son_(bob_is_son).
-agent_(bob_is_son,bob).
-patient_(bob_is_son,alice).
-residence_(alice_and_bob).
-agent_(alice_and_bob,alice).
-agent_(alice_and_bob,bob).
-patient_(alice_and_bob,home).
-start_(alice_and_bob,"2015-09-01").
-end_(alice_and_bob,"2019-02-03").
-marriage_(bob_and_charlie).
-agent_(bob_and_charlie,bob).
-agent_(bob_and_charlie,charlie).
-start_(bob_and_charlie,"2018-10-23").
-s152_c_2(bob,alice,"2015-01-01","2020-12-31").
+son_(bob_is_son_s152_c_1_neg).
+agent_(bob_is_son_s152_c_1_neg,bob_s152_c_1_neg).
+patient_(bob_is_son_s152_c_1_neg,alice_s152_c_1_neg).
+residence_(alice_and_bob_s152_c_1_neg).
+agent_(alice_and_bob_s152_c_1_neg,alice_s152_c_1_neg).
+agent_(alice_and_bob_s152_c_1_neg,bob_s152_c_1_neg).
+patient_(alice_and_bob_s152_c_1_neg,home_s152_c_1_neg).
+start_(alice_and_bob_s152_c_1_neg,"2015-09-01").
+end_(alice_and_bob_s152_c_1_neg,"2019-02-03").
+marriage_(bob_and_charlie_s152_c_1_neg).
+agent_(bob_and_charlie_s152_c_1_neg,bob_s152_c_1_neg).
+agent_(bob_and_charlie_s152_c_1_neg,charlie_s152_c_1_neg).
+start_(bob_and_charlie_s152_c_1_neg,"2018-10-23").
+s152_c_2(bob_s152_c_1_neg,alice_s152_c_1_neg,"2015-01-01","2020-12-31").
 
 % Test
-:- \+ s152_c_1(bob,alice,2019).
+:- \+ s152_c_1(bob_s152_c_1_neg,alice_s152_c_1_neg,2019).
 :- halt.

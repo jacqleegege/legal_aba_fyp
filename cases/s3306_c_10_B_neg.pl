@@ -5,7 +5,7 @@
 % Section 3306(c)(10)(B) applies to Alice's employment situation in 2017. Contradiction
 
 % Facts
-person(alice).
+person(alice_s3306_c_10_B_neg).
 
 year(2017).
 date("2017-01-01").
@@ -27,28 +27,28 @@ location_name(usa).
 
 finance(200).
 
-hospital_(hopkins_is_a_hospital).
-agent_(hopkins_is_a_hospital,"johns hopkins hospital").
-service_(alice_employed).
-patient_(alice_employed,"johns hopkins hospital").
-agent_(alice_employed,alice).
-start_(alice_employed,"2017-03-01").
-end_(alice_employed,"2017-03-31").
-location_(alice_employed,baltimore).
-location_(alice_employed,maryland).
-location_(alice_employed,usa).
-payment_(alice_is_paid).
-agent_(alice_is_paid,"johns hopkins hospital").
-patient_(alice_is_paid,alice).
-start_(alice_is_paid,"2017-03-31").
-purpose_(alice_is_paid,alice_employed).
-amount_(alice_is_paid,200).
-medical_patient_(alice_goes_to_hopkins).
-agent_(alice_goes_to_hopkins,alice).
-patient_(alice_goes_to_hopkins,"johns hopkins hospital").
-start_(alice_goes_to_hopkins,"2017-01-12").
-end_(alice_goes_to_hopkins,"2017-02-20").
+hospital_(hopkins_is_a_hospital_s3306_c_10_B_neg).
+agent_(hopkins_is_a_hospital_s3306_c_10_B_neg,"johns hopkins hospital_s3306_c_10_B_neg").
+service_(alice_employed_s3306_c_10_B_neg).
+patient_(alice_employed_s3306_c_10_B_neg,"johns hopkins hospital_s3306_c_10_B_neg").
+agent_(alice_employed_s3306_c_10_B_neg,alice_s3306_c_10_B_neg).
+start_(alice_employed_s3306_c_10_B_neg,"2017-03-01").
+end_(alice_employed_s3306_c_10_B_neg,"2017-03-31").
+location_(alice_employed_s3306_c_10_B_neg,baltimore).
+location_(alice_employed_s3306_c_10_B_neg,maryland).
+location_(alice_employed_s3306_c_10_B_neg,usa).
+payment_(alice_is_paid_s3306_c_10_B_neg).
+agent_(alice_is_paid_s3306_c_10_B_neg,"johns hopkins hospital_s3306_c_10_B_neg").
+patient_(alice_is_paid_s3306_c_10_B_neg,alice_s3306_c_10_B_neg).
+start_(alice_is_paid_s3306_c_10_B_neg,"2017-03-31").
+purpose_(alice_is_paid_s3306_c_10_B_neg,alice_employed_s3306_c_10_B_neg).
+amount_(alice_is_paid_s3306_c_10_B_neg,200).
+medical_patient_(alice_goes_to_hopkins_s3306_c_10_B_neg).
+agent_(alice_goes_to_hopkins_s3306_c_10_B_neg,alice_s3306_c_10_B_neg).
+patient_(alice_goes_to_hopkins_s3306_c_10_B_neg,"johns hopkins hospital_s3306_c_10_B_neg").
+start_(alice_goes_to_hopkins_s3306_c_10_B_neg,"2017-01-12").
+end_(alice_goes_to_hopkins_s3306_c_10_B_neg,"2017-02-20").
 
 % Test
-:- \+ s3306_c_10_B(alice_employed,"johns hopkins hospital",alice,"2017-03-01").
+:- \+ s3306_c_10_B(alice_employed_s3306_c_10_B_neg,"johns hopkins hospital_s3306_c_10_B_neg",alice_s3306_c_10_B_neg,"2017-03-01").
 :- halt.

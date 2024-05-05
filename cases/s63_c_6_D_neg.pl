@@ -21,10 +21,10 @@ date_split("2021-01-01",2021,1,1).
 date("2021-12-31").
 date_split("2021-12-31",2021,12,31).
 
-business_trust_(wbft_is_a_trust).
-agent_(wbft_is_a_trust,"Walter Brown Family Trust II").
-start_(wbft_is_a_trust,"1973-01-01").
-end_(wbft_is_a_trust,"2019-12-31").
+business_trust_(wbft_is_a_trust_s63_c_6_D_neg).
+agent_(wbft_is_a_trust_s63_c_6_D_neg,"Walter Brown Family Trust II").
+start_(wbft_is_a_trust_s63_c_6_D_neg,"1973-01-01").
+end_(wbft_is_a_trust_s63_c_6_D_neg,"2019-12-31").
 
 % Test
 :- \+ s63_c_6_D("Walter Brown Family Trust II",2021).

@@ -5,8 +5,8 @@
 % Section 7703(a)(1) applies to Alice for the year 2018. Contradiction
 
 % Facts
-person(alice).
-person(bob).
+person(alice_s7703_a_1_neg).
+person(bob_s7703_a_1_neg).
 
 year(2012).
 date("2012-01-01").
@@ -30,14 +30,14 @@ date_split("2018-01-01", 2018, 1, 1).
 date("2018-12-31").
 date_split("2018-12-31", 2018, 12, 31).
 
-marriage_(alice_and_bob).
-agent_(alice_and_bob,alice).
-agent_(alice_and_bob,bob).
-start_(alice_and_bob,"2012-04-05").
-death_(bob_dies).
-agent_(bob_dies,bob).
-start_(bob_dies,"2017-09-16").
+marriage_(alice_and_bob_s7703_a_1_neg).
+agent_(alice_and_bob_s7703_a_1_neg,alice_s7703_a_1_neg).
+agent_(alice_and_bob_s7703_a_1_neg,bob_s7703_a_1_neg).
+start_(alice_and_bob_s7703_a_1_neg,"2012-04-05").
+death_(bob_dies_s7703_a_1_neg).
+agent_(bob_dies_s7703_a_1_neg,bob_s7703_a_1_neg).
+start_(bob_dies_s7703_a_1_neg,"2017-09-16").
 
 % Test
-:- \+ s7703_a_1(alice,bob,alice_and_bob,"2017-09-16",2018).
+:- \+ s7703_a_1(alice_s7703_a_1_neg,bob_s7703_a_1_neg,alice_and_bob_s7703_a_1_neg,"2017-09-16",2018).
 :- halt.

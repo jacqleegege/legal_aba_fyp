@@ -5,9 +5,9 @@
 % Section 2(b)(1)(A) applies to Bob in 2018. Contradiction
 
 % Facts
-person(alice).
-person(bob).
-person(charlie).
+person(alice_s2_b_1_A_neg).
+person(bob_s2_b_1_A_neg).
+person(charlie_s2_b_1_A_neg).
 person(someone).
 
 year(1992).
@@ -143,54 +143,54 @@ atom_concat('bob_maintains_household_',2017,bob_maintains_household_2017).
 atom_concat('bob_maintains_household_',2018,bob_maintains_household_2018).
 atom_concat('bob_maintains_household_',2019,bob_maintains_household_2019).
 
-atom_concat('someone_maintains_household_',2004,someone_maintains_household_2004).
-atom_concat('someone_maintains_household_',2005,someone_maintains_household_2005).
-atom_concat('someone_maintains_household_',2006,someone_maintains_household_2006).
-atom_concat('someone_maintains_household_',2007,someone_maintains_household_2007).
-atom_concat('someone_maintains_household_',2008,someone_maintains_household_2008).
-atom_concat('someone_maintains_household_',2009,someone_maintains_household_2009).
-atom_concat('someone_maintains_household_',2010,someone_maintains_household_2010).
-atom_concat('someone_maintains_household_',2011,someone_maintains_household_2011).
-atom_concat('someone_maintains_household_',2012,someone_maintains_household_2012).
-atom_concat('someone_maintains_household_',2013,someone_maintains_household_2013).
-atom_concat('someone_maintains_household_',2014,someone_maintains_household_2014).
-atom_concat('someone_maintains_household_',2015,someone_maintains_household_2015).
-atom_concat('someone_maintains_household_',2016,someone_maintains_household_2016).
-atom_concat('someone_maintains_household_',2017,someone_maintains_household_2017).
-atom_concat('someone_maintains_household_',2018,someone_maintains_household_2018).
-atom_concat('someone_maintains_household_',2019,someone_maintains_household_2019).
+atom_concat('someone_maintains_household_', 2004, someone_maintains_household_2004).
+atom_concat('someone_maintains_household_', 2005, someone_maintains_household_2005).
+atom_concat('someone_maintains_household_', 2006, someone_maintains_household_2006).
+atom_concat('someone_maintains_household_', 2007, someone_maintains_household_2007).
+atom_concat('someone_maintains_household_', 2008, someone_maintains_household_2008).
+atom_concat('someone_maintains_household_', 2009, someone_maintains_household_2009).
+atom_concat('someone_maintains_household_', 2010, someone_maintains_household_2010).
+atom_concat('someone_maintains_household_', 2011, someone_maintains_household_2011).
+atom_concat('someone_maintains_household_', 2012, someone_maintains_household_2012).
+atom_concat('someone_maintains_household_', 2013, someone_maintains_household_2013).
+atom_concat('someone_maintains_household_', 2014, someone_maintains_household_2014).
+atom_concat('someone_maintains_household_', 2015, someone_maintains_household_2015).
+atom_concat('someone_maintains_household_', 2016, someone_maintains_household_2016).
+atom_concat('someone_maintains_household_', 2017, someone_maintains_household_2017).
+atom_concat('someone_maintains_household_', 2018, someone_maintains_household_2018).
+atom_concat('someone_maintains_household_', 2019, someone_maintains_household_2019).
 
 finance(40).
 finance(60).
 
-marriage_(alice_and_bob).
-agent_(alice_and_bob,alice).
-agent_(alice_and_bob,bob).
-start_(alice_and_bob,"1992-02-03").
-death_(alice_dies).
-agent_(alice_dies,alice).
-start_(alice_dies,"2014-07-09").
-end_(alice_dies,"2014-07-09").
-son_(charlie_is_son).
-agent_(charlie_is_son,charlie).
-patient_(charlie_is_son,alice).
-patient_(charlie_is_son,bob).
-start_(charlie_is_son,"2000-10-09").
-residence_(charlie_and_bob_residence).
-agent_(charlie_and_bob_residence,charlie).
-agent_(charlie_and_bob_residence,bob).
-patient_(charlie_and_bob_residence,bob_s_house).
-start_(charlie_and_bob_residence,"2004-01-01").
-end_(charlie_and_bob_residence,"2019-12-31").
+marriage_(alice_and_bob_s2_b_1_A_neg).
+agent_(alice_and_bob_s2_b_1_A_neg,alice_s2_b_1_A_neg).
+agent_(alice_and_bob_s2_b_1_A_neg,bob_s2_b_1_A_neg).
+start_(alice_and_bob_s2_b_1_A_neg,"1992-02-03").
+death_(alice_dies_s2_b_1_A_neg).
+agent_(alice_dies_s2_b_1_A_neg,alice_s2_b_1_A_neg).
+start_(alice_dies_s2_b_1_A_neg,"2014-07-09").
+end_(alice_dies_s2_b_1_A_neg,"2014-07-09").
+son_(charlie_is_son_s2_b_1_A_neg).
+agent_(charlie_is_son_s2_b_1_A_neg,charlie_s2_b_1_A_neg).
+patient_(charlie_is_son_s2_b_1_A_neg,alice_s2_b_1_A_neg).
+patient_(charlie_is_son_s2_b_1_A_neg,bob_s2_b_1_A_neg).
+start_(charlie_is_son_s2_b_1_A_neg,"2000-10-09").
+residence_(charlie_and_bob_residence_s2_b_1_A_neg).
+agent_(charlie_and_bob_residence_s2_b_1_A_neg,charlie_s2_b_1_A_neg).
+agent_(charlie_and_bob_residence_s2_b_1_A_neg,bob_s2_b_1_A_neg).
+patient_(charlie_and_bob_residence_s2_b_1_A_neg,bob_s_house_s2_b_1_A_neg).
+start_(charlie_and_bob_residence_s2_b_1_A_neg,"2004-01-01").
+end_(charlie_and_bob_residence_s2_b_1_A_neg,"2019-12-31").
 bob_household_maintenance(Year,Event,Start_day,End_day) :-
     between(2004,2019,Year),
     atom_concat('bob_maintains_household_',Year,Event),
     first_day_year(Year,Start_day),
     last_day_year(Year,End_day).
 payment_(Event) :- bob_household_maintenance(_,Event,_,_).
-agent_(Event,bob) :- bob_household_maintenance(_,Event,_,_).
+agent_(Event,bob_s2_b_1_A_neg) :- bob_household_maintenance(_,Event,_,_).
 amount_(Event,40) :- bob_household_maintenance(_,Event,_,_).
-purpose_(Event,bob_s_house) :- bob_household_maintenance(_,Event,_,_).
+purpose_(Event,bob_s_house_s2_b_1_A_neg) :- bob_household_maintenance(_,Event,_,_).
 start_(Event,Start_day) :- bob_household_maintenance(_,Event,Start_day,_).
 end_(Event,End_day) :- bob_household_maintenance(_,Event,_,End_day).
 someone_household_maintenance(Year,Event,Start_day,End_day) :-
@@ -201,10 +201,10 @@ someone_household_maintenance(Year,Event,Start_day,End_day) :-
 payment_(Event) :- someone_household_maintenance(_,Event,_,_).
 agent_(Event,someone) :- someone_household_maintenance(_,Event,_,_).
 amount_(Event,60) :- someone_household_maintenance(_,Event,_,_).
-purpose_(Event,bob_s_house) :- someone_household_maintenance(_,Event,_,_).
+purpose_(Event,bob_s_house_s2_b_1_A_neg) :- someone_household_maintenance(_,Event,_,_).
 start_(Event,Start_day) :- someone_household_maintenance(_,Event,Start_day,_).
 end_(Event,End_day) :- someone_household_maintenance(_,Event,_,End_day).
 
 % Test
-:- \+ s2_b_1_A(bob,bob_s_house,charlie,2018).
+:- \+ s2_b_1_A(bob_s2_b_1_A_neg,bob_s_house_s2_b_1_A_neg,charlie_s2_b_1_A_neg,2018).
 :- halt.

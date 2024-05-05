@@ -5,7 +5,7 @@
 % Alice's deduction for 2017 falls under section 63(d). Entailment
 
 % Facts
-person(alice).
+person(alice_s63_d_pos).
 finance(33200).
 finance(1200).
 
@@ -14,15 +14,15 @@ date_split("2017-01-01", 2017, 1, 1).
 date("2017-12-31").
 date_split("2017-12-31", 2017, 12, 31).
 
-payment_(alice_is_paid).
-patient_(alice_is_paid,alice).
-start_(alice_is_paid,"2017-12-31").
-amount_(alice_is_paid,33200).
-deduction_(deduction_alice_2017).
-agent_(deduction_alice_2017,alice).
-start_(deduction_alice_2017,"2017-12-31").
-amount_(deduction_alice_2017,1200).
+payment_(alice_is_paid_s63_d_pos).
+patient_(alice_is_paid_s63_d_pos,alice_s63_d_pos).
+start_(alice_is_paid_s63_d_pos,"2017-12-31").
+amount_(alice_is_paid_s63_d_pos,33200).
+deduction_(deduction_alice_2017_s63_d_pos).
+agent_(deduction_alice_2017_s63_d_pos,alice_s63_d_pos).
+start_(deduction_alice_2017_s63_d_pos,"2017-12-31").
+amount_(deduction_alice_2017_s63_d_pos,1200).
 
 % Test
-:- s63_d(alice,1200,1200,2017).
+:- s63_d(alice_s63_d_pos,1200,1200,2017).
 :- halt.

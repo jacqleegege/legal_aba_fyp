@@ -5,7 +5,7 @@
 % Alice has to pay $27181 in excise tax for the year 2015 under section 3301. Entailment
 
 % Facts
-person(alice).
+person(alice_s3301_pos).
 finance(453009).
 finance(443870).
 
@@ -21,10 +21,10 @@ date_split("2016-01-01", 2016, 1, 1).
 date("2016-12-31").
 date_split("2016-12-31", 2016, 12, 31).
 
-s3306_a(alice,Year) :- between(2015,2016,Year).
-total_wages_employer(alice,453009,_,_,"2015-01-01","2015-12-31").
-total_wages_employer(alice,443870,_,_,"2016-01-01","2016-12-31").
+s3306_a(alice_s3301_pos,Year) :- between(2015,2016,Year).
+total_wages_employer(alice_s3301_pos,453009,_,_,"2015-01-01","2015-12-31").
+total_wages_employer(alice_s3301_pos,443870,_,_,"2016-01-01","2016-12-31").
 
 % Test
-:- s3301(alice,2015,_,_,_,27181).
+:- s3301(alice_s3301_pos,2015,_,_,_,27181).
 :- halt.

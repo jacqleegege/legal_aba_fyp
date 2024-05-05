@@ -21,10 +21,10 @@ date_split("1999-01-01",1999,1,1).
 date("1999-12-31").
 date_split("1999-12-31",1999,12,31).
 
-business_trust_(wbft_is_a_trust).
-agent_(wbft_is_a_trust,"Walter Brown Family Trust II").
-start_(wbft_is_a_trust,"1973-01-01").
-end_(wbft_is_a_trust,"2019-12-31").
+business_trust_(wbft_is_a_trust_s63_c_6_D_pos).
+agent_(wbft_is_a_trust_s63_c_6_D_pos,"Walter Brown Family Trust II").
+start_(wbft_is_a_trust_s63_c_6_D_pos,"1973-01-01").
+end_(wbft_is_a_trust_s63_c_6_D_pos,"2019-12-31").
 
 % Test
 :- s63_c_6_D("Walter Brown Family Trust II",1999).

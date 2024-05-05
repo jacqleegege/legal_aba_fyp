@@ -5,9 +5,10 @@
 % Alice can claim an exemption with Bob the dependent for 2015 under section 151(c). Entailment
 
 % Facts
-person(alice).
-person(bob).
-person(charlie).
+person(alice_s151_c_pos).
+person(bob_s151_c_pos).
+person(charlie_s151_c_pos).
+finance(2000).
 
 year(2015).
 date("2015-02-02").
@@ -17,12 +18,12 @@ date_split("2015-01-01", 2015, 1, 1).
 date("2015-12-31").
 date_split("2015-12-31", 2015, 12, 31).
 
-marriage_(alice_and_charlie).
-agent_(alice_and_charlie,alice).
-agent_(alice_and_charlie,charlie).
-start_(alice_and_charlie,"2015-02-02").
-s152_c_1(bob,alice,2015).
+marriage_(alice_and_charlie_s151_c_pos).
+agent_(alice_and_charlie_s151_c_pos,alice_s151_c_pos).
+agent_(alice_and_charlie_s151_c_pos,charlie_s151_c_pos).
+start_(alice_and_charlie_s151_c_pos,"2015-02-02").
+s152_c_1(bob_s151_c_pos,alice_s151_c_pos,2015).
 
 % Test
-:- s151_c(alice,bob,2000,2015).
+:- s151_c(alice_s151_c_pos,bob_s151_c_pos,2000,2015).
 :- halt.

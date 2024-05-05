@@ -5,9 +5,9 @@
 % Section 7703(b)(3) applies to Alice maintaining her home for the year 2018. Contradiction
 
 % Facts
-person(alice).
-person(bob).
-person(charlie).
+person(alice_s7703_b_3_neg).
+person(bob_s7703_b_3_neg).
+person(charlie_s7703_b_3_neg).
 
 year(2012).
 date("2012-01-01").
@@ -39,23 +39,23 @@ date_split("2019-01-01", 2019, 1, 1).
 date("2019-12-31").
 date_split("2019-12-31", 2019, 12, 31).
 
-household(alice_s_house).
+household(alice_s_house_s7703_b_3_neg).
 finance(1).
 
-marriage_(alice_and_bob).
-agent_(alice_and_bob,alice).
-agent_(alice_and_bob,bob).
-start_(alice_and_bob,"2012-04-05").
-son_(charlie_is_born).
-agent_(charlie_is_born,charlie).
-patient_(charlie_is_born,bob).
-patient_(charlie_is_born,alice).
-start_(charlie_is_born,"2017-09-16").
-residence_(home).
-agent_(home,alice).
-agent_(home,charlie).
-patient_(home,alice_s_house).
-start_(home,"2017-09-16").
+marriage_(alice_and_bob_s7703_b_3_neg).
+agent_(alice_and_bob_s7703_b_3_neg,alice_s7703_b_3_neg).
+agent_(alice_and_bob_s7703_b_3_neg,bob_s7703_b_3_neg).
+start_(alice_and_bob_s7703_b_3_neg,"2012-04-05").
+son_(charlie_is_born_s7703_b_3_neg).
+agent_(charlie_is_born_s7703_b_3_neg,charlie_s7703_b_3_neg).
+patient_(charlie_is_born_s7703_b_3_neg,bob_s7703_b_3_neg).
+patient_(charlie_is_born_s7703_b_3_neg,alice_s7703_b_3_neg).
+start_(charlie_is_born_s7703_b_3_neg,"2017-09-16").
+residence_(home_s7703_b_3_neg).
+agent_(home_s7703_b_3_neg,alice_s7703_b_3_neg).
+agent_(home_s7703_b_3_neg,charlie_s7703_b_3_neg).
+patient_(home_s7703_b_3_neg,alice_s_house_s7703_b_3_neg).
+start_(home_s7703_b_3_neg,"2017-09-16").
 
 % NOTE: should be generated to 2117 + dates should be validated
 alice_household_maintenance(2017,'alice_maintains_household_2017',"2017-09-16","2017-12-31").
@@ -99,18 +99,18 @@ alice_household_maintenance(2050,'alice_maintains_household_2050',"2050-01-01","
 %     last_day_year(Year,End_day).
 
 payment_(Event) :- alice_household_maintenance(_,Event,_,_).
-agent_(Event,alice) :- alice_household_maintenance(_,Event,_,_).
+agent_(Event,alice_s7703_b_3_neg) :- alice_household_maintenance(_,Event,_,_).
 amount_(Event,1) :- alice_household_maintenance(_,Event,_,_).
-purpose_(Event,home) :- alice_household_maintenance(_,Event,_,_).
+purpose_(Event,home_s7703_b_3_neg) :- alice_household_maintenance(_,Event,_,_).
 start_(Event,Start_day) :- alice_household_maintenance(_,Event,Start_day,_).
 end_(Event,End_day) :- alice_household_maintenance(_,Event,_,End_day).
-s151_c_applies(alice,charlie,Year) :- between(2017,2019,Year).
-residence_(bob_lives_alice_house).
-agent_(bob_lives_alice_house,bob).
-patient_(bob_lives_alice_house,alice_s_house).
-start_(bob_lives_alice_house,"2017-09-16").
-end_(bob_lives_alice_house,"2018-10-10").
+s151_c_applies(alice_s7703_b_3_neg,charlie_s7703_b_3_neg,Year) :- between(2017,2019,Year).
+residence_(bob_lives_alice_house_s7703_b_3_neg).
+agent_(bob_lives_alice_house_s7703_b_3_neg,bob_s7703_b_3_neg).
+patient_(bob_lives_alice_house_s7703_b_3_neg,alice_s_house_s7703_b_3_neg).
+start_(bob_lives_alice_house_s7703_b_3_neg,"2017-09-16").
+end_(bob_lives_alice_house_s7703_b_3_neg,"2018-10-10").
 
 % Test
-:- \+ s7703_b_3(alice,bob,alice_s_house,2018).
+:- \+ s7703_b_3(alice_s7703_b_3_neg,bob_s7703_b_3_neg,alice_s_house_s7703_b_3_neg,2018).
 :- halt.

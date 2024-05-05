@@ -5,9 +5,9 @@
 % Section 3306(b)(15) applies to the payment that Alice made to Charlie in 2020. Entailment
 
 % Facts
-person(alice).
-person(bob).
-person(charlie).
+person(alice_s3306_b_15_pos).
+person(bob_s3306_b_15_pos).
+person(charlie_s3306_b_15_pos).
 
 year(2011).
 date("2011-01-01").
@@ -39,27 +39,27 @@ date_split("2020-12-31", 2020, 12, 31).
 
 finance(1200).
 
-s3306_c(alice_employer,alice,bob,Day,Year) :-
+s3306_c(alice_employer_s3306_b_15_pos,alice_s3306_b_15_pos,bob_s3306_b_15_pos,Day,Year) :-
     date_split(Day,Year,_,_),
     is_before("2011-02-01",Day),
     is_before(Day,"2019-11-19").
 
-purpose_(alice_employer,"agricultural labor").
-death_(bob_dies).
-agent_(bob_dies,bob).
-start_(bob_dies,"2019-11-25").
-end_(bob_dies,"2019-11-25").
-marriage_(bob_and_charlie).
-agent_(bob_and_charlie,bob).
-agent_(bob_and_charlie,charlie).
-payment_(alice_pays).
-agent_(alice_pays,alice).
-patient_(alice_pays,charlie).
-start_(alice_pays,"2020-01-20").
-end_(alice_pays,"2020-01-20").
-purpose_(alice_pays,alice_employer).
-amount_(alice_pays,1200).
+purpose_(alice_employer_s3306_b_15_pos,"agricultural labor").
+death_(bob_dies_s3306_b_15_pos).
+agent_(bob_dies_s3306_b_15_pos,bob_s3306_b_15_pos).
+start_(bob_dies_s3306_b_15_pos,"2019-11-25").
+end_(bob_dies_s3306_b_15_pos,"2019-11-25").
+marriage_(bob_and_charlie_s3306_b_15_pos).
+agent_(bob_and_charlie_s3306_b_15_pos,bob_s3306_b_15_pos).
+agent_(bob_and_charlie_s3306_b_15_pos,charlie_s3306_b_15_pos).
+payment_(alice_pays_s3306_b_15_pos).
+agent_(alice_pays_s3306_b_15_pos,alice_s3306_b_15_pos).
+patient_(alice_pays_s3306_b_15_pos,charlie_s3306_b_15_pos).
+start_(alice_pays_s3306_b_15_pos,"2020-01-20").
+end_(alice_pays_s3306_b_15_pos,"2020-01-20").
+purpose_(alice_pays_s3306_b_15_pos,alice_employer_s3306_b_15_pos).
+amount_(alice_pays_s3306_b_15_pos,1200).
 
 % Test
-:- s3306_b_15(alice_pays,alice,charlie,bob,2020).
+:- s3306_b_15(alice_pays_s3306_b_15_pos,alice_s3306_b_15_pos,charlie_s3306_b_15_pos,bob_s3306_b_15_pos,2020).
 :- halt.

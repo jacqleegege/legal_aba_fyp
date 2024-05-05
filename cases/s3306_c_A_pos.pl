@@ -5,8 +5,8 @@
 % Section 3306(c)(A) applies to Alice employing Bob for the year 2017. Entailment
 
 % Facts
-person(alice).
-person(bob).
+person(alice_s3306_c_A_pos).
+person(bob_s3306_c_A_pos).
 
 year(2017).
 date("2017-01-01").
@@ -22,20 +22,20 @@ location_name("baltimore, maryland, usa").
 country_name("usa").
 finance(3200).
 
-service_(alice_employer).
-patient_(alice_employer,alice).
-agent_(alice_employer,bob).
-start_(alice_employer,"2017-02-01").
-end_(alice_employer,"2017-09-02").
-location_(alice_employer,"baltimore, maryland, usa").
+service_(alice_employer_s3306_c_A_pos).
+patient_(alice_employer_s3306_c_A_pos,alice_s3306_c_A_pos).
+agent_(alice_employer_s3306_c_A_pos,bob_s3306_c_A_pos).
+start_(alice_employer_s3306_c_A_pos,"2017-02-01").
+end_(alice_employer_s3306_c_A_pos,"2017-09-02").
+location_(alice_employer_s3306_c_A_pos,"baltimore, maryland, usa").
 country_("baltimore, maryland, usa","usa").
-payment_(alice_pays).
-agent_(alice_pays,alice).
-patient_(alice_pays,bob).
-start_(alice_pays,"2017-09-02").
-purpose_(alice_pays,alice_employer).
-amount_(alice_pays,3200).
+payment_(alice_pays_s3306_c_A_pos).
+agent_(alice_pays_s3306_c_A_pos,alice_s3306_c_A_pos).
+patient_(alice_pays_s3306_c_A_pos,bob_s3306_c_A_pos).
+start_(alice_pays_s3306_c_A_pos,"2017-09-02").
+purpose_(alice_pays_s3306_c_A_pos,alice_employer_s3306_c_A_pos).
+amount_(alice_pays_s3306_c_A_pos,3200).
 
 % Test
-:- s3306_c_A(alice_employer,alice,bob).
+:- s3306_c_A(alice_employer_s3306_c_A_pos,alice_s3306_c_A_pos,bob_s3306_c_A_pos).
 :- halt.

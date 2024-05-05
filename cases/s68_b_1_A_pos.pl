@@ -5,9 +5,11 @@
 % Under section 68(b)(1)(A), Alice's applicable amount for 2016 is equal to $300000. Entailment
 
 % Facts
-person(alice).
-person(spouse).
+person(alice_s68_b_1_A_pos).
+person(spouse_s68_b_1_A_pos).
 finance(567192).
+finance(300000).
+
 
 year(2016).
 date("2016-01-01").
@@ -15,13 +17,13 @@ date_split("2016-01-01", 2016, 1, 1).
 date("2016-12-31").
 date_split("2016-12-31", 2016, 12, 31).
 
-income_(alice_is_paid).
-agent_(alice_is_paid,alice).
-start_(alice_is_paid,"2016-12-31").
-amount_(alice_is_paid,567192).
-s2_a(alice,spouse,2016).
+income_(alice_is_paid_s68_b_1_A_pos).
+agent_(alice_is_paid_s68_b_1_A_pos,alice_s68_b_1_A_pos).
+start_(alice_is_paid_s68_b_1_A_pos,"2016-12-31").
+amount_(alice_is_paid_s68_b_1_A_pos,567192).
+s2_a(alice_s68_b_1_A_pos,spouse_s68_b_1_A_pos,2016).
 joint_return_(random_joint_return).
 
 % Test
-:- s68_b_1_A(alice,random_joint_return,alice,300000,2016).
+:- s68_b_1_A(alice_s68_b_1_A_pos,random_joint_return,alice_s68_b_1_A_pos,300000,2016).
 :- halt.

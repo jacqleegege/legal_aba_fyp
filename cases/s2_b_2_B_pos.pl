@@ -5,8 +5,8 @@
 % Section 2(b)(2)(B) applies to Bob in 2013. Entailment
 
 % Facts
-person(alice).
-person(bob).
+person(alice_s2_b_2_B_pos).
+person(bob_s2_b_2_B_pos).
 
 year(1992).
 date("1992-02-03").
@@ -26,14 +26,14 @@ date_split("2014-12-31",2014,12,31).
 
 year(2013).
 
-marriage_(alice_and_bob).
-agent_(alice_and_bob,alice).
-agent_(alice_and_bob,bob).
-start_(alice_and_bob,"1992-02-03").
-nonresident_alien_(alice_is_a_nra).
-agent_(alice_is_a_nra,alice).
-end_(alice_is_a_nra,"2014-07-09").
+marriage_(alice_and_bob_s2_b_2_B_pos).
+agent_(alice_and_bob_s2_b_2_B_pos,alice_s2_b_2_B_pos).
+agent_(alice_and_bob_s2_b_2_B_pos,bob_s2_b_2_B_pos).
+start_(alice_and_bob_s2_b_2_B_pos,"1992-02-03").
+nonresident_alien_(alice_is_a_nra_s2_b_2_B_pos).
+agent_(alice_is_a_nra_s2_b_2_B_pos,alice_s2_b_2_B_pos).
+end_(alice_is_a_nra_s2_b_2_B_pos,"2014-07-09").
 
 % Test
-:- s2_b_2_B(bob,alice,2013).
+:- s2_b_2_B(bob_s2_b_2_B_pos,alice_s2_b_2_B_pos,2013).
 :- halt.

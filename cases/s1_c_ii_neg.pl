@@ -5,14 +5,16 @@
 % Alice has to pay $1162 in taxes for the year 2017 under section 1(c)(ii). Contradiction
 
 % Facts
-person(alice).
+person(alice_s1_c_ii_neg).
 year(2017).
 date("2017-01-01").
 date("2017-12-31").
 date_split("2017-01-01",2017,1,1).
 date_split("2017-12-31",2017,12,31).
 finance(7748).
-s63(alice,2017,7748).
+finance(1162).
+
+s63(alice_s1_c_ii_neg,2017,7748).
 
 % Test
 :- \+ s1_c_ii(7748,1162).

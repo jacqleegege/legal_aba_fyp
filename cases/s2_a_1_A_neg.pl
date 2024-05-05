@@ -5,8 +5,8 @@
 % Section 2(a)(1)(A) applies to Bob in 2014. Contradiction
 
 % Facts
-person(alice).
-person(bob).
+person(alice_s2_a_1_A_neg).
+person(bob_s2_a_1_A_neg).
 year(2014).
 year(1992).
 date("1992-02-03").
@@ -22,14 +22,14 @@ date_split("2014-01-01",2014,1,1).
 date("2014-12-31").
 date_split("2014-12-31",2014,12,31).
 
-marriage_(alice_and_bob).
-agent_(alice_and_bob,alice).
-agent_(alice_and_bob,bob).
-start_(alice_and_bob,"1992-02-03").
-death_(alice_dies).
-agent_(alice_dies,alice).
-start_(alice_dies,"2014-07-09").
+marriage_(alice_and_bob_s2_a_1_A_neg).
+agent_(alice_and_bob_s2_a_1_A_neg,alice_s2_a_1_A_neg).
+agent_(alice_and_bob_s2_a_1_A_neg,bob_s2_a_1_A_neg).
+start_(alice_and_bob_s2_a_1_A_neg,"1992-02-03").
+death_(alice_dies_s2_a_1_A_neg).
+agent_(alice_dies_s2_a_1_A_neg,alice_s2_a_1_A_neg).
+start_(alice_dies_s2_a_1_A_neg,"2014-07-09").
 
 % Test
-:- \+ s2_a_1_A(bob,alice,alice_and_bob,2014,2014).
+:- \+ s2_a_1_A(bob_s2_a_1_A_neg,alice_s2_a_1_A_neg,alice_and_bob_s2_a_1_A_neg,2014,2014).
 :- halt.

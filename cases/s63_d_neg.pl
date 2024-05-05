@@ -5,7 +5,7 @@
 % Alice's deduction for 2017 falls under section 63(d). Contradiction
 
 % Facts
-person(alice).
+person(alice_s63_d_neg).
 finance(33200).
 finance(2000).
 
@@ -14,12 +14,12 @@ date_split("2017-01-01", 2017, 1, 1).
 date("2017-12-31").
 date_split("2017-12-31", 2017, 12, 31).
 
-payment_(alice_is_paid).
-patient_(alice_is_paid,alice).
-start_(alice_is_paid,"2017-12-31").
-amount_(alice_is_paid,33200).
-s151_b(alice,2000,2017).
+payment_(alice_is_paid_s63_d_neg).
+patient_(alice_is_paid_s63_d_neg,alice_s63_d_neg).
+start_(alice_is_paid_s63_d_neg,"2017-12-31").
+amount_(alice_is_paid_s63_d_neg,33200).
+s151_b(alice_s63_d_neg,2000,2017).
 
 % Test
-:- \+ s63_d(alice,2000,2000,2017).
+:- \+ s63_d(alice_s63_d_neg,2000,2000,2017).
 :- halt.

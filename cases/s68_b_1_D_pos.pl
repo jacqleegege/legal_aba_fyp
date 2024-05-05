@@ -5,9 +5,10 @@
 % Under section 68(b)(1)(D), Alice's applicable amount for 2016 is equal to $150000. Entailment
 
 % Facts
-person(alice).
-person(bob).
+person(alice_s68_b_1_D_pos).
+person(bob_s68_b_1_D_pos).
 finance(567192).
+finance(150000).
 
 year(2016).
 date("2016-01-01").
@@ -15,15 +16,15 @@ date_split("2016-01-01", 2016, 1, 1).
 date("2016-12-31").
 date_split("2016-12-31", 2016, 12, 31).
 
-income_(alice_is_paid).
-agent_(alice_is_paid,alice).
-start_(alice_is_paid,"2016-12-31").
-amount_(alice_is_paid,567192).
-marriage_(alice_and_bob),
-agent_(alice_and_bob,alice),
-agent_(alice_and_bob,bob),
-s7703(alice,bob,alice_and_bob,2016).
+income_(alice_is_paid_s68_b_1_D_pos).
+agent_(alice_is_paid_s68_b_1_D_pos,alice_s68_b_1_D_pos).
+start_(alice_is_paid_s68_b_1_D_pos,"2016-12-31").
+amount_(alice_is_paid_s68_b_1_D_pos,567192).
+marriage_(alice_and_bob_s68_b_1_D_pos),
+agent_(alice_and_bob_s68_b_1_D_pos,alice_s68_b_1_D_pos),
+agent_(alice_and_bob_s68_b_1_D_pos,bob_s68_b_1_D_pos),
+s7703(alice_s68_b_1_D_pos,bob_s68_b_1_D_pos,alice_and_bob_s68_b_1_D_pos,2016).
 
 % Test
-:- s68_b_1_D(alice,150000,2016).
+:- s68_b_1_D(alice_s68_b_1_D_pos,150000,2016).
 :- halt.

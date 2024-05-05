@@ -15,8 +15,8 @@
 % Section 3306(a)(1)(B) applies to Alice for the year 2017. Contradiction
 
 % Facts
-person(alice).
-person(bob).
+person(alice_s3306_a_1_B_neg).
+person(bob_s3306_a_1_B_neg).
 
 year(2017).
 date("2017-01-24").
@@ -61,5 +61,5 @@ s3306_c("alice_employer_2017-12-03",alice,bob,"2017-12-03",2017).
 %     atom_concat("alice_employer_",Day,Employment_event).
 
 % Test
-:- \+ s3306_a_1_B(alice,2017).
+:- \+ s3306_a_1_B(alice_s3306_a_1_B_neg,2017).
 :- halt.

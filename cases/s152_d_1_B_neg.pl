@@ -5,7 +5,7 @@
 % Section 152(d)(1)(B) applies to Alice for the year 2015. Contradiction
 
 % Facts
-person(alice).
+person(alice_s152_d_1_B_neg).
 
 finance(2312).
 finance(2000).
@@ -16,13 +16,13 @@ date_split("2015-01-01", 2015, 1, 1).
 date("2015-12-31").
 date_split("2015-12-31", 2015, 12, 31).
 
-income_(alice_makes_money).
-agent_(alice_makes_money,alice).
-amount_(alice_makes_money,2312).
-start_(alice_makes_money,"2015-01-01").
-end_(alice_makes_money,"2015-12-31").
-s151_d(alice,2000,2015).
+income_(alice_makes_money_s152_d_1_B_neg).
+agent_(alice_makes_money_s152_d_1_B_neg,alice_s152_d_1_B_neg).
+amount_(alice_makes_money_s152_d_1_B_neg,2312).
+start_(alice_makes_money_s152_d_1_B_neg,"2015-01-01").
+end_(alice_makes_money_s152_d_1_B_neg,"2015-12-31").
+s151_d(alice_s152_d_1_B_neg,2000,2015).
 
 % Test
-:- \+ s152_d_1_B(alice,2015).
+:- \+ s152_d_1_B(alice_s152_d_1_B_neg,2015).
 :- halt.

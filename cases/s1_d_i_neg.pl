@@ -5,17 +5,19 @@
 % Alice has to pay $17123 in taxes for the year 2017 under section 1(d)(i). Contradiction
 
 % Facts
-person(alice).
-person(spouse).
+person(alice_s1_d_i_neg).
+person(spouse_s1_d_i_neg).
 year(2017).
 date("2017-01-01").
 date("2017-12-31").
 date_split("2017-01-01",2017,1,1).
 date_split("2017-12-31",2017,12,31).
 finance(67285).
-marriage_(alice_and_spouse).
-s7703(alice,spouse,alice_and_spouse,2017).
-s63(alice,2017,67285).
+finance(17123).
+
+marriage_(alice_and_spouse_s1_d_i_neg).
+s7703(alice_s1_d_i_neg,spouse_s1_d_i_neg,alice_and_spouse_s1_d_i_neg,2017).
+s63(alice_s1_d_i_neg,2017,67285).
 
 % Test
 :- \+ s1_d_i(67285,17123).

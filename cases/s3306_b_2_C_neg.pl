@@ -5,9 +5,9 @@
 % Section 3306(b)(2)(C) applies to the payment Alice made to the retirement fund for the year 2017. Contradiction
 
 % Facts
-person(alice).
-person(charlie).
-person(bob).
+person(alice_s3306_b_2_C_neg).
+person(charlie_s3306_b_2_C_neg).
+person(bob_s3306_b_2_C_neg).
 
 year(2017).
 date("2017-01-01").
@@ -25,41 +25,41 @@ finance(45252).
 finance(9832).
 finance(5322).
 
-service_(alice_employer).
-patient_(alice_employer,alice).
-agent_(alice_employer,bob).
-start_(alice_employer,"2017-01-01").
-end_(alice_employer,"2017-12-31").
-payment_(alice_pays_bob).
-agent_(alice_pays_bob,alice).
-patient_(alice_pays_bob,bob).
-start_(alice_pays_bob,"2017-01-01").
-end_(alice_pays_bob,"2017-12-31").
-purpose_(alice_pays_bob,alice_employer).
-amount_(alice_pays_bob,45252).
-payment_(alice_pays_retirement).
-agent_(alice_pays_retirement,alice).
-patient_(alice_pays_retirement,retirement_fund).
-purpose_(alice_pays_retirement,"make provisions for employees in case of retirement").
-beneficiary_(alice_pays_retirement,bob).
-start_(alice_pays_retirement,"2017-01-01").
-end_(alice_pays_retirement,"2017-12-31").
-amount_(alice_pays_retirement,9832).
-payment_(alice_pays_insurance).
-agent_(alice_pays_insurance,alice).
-patient_(alice_pays_insurance,life_insurance_fund).
-purpose_(alice_pays_insurance,"make provisions in case of death").
-beneficiary_(alice_pays_insurance,charlie).
-start_(alice_pays_insurance,"2017-01-01").
-end_(alice_pays_insurance,"2017-12-31").
-amount_(alice_pays_insurance,5322).
-father_(alice_and_charlie).
-agent_(alice_and_charlie,charlie).
-patient_(alice_and_charlie,alice).
-retirement_(charlie_retires).
-agent_(charlie_retires,charlie).
-start_(charlie_retires,"2016-01-01").
+service_(alice_employer_s3306_b_2_C_neg).
+patient_(alice_employer_s3306_b_2_C_neg,alice_s3306_b_2_C_neg).
+agent_(alice_employer_s3306_b_2_C_neg,bob_s3306_b_2_C_neg).
+start_(alice_employer_s3306_b_2_C_neg,"2017-01-01").
+end_(alice_employer_s3306_b_2_C_neg,"2017-12-31").
+payment_(alice_pays_bob_s3306_b_2_C_neg).
+agent_(alice_pays_bob_s3306_b_2_C_neg,alice_s3306_b_2_C_neg).
+patient_(alice_pays_bob_s3306_b_2_C_neg,bob_s3306_b_2_C_neg).
+start_(alice_pays_bob_s3306_b_2_C_neg,"2017-01-01").
+end_(alice_pays_bob_s3306_b_2_C_neg,"2017-12-31").
+purpose_(alice_pays_bob_s3306_b_2_C_neg,alice_employer_s3306_b_2_C_neg).
+amount_(alice_pays_bob_s3306_b_2_C_neg,45252).
+payment_(alice_pays_retirement_s3306_b_2_C_neg).
+agent_(alice_pays_retirement_s3306_b_2_C_neg,alice_s3306_b_2_C_neg).
+patient_(alice_pays_retirement_s3306_b_2_C_neg,retirement_fund_s3306_b_2_C_neg).
+purpose_(alice_pays_retirement_s3306_b_2_C_neg,"make provisions for employees in case of retirement").
+beneficiary_(alice_pays_retirement_s3306_b_2_C_neg,bob_s3306_b_2_C_neg).
+start_(alice_pays_retirement_s3306_b_2_C_neg,"2017-01-01").
+end_(alice_pays_retirement_s3306_b_2_C_neg,"2017-12-31").
+amount_(alice_pays_retirement_s3306_b_2_C_neg,9832).
+payment_(alice_pays_insurance_s3306_b_2_C_neg).
+agent_(alice_pays_insurance_s3306_b_2_C_neg,alice_s3306_b_2_C_neg).
+patient_(alice_pays_insurance_s3306_b_2_C_neg,life_insurance_fund_s3306_b_2_C_neg).
+purpose_(alice_pays_insurance_s3306_b_2_C_neg,"make provisions in case of death").
+beneficiary_(alice_pays_insurance_s3306_b_2_C_neg,charlie_s3306_b_2_C_neg).
+start_(alice_pays_insurance_s3306_b_2_C_neg,"2017-01-01").
+end_(alice_pays_insurance_s3306_b_2_C_neg,"2017-12-31").
+amount_(alice_pays_insurance_s3306_b_2_C_neg,5322).
+father_(alice_and_charlie_s3306_b_2_C_neg).
+agent_(alice_and_charlie_s3306_b_2_C_neg,charlie_s3306_b_2_C_neg).
+patient_(alice_and_charlie_s3306_b_2_C_neg,alice_s3306_b_2_C_neg).
+retirement_(charlie_retires_s3306_b_2_C_neg).
+agent_(charlie_retires_s3306_b_2_C_neg,charlie_s3306_b_2_C_neg).
+start_(charlie_retires_s3306_b_2_C_neg,"2016-01-01").
 
 % Test
-:- \+ s3306_b_2_C(retirement_fund).
+:- \+ s3306_b_2_C(retirement_fund_s3306_b_2_C_neg).
 :- halt.

@@ -5,8 +5,8 @@
 % Section 2(b)(2)(A) applies to Alice and Bob in 2010. Contradiction
 
 % Facts
-person(alice).
-person(bob).
+person(alice_s2_b_2_A_neg).
+person(bob_s2_b_2_A_neg).
 
 year(1992).
 date("1992-02-03").
@@ -26,15 +26,15 @@ date_split("2014-12-31",2014,12,31).
 
 year(2010).
 
-marriage_(alice_and_bob).
-agent_(alice_and_bob,alice).
-agent_(alice_and_bob,bob).
-start_(alice_and_bob,"1992-02-03").
-legal_separation_(alice_and_bob_divorce).
-agent_(alice_and_bob_divorce,"decree of separate maintenance").
-patient_(alice_and_bob_divorce,alice_and_bob).
-start_(alice_and_bob_divorce,"2014-07-09").
+marriage_(alice_and_bob_s2_b_2_A_neg).
+agent_(alice_and_bob_s2_b_2_A_neg,alice_s2_b_2_A_neg).
+agent_(alice_and_bob_s2_b_2_A_neg,bob_s2_b_2_A_neg).
+start_(alice_and_bob_s2_b_2_A_neg,"1992-02-03").
+legal_separation_(alice_and_bob_divorce_s2_b_2_A_neg).
+agent_(alice_and_bob_divorce_s2_b_2_A_neg,"decree of separate maintenance").
+patient_(alice_and_bob_divorce_s2_b_2_A_neg,alice_and_bob_s2_b_2_A_neg).
+start_(alice_and_bob_divorce_s2_b_2_A_neg,"2014-07-09").
 
 % Test
-:- \+ s2_b_2_A(alice,bob,alice_and_bob_divorce,alice_and_bob,2010).
+:- \+ s2_b_2_A(alice_s2_b_2_A_neg,bob_s2_b_2_A_neg,alice_and_bob_divorce_s2_b_2_A_neg,alice_and_bob_s2_b_2_A_neg,2010).
 :- halt.

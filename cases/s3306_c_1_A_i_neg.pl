@@ -5,8 +5,8 @@
 % Section 3306(c)(1)(A)(i) applies to Alice employing Bob for the year 2017. Contradiction
 
 % Facts
-person(alice).
-person(bob).
+person(alice_s3306_c_1_A_i_neg).
+person(bob_s3306_c_1_A_i_neg).
 
 year(2017).
 date("2017-01-01").
@@ -23,27 +23,27 @@ country_name("venezuela").
 
 finance(2300).
 
-service_(alice_employer).
-patient_(alice_employer,alice).
-agent_(alice_employer,bob).
-start_(alice_employer,"2017-02-01").
-end_(alice_employer,"2017-09-02").
-location_(alice_employer,"caracas, venezuela").
+service_(alice_employer_s3306_c_1_A_i_neg).
+patient_(alice_employer_s3306_c_1_A_i_neg,alice_s3306_c_1_A_i_neg).
+agent_(alice_employer_s3306_c_1_A_i_neg,bob_s3306_c_1_A_i_neg).
+start_(alice_employer_s3306_c_1_A_i_neg,"2017-02-01").
+end_(alice_employer_s3306_c_1_A_i_neg,"2017-09-02").
+location_(alice_employer_s3306_c_1_A_i_neg,"caracas, venezuela").
 country_("caracas, venezuela", "venezuela").
-purpose_(alice_employer,"agricultural labor").
-payment_(alice_pays).
-agent_(alice_pays,alice).
-patient_(alice_pays,bob).
-start_(alice_pays,"2017-09-02").
-purpose_(alice_pays,alice_employer).
-amount_(alice_pays,2300).
-citizenship_(alice_is_american).
-agent_(alice_is_american,alice).
-patient_(alice_is_american,"usa").
-citizenship_(bob_is_american).
-agent_(bob_is_american,bob).
-patient_(bob_is_american,"usa").
+purpose_(alice_employer_s3306_c_1_A_i_neg,"agricultural labor").
+payment_(alice_pays_s3306_c_1_A_i_neg).
+agent_(alice_pays_s3306_c_1_A_i_neg,alice_s3306_c_1_A_i_neg).
+patient_(alice_pays_s3306_c_1_A_i_neg,bob_s3306_c_1_A_i_neg).
+start_(alice_pays_s3306_c_1_A_i_neg,"2017-09-02").
+purpose_(alice_pays_s3306_c_1_A_i_neg,alice_employer_s3306_c_1_A_i_neg).
+amount_(alice_pays_s3306_c_1_A_i_neg,2300).
+citizenship_(alice_is_american_s3306_c_1_A_i_neg).
+agent_(alice_is_american_s3306_c_1_A_i_neg,alice_s3306_c_1_A_i_neg).
+patient_(alice_is_american_s3306_c_1_A_i_neg,"usa").
+citizenship_(bob_is_american_s3306_c_1_A_i_neg).
+agent_(bob_is_american_s3306_c_1_A_i_neg,bob_s3306_c_1_A_i_neg).
+patient_(bob_is_american_s3306_c_1_A_i_neg,"usa").
 
 % Test
-:- \+ s3306_c_1_A_i(alice,2300,bob,alice_employer,2017).
+:- \+ s3306_c_1_A_i(alice_s3306_c_1_A_i_neg,2300,bob_s3306_c_1_A_i_neg,alice_employer_s3306_c_1_A_i_neg,2017).
 :- halt.

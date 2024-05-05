@@ -5,9 +5,9 @@
 % Section 2(a)(2)(A) applies to Bob in 2015. Entailment
 
 % Facts
-person(alice).
-person(bob).
-person(charlie).
+person(alice_s2_a_2_A_pos).
+person(bob_s2_a_2_A_pos).
+person(charlie_s2_a_2_A_pos).
 
 year(1992).
 date("1992-02-03").
@@ -33,19 +33,19 @@ date_split("2015-01-01",2015,1,1).
 date("2015-12-31").
 date_split("2015-12-31",2015,12,31).
 
-marriage_(alice_and_bob).
-agent_(alice_and_bob,alice).
-agent_(alice_and_bob,bob).
-start_(alice_and_bob,"1992-02-03").
-death_(alice_dies).
-agent_(alice_dies,alice).
-start_(alice_dies,"2014-07-09").
-end_(alice_dies,"2014-07-09").
-marriage_(bob_and_charlie).
-agent_(bob_and_charlie,charlie).
-agent_(bob_and_charlie,bob).
-start_(bob_and_charlie,"2015-09-14").
+marriage_(alice_and_bob_s2_a_2_A_pos).
+agent_(alice_and_bob_s2_a_2_A_pos,alice_s2_a_2_A_pos).
+agent_(alice_and_bob_s2_a_2_A_pos,bob_s2_a_2_A_pos).
+start_(alice_and_bob_s2_a_2_A_pos,"1992-02-03").
+death_(alice_dies_s2_a_2_A_pos).
+agent_(alice_dies_s2_a_2_A_pos,alice_s2_a_2_A_pos).
+start_(alice_dies_s2_a_2_A_pos,"2014-07-09").
+end_(alice_dies_s2_a_2_A_pos,"2014-07-09").
+marriage_(bob_and_charlie_s2_a_2_A_pos).
+agent_(bob_and_charlie_s2_a_2_A_pos,charlie_s2_a_2_A_pos).
+agent_(bob_and_charlie_s2_a_2_A_pos,bob_s2_a_2_A_pos).
+start_(bob_and_charlie_s2_a_2_A_pos,"2015-09-14").
 
 % Test
-:- s2_a_2_A(bob,bob_and_charlie,alice_and_bob,"2015-09-14",2015).
+:- s2_a_2_A(bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,alice_and_bob_s2_a_2_A_pos,"2015-09-14",2015).
 :- halt.

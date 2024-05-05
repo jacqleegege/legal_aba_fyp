@@ -5,8 +5,8 @@
 % Section 152(c)(1)(B) applies to Bob with Alice as the taxpayer for the year 2016. Entailment
 
 % Facts
-person(alice).
-person(bob).
+person(alice_s152_c_1_B_pos).
+person(bob_s152_c_1_B_pos).
 
 year(2015).
 date("2015-09-01").
@@ -30,16 +30,16 @@ date_split("2019-01-01", 2019, 1, 1).
 date("2019-12-31").
 date_split("2019-12-31", 2019, 12, 31).
 
-son_(bob_is_son).
-agent_(bob_is_son,bob).
-patient_(bob_is_son,alice).
-residence_(alice_and_bob).
-agent_(alice_and_bob,alice).
-agent_(alice_and_bob,bob).
-patient_(alice_and_bob,home).
-start_(alice_and_bob,"2015-09-01").
-end_(alice_and_bob,"2019-11-03").
+son_(bob_is_son_s152_c_1_B_pos).
+agent_(bob_is_son_s152_c_1_B_pos,bob_s152_c_1_B_pos).
+patient_(bob_is_son_s152_c_1_B_pos,alice_s152_c_1_B_pos).
+residence_(alice_and_bob_s152_c_1_B_pos).
+agent_(alice_and_bob_s152_c_1_B_pos,alice_s152_c_1_B_pos).
+agent_(alice_and_bob_s152_c_1_B_pos,bob_s152_c_1_B_pos).
+patient_(alice_and_bob_s152_c_1_B_pos,home_s152_c_1_B_pos).
+start_(alice_and_bob_s152_c_1_B_pos,"2015-09-01").
+end_(alice_and_bob_s152_c_1_B_pos,"2019-11-03").
 
 % Test
-:- s152_c_1_B(bob,home,alice,"2015-09-01","2019-11-03",2016).
+:- s152_c_1_B(bob_s152_c_1_B_pos,home_s152_c_1_B_pos,alice_s152_c_1_B_pos,"2015-09-01","2019-11-03",2016).
 :- halt.

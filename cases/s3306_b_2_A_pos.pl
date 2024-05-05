@@ -5,8 +5,8 @@
 % Section 3306(b)(2)(A) applies to the payment Alice made to the health insurance fund for the year 2017. Entailment
 
 % Facts
-person(alice).
-person(bob).
+person(alice_s3306_b_2_A_pos).
+person(bob_s3306_b_2_A_pos).
 
 year(2017).
 date("2017-01-01").
@@ -24,37 +24,37 @@ finance(45252).
 finance(9832).
 finance(5322).
 
-service_(alice_employer).
-patient_(alice_employer,alice).
-agent_(alice_employer,bob).
-start_(alice_employer,"2017-01-01").
-end_(alice_employer,"2017-12-31").
-payment_(alice_pays_bob).
-agent_(alice_pays_bob,alice).
-patient_(alice_pays_bob,bob).
-start_(alice_pays_bob,"2017-01-01").
-end_(alice_pays_bob,"2017-12-31").
-purpose_(alice_pays_bob,alice_employer).
-amount_(alice_pays_bob,45252).
-payment_(alice_pays_retirement).
-agent_(alice_pays_retirement,alice).
-patient_(alice_pays_retirement,retirement_fund).
-plan_(retirement_fund).
-purpose_(retirement_fund,"make provisions for employees in case of retirement").
-beneficiary_(retirement_fund,bob).
-start_(alice_pays_retirement,"2017-01-01").
-end_(alice_pays_retirement,"2017-12-31").
-amount_(alice_pays_retirement,9832).
-payment_(alice_pays_insurance).
-agent_(alice_pays_insurance,alice).
-patient_(alice_pays_insurance,health_insurance_fund).
-plan_(health_insurance_fund).
-purpose_(health_insurance_fund,"make provisions for employees in case of sickness").
-beneficiary_(health_insurance_fund,bob).
-start_(alice_pays_insurance,"2017-01-01").
-end_(alice_pays_insurance,"2017-12-31").
-amount_(alice_pays_insurance,5322).
+service_(alice_employer_s3306_b_2_A_pos).
+patient_(alice_employer_s3306_b_2_A_pos,alice_s3306_b_2_A_pos).
+agent_(alice_employer_s3306_b_2_A_pos,bob_s3306_b_2_A_pos).
+start_(alice_employer_s3306_b_2_A_pos,"2017-01-01").
+end_(alice_employer_s3306_b_2_A_pos,"2017-12-31").
+payment_(alice_pays_bob_s3306_b_2_A_pos).
+agent_(alice_pays_bob_s3306_b_2_A_pos,alice_s3306_b_2_A_pos).
+patient_(alice_pays_bob_s3306_b_2_A_pos,bob_s3306_b_2_A_pos).
+start_(alice_pays_bob_s3306_b_2_A_pos,"2017-01-01").
+end_(alice_pays_bob_s3306_b_2_A_pos,"2017-12-31").
+purpose_(alice_pays_bob_s3306_b_2_A_pos,alice_employer_s3306_b_2_A_pos).
+amount_(alice_pays_bob_s3306_b_2_A_pos,45252).
+payment_(alice_pays_retirement_s3306_b_2_A_pos).
+agent_(alice_pays_retirement_s3306_b_2_A_pos,alice_s3306_b_2_A_pos).
+patient_(alice_pays_retirement_s3306_b_2_A_pos,retirement_fund_s3306_b_2_A_pos).
+plan_(retirement_fund_s3306_b_2_A_pos).
+purpose_(retirement_fund_s3306_b_2_A_pos,"make provisions for employees in case of retirement").
+beneficiary_(retirement_fund_s3306_b_2_A_pos,bob_s3306_b_2_A_pos).
+start_(alice_pays_retirement_s3306_b_2_A_pos,"2017-01-01").
+end_(alice_pays_retirement_s3306_b_2_A_pos,"2017-12-31").
+amount_(alice_pays_retirement_s3306_b_2_A_pos,9832).
+payment_(alice_pays_insurance_s3306_b_2_A_pos).
+agent_(alice_pays_insurance_s3306_b_2_A_pos,alice_s3306_b_2_A_pos).
+patient_(alice_pays_insurance_s3306_b_2_A_pos,health_insurance_fund_s3306_b_2_A_pos).
+plan_(health_insurance_fund_s3306_b_2_A_pos).
+purpose_(health_insurance_fund_s3306_b_2_A_pos,"make provisions for employees in case of sickness").
+beneficiary_(health_insurance_fund_s3306_b_2_A_pos,bob_s3306_b_2_A_pos).
+start_(alice_pays_insurance_s3306_b_2_A_pos,"2017-01-01").
+end_(alice_pays_insurance_s3306_b_2_A_pos,"2017-12-31").
+amount_(alice_pays_insurance_s3306_b_2_A_pos,5322).
 
 % Test
-:- s3306_b_2_A(health_insurance_fund).
+:- s3306_b_2_A(health_insurance_fund_s3306_b_2_A_pos).
 :- halt.

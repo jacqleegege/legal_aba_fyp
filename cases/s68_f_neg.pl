@@ -5,8 +5,8 @@
 % Section 68(f) applies to Alice for the year 2014. Contradiction
 
 % Facts
-person(alice).
-person(bob).
+person(alice_s68_f_neg).
+person(bob_s68_f_neg).
 finance(310192).
 
 year(2014).
@@ -15,11 +15,11 @@ date_split("2014-01-01", 2014, 1, 1).
 date("2014-12-31").
 date_split("2014-12-31", 2014, 12, 31).
 
-income_(alice_is_paid).
-agent_(alice_is_paid,alice).
-start_(alice_is_paid,"2014-12-31").
-amount_(alice_is_paid,310192).
-s2_a(alice,bob,2014).
+income_(alice_is_paid_s68_f_neg).
+agent_(alice_is_paid_s68_f_neg,alice_s68_f_neg).
+start_(alice_is_paid_s68_f_neg,"2014-12-31").
+amount_(alice_is_paid_s68_f_neg,310192).
+s2_a(alice_s68_f_neg,bob_s68_f_neg,2014).
 
 % Test
 :- \+ s68_f(2014).

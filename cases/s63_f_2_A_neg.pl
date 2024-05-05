@@ -5,8 +5,8 @@
 % Section 63(f)(2)(A) applies to Bob in 2017. Contradiction
 
 % Facts
-person(alice).
-person(bob).
+person(alice_s63_f_2_A_neg).
+person(bob_s63_f_2_A_neg).
 finance(33200).
 
 year(2015).
@@ -26,18 +26,18 @@ date("2017-12-31").
 date_split("2017-12-31", 2017, 12, 31).
 
 
-payment_(alice_is_paid).
-patient_(alice_is_paid,alice).
-start_(alice_is_paid,"2017-12-31").
-amount_(alice_is_paid,33200).
-marriage_(alice_and_bob).
-agent_(alice_and_bob,alice).
-agent_(alice_and_bob,bob).
-start_(alice_and_bob,"2017-02-03").
-blindness_(alice_is_blind).
-agent_(alice_is_blind,alice).
-start_(alice_is_blind,"2015-04-19").
+payment_(alice_is_paid_s63_f_2_A_neg).
+patient_(alice_is_paid_s63_f_2_A_neg,alice_s63_f_2_A_neg).
+start_(alice_is_paid_s63_f_2_A_neg,"2017-12-31").
+amount_(alice_is_paid_s63_f_2_A_neg,33200).
+marriage_(alice_and_bob_s63_f_2_A_neg).
+agent_(alice_and_bob_s63_f_2_A_neg,alice_s63_f_2_A_neg).
+agent_(alice_and_bob_s63_f_2_A_neg,bob_s63_f_2_A_neg).
+start_(alice_and_bob_s63_f_2_A_neg,"2017-02-03").
+blindness_(alice_is_blind_s63_f_2_A_neg).
+agent_(alice_is_blind_s63_f_2_A_neg,alice_s63_f_2_A_neg).
+start_(alice_is_blind_s63_f_2_A_neg,"2015-04-19").
 
 % Test
-:- \+ s63_f_2_A(bob,2017).
+:- \+ s63_f_2_A(bob_s63_f_2_A_neg,2017).
 :- halt.

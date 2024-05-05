@@ -5,8 +5,8 @@
 % Section 3306(a)(2)(A) make Alice an employer for the year 2017. Contradiction
 
 % Facts
-person(alice).
-person(bob).
+person(alice_s3306_a_2_A_neg).
+person(bob_s3306_a_2_A_neg).
 
 year(2017).
 date("2017-02-01").
@@ -39,32 +39,32 @@ date_split("2018-12-31", 2018, 12, 31).
 finance(3200).
 finance(4520).
 
-service_(alice_employer).
-patient_(alice_employer,alice).
-agent_(alice_employer,bob).
-start_(alice_employer,"2017-02-01").
-end_(alice_employer,"2017-09-02").
-purpose_(alice_employer,"agricultural labor").
-payment_(alice_pays).
-agent_(alice_pays,alice).
-patient_(alice_pays,bob).
-start_(alice_pays,"2017-09-02").
-purpose_(alice_pays,alice_employer).
-amount_(alice_pays,3200).
-s3306_b(3200,alice_pays,alice_employer,alice,bob,alice,bob,"cash").
-service_(bob_employer).
-patient_(bob_employer,bob).
-agent_(bob_employer,alice).
-start_(bob_employer,"2017-04-01").
-end_(bob_employer,"2018-09-02").
-payment_(bob_pays).
-agent_(bob_pays,bob).
-patient_(bob_pays,alice).
-start_(bob_pays,"2018-09-02").
-purpose_(bob_pays,bob_employer).
-amount_(bob_pays,4520).
-s3306_b(4520,bob_pays,bob_employer,bob,alice,bob,alice,"cash").
+service_(alice_employer_s3306_a_2_A_neg).
+patient_(alice_employer_s3306_a_2_A_neg,alice_s3306_a_2_A_neg).
+agent_(alice_employer_s3306_a_2_A_neg,bob_s3306_a_2_A_neg).
+start_(alice_employer_s3306_a_2_A_neg,"2017-02-01").
+end_(alice_employer_s3306_a_2_A_neg,"2017-09-02").
+purpose_(alice_employer_s3306_a_2_A_neg,"agricultural labor").
+payment_(alice_pays_s3306_a_2_A_neg).
+agent_(alice_pays_s3306_a_2_A_neg,alice_s3306_a_2_A_neg).
+patient_(alice_pays_s3306_a_2_A_neg,bob_s3306_a_2_A_neg).
+start_(alice_pays_s3306_a_2_A_neg,"2017-09-02").
+purpose_(alice_pays_s3306_a_2_A_neg,alice_employer_s3306_a_2_A_neg).
+amount_(alice_pays_s3306_a_2_A_neg,3200).
+s3306_b(3200,alice_pays_s3306_a_2_A_neg,alice_employer_s3306_a_2_A_neg,alice_s3306_a_2_A_neg,bob_s3306_a_2_A_neg,alice_s3306_a_2_A_neg,bob_s3306_a_2_A_neg,"cash").
+service_(bob_employer_s3306_a_2_A_neg).
+patient_(bob_employer_s3306_a_2_A_neg,bob_s3306_a_2_A_neg).
+agent_(bob_employer_s3306_a_2_A_neg,alice_s3306_a_2_A_neg).
+start_(bob_employer_s3306_a_2_A_neg,"2017-04-01").
+end_(bob_employer_s3306_a_2_A_neg,"2018-09-02").
+payment_(bob_pays_s3306_a_2_A_neg).
+agent_(bob_pays_s3306_a_2_A_neg,bob_s3306_a_2_A_neg).
+patient_(bob_pays_s3306_a_2_A_neg,alice_s3306_a_2_A_neg).
+start_(bob_pays_s3306_a_2_A_neg,"2018-09-02").
+purpose_(bob_pays_s3306_a_2_A_neg,bob_employer_s3306_a_2_A_neg).
+amount_(bob_pays_s3306_a_2_A_neg,4520).
+s3306_b(4520,bob_pays_s3306_a_2_A_neg,bob_employer_s3306_a_2_A_neg,bob_s3306_a_2_A_neg,alice_s3306_a_2_A_neg,bob_s3306_a_2_A_neg,alice_s3306_a_2_A_neg,"cash").
 
 % Test
-:- \+ s3306_a_2_A(alice,2017,3200,alice_employer).
+:- \+ s3306_a_2_A(alice_s3306_a_2_A_neg,2017,3200,alice_employer_s3306_a_2_A_neg).
 :- halt.

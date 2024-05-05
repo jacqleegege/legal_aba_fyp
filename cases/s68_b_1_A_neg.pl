@@ -5,10 +5,11 @@
 % Section 68(b)(1)(A) applies to Alice for 2016. Contradiction
 
 % Facts
-person(alice).
-person(bob).
-marriage_(alice_and_bob).
+person(alice_s68_b_1_A_neg).
+person(bob_s68_b_1_A_neg).
+marriage_(alice_and_bob_s68_b_1_A_neg).
 finance(567192).
+finance(300000).
 
 year(2016).
 date("2016-01-01").
@@ -16,13 +17,13 @@ date_split("2016-01-01", 2016, 1, 1).
 date("2016-12-31").
 date_split("2016-12-31", 2016, 12, 31).
 
-income_(alice_is_paid).
-agent_(alice_is_paid,alice).
-start_(alice_is_paid,"2016-12-31").
-amount_(alice_is_paid,567192).
-s7703(alice,bob,alice_and_bob,2016).
+income_(alice_is_paid_s68_b_1_A_neg).
+agent_(alice_is_paid_s68_b_1_A_neg,alice_s68_b_1_A_neg).
+start_(alice_is_paid_s68_b_1_A_neg,"2016-12-31").
+amount_(alice_is_paid_s68_b_1_A_neg,567192).
+s7703(alice_s68_b_1_A_neg,bob_s68_b_1_A_neg,alice_and_bob_s68_b_1_A_neg,2016).
 joint_return_(random_joint_return).
 
 % Test
-:- \+ s68_b_1_A(alice,random_joint_return,bob,300000,2016).
+:- \+ s68_b_1_A(alice_s68_b_1_A_neg,random_joint_return,bob_s68_b_1_A_neg,300000,2016).
 :- halt.

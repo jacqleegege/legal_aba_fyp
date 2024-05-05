@@ -5,10 +5,10 @@
 % Section 2(b)(1)(A)(ii) applies to Charlie as the dependent in 2017. Contradiction
 
 % Facts
-person(alice).
-person(bob).
-person(charlie).
-person(spouse).
+person(alice_s2_b_1_A_ii_neg).
+person(bob_s2_b_1_A_ii_neg).
+person(charlie_s2_b_1_A_ii_neg).
+person(spouse_s2_b_1_A_ii_neg).
 
 year(1992).
 date("1992-02-03").
@@ -146,49 +146,49 @@ atom_concat('bob_maintains_household_',2019,bob_maintains_household_2019).
 finance(312489).
 finance(1).
 
-marriage_(alice_and_bob).
-agent_(alice_and_bob,alice).
-agent_(alice_and_bob,bob).
-start_(alice_and_bob,"1992-02-03").
-death_(alice_dies).
-agent_(alice_dies,alice).
-start_(alice_dies,"2014-07-09").
-end_(alice_dies,"2014-07-09").
-son_(charlie_is_brother).
-agent_(charlie_is_brother,charlie).
-patient_(charlie_is_brother,bob).
-start_(charlie_is_brother,"2000-10-09").
-residence_(charlie_and_bob_residence).
-agent_(charlie_and_bob_residence,charlie).
-agent_(charlie_and_bob_residence,bob).
-patient_(charlie_and_bob_residence,bob_s_house).
-start_(charlie_and_bob_residence,"2004-01-01").
-end_(charlie_and_bob_residence,"2019-12-31").
+marriage_(alice_and_bob_s2_b_1_A_ii_neg).
+agent_(alice_and_bob_s2_b_1_A_ii_neg,alice_s2_b_1_A_ii_neg).
+agent_(alice_and_bob_s2_b_1_A_ii_neg,bob_s2_b_1_A_ii_neg).
+start_(alice_and_bob_s2_b_1_A_ii_neg,"1992-02-03").
+death_(alice_dies_s2_b_1_A_ii_neg).
+agent_(alice_dies_s2_b_1_A_ii_neg,alice_s2_b_1_A_ii_neg).
+start_(alice_dies_s2_b_1_A_ii_neg,"2014-07-09").
+end_(alice_dies_s2_b_1_A_ii_neg,"2014-07-09").
+son_(charlie_is_brother_s2_b_1_A_ii_neg).
+agent_(charlie_is_brother_s2_b_1_A_ii_neg,charlie_s2_b_1_A_ii_neg).
+patient_(charlie_is_brother_s2_b_1_A_ii_neg,bob_s2_b_1_A_ii_neg).
+start_(charlie_is_brother_s2_b_1_A_ii_neg,"2000-10-09").
+residence_(charlie_and_bob_residence_s2_b_1_A_ii_neg).
+agent_(charlie_and_bob_residence_s2_b_1_A_ii_neg,charlie_s2_b_1_A_ii_neg).
+agent_(charlie_and_bob_residence_s2_b_1_A_ii_neg,bob_s2_b_1_A_ii_neg).
+patient_(charlie_and_bob_residence_s2_b_1_A_ii_neg,bob_s_house_s2_b_1_A_ii_neg).
+start_(charlie_and_bob_residence_s2_b_1_A_ii_neg,"2004-01-01").
+end_(charlie_and_bob_residence_s2_b_1_A_ii_neg,"2019-12-31").
 bob_household_maintenance(Year,Event,Start_day,End_day) :-
     between(2004,2019,Year),
     atom_concat('bob_maintains_household_',Year,Event),
     first_day_year(Year,Start_day),
     last_day_year(Year,End_day).
 payment_(Event) :- bob_household_maintenance(_,Event,_,_).
-agent_(Event,bob) :- bob_household_maintenance(_,Event,_,_).
+agent_(Event,bob_s2_b_1_A_ii_neg) :- bob_household_maintenance(_,Event,_,_).
 amount_(Event,1) :- bob_household_maintenance(_,Event,_,_).
-purpose_(Event,bob_s_house) :- bob_household_maintenance(_,Event,_,_).
+purpose_(Event,bob_s_house_s2_b_1_A_ii_neg) :- bob_household_maintenance(_,Event,_,_).
 start_(Event,Start_day) :- bob_household_maintenance(_,Event,Start_day,_).
 end_(Event,End_day) :- bob_household_maintenance(_,Event,_,End_day).
-income_(charlie_makes_money).
-agent_(charlie_makes_money,charlie).
-amount_(charlie_makes_money,312489).
-start_(charlie_makes_money,"2017-12-31").
-marriage_(charlie_marriage).
-agent_(charlie_marriage,charlie).
-agent_(charlie_marriage,spouse).
-start_(charlie_marriage,"2016-12-01").
-joint_return_(charlie_and_spouse_joint_return).
-agent_(charlie_and_spouse_joint_return,charlie).
-agent_(charlie_and_spouse_joint_return,spouse).
-start_(charlie_and_spouse_joint_return,"2017-01-01").
-end_(charlie_and_spouse_joint_return,"2017-12-31").
+income_(charlie_makes_money_s2_b_1_A_ii_neg).
+agent_(charlie_makes_money_s2_b_1_A_ii_neg,charlie_s2_b_1_A_ii_neg).
+amount_(charlie_makes_money_s2_b_1_A_ii_neg,312489).
+start_(charlie_makes_money_s2_b_1_A_ii_neg,"2017-12-31").
+marriage_(charlie_marriage_s2_b_1_A_ii_neg).
+agent_(charlie_marriage_s2_b_1_A_ii_neg,charlie_s2_b_1_A_ii_neg).
+agent_(charlie_marriage_s2_b_1_A_ii_neg,spouse_s2_b_1_A_ii_neg).
+start_(charlie_marriage_s2_b_1_A_ii_neg,"2016-12-01").
+joint_return_(charlie_and_spouse_joint_return_s2_b_1_A_ii_neg).
+agent_(charlie_and_spouse_joint_return_s2_b_1_A_ii_neg,charlie_s2_b_1_A_ii_neg).
+agent_(charlie_and_spouse_joint_return_s2_b_1_A_ii_neg,spouse_s2_b_1_A_ii_neg).
+start_(charlie_and_spouse_joint_return_s2_b_1_A_ii_neg,"2017-01-01").
+end_(charlie_and_spouse_joint_return_s2_b_1_A_ii_neg,"2017-12-31").
 
 % Test
-:- \+ s2_b_1_A_ii(bob,charlie,2017).
+:- \+ s2_b_1_A_ii(bob_s2_b_1_A_ii_neg,charlie_s2_b_1_A_ii_neg,2017).
 :- halt.

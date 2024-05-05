@@ -5,10 +5,10 @@
 % Section 3306(a)(2)(A) make Alice an employer for the year 2017. Entailment
 
 % Facts
-person(alice).
-person(bob).
-person(charlie).
-person(dan).
+person(alice_s3306_a_2_A_pos).
+person(bob_s3306_a_2_A_pos).
+person(charlie_s3306_a_2_A_pos).
+person(dan_s3306_a_2_A_pos).
 
 year(2017).
 date("2017-02-01").
@@ -34,60 +34,61 @@ finance(4520).
 finance(6771).
 finance(6954).
 finance(6872).
+medium("cash").
 
-service_(alice_employer_bob).
-patient_(alice_employer_bob,alice).
-agent_(alice_employer_bob,bob).
-start_(alice_employer_bob,"2017-02-01").
-end_(alice_employer_bob,"2017-09-02").
-purpose_(alice_employer_bob,"agricultural labor").
-payment_(alice_pays_bob).
-agent_(alice_pays_bob,alice).
-patient_(alice_pays_bob,bob).
-start_(alice_pays_bob,"2017-09-02").
-purpose_(alice_pays_bob,alice_employer_bob).
-amount_(alice_pays_bob,6771).
-s3306_b(6771,alice_pays_bob,alice_employer_bob,alice,bob,alice,bob,_).
-service_(alice_employer_charlie).
-patient_(alice_employer_charlie,alice).
-agent_(alice_employer_charlie,charlie).
-start_(alice_employer_charlie,"2017-02-01").
-end_(alice_employer_charlie,"2017-09-02").
-purpose_(alice_employer_charlie,"agricultural labor").
-payment_(alice_pays_charlie).
-agent_(alice_pays_charlie,alice).
-patient_(alice_pays_charlie,charlie).
-start_(alice_pays_charlie,"2017-09-02").
-purpose_(alice_pays_charlie,alice_employer_charlie).
-amount_(alice_pays_charlie,6954).
-s3306_b(6954,alice_pays_charlie,alice_employer_charlie,alice,charlie,alice,charlie,_).
-service_(alice_employer_dan).
-patient_(alice_employer_dan,alice).
-agent_(alice_employer_dan,dan).
-start_(alice_employer_dan,"2017-02-01").
-end_(alice_employer_dan,"2017-09-02").
-purpose_(alice_employer_dan,"agricultural labor").
-payment_(alice_pays_dan).
-agent_(alice_pays_dan,alice).
-patient_(alice_pays_dan,dan).
-start_(alice_pays_dan,"2017-09-02").
-purpose_(alice_pays_dan,alice_employer_dan).
-amount_(alice_pays_dan,6872).
-s3306_b(6872,alice_pays_dan,alice_employer_dan,alice,dan,alice,dan,_).
-service_(bob_employer).
-patient_(bob_employer,bob).
-agent_(bob_employer,alice).
-start_(bob_employer,"2017-04-01").
-end_(bob_employer,"2018-09-02").
-payment_(bob_pays).
-agent_(bob_pays,bob).
-patient_(bob_pays,alice).
-start_(bob_pays,"2018-09-02").
-end_(bob_pays,"2018-09-02").
-purpose_(bob_pays,bob_employer).
-amount_(bob_pays,4520).
-s3306_b(4520,bob_pays,bob_employer,bob,alice,bob,alice,"cash").
+service_(alice_employer_bob_s3306_a_2_A_pos).
+patient_(alice_employer_bob_s3306_a_2_A_pos,alice_s3306_a_2_A_pos).
+agent_(alice_employer_bob_s3306_a_2_A_pos,bob_s3306_a_2_A_pos).
+start_(alice_employer_bob_s3306_a_2_A_pos,"2017-02-01").
+end_(alice_employer_bob_s3306_a_2_A_pos,"2017-09-02").
+purpose_(alice_employer_bob_s3306_a_2_A_pos,"agricultural labor").
+payment_(alice_pays_bob_s3306_a_2_A_pos).
+agent_(alice_pays_bob_s3306_a_2_A_pos,alice_s3306_a_2_A_pos).
+patient_(alice_pays_bob_s3306_a_2_A_pos,bob_s3306_a_2_A_pos).
+start_(alice_pays_bob_s3306_a_2_A_pos,"2017-09-02").
+purpose_(alice_pays_bob_s3306_a_2_A_pos,alice_employer_bob_s3306_a_2_A_pos).
+amount_(alice_pays_bob_s3306_a_2_A_pos,6771).
+s3306_b(6771,alice_pays_bob_s3306_a_2_A_pos,alice_employer_bob_s3306_a_2_A_pos,alice_s3306_a_2_A_pos,bob_s3306_a_2_A_pos,alice_s3306_a_2_A_pos,bob_s3306_a_2_A_pos,"cash").
+service_(alice_employer_charlie_s3306_a_2_A_pos).
+patient_(alice_employer_charlie_s3306_a_2_A_pos,alice_s3306_a_2_A_pos).
+agent_(alice_employer_charlie_s3306_a_2_A_pos,charlie_s3306_a_2_A_pos).
+start_(alice_employer_charlie_s3306_a_2_A_pos,"2017-02-01").
+end_(alice_employer_charlie_s3306_a_2_A_pos,"2017-09-02").
+purpose_(alice_employer_charlie_s3306_a_2_A_pos,"agricultural labor").
+payment_(alice_pays_charlie_s3306_a_2_A_pos).
+agent_(alice_pays_charlie_s3306_a_2_A_pos,alice_s3306_a_2_A_pos).
+patient_(alice_pays_charlie_s3306_a_2_A_pos,charlie_s3306_a_2_A_pos).
+start_(alice_pays_charlie_s3306_a_2_A_pos,"2017-09-02").
+purpose_(alice_pays_charlie_s3306_a_2_A_pos,alice_employer_charlie_s3306_a_2_A_pos).
+amount_(alice_pays_charlie_s3306_a_2_A_pos,6954).
+s3306_b(6954,alice_pays_charlie_s3306_a_2_A_pos,alice_employer_charlie_s3306_a_2_A_pos,alice_s3306_a_2_A_pos,charlie_s3306_a_2_A_pos,alice_s3306_a_2_A_pos,charlie_s3306_a_2_A_pos,_).
+service_(alice_employer_dan_s3306_a_2_A_pos).
+patient_(alice_employer_dan_s3306_a_2_A_pos,alice_s3306_a_2_A_pos).
+agent_(alice_employer_dan_s3306_a_2_A_pos,dan_s3306_a_2_A_pos).
+start_(alice_employer_dan_s3306_a_2_A_pos,"2017-02-01").
+end_(alice_employer_dan_s3306_a_2_A_pos,"2017-09-02").
+purpose_(alice_employer_dan_s3306_a_2_A_pos,"agricultural labor").
+payment_(alice_pays_dan_s3306_a_2_A_pos).
+agent_(alice_pays_dan_s3306_a_2_A_pos,alice_s3306_a_2_A_pos).
+patient_(alice_pays_dan_s3306_a_2_A_pos,dan_s3306_a_2_A_pos).
+start_(alice_pays_dan_s3306_a_2_A_pos,"2017-09-02").
+purpose_(alice_pays_dan_s3306_a_2_A_pos,alice_employer_dan_s3306_a_2_A_pos).
+amount_(alice_pays_dan_s3306_a_2_A_pos,6872).
+s3306_b(6872,alice_pays_dan_s3306_a_2_A_pos,alice_employer_dan_s3306_a_2_A_pos,alice_s3306_a_2_A_pos,dan_s3306_a_2_A_pos,alice_s3306_a_2_A_pos,dan_s3306_a_2_A_pos,_).
+service_(bob_employer_s3306_a_2_A_pos).
+patient_(bob_employer_s3306_a_2_A_pos,bob_s3306_a_2_A_pos).
+agent_(bob_employer_s3306_a_2_A_pos,alice_s3306_a_2_A_pos).
+start_(bob_employer_s3306_a_2_A_pos,"2017-04-01").
+end_(bob_employer_s3306_a_2_A_pos,"2018-09-02").
+payment_(bob_pays_s3306_a_2_A_pos).
+agent_(bob_pays_s3306_a_2_A_pos,bob_s3306_a_2_A_pos).
+patient_(bob_pays_s3306_a_2_A_pos,alice_s3306_a_2_A_pos).
+start_(bob_pays_s3306_a_2_A_pos,"2018-09-02").
+end_(bob_pays_s3306_a_2_A_pos,"2018-09-02").
+purpose_(bob_pays_s3306_a_2_A_pos,bob_employer_s3306_a_2_A_pos).
+amount_(bob_pays_s3306_a_2_A_pos,4520).
+s3306_b(4520,bob_pays_s3306_a_2_A_pos,bob_employer_s3306_a_2_A_pos,bob_s3306_a_2_A_pos,alice_s3306_a_2_A_pos,bob_s3306_a_2_A_pos,alice_s3306_a_2_A_pos,"cash").
 
 % Test
-:- s3306_a_2_A(alice,2017,6771,alice_employer_bob),s3306_a_2_A(alice,2017,6954,alice_employer_charlie),s3306_a_2_A(alice,2017,6872,alice_employer_dan).
+:- s3306_a_2_A(alice_s3306_a_2_A_pos,2017,6771,alice_employer_bob_s3306_a_2_A_pos),s3306_a_2_A(alice_s3306_a_2_A_pos,2017,6954,alice_employer_charlie_s3306_a_2_A_pos),s3306_a_2_A(alice_s3306_a_2_A_pos,2017,6872,alice_employer_dan_s3306_a_2_A_pos).
 :- halt.

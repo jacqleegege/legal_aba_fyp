@@ -5,8 +5,8 @@
 % Alice bears a relationship to Bob under section 152(d)(2)(H) for the year 2018. Entailment
 
 % Facts
-person(alice).
-person(bob).
+person(alice_s152_d_2_H_pos).
+person(bob_s152_d_2_H_pos).
 
 year(2014).
 date("2014-04-15").
@@ -22,12 +22,16 @@ date_split("2018-01-01", 2018, 1, 1).
 date("2018-12-31").
 date_split("2018-12-31", 2018, 12, 31).
 
-residence_(alice_and_bob).
-agent_(alice_and_bob,alice).
-agent_(alice_and_bob,bob).
-start_(alice_and_bob,"2014-04-15").
-patient_(alice_and_bob,home).
+year(2100).
+date("2100-01-01").
+date_split("2100-01-01", 2100, 1, 1).
+
+residence_(alice_and_bob_s152_d_2_H_pos).
+agent_(alice_and_bob_s152_d_2_H_pos,alice_s152_d_2_H_pos).
+agent_(alice_and_bob_s152_d_2_H_pos,bob_s152_d_2_H_pos).
+start_(alice_and_bob_s152_d_2_H_pos,"2014-04-15").
+patient_(alice_and_bob_s152_d_2_H_pos,home_s152_d_2_H_pos).
 
 % Test
-:- s152_d_2_H(alice,bob,2018,home,"2014-04-15","2100-01-01").
+:- s152_d_2_H(alice_s152_d_2_H_pos,bob_s152_d_2_H_pos,2018,home_s152_d_2_H_pos,"2014-04-15","2100-01-01").
 :- halt.

@@ -5,7 +5,7 @@
 % Section 3306(c)(6) applies to Alice's employment situation in 2017. Entailment
 
 % Facts
-person(alice).
+person(alice_s3306_c_6_pos).
 
 year(2017).
 date("2017-01-01").
@@ -19,21 +19,21 @@ location_name("usa").
 
 finance(73200).
 
-service_(alice_employed).
-patient_(alice_employed,"united states government").
-agent_(alice_employed,alice).
-start_(alice_employed,"2017-01-01").
-end_(alice_employed,"2017-12-31").
-location_(alice_employed,"arlington").
-location_(alice_employed,"virginia").
-location_(alice_employed,"usa").
-payment_(alice_is_paid).
-agent_(alice_is_paid,"united states government").
-patient_(alice_is_paid,alice).
-start_(alice_is_paid,"2017-12-31").
-purpose_(alice_is_paid,alice_employed).
-amount_(alice_is_paid,73200).
+service_(alice_employed_s3306_c_6_pos).
+patient_(alice_employed_s3306_c_6_pos,"united states government").
+agent_(alice_employed_s3306_c_6_pos,alice_s3306_c_6_pos).
+start_(alice_employed_s3306_c_6_pos,"2017-01-01").
+end_(alice_employed_s3306_c_6_pos,"2017-12-31").
+location_(alice_employed_s3306_c_6_pos,"arlington").
+location_(alice_employed_s3306_c_6_pos,"virginia").
+location_(alice_employed_s3306_c_6_pos,"usa").
+payment_(alice_is_paid_s3306_c_6_pos).
+agent_(alice_is_paid_s3306_c_6_pos,"united states government").
+patient_(alice_is_paid_s3306_c_6_pos,alice_s3306_c_6_pos).
+start_(alice_is_paid_s3306_c_6_pos,"2017-12-31").
+purpose_(alice_is_paid_s3306_c_6_pos,alice_employed_s3306_c_6_pos).
+amount_(alice_is_paid_s3306_c_6_pos,73200).
 
 % Test
-:- s3306_c_6(alice_employed).
+:- s3306_c_6(alice_employed_s3306_c_6_pos).
 :- halt.

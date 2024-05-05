@@ -6,8 +6,9 @@
 
 % Facts
 
-person(alice).
-person(bob).
+person(alice_s151_b_pos).
+person(bob_s151_b_pos).
+person(2000).
 
 year(2015).
 date("2015-02-02").
@@ -17,11 +18,11 @@ date_split("2015-01-01", 2015, 1, 1).
 date("2015-12-31").
 date_split("2015-12-31", 2015, 12, 31).
 
-marriage_(alice_and_bob).
-agent_(alice_and_bob,alice).
-agent_(alice_and_bob,bob).
-start_(alice_and_bob,"2015-02-02").
+marriage_(alice_and_bob_s151_b_pos).
+agent_(alice_and_bob_s151_b_pos,alice_s151_b_pos).
+agent_(alice_and_bob_s151_b_pos,bob_s151_b_pos).
+start_(alice_and_bob_s151_b_pos,"2015-02-02").
 
 % Test
-:- s151_b(alice,bob,2,000,2015).
+:- s151_b(alice_s151_b_pos,bob_s151_b_pos,2000,2015).
 :- halt.

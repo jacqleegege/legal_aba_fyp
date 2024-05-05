@@ -5,22 +5,24 @@
 % Alice and her spouse have to pay $247647 in taxes for the year 2017 under section 1(a)(v). Entailment
 
 % Facts
-person(alice).
-person(spouse).
+person(alice_s1_a_1_v_pos).
+person(spouse_s1_a_1_v_pos).
 year(2017).
 date("2017-01-01").
 date("2017-12-31").
 date_split("2017-01-01",2017,1,1).
 date_split("2017-12-31",2017,12,31).
 finance(684642).
-marriage_(alice_and_spouse).
-s7703(alice,spouse,alice_and_spouse,2017).
-joint_return_(joint_return).
-agent_(joint_return,alice).
-agent_(joint_return,spouse).
-start_(joint_return,"2017-01-01").
-end_(joint_return,"2017-12-31").
-s63(alice,2017,684642).
+finance(247647).
+
+marriage_(alice_and_spouse_s1_a_1_v_pos).
+s7703(alice_s1_a_1_v_pos,spouse_s1_a_1_v_pos,alice_and_spouse_s1_a_1_v_pos,2017).
+joint_return_(joint_return_s1_a_1_v_pos).
+agent_(joint_return_s1_a_1_v_pos,alice_s1_a_1_v_pos).
+agent_(joint_return_s1_a_1_v_pos,spouse_s1_a_1_v_pos).
+start_(joint_return_s1_a_1_v_pos,"2017-01-01").
+end_(joint_return_s1_a_1_v_pos,"2017-12-31").
+s63(alice_s1_a_1_v_pos,2017,684642).
 
 % Test
 :- s1_a_v(684642,247647).

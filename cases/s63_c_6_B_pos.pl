@@ -5,8 +5,8 @@
 % Section 63(c)(6)(B) applies to Alice for 2017. Entailment
 
 % Facts
-person(alice).
-person(bob).
+person(alice_s63_c_6_B_pos).
+person(bob_s63_c_6_B_pos).
 
 year(2016).
 date("2016-08-15").
@@ -32,19 +32,19 @@ date_split("2018-12-31",2018,12,31).
 
 finance(33200).
 
-payment_(alice_is_paid).
-patient_(alice_is_paid,alice).
-start_(alice_is_paid,"2017-12-31").
-amount_(alice_is_paid,33200).
-marriage_(alice_and_bob).
-agent_(alice_and_bob,alice).
-agent_(alice_and_bob,bob).
-start_(alice_and_bob,"2017-02-03").
-nonresident_alien_(alice_is_a_nra).
-agent_(alice_is_a_nra,alice).
-start_(alice_is_a_nra,"2016-08-23").
-end_(alice_is_a_nra,"2018-08-15").
+payment_(alice_is_paid_s63_c_6_B_pos).
+patient_(alice_is_paid_s63_c_6_B_pos,alice_s63_c_6_B_pos).
+start_(alice_is_paid_s63_c_6_B_pos,"2017-12-31").
+amount_(alice_is_paid_s63_c_6_B_pos,33200).
+marriage_(alice_and_bob_s63_c_6_B_pos).
+agent_(alice_and_bob_s63_c_6_B_pos,alice_s63_c_6_B_pos).
+agent_(alice_and_bob_s63_c_6_B_pos,bob_s63_c_6_B_pos).
+start_(alice_and_bob_s63_c_6_B_pos,"2017-02-03").
+nonresident_alien_(alice_is_a_nra_s63_c_6_B_pos).
+agent_(alice_is_a_nra_s63_c_6_B_pos,alice_s63_c_6_B_pos).
+start_(alice_is_a_nra_s63_c_6_B_pos,"2016-08-23").
+end_(alice_is_a_nra_s63_c_6_B_pos,"2018-08-15").
 
 % Test
-:- s63_c_6_B(alice,2017).
+:- s63_c_6_B(alice_s63_c_6_B_pos,2017).
 :- halt.

@@ -6,10 +6,10 @@
 
 % Facts
 
-person(alice).
-person(bob).
-person(charlie).
-person(dan).
+person(alice_s2_b_1_A_i_II_pos).
+person(bob_s2_b_1_A_i_II_pos).
+person(charlie_s2_b_1_A_i_II_pos).
+person(dan_s2_b_1_A_i_II_pos).
 
 year(1992).
 date("1992-02-03").
@@ -146,45 +146,45 @@ atom_concat('bob_maintains_household_',2019,bob_maintains_household_2019).
 
 finance(1).
 
-marriage_(alice_and_bob).
-agent_(alice_and_bob,alice).
-agent_(alice_and_bob,bob).
-start_(alice_and_bob,"1992-02-03").
-death_(alice_dies).
-agent_(alice_dies,alice).
-start_(alice_dies,"2014-07-09").
-end_(alice_dies,"2014-07-09").
-son_(charlie_is_son).
-agent_(charlie_is_son,charlie).
-patient_(charlie_is_son,alice).
-patient_(charlie_is_son,bob).
-start_(charlie_is_son,"2000-10-09").
-residence_(charlie_and_bob_residence).
-agent_(charlie_and_bob_residence,charlie).
-agent_(charlie_and_bob_residence,bob).
-patient_(charlie_and_bob_residence,bob_s_house).
-start_(charlie_and_bob_residence,"2004-01-01").
-end_(charlie_and_bob_residence,"2019-12-31").
+marriage_(alice_and_bob_s2_b_1_A_i_II_pos).
+agent_(alice_and_bob_s2_b_1_A_i_II_pos,alice_s2_b_1_A_i_II_pos).
+agent_(alice_and_bob_s2_b_1_A_i_II_pos,bob_s2_b_1_A_i_II_pos).
+start_(alice_and_bob_s2_b_1_A_i_II_pos,"1992-02-03").
+death_(alice_dies_s2_b_1_A_i_II_pos).
+agent_(alice_dies_s2_b_1_A_i_II_pos,alice_s2_b_1_A_i_II_pos).
+start_(alice_dies_s2_b_1_A_i_II_pos,"2014-07-09").
+end_(alice_dies_s2_b_1_A_i_II_pos,"2014-07-09").
+son_(charlie_is_son_s2_b_1_A_i_II_pos).
+agent_(charlie_is_son_s2_b_1_A_i_II_pos,charlie_s2_b_1_A_i_II_pos).
+patient_(charlie_is_son_s2_b_1_A_i_II_pos,alice_s2_b_1_A_i_II_pos).
+patient_(charlie_is_son_s2_b_1_A_i_II_pos,bob_s2_b_1_A_i_II_pos).
+start_(charlie_is_son_s2_b_1_A_i_II_pos,"2000-10-09").
+residence_(charlie_and_bob_residence_s2_b_1_A_i_II_pos).
+agent_(charlie_and_bob_residence_s2_b_1_A_i_II_pos,charlie_s2_b_1_A_i_II_pos).
+agent_(charlie_and_bob_residence_s2_b_1_A_i_II_pos,bob_s2_b_1_A_i_II_pos).
+patient_(charlie_and_bob_residence_s2_b_1_A_i_II_pos,bob_s_house_s2_b_1_A_i_II_pos).
+start_(charlie_and_bob_residence_s2_b_1_A_i_II_pos,"2004-01-01").
+end_(charlie_and_bob_residence_s2_b_1_A_i_II_pos,"2019-12-31").
 bob_household_maintenance(Year,Event,Start_day,End_day) :-
     between(2004,2019,Year),
     atom_concat('bob_maintains_household_',Year,Event),
     first_day_year(Year,Start_day),
     last_day_year(Year,End_day).
 payment_(Event) :- bob_household_maintenance(_,Event,_,_).
-agent_(Event,bob) :- bob_household_maintenance(_,Event,_,_).
+agent_(Event,bob_s2_b_1_A_i_II_pos) :- bob_household_maintenance(_,Event,_,_).
 amount_(Event,1) :- bob_household_maintenance(_,Event,_,_).
-purpose_(Event,bob_s_house) :- bob_household_maintenance(_,Event,_,_).
+purpose_(Event,bob_s_house_s2_b_1_A_i_II_pos) :- bob_household_maintenance(_,Event,_,_).
 start_(Event,Start_day) :- bob_household_maintenance(_,Event,Start_day,_).
 end_(Event,End_day) :- bob_household_maintenance(_,Event,_,End_day).
-joint_return_(s21).
-agent_(s21,charlie).
-agent_(s21,bob).
-marriage_(charlie_and_dan).
-agent_(charlie_and_dan,dan).
-agent_(charlie_and_dan,charlie).
-start_(charlie_and_dan,"2018-02-14").
-s152_b_2(charlie,s21,bob,2018).
+joint_return_(s21_s2_b_1_A_i_II_pos).
+agent_(s21_s2_b_1_A_i_II_pos,charlie_s2_b_1_A_i_II_pos).
+agent_(s21_s2_b_1_A_i_II_pos,bob_s2_b_1_A_i_II_pos).
+marriage_(charlie_and_dan_s2_b_1_A_i_II_pos).
+agent_(charlie_and_dan_s2_b_1_A_i_II_pos,dan_s2_b_1_A_i_II_pos).
+agent_(charlie_and_dan_s2_b_1_A_i_II_pos,charlie_s2_b_1_A_i_II_pos).
+start_(charlie_and_dan_s2_b_1_A_i_II_pos,"2018-02-14").
+s152_b_2(charlie_s2_b_1_A_i_II_pos,s21_s2_b_1_A_i_II_pos,bob_s2_b_1_A_i_II_pos,2018).
 
 % Test
-:- s2_b_1_A_i_II(charlie,bob,2018).
+:- s2_b_1_A_i_II(charlie_s2_b_1_A_i_II_pos,bob_s2_b_1_A_i_II_pos,2018).
 :- halt.

@@ -5,9 +5,9 @@
 % Alice bears a relationship to Charlie under section 152(d)(2)(G) for the year 2018. Entailment
 
 % Facts
-person(alice).
-person(bob).
-person(charlie).
+person(alice_s152_d_2_G_pos).
+person(bob_s152_d_2_G_pos).
+person(charlie_s152_d_2_G_pos).
 
 year(2014).
 date("2014-04-15").
@@ -31,19 +31,23 @@ date_split("2018-01-01", 2018, 1, 1).
 date("2018-12-31").
 date_split("2018-12-31", 2018, 12, 31).
 
-father_(charlie_and_bob).
-agent_(charlie_and_bob,charlie).
-patient_(charlie_and_bob,bob).
-start_(charlie_and_bob,"2014-04-15").
-marriage_(alice_and_bob).
-agent_(alice_and_bob,alice).
-agent_(alice_and_bob,bob).
-start_(alice_and_bob,"1992-10-12").
+year(2100).
+date("2100-01-01").
+date_split("2100-01-01", 2100, 1, 1).
+
+father_(charlie_and_bob_s152_d_2_G_pos).
+agent_(charlie_and_bob_s152_d_2_G_pos,charlie_s152_d_2_G_pos).
+patient_(charlie_and_bob_s152_d_2_G_pos,bob_s152_d_2_G_pos).
+start_(charlie_and_bob_s152_d_2_G_pos,"2014-04-15").
+marriage_(alice_and_bob_s152_d_2_G_pos).
+agent_(alice_and_bob_s152_d_2_G_pos,alice_s152_d_2_G_pos).
+agent_(alice_and_bob_s152_d_2_G_pos,bob_s152_d_2_G_pos).
+start_(alice_and_bob_s152_d_2_G_pos,"1992-10-12").
 % pos_s152_d_2_G():-
 %     s152_d_2_G(alice,charlie,Start_relationship,End_relationship),
 %     first_day_year(2018,First_day),
 %     is_before(Start_relationship,First_day).
 
 % Test
-:- s152_d_2_G(alice,charlie,"2014-04-15","2100-01-01").
+:- s152_d_2_G(alice_s152_d_2_G_pos,charlie_s152_d_2_G_pos,"2014-04-15","2100-01-01").
 :- halt.

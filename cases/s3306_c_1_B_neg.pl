@@ -5,8 +5,8 @@
 % Section 3306(c)(1)(B) applies to Alice employing Bob for the year 2017. Contradiction
 
 % Facts
-person(alice).
-person(bob).
+person(alice_s3306_c_1_B_neg).
+person(bob_s3306_c_1_B_neg).
 
 year(2017).
 date("2017-01-01").
@@ -23,31 +23,31 @@ country_name("usa").
 
 finance(3200).
 
-service_(alice_employer).
-patient_(alice_employer,alice).
-agent_(alice_employer,bob).
-start_(alice_employer,"2017-02-01").
-end_(alice_employer,"2017-09-02").
-location_(alice_employer,"stanley, wisconsin, usa").
+service_(alice_employer_s3306_c_1_B_neg).
+patient_(alice_employer_s3306_c_1_B_neg,alice_s3306_c_1_B_neg).
+agent_(alice_employer_s3306_c_1_B_neg,bob_s3306_c_1_B_neg).
+start_(alice_employer_s3306_c_1_B_neg,"2017-02-01").
+end_(alice_employer_s3306_c_1_B_neg,"2017-09-02").
+location_(alice_employer_s3306_c_1_B_neg,"stanley, wisconsin, usa").
 country_("stanley, wisconsin, usa","usa").
-purpose_(alice_employer,"agricultural labor").
-payment_(alice_pays).
-agent_(alice_pays,alice).
-patient_(alice_pays,bob).
-start_(alice_pays,"2017-09-02").
-purpose_(alice_pays,alice_employer).
-amount_(alice_pays,3200).
-citizenship_(alice_is_american).
-agent_(alice_is_american,alice).
-patient_(alice_is_american,"usa").
-citizenship_(bob_is_mexican).
-agent_(bob_is_mexican,bob).
-patient_(bob_is_mexican,mexico).
-migration_(bob_migrates_to_usa).
-destination_(bob_migrates_to_usa,"usa").
-agent_(bob_migrates_to_usa,bob).
-purpose_(bob_migrates_to_usa,"agricultural labor").
+purpose_(alice_employer_s3306_c_1_B_neg,"agricultural labor").
+payment_(alice_pays_s3306_c_1_B_neg).
+agent_(alice_pays_s3306_c_1_B_neg,alice_s3306_c_1_B_neg).
+patient_(alice_pays_s3306_c_1_B_neg,bob_s3306_c_1_B_neg).
+start_(alice_pays_s3306_c_1_B_neg,"2017-09-02").
+purpose_(alice_pays_s3306_c_1_B_neg,alice_employer_s3306_c_1_B_neg).
+amount_(alice_pays_s3306_c_1_B_neg,3200).
+citizenship_(alice_is_american_s3306_c_1_B_neg).
+agent_(alice_is_american_s3306_c_1_B_neg,alice_s3306_c_1_B_neg).
+patient_(alice_is_american_s3306_c_1_B_neg,"usa").
+citizenship_(bob_is_mexican_s3306_c_1_B_neg).
+agent_(bob_is_mexican_s3306_c_1_B_neg,bob_s3306_c_1_B_neg).
+patient_(bob_is_mexican_s3306_c_1_B_neg,mexico).
+migration_(bob_migrates_to_usa_s3306_c_1_B_neg).
+destination_(bob_migrates_to_usa_s3306_c_1_B_neg,"usa").
+agent_(bob_migrates_to_usa_s3306_c_1_B_neg,bob_s3306_c_1_B_neg).
+purpose_(bob_migrates_to_usa_s3306_c_1_B_neg,"agricultural labor").
 
 % Test
-:- \+ s3306_c_1_B(alice_employer,bob).
+:- \+ s3306_c_1_B(alice_employer_s3306_c_1_B_neg,bob_s3306_c_1_B_neg).
 :- halt.

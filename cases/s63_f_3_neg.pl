@@ -5,8 +5,8 @@
 % Under section 63(f)(3), Alice's additional standard deduction in 2017 is equal to $600. Contradiction
 
 % Facts
-person(alice).
-person(bob).
+person(alice_s63_f_3_neg).
+person(bob_s63_f_3_neg).
 finance(33200).
 finance(600).
 
@@ -34,19 +34,19 @@ date_split("2017-01-01", 2017, 1, 1).
 date("2017-12-31").
 date_split("2017-12-31", 2017, 12, 31).
 
-payment_(alice_is_paid).
-patient_(alice_is_paid,alice).
-start_(alice_is_paid,"2017-12-31").
-amount_(alice_is_paid,33200).
-birth_(alice_is_born).
-agent_(alice_is_born,alice).
-start_(alice_is_born,"1950-03-02").
-end_(alice_is_born,"1950-03-02").
-birth_(bob_is_born).
-agent_(bob_is_born,bob).
-start_(bob_is_born,"1955-03-03").
-end_(bob_is_born,"1955-03-03").
+payment_(alice_is_paid_s63_f_3_neg).
+patient_(alice_is_paid_s63_f_3_neg,alice_s63_f_3_neg).
+start_(alice_is_paid_s63_f_3_neg,"2017-12-31").
+amount_(alice_is_paid_s63_f_3_neg,33200).
+birth_(alice_is_born_s63_f_3_neg).
+agent_(alice_is_born_s63_f_3_neg,alice_s63_f_3_neg).
+start_(alice_is_born_s63_f_3_neg,"1950-03-02").
+end_(alice_is_born_s63_f_3_neg,"1950-03-02").
+birth_(bob_is_born_s63_f_3_neg).
+agent_(bob_is_born_s63_f_3_neg,bob_s63_f_3_neg).
+start_(bob_is_born_s63_f_3_neg,"1955-03-03").
+end_(bob_is_born_s63_f_3_neg,"1955-03-03").
 
 % Test
-:- \+ s63_f_3(alice,2017,600).
+:- \+ s63_f_3(alice_s63_f_3_neg,2017,600).
 :- halt.

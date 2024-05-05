@@ -5,8 +5,8 @@
 % Section 2(b)(2)(A) applies to Alice and Bob in 2018. Entailment
 
 % Facts
-person(alice).
-person(bob).
+person(alice_s2_b_2_A_pos).
+person(bob_s2_b_2_A_pos).
 
 year(1992).
 date("1992-02-03").
@@ -26,15 +26,15 @@ date_split("2014-12-31",2014,12,31).
 
 year(2018).
 
-marriage_(alice_and_bob).
-agent_(alice_and_bob,alice).
-agent_(alice_and_bob,bob).
-start_(alice_and_bob,"1992-02-03").
-legal_separation_(alice_and_bob_divorce).
-agent_(alice_and_bob_divorce,"decree of separate maintenance").
-patient_(alice_and_bob_divorce,alice_and_bob).
-start_(alice_and_bob_divorce,"2014-07-09").
+marriage_(alice_and_bob_s2_b_2_A_pos).
+agent_(alice_and_bob_s2_b_2_A_pos,alice_s2_b_2_A_pos).
+agent_(alice_and_bob_s2_b_2_A_pos,bob_s2_b_2_A_pos).
+start_(alice_and_bob_s2_b_2_A_pos,"1992-02-03").
+legal_separation_(alice_and_bob_divorce_s2_b_2_A_pos).
+agent_(alice_and_bob_divorce_s2_b_2_A_pos,"decree of separate maintenance").
+patient_(alice_and_bob_divorce_s2_b_2_A_pos,alice_and_bob_s2_b_2_A_pos).
+start_(alice_and_bob_divorce_s2_b_2_A_pos,"2014-07-09").
 
 % Test
-:- s2_b_2_A(alice,bob,alice_and_bob_divorce,alice_and_bob,2018).
+:- s2_b_2_A(alice_s2_b_2_A_pos,bob_s2_b_2_A_pos,alice_and_bob_divorce_s2_b_2_A_pos,alice_and_bob_s2_b_2_A_pos,2018).
 :- halt.

@@ -5,9 +5,9 @@
 % Section 7703(b)(1) applies to Alice for the year 2018. Entailment
 
 % Facts
-person(alice).
-person(bob).
-person(charlie).
+person(alice_s7703_b_1_pos).
+person(bob_s7703_b_1_pos).
+person(charlie_s7703_b_1_pos).
 
 year(2012).
 date("2012-01-01").
@@ -37,26 +37,26 @@ date_split("2019-01-01", 2019, 1, 1).
 date("2019-12-31").
 date_split("2019-12-31", 2019, 12, 31).
 
-household(alice_s_house).
+household(alice_s_house_s7703_b_1_pos).
 finance(1).
 
-marriage_(alice_and_bob).
-agent_(alice_and_bob,alice).
-agent_(alice_and_bob,bob).
-start_(alice_and_bob,"2012-04-05").
-son_(charlie_is_born).
-agent_(charlie_is_born,charlie).
-patient_(charlie_is_born,bob).
-patient_(charlie_is_born,alice).
-start_(charlie_is_born,"2017-09-16").
-residence_(alice_residence).
-agent_(alice_residence,alice).
-patient_(alice_residence,alice_s_house).
-start_(alice_residence,"2017-09-16").
-residence_(charlie_residence).
-agent_(charlie_residence,charlie).
-patient_(charlie_residence,alice_s_house).
-start_(charlie_residence,"2017-09-16").
+marriage_(alice_and_bob_s7703_b_1_pos).
+agent_(alice_and_bob_s7703_b_1_pos,alice_s7703_b_1_pos).
+agent_(alice_and_bob_s7703_b_1_pos,bob_s7703_b_1_pos).
+start_(alice_and_bob_s7703_b_1_pos,"2012-04-05").
+son_(charlie_is_born_s7703_b_1_pos).
+agent_(charlie_is_born_s7703_b_1_pos,charlie_s7703_b_1_pos).
+patient_(charlie_is_born_s7703_b_1_pos,bob_s7703_b_1_pos).
+patient_(charlie_is_born_s7703_b_1_pos,alice_s7703_b_1_pos).
+start_(charlie_is_born_s7703_b_1_pos,"2017-09-16").
+residence_(alice_residence_s7703_b_1_pos).
+agent_(alice_residence_s7703_b_1_pos,alice_s7703_b_1_pos).
+patient_(alice_residence_s7703_b_1_pos,alice_s_house_s7703_b_1_pos).
+start_(alice_residence_s7703_b_1_pos,"2017-09-16").
+residence_(charlie_residence_s7703_b_1_pos).
+agent_(charlie_residence_s7703_b_1_pos,charlie_s7703_b_1_pos).
+patient_(charlie_residence_s7703_b_1_pos,alice_s_house_s7703_b_1_pos).
+start_(charlie_residence_s7703_b_1_pos,"2017-09-16").
 
 % NOTE: should be generated to 2117 + dates should be validated
 alice_household_maintenance(2017,'alice_maintains_household_2017',"2017-09-16","2017-12-31").
@@ -99,13 +99,13 @@ alice_household_maintenance(2050,'alice_maintains_household_2050',"2050-01-01","
 %     (((Year==2017)->(Start_day="2017-09-16"));first_day_year(Year,Start_day)),
 %     last_day_year(Year,End_day).
 payment_(Event) :- alice_household_maintenance(_,Event,_,_).
-agent_(Event,alice) :- alice_household_maintenance(_,Event,_,_).
+agent_(Event,alice_s7703_b_1_pos) :- alice_household_maintenance(_,Event,_,_).
 amount_(Event,1) :- alice_household_maintenance(_,Event,_,_).
-purpose_(Event,alice_s_house) :- alice_household_maintenance(_,Event,_,_).
+purpose_(Event,alice_s_house_s7703_b_1_pos) :- alice_household_maintenance(_,Event,_,_).
 start_(Event,Start_day) :- alice_household_maintenance(_,Event,Start_day,_).
 end_(Event,End_day) :- alice_household_maintenance(_,Event,_,End_day).
-s151_c_applies(alice,charlie,Year) :- between(2017,2019,Year).
+s151_c_applies(alice_s7703_b_1_pos,charlie_s7703_b_1_pos,Year) :- between(2017,2019,Year).
 
 % Test
-:- s7703_b_1(alice,alice_s_house,charlie,2018).
+:- s7703_b_1(alice_s7703_b_1_pos,alice_s_house_s7703_b_1_pos,charlie_s7703_b_1_pos,2018).
 :- halt.

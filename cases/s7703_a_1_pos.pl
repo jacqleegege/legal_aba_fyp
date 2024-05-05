@@ -5,8 +5,8 @@
 % Section 7703(a)(1) applies to Alice for the year 2012. Entailment
 
 % Facts
-person(alice).
-person(bob).
+person(alice_s7703_a_1_pos).
+person(bob_s7703_a_1_pos).
 
 year(2012).
 date("2012-01-01").
@@ -24,14 +24,14 @@ date_split("2017-09-16", 2017, 9, 16).
 date("2017-12-31").
 date_split("2017-12-31", 2017, 12, 31).
 
-marriage_(alice_and_bob).
-agent_(alice_and_bob,alice).
-agent_(alice_and_bob,bob).
-start_(alice_and_bob,"2012-04-05").
-death_(bob_dies).
-agent_(bob_dies,bob).
-start_(bob_dies,"2017-09-16").
+marriage_(alice_and_bob_s7703_a_1_pos).
+agent_(alice_and_bob_s7703_a_1_pos,alice_s7703_a_1_pos).
+agent_(alice_and_bob_s7703_a_1_pos,bob_s7703_a_1_pos).
+start_(alice_and_bob_s7703_a_1_pos,"2012-04-05").
+death_(bob_dies_s7703_a_1_pos).
+agent_(bob_dies_s7703_a_1_pos,bob_s7703_a_1_pos).
+start_(bob_dies_s7703_a_1_pos,"2017-09-16").
 
 % Test
-:- s7703_a_1(alice,bob,alice_and_bob,"2017-09-16",2012).
+:- s7703_a_1(alice_s7703_a_1_pos,bob_s7703_a_1_pos,alice_and_bob_s7703_a_1_pos,"2017-09-16",2012).
 :- halt.

@@ -5,8 +5,8 @@
 % Section 2(a)(2)(B) applies to Bob in 2014. Contradiction
 
 % Facts
-person(alice).
-person(bob).
+person(alice_s2_a_2_B_neg).
+person(bob_s2_a_2_B_neg).
 
 year(1990).
 date("1990-03-04").
@@ -24,18 +24,18 @@ date_split("1992-01-01",1992,1,1).
 date("1992-12-31").
 date_split("1992-12-31",1992,12,31).
 
-marriage_(alice_and_bob).
-agent_(alice_and_bob,alice).
-agent_(alice_and_bob,bob).
-start_(alice_and_bob,"1992-02-03").
-death_(alice_dies).
-agent_(alice_dies,alice).
-start_(alice_dies,"2014-07-09").
-end_(alice_dies,"2014-07-09").
-nonresident_alien_(alice_is_nra).
-agent_(alice_is_nra,alice).
-start_(alice_is_nra,"1990-03-04").
+marriage_(alice_and_bob_s2_a_2_B_neg).
+agent_(alice_and_bob_s2_a_2_B_neg,alice_s2_a_2_B_neg).
+agent_(alice_and_bob_s2_a_2_B_neg,bob_s2_a_2_B_neg).
+start_(alice_and_bob_s2_a_2_B_neg,"1992-02-03").
+death_(alice_dies_s2_a_2_B_neg).
+agent_(alice_dies_s2_a_2_B_neg,alice_s2_a_2_B_neg).
+start_(alice_dies_s2_a_2_B_neg,"2014-07-09").
+end_(alice_dies_s2_a_2_B_neg,"2014-07-09").
+nonresident_alien_(alice_is_nra_s2_a_2_B_neg).
+agent_(alice_is_nra_s2_a_2_B_neg,alice_s2_a_2_B_neg).
+start_(alice_is_nra_s2_a_2_B_neg,"1990-03-04").
 
 % Test
-:- \+ s2_a_2_B(bob,alice,2014).
+:- \+ s2_a_2_B(bob_s2_a_2_B_neg,alice_s2_a_2_B_neg,2014).
 :- halt.

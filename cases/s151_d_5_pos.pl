@@ -5,7 +5,8 @@
 % The exemption amount of Alice's exemption is equal to $0 under section 151(d)(5). Entailment
 
 % Facts
-person(alice).
+person(alice_s151_d_5_pos).
+finance(0).
 
 year(2018).
 date("2018-01-01").
@@ -13,7 +14,7 @@ date_split("2018-01-01", 2018, 1, 1).
 date("2018-12-31").
 date_split("2018-12-31", 2018, 12, 31).
 
-s151_b_applies(alice,2018).
+s151_b_applies(alice_s151_d_5_pos,2018).
 
 % Test
 :- s151_d_5(0,2018).

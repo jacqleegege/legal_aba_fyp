@@ -5,9 +5,9 @@
 % Section 2(a)(1)(B) applies to Bob in 2020. Contradiction
 
 % Facts
-person(alice).
-person(bob).
-person(charlie).
+person(alice_s2_a_1_B_neg).
+person(bob_s2_a_1_B_neg).
+person(charlie_s2_a_1_B_neg).
 
 year(1992).
 date("1992-02-03").
@@ -129,48 +129,48 @@ atom_concat('bob_maintains_household_', 2022, bob_maintains_household_2022).
 atom_concat('bob_maintains_household_', 2023, bob_maintains_household_2023).
 atom_concat('bob_maintains_household_', 2024, bob_maintains_household_2024).
 
-marriage_(alice_and_bob).
-agent_(alice_and_bob,alice).
-agent_(alice_and_bob,bob).
-start_(alice_and_bob,"1992-02-03").
-death_(alice_dies).
-agent_(alice_dies,alice).
-start_(alice_dies,"2021-07-09").
-son_(charlie_is_son).
-agent_(charlie_is_son,charlie).
-patient_(charlie_is_son,alice).
-start_(charlie_is_son,"2000-10-09").
-residence_(charlie_and_bob_residence).
-agent_(charlie_and_bob_residence,charlie).
-agent_(charlie_and_bob_residence,bob).
-patient_(charlie_and_bob_residence,bob_s_house).
-start_(charlie_and_bob_residence,"2011-01-01").
-end_(charlie_and_bob_residence,"2024-12-31").
+marriage_(alice_and_bob_s2_a_1_B_neg).
+agent_(alice_and_bob_s2_a_1_B_neg,alice_s2_a_1_B_neg).
+agent_(alice_and_bob_s2_a_1_B_neg,bob_s2_a_1_B_neg).
+start_(alice_and_bob_s2_a_1_B_neg,"1992-02-03").
+death_(alice_dies_s2_a_1_B_neg).
+agent_(alice_dies_s2_a_1_B_neg,alice_s2_a_1_B_neg).
+start_(alice_dies_s2_a_1_B_neg,"2021-07-09").
+son_(charlie_is_son_s2_a_1_B_neg).
+agent_(charlie_is_son_s2_a_1_B_neg,charlie_s2_a_1_B_neg).
+patient_(charlie_is_son_s2_a_1_B_neg,alice_s2_a_1_B_neg).
+start_(charlie_is_son_s2_a_1_B_neg,"2000-10-09").
+residence_(charlie_and_bob_residence_s2_a_1_B_neg).
+agent_(charlie_and_bob_residence_s2_a_1_B_neg,charlie_s2_a_1_B_neg).
+agent_(charlie_and_bob_residence_s2_a_1_B_neg,bob_s2_a_1_B_neg).
+patient_(charlie_and_bob_residence_s2_a_1_B_neg,bob_s_house_s2_a_1_B_neg).
+start_(charlie_and_bob_residence_s2_a_1_B_neg,"2011-01-01").
+end_(charlie_and_bob_residence_s2_a_1_B_neg,"2024-12-31").
 bob_household_maintenance(Year,Event,Start_day,End_day) :-
     between(2011,2024,Year),
     atom_concat('bob_maintains_household_',Year,Event),
     first_day_year(Year,Start_day),
     last_day_year(Year,End_day).
 payment_(Event) :- bob_household_maintenance(_,Event,_,_).
-agent_(Event,bob) :- bob_household_maintenance(_,Event,_,_).
+agent_(Event,bob_s2_a_1_B_neg) :- bob_household_maintenance(_,Event,_,_).
 amount_(Event,1) :- bob_household_maintenance(_,Event,_,_).
-purpose_(Event,bob_s_house) :- bob_household_maintenance(_,Event,_,_).
+purpose_(Event,bob_s_house_s2_a_1_B_neg) :- bob_household_maintenance(_,Event,_,_).
 start_(Event,Start_day) :- bob_household_maintenance(_,Event,Start_day,_).
 end_(Event,End_day) :- bob_household_maintenance(_,Event,_,End_day).
-marriage_(charlie_marriage).
-agent_(charlie_marriage,charlie).
-agent_(charlie_marriage,spouse).
-start_(charlie_marriage,"2019-12-01").
-joint_return_(charlie_and_spouse_joint_return).
-agent_(charlie_and_spouse_joint_return,charlie).
-agent_(charlie_and_spouse_joint_return,spouse).
-start_(charlie_and_spouse_joint_return,"2020-01-01").
-end_(charlie_and_spouse_joint_return,"2020-12-31").
-income_(charlie_makes_money).
-agent_(charlie_makes_money,charlie).
-amount_(charlie_makes_money,312489).
-start_(charlie_makes_money,"2020-12-31").
+marriage_(charlie_marriage_s2_a_1_B_neg).
+agent_(charlie_marriage_s2_a_1_B_neg,charlie_s2_a_1_B_neg).
+agent_(charlie_marriage_s2_a_1_B_neg,spouse_s2_a_1_B_neg).
+start_(charlie_marriage_s2_a_1_B_neg,"2019-12-01").
+joint_return_(charlie_and_spouse_joint_return_s2_a_1_B_neg).
+agent_(charlie_and_spouse_joint_return_s2_a_1_B_neg,charlie_s2_a_1_B_neg).
+agent_(charlie_and_spouse_joint_return_s2_a_1_B_neg,spouse_s2_a_1_B_neg).
+start_(charlie_and_spouse_joint_return_s2_a_1_B_neg,"2020-01-01").
+end_(charlie_and_spouse_joint_return_s2_a_1_B_neg,"2020-12-31").
+income_(charlie_makes_money_s2_a_1_B_neg).
+agent_(charlie_makes_money_s2_a_1_B_neg,charlie_s2_a_1_B_neg).
+amount_(charlie_makes_money_s2_a_1_B_neg,312489).
+start_(charlie_makes_money_s2_a_1_B_neg,"2020-12-31").
 
 % Test
-:- \+ s2_a_1_B(bob,bob_s_house,charlie,2020).
+:- \+ s2_a_1_B(bob_s2_a_1_B_neg,bob_s_house_s2_a_1_B_neg,charlie_s2_a_1_B_neg,2020).
 :- halt.

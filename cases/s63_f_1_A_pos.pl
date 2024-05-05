@@ -5,8 +5,8 @@
 % Section 63(f)(1)(A) applies to Alice in 2017. Entailment
 
 % Facts
-person(alice).
-person(bob).
+person(alice_s63_f_1_A_pos).
+person(bob_s63_f_1_A_pos).
 finance(33200).
 
 year(2017).
@@ -33,23 +33,23 @@ date_split("1955-01-01", 1955, 1, 1).
 date("1955-12-31").
 date_split("1955-12-31", 1955, 12, 31).
 
-payment_(alice_is_paid).
-patient_(alice_is_paid,alice).
-start_(alice_is_paid,"2017-12-31").
-amount_(alice_is_paid,33200).
-marriage_(alice_and_bob).
-agent_(alice_and_bob,alice).
-agent_(alice_and_bob,bob).
-start_(alice_and_bob,"2017-02-03").
-birth_(alice_is_born).
-agent_(alice_is_born,alice).
-start_(alice_is_born,"1950-03-02").
-end_(alice_is_born,"1950-03-02").
-birth_(bob_is_born).
-agent_(bob_is_born,bob).
-start_(bob_is_born,"1955-03-03").
-end_(bob_is_born,"1955-03-03").
+payment_(alice_is_paid_s63_f_1_A_pos).
+patient_(alice_is_paid_s63_f_1_A_pos,alice_s63_f_1_A_pos).
+start_(alice_is_paid_s63_f_1_A_pos,"2017-12-31").
+amount_(alice_is_paid_s63_f_1_A_pos,33200).
+marriage_(alice_and_bob_s63_f_1_A_pos).
+agent_(alice_and_bob_s63_f_1_A_pos,alice_s63_f_1_A_pos).
+agent_(alice_and_bob_s63_f_1_A_pos,bob_s63_f_1_A_pos).
+start_(alice_and_bob_s63_f_1_A_pos,"2017-02-03").
+birth_(alice_is_born_s63_f_1_A_pos).
+agent_(alice_is_born_s63_f_1_A_pos,alice_s63_f_1_A_pos).
+start_(alice_is_born_s63_f_1_A_pos,"1950-03-02").
+end_(alice_is_born_s63_f_1_A_pos,"1950-03-02").
+birth_(bob_is_born_s63_f_1_A_pos).
+agent_(bob_is_born_s63_f_1_A_pos,bob_s63_f_1_A_pos).
+start_(bob_is_born_s63_f_1_A_pos,"1955-03-03").
+end_(bob_is_born_s63_f_1_A_pos,"1955-03-03").
 
 % Test
-:- s63_f_1_A(alice,2017).
+:- s63_f_1_A(alice_s63_f_1_A_pos,2017).
 :- halt.

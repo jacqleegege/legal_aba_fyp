@@ -5,15 +5,17 @@
 % Alice has to pay $442985 in taxes for the year 2017 under section 1(b)(v). Entailment
 
 % Facts
-person(alice).
+person(alice_s1_b_v_pos).
 year(2017).
 date("2017-01-01").
 date("2017-12-31").
 date_split("2017-01-01",2017,1,1).
 date_split("2017-12-31",2017,12,31).
 finance(1172980).
-s2_b(alice,alice,2017).
-s63(alice,2017,1172980).
+finance(442985).
+
+s2_b(alice_s1_b_v_pos,alice_s1_b_v_pos,2017).
+s63(alice_s1_b_v_pos,2017,1172980).
 
 % Test
 :- s1_b_v(1172980,442985).

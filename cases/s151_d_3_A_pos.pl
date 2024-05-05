@@ -5,10 +5,14 @@
 % Under section 151(d)(3)(A), Alice's exemption amount is reduced to $1800. Entailment
 
 % Facts
-person(alice).
+person(alice_s151_d_3_A_pos).
 
 finance(260932).
+finance(250000).
+finance(10).
 finance(2000).
+finance(1800).
+
 
 year(2015).
 date("2015-01-01").
@@ -16,13 +20,13 @@ date_split("2015-01-01", 2015, 1, 1).
 date("2015-12-31").
 date_split("2015-12-31", 2015, 12, 31).
 
-income_(alice_makes_money).
-agent_(alice_makes_money,alice).
-amount_(alice_makes_money,260932).
-start_(alice_makes_money,"2015-01-01").
-end_(alice_makes_money,"2015-12-31").
-s151_c(alice,alice,2000,2015).
+income_(alice_makes_money_s151_d_3_A_pos).
+agent_(alice_makes_money_s151_d_3_A_pos,alice_s151_d_3_A_pos).
+amount_(alice_makes_money_s151_d_3_A_pos,260932).
+start_(alice_makes_money_s151_d_3_A_pos,"2015-01-01").
+end_(alice_makes_money_s151_d_3_A_pos,"2015-12-31").
+s151_c(alice_s151_d_3_A_pos,alice_s151_d_3_A_pos,2000,2015).
 
 % Test
-:- s151_d_3_A(alice,260932,250000,10,2000,1800,2015).
+:- s151_d_3_A(alice_s151_d_3_A_pos,260932,250000,10,2000,1800,2015).
 :- halt.

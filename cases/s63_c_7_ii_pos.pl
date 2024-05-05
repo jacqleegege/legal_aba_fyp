@@ -5,9 +5,10 @@
 % Under section 63(c)(7)(ii), Alice's basic standard deduction in 2019 is equal to $12000. Entailment
 
 % Facts
-person(alice).
-person(bob).
+person(alice_s63_c_7_ii_pos).
+person(bob_s63_c_7_ii_pos).
 finance(33200).
+finance(12000).
 
 year(2019).
 date("2019-02-03").
@@ -17,14 +18,14 @@ date_split("2019-01-01", 2019, 1, 1).
 date("2019-12-31").
 date_split("2019-12-31", 2019, 12, 31).
 
-payment_(alice_is_paid).
-patient_(alice_is_paid,alice).
-start_(alice_is_paid,"2019-12-31").
-amount_(alice_is_paid,33200).
-marriage_(alice_and_bob).
-agent_(alice_and_bob,alice).
-agent_(alice_and_bob,bob).
-start_(alice_and_bob,"2019-02-03").
+payment_(alice_is_paid_s63_c_7_ii_pos).
+patient_(alice_is_paid_s63_c_7_ii_pos,alice_s63_c_7_ii_pos).
+start_(alice_is_paid_s63_c_7_ii_pos,"2019-12-31").
+amount_(alice_is_paid_s63_c_7_ii_pos,33200).
+marriage_(alice_and_bob_s63_c_7_ii_pos).
+agent_(alice_and_bob_s63_c_7_ii_pos,alice_s63_c_7_ii_pos).
+agent_(alice_and_bob_s63_c_7_ii_pos,bob_s63_c_7_ii_pos).
+start_(alice_and_bob_s63_c_7_ii_pos,"2019-02-03").
 
 % Test
 :- s63_c_7_ii(2019,12000).

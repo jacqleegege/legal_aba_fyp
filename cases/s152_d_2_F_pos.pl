@@ -5,9 +5,9 @@
 % Alice bears a relationship to Bob under section 152(d)(2)(F). Entailment
 
 % Facts
-person(alice).
-person(bob).
-person(charlie).
+person(alice_s152_d_2_F_pos).
+person(bob_s152_d_2_F_pos).
+person(charlie_s152_d_2_F_pos).
 
 year(2014).
 date("2014-04-15").
@@ -25,15 +25,19 @@ date_split("1992-01-01", 1992, 1, 1).
 date("1992-12-31").
 date_split("1992-12-31", 1992, 12, 31).
 
-father_(charlie_and_bob).
-agent_(charlie_and_bob,charlie).
-patient_(charlie_and_bob,bob).
-start_(charlie_and_bob,"2014-04-15").
-sister_(alice_and_charlie).
-agent_(alice_and_charlie,alice).
-patient_(alice_and_charlie,charlie).
-start_(alice_and_charlie,"1992-10-12").
+year(2100).
+date("2100-01-01").
+date_split("2100-01-01", 2100, 1, 1).
+
+father_(charlie_and_bob_s152_d_2_F_pos).
+agent_(charlie_and_bob_s152_d_2_F_pos,charlie_s152_d_2_F_pos).
+patient_(charlie_and_bob_s152_d_2_F_pos,bob_s152_d_2_F_pos).
+start_(charlie_and_bob_s152_d_2_F_pos,"2014-04-15").
+sister_(alice_and_charlie_s152_d_2_F_pos).
+agent_(alice_and_charlie_s152_d_2_F_pos,alice_s152_d_2_F_pos).
+patient_(alice_and_charlie_s152_d_2_F_pos,charlie_s152_d_2_F_pos).
+start_(alice_and_charlie_s152_d_2_F_pos,"1992-10-12").
 
 % Test
-:- s152_d_2_F(alice,bob,charlie,"2014-04-15","2100-01-01").
+:- s152_d_2_F(alice_s152_d_2_F_pos,bob_s152_d_2_F_pos,charlie_s152_d_2_F_pos,"2014-04-15","2100-01-01").
 :- halt.

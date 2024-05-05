@@ -5,9 +5,10 @@
 % Under section 68(b)(1)(B), Alice's applicable amount for 2016 is equal to $275000. Contradiction
 
 % Facts
-person(alice).
-person(spouse).
+person(alice_s68_b_1_B_neg).
+person(spouse_s68_b_1_B_neg).
 finance(567192).
+finance(275000).
 
 year(2016).
 date("2016-01-01").
@@ -15,12 +16,12 @@ date_split("2016-01-01", 2016, 1, 1).
 date("2016-12-31").
 date_split("2016-12-31", 2016, 12, 31).
 
-income_(alice_is_paid).
-agent_(alice_is_paid,alice).
-start_(alice_is_paid,"2016-12-31").
-amount_(alice_is_paid,567192).
-s2_a(alice,spouse,2016).
+income_(alice_is_paid_s68_b_1_B_neg).
+agent_(alice_is_paid_s68_b_1_B_neg,alice_s68_b_1_B_neg).
+start_(alice_is_paid_s68_b_1_B_neg,"2016-12-31").
+amount_(alice_is_paid_s68_b_1_B_neg,567192).
+s2_a(alice_s68_b_1_B_neg,spouse_s68_b_1_B_neg,2016).
 
 % Test
-:- \+ s68_b_1_B(alice,275000,2016).
+:- \+ s68_b_1_B(alice_s68_b_1_B_neg,275000,2016).
 :- halt.

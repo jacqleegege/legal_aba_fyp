@@ -13,6 +13,8 @@ date("2017-12-31").
 date_split("2017-01-01",2017,1,1).
 date_split("2017-12-31",2017,12,31).
 finance(103272).
+finance(24543).
+
 s7703(alice_s1_a_iii_pos,spouse_s1_a_iii_pos,alice_and_spouse_s1_a_iii_pos,2017).
 s7703_short(alice_s1_a_iii_pos,spouse_s1_a_iii_pos,2017).
 marriage_(alice_and_spouse_s1_a_iii_pos).

@@ -5,8 +5,8 @@
 % Section 3306(b)(11) applies to the payment that Alice made to Bob for the year 2017. Entailment
 
 % Facts
-person(alice).
-person(bob).
+person(alice_s3306_b_11_pos).
+person(bob_s3306_b_11_pos).
 
 year(2017).
 date("2017-01-01").
@@ -21,20 +21,20 @@ date_split("2017-12-31", 2017, 12, 31).
 finance(3200).
 medium("kind").
 
-service_(alice_employer).
-patient_(alice_employer,alice).
-agent_(alice_employer,bob).
-start_(alice_employer,"2017-02-01").
-end_(alice_employer,"2017-09-02").
-purpose_(alice_employer,"agricultural labor").
-payment_(alice_pays).
-agent_(alice_pays,alice).
-patient_(alice_pays,bob).
-start_(alice_pays,"2017-09-02").
-purpose_(alice_pays,alice_employer).
-amount_(alice_pays,3200).
-means_(alice_pays,"kind").
+service_(alice_employer_s3306_b_11_pos).
+patient_(alice_employer_s3306_b_11_pos,alice_s3306_b_11_pos).
+agent_(alice_employer_s3306_b_11_pos,bob_s3306_b_11_pos).
+start_(alice_employer_s3306_b_11_pos,"2017-02-01").
+end_(alice_employer_s3306_b_11_pos,"2017-09-02").
+purpose_(alice_employer_s3306_b_11_pos,"agricultural labor").
+payment_(alice_pays_s3306_b_11_pos).
+agent_(alice_pays_s3306_b_11_pos,alice_s3306_b_11_pos).
+patient_(alice_pays_s3306_b_11_pos,bob_s3306_b_11_pos).
+start_(alice_pays_s3306_b_11_pos,"2017-09-02").
+purpose_(alice_pays_s3306_b_11_pos,alice_employer_s3306_b_11_pos).
+amount_(alice_pays_s3306_b_11_pos,3200).
+means_(alice_pays_s3306_b_11_pos,"kind").
 
 % Test
-:- s3306_b_11(alice_pays,alice_employer,"kind").
+:- s3306_b_11(alice_pays_s3306_b_11_pos,alice_employer_s3306_b_11_pos,"kind").
 :- halt.

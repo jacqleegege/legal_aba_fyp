@@ -17,13 +17,13 @@
 % Section 3306(a)(2)(B) applies to Alice for the year 2017. Contradiction
 
 % Facts
-person(alice).
-person(bob).
-person(cameron).
-person(dan).
-person(emily).
-person(fred).
-person(george).
+person(alice_s3306_a_2_B_neg).
+person(bob_s3306_a_2_B_neg).
+person(cameron_s3306_a_2_B_neg).
+person(dan_s3306_a_2_B_neg).
+person(emily_s3306_a_2_B_neg).
+person(fred_s3306_a_2_B_neg).
+person(george_s3306_a_2_B_neg).
 
 year(2017).
 date("2017-01-01").
@@ -177,8 +177,19 @@ s3306_c(alice_employer_2017-12-03,alice,george,"2017-12-03",2017).
 %         )
 %     ),
 %     atom_concat("alice_employer_",Day,Service_event).
-purpose_(_,"agricultural labor"). % all that's mentioned here is agricultural labor
+purpose_(alice_employer_2017-01-24,"agricultural labor").
+purpose_(alice_employer_2017-02-04,"agricultural labor").
+purpose_(alice_employer_2017-03-03,"agricultural labor").
+purpose_(alice_employer_2017-03-19,"agricultural labor").
+purpose_(alice_employer_2017-04-02,"agricultural labor").
+purpose_(alice_employer_2017-05-09,"agricultural labor").
+purpose_(alice_employer_2017-10-15,"agricultural labor").
+purpose_(alice_employer_2017-10-25,"agricultural labor").
+purpose_(alice_employer_2017-11-08,"agricultural labor").
+purpose_(alice_employer_2017-11-22,"agricultural labor").
+purpose_(alice_employer_2017-12-01,"agricultural labor").
+purpose_(alice_employer_2017-12-03,"agricultural labor").% all that's mentioned here is agricultural labor
 
 % Test
-:- \+ s3306_a_2_B(alice,2017).
+:- \+ s3306_a_2_B(alice_s3306_a_2_B_neg,2017).
 :- halt.

@@ -5,7 +5,7 @@
 % Section 152(d)(1)(B) applies to Alice for the year 2015. Entailment
 
 % Facts
-person(alice).
+person(alice_s152_d_1_B_pos).
 
 finance(2000).
 
@@ -15,8 +15,8 @@ date_split("2015-01-01", 2015, 1, 1).
 date("2015-12-31").
 date_split("2015-12-31", 2015, 12, 31).
 
-s151_d(alice,2000,2015).
+s151_d(alice_s152_d_1_B_pos,2000,2015).
 
 % Test
-:- s152_d_1_B(alice,2015).
+:- s152_d_1_B(alice_s152_d_1_B_pos,2015).
 :- halt.

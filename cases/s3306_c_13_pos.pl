@@ -5,7 +5,7 @@
 % Section 3306(c)(13) applies to Alice's employment situation in 2017. Entailment
 
 % Facts
-person(alice).
+person(alice_s3306_c_13_pos).
 
 year(2017).
 date("2017-01-01").
@@ -36,33 +36,33 @@ location_name("johns hopkins school of nursing").
 
 finance(3200).
 
-service_(alice_employed).
-patient_(alice_employed,"johns hopkins school of nursing").
-agent_(alice_employed,alice).
-start_(alice_employed,"2017-01-01").
-end_(alice_employed,"2017-12-31").
-location_(alice_employed,baltimore).
-location_(alice_employed,maryland).
-location_(alice_employed,usa).
-payment_(alice_is_paid).
-agent_(alice_is_paid,"johns hopkins school of nursing").
-patient_(alice_is_paid,alice).
-start_(alice_is_paid,"2017-12-31").
-purpose_(alice_is_paid,alice_employed).
-amount_(alice_is_paid,3200).
-nurses_training_school_(hopkins_is_a_nursing_school).
-agent_(hopkins_is_a_nursing_school,"johns hopkins school of nursing").
-enrollment_(alice_goes_to_hopkins).
-agent_(alice_goes_to_hopkins,alice).
-patient_(alice_goes_to_hopkins,"johns hopkins school of nursing").
-start_(alice_goes_to_hopkins,"2015-08-29").
-end_(alice_goes_to_hopkins,"2019-05-30").
-attending_classes_(alice_goes_to_class).
-agent_(alice_goes_to_class,alice).
-location_(alice_goes_to_class,"johns hopkins school of nursing").
-start_(alice_goes_to_class,"2015-08-29").
-end_(alice_goes_to_class,"2019-05-30").
+service_(alice_employed_s3306_c_13_pos).
+patient_(alice_employed_s3306_c_13_pos,"johns hopkins school of nursing").
+agent_(alice_employed_s3306_c_13_pos,alice_s3306_c_13_pos).
+start_(alice_employed_s3306_c_13_pos,"2017-01-01").
+end_(alice_employed_s3306_c_13_pos,"2017-12-31").
+location_(alice_employed_s3306_c_13_pos,baltimore).
+location_(alice_employed_s3306_c_13_pos,maryland).
+location_(alice_employed_s3306_c_13_pos,usa).
+payment_(alice_is_paid_s3306_c_13_pos).
+agent_(alice_is_paid_s3306_c_13_pos,"johns hopkins school of nursing").
+patient_(alice_is_paid_s3306_c_13_pos,alice_s3306_c_13_pos).
+start_(alice_is_paid_s3306_c_13_pos,"2017-12-31").
+purpose_(alice_is_paid_s3306_c_13_pos,alice_employed_s3306_c_13_pos).
+amount_(alice_is_paid_s3306_c_13_pos,3200).
+nurses_training_school_(hopkins_is_a_nursing_school_s3306_c_13_pos).
+agent_(hopkins_is_a_nursing_school_s3306_c_13_pos,"johns hopkins school of nursing").
+enrollment_(alice_goes_to_hopkins_s3306_c_13_pos).
+agent_(alice_goes_to_hopkins_s3306_c_13_pos,alice_s3306_c_13_pos).
+patient_(alice_goes_to_hopkins_s3306_c_13_pos,"johns hopkins school of nursing").
+start_(alice_goes_to_hopkins_s3306_c_13_pos,"2015-08-29").
+end_(alice_goes_to_hopkins_s3306_c_13_pos,"2019-05-30").
+attending_classes_(alice_goes_to_class_s3306_c_13_pos).
+agent_(alice_goes_to_class_s3306_c_13_pos,alice_s3306_c_13_pos).
+location_(alice_goes_to_class_s3306_c_13_pos,"johns hopkins school of nursing").
+start_(alice_goes_to_class_s3306_c_13_pos,"2015-08-29").
+end_(alice_goes_to_class_s3306_c_13_pos,"2019-05-30").
 
 % Test
-:- s3306_c_13(alice_employed,"johns hopkins school of nursing",alice,"2017-01-01").
+:- s3306_c_13(alice_employed_s3306_c_13_pos,"johns hopkins school of nursing",alice_s3306_c_13_pos,"2017-01-01").
 :- halt.
