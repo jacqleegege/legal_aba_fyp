@@ -50,18 +50,18 @@ date_split("2017-01-01", 2017, 1, 1).
 date("2017-12-31").
 date_split("2017-12-31", 2017, 12, 31).
 
-s3306_c("alice_employer_2017-01-24", alice, bob, "2017-01-24", 2017).
-s3306_c("alice_employer_2017-02-04", alice, bob, "2017-02-04", 2017).
-s3306_c("alice_employer_2017-03-03", alice, bob, "2017-03-03", 2017).
-s3306_c("alice_employer_2017-03-19", alice, bob, "2017-03-19", 2017).
-s3306_c("alice_employer_2017-04-02", alice, bob, "2017-04-02", 2017).
-s3306_c("alice_employer_2017-05-09", alice, bob, "2017-05-09", 2017).
-s3306_c("alice_employer_2017-10-15", alice, bob, "2017-10-15", 2017).
-s3306_c("alice_employer_2017-10-25", alice, bob, "2017-10-25", 2017).
-s3306_c("alice_employer_2017-11-08", alice, bob, "2017-11-08", 2017).
-s3306_c("alice_employer_2017-11-22", alice, bob, "2017-11-22", 2017).
-s3306_c("alice_employer_2017-12-01", alice, bob, "2017-12-01", 2017).
-s3306_c("alice_employer_2017-12-03", alice, bob, "2017-12-03", 2017).
+s3306_c("alice_employer_2017-s3306_a_1_B_pos01-24", alice_s3306_a_1_B_pos, bob_s3306_a_1_B_pos, "2017-01-24", 2017).
+s3306_c("alice_employer_2017-s3306_a_1_B_pos02-04", alice_s3306_a_1_B_pos, bob_s3306_a_1_B_pos, "2017-02-04", 2017).
+s3306_c("alice_employer_2017-s3306_a_1_B_pos03-03", alice_s3306_a_1_B_pos, bob_s3306_a_1_B_pos, "2017-03-03", 2017).
+s3306_c("alice_employer_2017-s3306_a_1_B_pos03-19", alice_s3306_a_1_B_pos, bob_s3306_a_1_B_pos, "2017-03-19", 2017).
+s3306_c("alice_employer_2017-s3306_a_1_B_pos04-02", alice_s3306_a_1_B_pos, bob_s3306_a_1_B_pos, "2017-04-02", 2017).
+s3306_c("alice_employer_2017-s3306_a_1_B_pos05-09", alice_s3306_a_1_B_pos, bob_s3306_a_1_B_pos, "2017-05-09", 2017).
+s3306_c("alice_employer_2017-s3306_a_1_B_pos10-15", alice_s3306_a_1_B_pos, bob_s3306_a_1_B_pos, "2017-10-15", 2017).
+s3306_c("alice_employer_2017-s3306_a_1_B_pos10-25", alice_s3306_a_1_B_pos, bob_s3306_a_1_B_pos, "2017-10-25", 2017).
+s3306_c("alice_employer_2017-s3306_a_1_B_pos11-08", alice_s3306_a_1_B_pos, bob_s3306_a_1_B_pos, "2017-11-08", 2017).
+s3306_c("alice_employer_2017-s3306_a_1_B_pos11-22", alice_s3306_a_1_B_pos, bob_s3306_a_1_B_pos, "2017-11-22", 2017).
+s3306_c("alice_employer_2017-s3306_a_1_B_pos12-01", alice_s3306_a_1_B_pos, bob_s3306_a_1_B_pos, "2017-12-01", 2017).
+s3306_c("alice_employer_2017-s3306_a_1_B_pos12-03", alice_s3306_a_1_B_pos, bob_s3306_a_1_B_pos, "2017-12-03", 2017).
 
 % s3306_c(Employment_event,alice,bob,Day,_) :-
 %     member(Day, ["2017-01-24", "2017-02-04", "2017-03-03", "2017-03-19","2017-04-02","2017-05-09","2017-10-15","2017-10-25","2017-11-08","2017-11-22","2017-12-01","2017-12-03"]),

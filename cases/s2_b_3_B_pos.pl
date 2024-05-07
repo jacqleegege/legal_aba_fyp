@@ -121,17 +121,17 @@ date_split("2019-01-01",2019,1,1).
 date("2019-12-31").
 date_split("2019-12-31",2019,12,31).
 
-atom_concat('bob_maintains_household_',2015,bob_maintains_household_2015).
-atom_concat('bob_maintains_household_',2016,bob_maintains_household_2016).
-atom_concat('bob_maintains_household_',2017,bob_maintains_household_2017).
-atom_concat('bob_maintains_household_',2018,bob_maintains_household_2018).
-atom_concat('bob_maintains_household_',2019,bob_maintains_household_2019).
+atom_concat('bob_maintains_household_s2_b_3_B_pos',2015,bob_maintains_household_s2_b_3_B_pos2015).
+atom_concat('bob_maintains_household_s2_b_3_B_pos',2016,bob_maintains_household_s2_b_3_B_pos2016).
+atom_concat('bob_maintains_household_s2_b_3_B_pos',2017,bob_maintains_household_s2_b_3_B_pos2017).
+atom_concat('bob_maintains_household_s2_b_3_B_pos',2018,bob_maintains_household_s2_b_3_B_pos2018).
+atom_concat('bob_maintains_household_s2_b_3_B_pos',2019,bob_maintains_household_s2_b_3_B_pos2019).
 
-atom_concat('bob_income_',2015,bob_income_2015).
-atom_concat('bob_income_',2016,bob_income_2016).
-atom_concat('bob_income_',2017,bob_income_2017).
-atom_concat('bob_income_',2018,bob_income_2018).
-atom_concat('bob_income_',2019,bob_income_2019).
+atom_concat('bob_income_s2_b_3_B_pos',2015,bob_income_s2_b_3_B_pos2015).
+atom_concat('bob_income_s2_b_3_B_pos',2016,bob_income_s2_b_3_B_pos2016_s2_b_3_B_pos).
+atom_concat('bob_income_s2_b_3_B_pos',2017,bob_income_s2_b_3_B_pos2017).
+atom_concat('bob_income_s2_b_3_B_pos',2018,bob_income_s2_b_3_B_pos2018).
+atom_concat('bob_income_s2_b_3_B_pos',2019,bob_income_s2_b_3_B_pos2019).
 
 finance(1).
 finance(300000).
@@ -152,7 +152,7 @@ start_(charlie_and_bob_residence_s2_b_3_B_pos,"2004-01-01").
 end_(charlie_and_bob_residence_s2_b_3_B_pos,"2019-12-31").
 bob_household_maintenance(Year,Event,Start_day,End_day) :-
     between(2015,2019,Year),
-    atom_concat('bob_maintains_household_',Year,Event),
+    atom_concat('bob_maintains_household_s2_b_3_B_pos',Year,Event),
     first_day_year(Year,Start_day),
     last_day_year(Year,End_day).
 payment_(Event) :- bob_household_maintenance(_,Event,_,_).
@@ -165,7 +165,7 @@ s152_d_2_H(charlie_s2_b_3_B_pos,bob_s2_b_3_B_pos,Year,_,Start_day,End_day) :-
     between(2015,2019,Year),first_day_year(Year,Start_day),last_day_year(Year,End_day).
 bob_income(Year,Event,Start_day,End_day) :-
     between(2015,2019,Year),
-    atom_concat('bob_income_',Year,Event),
+    atom_concat('bob_income_s2_b_3_B_pos',Year,Event),
     first_day_year(Year,Start_day),
     last_day_year(Year,End_day).
 income_(Event) :- bob_household_maintenance(_,Event,_,_).

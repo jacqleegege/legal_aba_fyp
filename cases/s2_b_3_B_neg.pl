@@ -121,11 +121,11 @@ date_split("2019-01-01",2019,1,1).
 date("2019-12-31").
 date_split("2019-12-31",2019,12,31).
 
-atom_concat('bob_maintains_household_', 2015, bob_maintains_household_2015).
-atom_concat('bob_maintains_household_', 2016, bob_maintains_household_2016).
-atom_concat('bob_maintains_household_', 2017, bob_maintains_household_2017).
-atom_concat('bob_maintains_household_', 2018, bob_maintains_household_2018).
-atom_concat('bob_maintains_household_', 2019, bob_maintains_household_2019).
+atom_concat('bob_maintains_household_s2_b_3_B_neg', 2015, bob_maintains_household_s2_b_3_B_neg2015).
+atom_concat('bob_maintains_household_s2_b_3_B_neg', 2016, bob_maintains_household_s2_b_3_B_neg2016).
+atom_concat('bob_maintains_household_s2_b_3_B_neg', 2017, bob_maintains_household_s2_b_3_B_neg2017).
+atom_concat('bob_maintains_household_s2_b_3_B_neg', 2018, bob_maintains_household_s2_b_3_B_neg2018).
+atom_concat('bob_maintains_household_s2_b_3_B_neg', 2019, bob_maintains_household_s2_b_3_B_neg2019).
 
 finance(1).
 
@@ -148,7 +148,7 @@ start_(charlie_and_bob_residence_s2_b_3_B_neg,"2004-01-01").
 end_(charlie_and_bob_residence_s2_b_3_B_neg,"2019-12-31").
 bob_household_maintenance(Year,Event,Start_day,End_day) :-
     between(2015,2019,Year),
-    atom_concat('bob_maintains_household_',Year,Event),
+    atom_concat('bob_maintains_household_s2_b_3_B_neg',Year,Event),
     first_day_year(Year,Start_day),
     last_day_year(Year,End_day).
 payment_(Event) :- bob_household_maintenance(_,Event,_,_).

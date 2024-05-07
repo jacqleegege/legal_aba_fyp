@@ -55,74 +55,74 @@ date_split("2017-12-01", 2017, 12, 1).
 date("2017-12-03").
 date_split("2017-12-03", 2017, 12, 3).
 
-s3306_c(alice_employer_2017-01-24,alice,bob,"2017-01-24",2017).
-s3306_c(alice_employer_2017-01-24,alice,cameron,"2017-01-24",2017).
-s3306_c(alice_employer_2017-01-24,alice,dan,"2017-01-24",2017).
-s3306_c(alice_employer_2017-01-24,alice,emily,"2017-01-24",2017).
-s3306_c(alice_employer_2017-01-24,alice,fred,"2017-01-24",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg01-24,alice_s3306_a_2_B_neg,bob_s3306_a_2_B_neg,"2017-01-24",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg01-24,alice_s3306_a_2_B_neg,cameron_s3306_a_2_B_neg,"2017-01-24",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg01-24,alice_s3306_a_2_B_neg,dan_s3306_a_2_B_neg,"2017-01-24",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg01-24,alice_s3306_a_2_B_neg,emily_s3306_a_2_B_neg,"2017-01-24",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg01-24,alice_s3306_a_2_B_neg,fred_s3306_a_2_B_neg,"2017-01-24",2017).
 
-s3306_c(alice_employer_2017-02-04,alice,bob,"2017-02-04",2017).
-s3306_c(alice_employer_2017-02-04,alice,cameron,"2017-02-04",2017).
-s3306_c(alice_employer_2017-02-04,alice,fred,"2017-02-04",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg02-04,alice_s3306_a_2_B_neg,bob_s3306_a_2_B_neg,"2017-02-04",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg02-04,alice_s3306_a_2_B_neg,cameron_s3306_a_2_B_neg,"2017-02-04",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg02-04,alice_s3306_a_2_B_neg,fred_s3306_a_2_B_neg,"2017-02-04",2017).
 
-s3306_c(alice_employer_2017-03-03,alice,bob,"2017-03-03",2017).
-s3306_c(alice_employer_2017-03-03,alice,cameron,"2017-03-03",2017).
-s3306_c(alice_employer_2017-03-03,alice,dan,"2017-03-03",2017).
-s3306_c(alice_employer_2017-03-03,alice,emily,"2017-03-03",2017).
-s3306_c(alice_employer_2017-03-03,alice,fred,"2017-03-03",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg03-03,alice_s3306_a_2_B_neg,bob_s3306_a_2_B_neg,"2017-03-03",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg03-03,alice_s3306_a_2_B_neg,cameron_s3306_a_2_B_neg,"2017-03-03",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg03-03,alice_s3306_a_2_B_neg,dan_s3306_a_2_B_neg,"2017-03-03",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg03-03,alice_s3306_a_2_B_neg,emily_s3306_a_2_B_neg,"2017-03-03",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg03-03,alice_s3306_a_2_B_neg,fred_s3306_a_2_B_neg,"2017-03-03",2017).
 
-s3306_c(alice_employer_2017-03-19,alice,cameron,"2017-03-19",2017).
-s3306_c(alice_employer_2017-03-19,alice,dan,"2017-03-19",2017).
-s3306_c(alice_employer_2017-03-19,alice,emily,"2017-03-19",2017).
-s3306_c(alice_employer_2017-03-19,alice,fred,"2017-03-19",2017).
-s3306_c(alice_employer_2017-03-19,alice,george,"2017-03-19",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg03-19,alice_s3306_a_2_B_neg,cameron_s3306_a_2_B_neg,"2017-03-19",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg03-19,alice_s3306_a_2_B_neg,dan_s3306_a_2_B_neg,"2017-03-19",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg03-19,alice_s3306_a_2_B_neg,emily_s3306_a_2_B_neg,"2017-03-19",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg03-19,alice_s3306_a_2_B_neg,fred_s3306_a_2_B_neg,"2017-03-19",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg03-19,alice_s3306_a_2_B_neg,george_s3306_a_2_B_neg,"2017-03-19",2017).
 
-s3306_c(alice_employer_2017-04-02,alice,bob,"2017-04-02",2017).
-s3306_c(alice_employer_2017-04-02,alice,cameron,"2017-04-02",2017).
-s3306_c(alice_employer_2017-04-02,alice,dan,"2017-04-02",2017).
-s3306_c(alice_employer_2017-04-02,alice,fred,"2017-04-02",2017).
-s3306_c(alice_employer_2017-04-02,alice,george,"2017-04-02",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg04-02,alice_s3306_a_2_B_neg,bob_s3306_a_2_B_neg,"2017-04-02",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg04-02,alice_s3306_a_2_B_neg,cameron_s3306_a_2_B_neg,"2017-04-02",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg04-02,alice_s3306_a_2_B_neg,dan_s3306_a_2_B_neg,"2017-04-02",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg04-02,alice_s3306_a_2_B_neg,fred_s3306_a_2_B_neg,"2017-04-02",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg04-02,alice_s3306_a_2_B_neg,george_s3306_a_2_B_neg,"2017-04-02",2017).
 
-s3306_c(alice_employer_2017-05-09,alice,cameron,"2017-05-09",2017).
-s3306_c(alice_employer_2017-05-09,alice,dan,"2017-05-09",2017).
-s3306_c(alice_employer_2017-05-09,alice,emily,"2017-05-09",2017).
-s3306_c(alice_employer_2017-05-09,alice,fred,"2017-05-09",2017).
-s3306_c(alice_employer_2017-05-09,alice,george,"2017-05-09",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg05-09,alice_s3306_a_2_B_neg,cameron_s3306_a_2_B_neg,"2017-05-09",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg05-09,alice_s3306_a_2_B_neg,dan_s3306_a_2_B_neg,"2017-05-09",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg05-09,alice_s3306_a_2_B_neg,emily_s3306_a_2_B_neg,"2017-05-09",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg05-09,alice_s3306_a_2_B_neg,fred_s3306_a_2_B_neg,"2017-05-09",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg05-09,alice_s3306_a_2_B_neg,george_s3306_a_2_B_neg,"2017-05-09",2017).
 
-s3306_c(alice_employer_2017-10-15,alice,bob,"2017-10-15",2017).
-s3306_c(alice_employer_2017-10-15,alice,cameron,"2017-10-15",2017).
-s3306_c(alice_employer_2017-10-15,alice,dan,"2017-10-15",2017).
-s3306_c(alice_employer_2017-10-15,alice,emily,"2017-10-15",2017).
-s3306_c(alice_employer_2017-10-15,alice,george,"2017-10-15",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg10-15,alice_s3306_a_2_B_neg,bob_s3306_a_2_B_neg,"2017-10-15",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg10-15,alice_s3306_a_2_B_neg,cameron_s3306_a_2_B_neg,"2017-10-15",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg10-15,alice_s3306_a_2_B_neg,dan_s3306_a_2_B_neg,"2017-10-15",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg10-15,alice_s3306_a_2_B_neg,emily_s3306_a_2_B_neg,"2017-10-15",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg10-15,alice_s3306_a_2_B_neg,george_s3306_a_2_B_neg,"2017-10-15",2017).
 
-s3306_c(alice_employer_2017-10-25,alice,bob,"2017-10-25",2017).
-s3306_c(alice_employer_2017-10-25,alice,emily,"2017-10-25",2017).
-s3306_c(alice_employer_2017-10-25,alice,fred,"2017-10-25",2017).
-s3306_c(alice_employer_2017-10-25,alice,george,"2017-10-25",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg10-25,alice_s3306_a_2_B_neg,bob_s3306_a_2_B_neg,"2017-10-25",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg10-25,alice_s3306_a_2_B_neg,emily_s3306_a_2_B_neg,"2017-10-25",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg10-25,alice_s3306_a_2_B_neg,fred_s3306_a_2_B_neg,"2017-10-25",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg10-25,alice_s3306_a_2_B_neg,george_s3306_a_2_B_neg,"2017-10-25",2017).
 
-s3306_c(alice_employer_2017-11-08,alice,bob,"2017-11-08",2017).
-s3306_c(alice_employer_2017-11-08,alice,cameron,"2017-11-08",2017).
-s3306_c(alice_employer_2017-11-08,alice,emily,"2017-11-08",2017).
-s3306_c(alice_employer_2017-11-08,alice,fred,"2017-11-08",2017).
-s3306_c(alice_employer_2017-11-08,alice,george,"2017-11-08",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg11-08,alice_s3306_a_2_B_neg,bob_s3306_a_2_B_neg,"2017-11-08",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg11-08,alice_s3306_a_2_B_neg,cameron_s3306_a_2_B_neg,"2017-11-08",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg11-08,alice_s3306_a_2_B_neg,emily_s3306_a_2_B_neg,"2017-11-08",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg11-08,alice_s3306_a_2_B_neg,fred_s3306_a_2_B_neg,"2017-11-08",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg11-08,alice_s3306_a_2_B_neg,george_s3306_a_2_B_neg,"2017-11-08",2017).
 
-s3306_c(alice_employer_2017-11-22,alice,bob,"2017-11-22",2017).
-s3306_c(alice_employer_2017-11-22,alice,cameron,"2017-11-22",2017).
-s3306_c(alice_employer_2017-11-22,alice,dan,"2017-11-22",2017).
-s3306_c(alice_employer_2017-11-22,alice,emily,"2017-11-22",2017).
-s3306_c(alice_employer_2017-11-22,alice,fred,"2017-11-22",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg11-22,alice_s3306_a_2_B_neg,bob_s3306_a_2_B_neg,"2017-11-22",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg11-22,alice_s3306_a_2_B_neg,cameron_s3306_a_2_B_neg,"2017-11-22",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg11-22,alice_s3306_a_2_B_neg,dan_s3306_a_2_B_neg,"2017-11-22",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg11-22,alice_s3306_a_2_B_neg,emily_s3306_a_2_B_neg,"2017-11-22",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg11-22,alice_s3306_a_2_B_neg,fred_s3306_a_2_B_neg,"2017-11-22",2017).
 
-s3306_c(alice_employer_2017-12-01,alice,bob,"2017-12-01",2017).
-s3306_c(alice_employer_2017-12-01,alice,cameron,"2017-12-01",2017).
-s3306_c(alice_employer_2017-12-01,alice,dan,"2017-12-01",2017).
-s3306_c(alice_employer_2017-12-01,alice,emily,"2017-12-01",2017).
-s3306_c(alice_employer_2017-12-01,alice,george,"2017-12-01",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg12-01,alice_s3306_a_2_B_neg,bob_s3306_a_2_B_neg,"2017-12-01",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg12-01,alice_s3306_a_2_B_neg,cameron_s3306_a_2_B_neg,"2017-12-01",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg12-01,alice_s3306_a_2_B_neg,dan_s3306_a_2_B_neg,"2017-12-01",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg12-01,alice_s3306_a_2_B_neg,emily_s3306_a_2_B_neg,"2017-12-01",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg12-01,alice_s3306_a_2_B_neg,george_s3306_a_2_B_neg,"2017-12-01",2017).
 
-s3306_c(alice_employer_2017-12-03,alice,bob,"2017-12-03",2017).
-s3306_c(alice_employer_2017-12-03,alice,cameron,"2017-12-03",2017).
-s3306_c(alice_employer_2017-12-03,alice,dan,"2017-12-03",2017).
-s3306_c(alice_employer_2017-12-03,alice,emily,"2017-12-03",2017).
-s3306_c(alice_employer_2017-12-03,alice,george,"2017-12-03",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg12-03,alice_s3306_a_2_B_neg,bob_s3306_a_2_B_neg,"2017-12-03",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg12-03,alice_s3306_a_2_B_neg,cameron_s3306_a_2_B_neg,"2017-12-03",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg12-03,alice_s3306_a_2_B_neg,dan_s3306_a_2_B_neg,"2017-12-03",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg12-03,alice_s3306_a_2_B_neg,emily_s3306_a_2_B_neg,"2017-12-03",2017).
+s3306_c(alice_employer_2017-s3306_a_2_B_neg12-03,alice_s3306_a_2_B_neg,george_s3306_a_2_B_neg,"2017-12-03",2017).
 
 % s3306_c(Service_event,alice,Employee,Day,_) :-
 %     member(Day, ["2017-01-24","2017-02-04","2017-03-03","2017-03-19","2017-04-02","2017-05-09","2017-10-15","2017-10-25","2017-11-08","2017-11-22","2017-12-01","2017-12-03"]),
@@ -177,18 +177,18 @@ s3306_c(alice_employer_2017-12-03,alice,george,"2017-12-03",2017).
 %         )
 %     ),
 %     atom_concat("alice_employer_",Day,Service_event).
-purpose_(alice_employer_2017-01-24,"agricultural labor").
-purpose_(alice_employer_2017-02-04,"agricultural labor").
-purpose_(alice_employer_2017-03-03,"agricultural labor").
-purpose_(alice_employer_2017-03-19,"agricultural labor").
-purpose_(alice_employer_2017-04-02,"agricultural labor").
-purpose_(alice_employer_2017-05-09,"agricultural labor").
-purpose_(alice_employer_2017-10-15,"agricultural labor").
-purpose_(alice_employer_2017-10-25,"agricultural labor").
-purpose_(alice_employer_2017-11-08,"agricultural labor").
-purpose_(alice_employer_2017-11-22,"agricultural labor").
-purpose_(alice_employer_2017-12-01,"agricultural labor").
-purpose_(alice_employer_2017-12-03,"agricultural labor").% all that's mentioned here is agricultural labor
+purpose_(alice_employer_2017-s3306_a_2_B_neg01-24,"agricultural labor").
+purpose_(alice_employer_2017-s3306_a_2_B_neg02-04,"agricultural labor").
+purpose_(alice_employer_2017-s3306_a_2_B_neg03-03,"agricultural labor").
+purpose_(alice_employer_2017-s3306_a_2_B_neg03-19,"agricultural labor").
+purpose_(alice_employer_2017-s3306_a_2_B_neg04-02,"agricultural labor").
+purpose_(alice_employer_2017-s3306_a_2_B_neg05-09,"agricultural labor").
+purpose_(alice_employer_2017-s3306_a_2_B_neg10-15,"agricultural labor").
+purpose_(alice_employer_2017-s3306_a_2_B_neg10-25,"agricultural labor").
+purpose_(alice_employer_2017-s3306_a_2_B_neg11-08,"agricultural labor").
+purpose_(alice_employer_2017-s3306_a_2_B_neg11-22,"agricultural labor").
+purpose_(alice_employer_2017-s3306_a_2_B_neg12-01,"agricultural labor").
+purpose_(alice_employer_2017-s3306_a_2_B_neg12-03,"agricultural labor").% all that's mentioned here is agricultural labor
 
 % Test
 :- \+ s3306_a_2_B(alice_s3306_a_2_B_neg,2017).

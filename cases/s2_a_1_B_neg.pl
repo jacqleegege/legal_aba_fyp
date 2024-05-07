@@ -114,20 +114,20 @@ date_split("2024-12-31",2024,12,31).
 finance(1).
 finance(312489).
 
-atom_concat('bob_maintains_household_', 2011, bob_maintains_household_2011).
-atom_concat('bob_maintains_household_', 2012, bob_maintains_household_2012).
-atom_concat('bob_maintains_household_', 2013, bob_maintains_household_2013).
-atom_concat('bob_maintains_household_', 2014, bob_maintains_household_2014).
-atom_concat('bob_maintains_household_', 2015, bob_maintains_household_2015).
-atom_concat('bob_maintains_household_', 2016, bob_maintains_household_2016).
-atom_concat('bob_maintains_household_', 2017, bob_maintains_household_2017).
-atom_concat('bob_maintains_household_', 2018, bob_maintains_household_2018).
-atom_concat('bob_maintains_household_', 2019, bob_maintains_household_2019).
-atom_concat('bob_maintains_household_', 2020, bob_maintains_household_2020).
-atom_concat('bob_maintains_household_', 2021, bob_maintains_household_2021).
-atom_concat('bob_maintains_household_', 2022, bob_maintains_household_2022).
-atom_concat('bob_maintains_household_', 2023, bob_maintains_household_2023).
-atom_concat('bob_maintains_household_', 2024, bob_maintains_household_2024).
+atom_concat('bob_maintains_household_s2_a_1_B_neg', 2011, bob_maintains_household_s2_a_1_B_neg2011).
+atom_concat('bob_maintains_household_s2_a_1_B_neg', 2012, bob_maintains_household_s2_a_1_B_neg2012).
+atom_concat('bob_maintains_household_s2_a_1_B_neg', 2013, bob_maintains_household_s2_a_1_B_neg2013).
+atom_concat('bob_maintains_household_s2_a_1_B_neg', 2014, bob_maintains_household_s2_a_1_B_neg2014).
+atom_concat('bob_maintains_household_s2_a_1_B_neg', 2015, bob_maintains_household_s2_a_1_B_neg2015).
+atom_concat('bob_maintains_household_s2_a_1_B_neg', 2016, bob_maintains_household_s2_a_1_B_neg2016).
+atom_concat('bob_maintains_household_s2_a_1_B_neg', 2017, bob_maintains_household_s2_a_1_B_neg2017).
+atom_concat('bob_maintains_household_s2_a_1_B_neg', 2018, bob_maintains_household_s2_a_1_B_neg2018).
+atom_concat('bob_maintains_household_s2_a_1_B_neg', 2019, bob_maintains_household_s2_a_1_B_neg2019).
+atom_concat('bob_maintains_household_s2_a_1_B_neg', 2020, bob_maintains_household_s2_a_1_B_neg2020).
+atom_concat('bob_maintains_household_s2_a_1_B_neg', 2021, bob_maintains_household_s2_a_1_B_neg2021).
+atom_concat('bob_maintains_household_s2_a_1_B_neg', 2022, bob_maintains_household_s2_a_1_B_neg2022).
+atom_concat('bob_maintains_household_s2_a_1_B_neg', 2023, bob_maintains_household_s2_a_1_B_neg2023).
+atom_concat('bob_maintains_household_s2_a_1_B_neg', 2024, bob_maintains_household_s2_a_1_B_neg2024).
 
 marriage_(alice_and_bob_s2_a_1_B_neg).
 agent_(alice_and_bob_s2_a_1_B_neg,alice_s2_a_1_B_neg).
@@ -148,7 +148,7 @@ start_(charlie_and_bob_residence_s2_a_1_B_neg,"2011-01-01").
 end_(charlie_and_bob_residence_s2_a_1_B_neg,"2024-12-31").
 bob_household_maintenance(Year,Event,Start_day,End_day) :-
     between(2011,2024,Year),
-    atom_concat('bob_maintains_household_',Year,Event),
+    atom_concat('bob_maintains_household_s2_a_1_B_neg',Year,Event),
     first_day_year(Year,Start_day),
     last_day_year(Year,End_day).
 payment_(Event) :- bob_household_maintenance(_,Event,_,_).

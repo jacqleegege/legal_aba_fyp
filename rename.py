@@ -45,8 +45,6 @@ for name in rename_list:
         section = filename[6:-3]
     replacements[old_name] = name+section
 
-print(replacements)
-
 def replace_all(text, dic):
     for i, j in dic.items():
         text = re.sub(i,j,text)
