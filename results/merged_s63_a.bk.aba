@@ -2751,14 +2751,14 @@ s63_b_xor_a(Taxp,Taxy,Taxable_income_tmp):-
 %(a) In general
 
 %Except as provided in subsection (b), for purposes of this subtitle, the term "taxable income" means gross income minus the deductions allowed by this chapter (other than the standard deduction).
-s63_a(Taxp,Taxy,Taxinc,Grossinc,Ded63) :-
-    gross_income(Taxp,Taxy,Grossinc),
-	s63_d(Taxp,_,Total_deduction,Taxy),
-	s68(Taxp,Total_deduction,Total_deduction_reduced,Taxy),
-	s151(Taxp,Exemption_151,_,_,Taxy),
-	Ded63 = Total_deduction_reduced + Exemption_151,
-    Taxable_income_tmp = Grossinc - Ded63,
-	max(Taxinc,Taxable_income_tmp,0).
+%s63_a(Taxp,Taxy,Taxinc,Grossinc,Ded63) :-
+%    gross_income(Taxp,Taxy,Grossinc),
+%	s63_d(Taxp,_,Total_deduction,Taxy),
+%	s68(Taxp,Total_deduction,Total_deduction_reduced,Taxy),
+%	s151(Taxp,Exemption_151,_,_,Taxy),
+%	Ded63 = Total_deduction_reduced + Exemption_151,
+%    Taxable_income_tmp = Grossinc - Ded63,
+%	max(Taxinc,Taxable_income_tmp,0).
 
 %(b) Individuals who do not itemize their deductions
 
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % In 2017, Alice was paid $33200. She is allowed deductions under section 151 of $2000 for the year 2017. She is allowed an itemized deduction of $4252 in 2017.
 
 % Question

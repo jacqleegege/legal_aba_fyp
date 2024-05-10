@@ -2838,8 +2838,8 @@ s63_c_2_A(Taxp,Taxy,Multiplier) :-
     s63_c_2_A_i_or_ii(Taxp,Taxy),
     Multiplier = 2.
 
-s63_c_2_A_i_or_ii(Taxp,Taxy):-
-    s63_c_2_A_i(Taxp,_,Taxy).
+%s63_c_2_A_i_or_ii(Taxp,Taxy):-
+%    s63_c_2_A_i(Taxp,_,Taxy).
 s63_c_2_A_i_or_ii(Taxp,Taxy):-
      s63_c_2_A_ii(Taxp,Taxy).
 
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % In 2017, Alice was paid $33200 in remuneration. Alice and Bob have been married since Feb 3rd, 2017. Alice and Bob file separate returns in 2017.
 
 % Question

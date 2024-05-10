@@ -977,8 +977,8 @@ s152_d_2_F(Dependent,Taxp,S125,Start_day,End_day) :-
     earlier(End_day,End_day_sibling,End_day_child).
 
 %(G) A son-in-law, daughter-in-law, father-in-law, mother-in-law, brother-in-law, or sister-in-law.
-s152_d_2_G(Dependent,Taxp,Start_day,End_day) :-
-    is_child_in_law_of(Dependent,Taxp,Start_day,End_day).
+%s152_d_2_G(Dependent,Taxp,Start_day,End_day) :-
+%    is_child_in_law_of(Dependent,Taxp,Start_day,End_day).
 s152_d_2_G(Dependent,Taxp,Start_day,End_day) :-
     is_parent_in_law_of(Dependent,Taxp,Start_day,End_day).
 s152_d_2_G(Dependent,Taxp,Start_day,End_day) :-
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % Alice and Bob started living together on April 15th, 2014. Alice and Bob are not related, nor do they have relatives married to one another.
 
 % Question

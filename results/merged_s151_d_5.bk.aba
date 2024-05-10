@@ -508,9 +508,9 @@ s151_d_3_B_joint_return(Taxp,Taxy,Spouse):-
 %(5) Special rules for taxable years 2018 through 2025
 %
 %In the case of a taxable year beginning after December 31, 2017, and before January 1, 2026, the term "exemption amount" means zero.
-s151_d_5(Ea,Taxy) :-
-    between(2018,2025,Taxy),
-    Ea = 0.
+%s151_d_5(Ea,Taxy) :-
+%    between(2018,2025,Taxy),
+%    Ea = 0.
 
 assumption(not_start_(Event,Time)).
 assumption(not_end_(Event,Time)).
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % Alice is entitled to an exemption under section 151(b) for the year 2018.
 
 % Question

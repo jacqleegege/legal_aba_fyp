@@ -2945,13 +2945,13 @@ agent_itemded(Itemded,Taxp,Spouse):-
 
 
 %(B) a nonresident alien individual, or
-s63_c_6_B(Taxp,Taxy) :-
-    nonresident_alien_(Taxp_is_nra),
-    agent_(Taxp_is_nra,Taxp),
-    first_day_year(Taxy,First_day_year),
-    last_day_year(Taxy,Last_day_year),
-    start_taxp_is_nra(Taxp_is_nra,Start_nra,Last_day_year),
-    end_taxp_is_nra(Taxp_is_nra,End_nra,First_day_year).
+%s63_c_6_B(Taxp,Taxy) :-
+%    nonresident_alien_(Taxp_is_nra),
+%    agent_(Taxp_is_nra,Taxp),
+%    first_day_year(Taxy,First_day_year),
+%    last_day_year(Taxy,Last_day_year),
+%    start_taxp_is_nra(Taxp_is_nra,Start_nra,Last_day_year),
+%    end_taxp_is_nra(Taxp_is_nra,End_nra,First_day_year).
 
 start_taxp_is_nra(Taxp_is_nra,Start_nra,Last_day_year):-
     nonresident_alien_(Taxp_is_nra), date(Start_nra),
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % In 2017, Alice was paid $33200. Alice and Bob got married on Feb 3rd, 2017. Alice was a nonresident alien from August 23rd, 2015 to September 15th, 2016.
 
 % Question

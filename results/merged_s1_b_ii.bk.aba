@@ -128,11 +128,11 @@ s1_b_i(Taxinc,Tax) :-
     Taxinc < 29601,
     Tax = (Taxinc*15)/100.
 %(ii) $4,440, plus 28% of the excess over $29,600 if the taxable income is over $29,600 but not over $76,400;
-s1_b_ii(Taxinc,Tax) :-
-    finance(Taxinc),
-    Taxinc < 76401,
-    29600 < Taxinc,
-    Tax = 4440+((Taxinc-29600)*28)/100.
+%s1_b_ii(Taxinc,Tax) :-
+%    finance(Taxinc),
+%    Taxinc < 76401,
+%    29600 < Taxinc,
+%    Tax = 4440+((Taxinc-29600)*28)/100.
 %(iii) $17,544, plus 31% of the excess over $76,400 if the taxable income is over $76,400 but not over $127,500;
 s1_b_iii(Taxinc,Tax) :-
     finance(Taxinc),
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % Alice is a head of household for the year 2017. Alice's taxable income for the year 2017 is $9560.
 
 % Question

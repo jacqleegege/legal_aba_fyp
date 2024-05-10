@@ -955,8 +955,8 @@ s152_d_2_B(Dependent,Taxp,Start_day,End_day) :-
     is_stepsibling_of(Dependent,Taxp,Start_day,End_day).
 
 %(C) The father or mother, or an ancestor of either.
-s152_d_2_C(S113,Taxp,Start_day,End_day) :-
-	is_descendent_of(Taxp,S113,Start_day,End_day).
+%s152_d_2_C(S113,Taxp,Start_day,End_day) :-
+%	is_descendent_of(Taxp,S113,Start_day,End_day).
 
 %(D) A stepfather or stepmother.
 s152_d_2_D(Dependent,Taxp,Start_day,End_day) :-
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % Bob is Alice's son since April 15th, 2014.
 
 % Question

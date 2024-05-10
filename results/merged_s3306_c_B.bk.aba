@@ -2126,16 +2126,16 @@ s3306_c_A_country(Geographical_location,Country):-
 	Geographical_location="usa".
 
 %(B) performed outside the United States (except in a contiguous country with which the United States has an agreement relating to unemployment compensation) by a citizen of the United States as an employee of an American employer, except-
-s3306_c_B(Service,Employer,Employee,Location) :-
-	agent_(Service, Employee),
-	patient_(Service, Employer),
-	s3306_c_B_location(Location,Country),
-	not_s3306_c_B_agreement(Location),
-    american_employer_(Employer_is_american_employer),
-    agent_(Employer_is_american_employer, Employer),
-	citizenship_(Employee_is_american),
-	agent_(Employee_is_american,Employee),
-    patient_(Employee_is_american,"usa").
+%s3306_c_B(Service,Employer,Employee,Location) :-
+%	agent_(Service, Employee),
+%	patient_(Service, Employer),
+%	s3306_c_B_location(Location,Country),
+%	not_s3306_c_B_agreement(Location),
+%    american_employer_(Employer_is_american_employer),
+%    agent_(Employer_is_american_employer, Employer),
+%	citizenship_(Employee_is_american),
+%	agent_(Employee_is_american,Employee),
+%    patient_(Employee_is_american,"usa").
 
 s3306_c_B_location(Location,Country):-
 	country_(Location,Country),
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % Alice has paid $3200 to Bob for work done from Feb 1st, 2017 to Sep 2nd, 2017, in Caracas, Venezuela. Bob is an American citizen and Alice is an American employer.
 
 % Question

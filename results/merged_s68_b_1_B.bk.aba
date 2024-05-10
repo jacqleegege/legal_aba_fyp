@@ -3348,9 +3348,9 @@ joint_return_or_s2_a(Taxp,Joint_return,Surviving_spouse,Taxy):-
 
 
 %(B) $275,000 in the case of a head of household (as defined in section 2(b)),
-s68_b_1_B(Taxp,Aa,Taxy) :-
-    s2_b(Taxp,_,Taxy),
-    amount("B",Aa).
+%s68_b_1_B(Taxp,Aa,Taxy) :-
+%    s2_b(Taxp,_,Taxy),
+%    amount("B",Aa).
 
 %(C) $250,000 in the case of an individual who is not married and who is not a surviving spouse or head of household, and
 s68_b_1_C(Taxp,Aa,Taxy) :-
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % In 2016, Alice's income was $567192. Alice is a surviving spouse for the year 2016.
 
 % Question

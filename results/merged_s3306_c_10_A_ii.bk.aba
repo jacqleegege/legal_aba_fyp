@@ -2367,12 +2367,12 @@ s3306_c_13_student(Student_is_enrolled,Stop_enrollment,Workday):-
 	is_before(Workday,Stop_enrollment).
 	
 %(ii) by the spouse of such a student, or
-s3306_c_10_A_ii(Spouse,Student,Workday) :-
-	date_split(Workday,Year,M1,D1),
-    s7703(Student,Spouse,Marriage,Year),
-	s3306_c_10_A_ii_start(Marriage,Workday),
-	s3306_c_10_A_ii_end(Marriage,Workday),
-	s3306_c_10_A_i(Spouse,_,Workday).
+%s3306_c_10_A_ii(Spouse,Student,Workday) :-
+%	date_split(Workday,Year,M1,D1),
+%    s7703(Student,Spouse,Marriage,Year),
+%	s3306_c_10_A_ii_start(Marriage,Workday),
+%	s3306_c_10_A_ii_end(Marriage,Workday),
+%	s3306_c_10_A_i(Spouse,_,Workday).
 
 s3306_c_10_A_ii_start(Marriage,Workday):-
 	marriage(Marriage),date(Workday),not_start_(Marriage,_).
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % Alice's husband, Bob, was paid $3200 in 2017 for services performed for Johns Hopkins University. Alice was enrolled at Johns Hopkins University and attending classes from August 29, 2015 to May 30th, 2019.
 
 % Question

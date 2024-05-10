@@ -938,11 +938,11 @@ s152_d_2(Dependent,Taxp,Taxy,Start_day,End_day) :-
 %For purposes of paragraph (1)(A), an individual bears a relationship to the taxpayer described in this paragraph if the individual is any of the following with respect to the taxpayer:
 
 %(A) A child or a descendant of a child.
-s152_d_2_A(Dependent,Taxp,Start_day,End_day) :-
-	is_child_of(Child,Taxp,Start_child,End_child),
-    Dependent=Child,
-    Start_day=Start_child,
-    End_day=End_child.
+%s152_d_2_A(Dependent,Taxp,Start_day,End_day) :-
+%	is_child_of(Child,Taxp,Start_child,End_child),
+%    Dependent=Child,
+%    Start_day=Start_child,
+%    End_day=End_child.
 s152_d_2_A(Dependent,Taxp,Start_day,End_day) :-
     is_child_of(Child,Taxp,Start_child,End_child),
     not_same_person(Dependent,Child),
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % Bob is Alice's brother since April 15th, 2014.
 
 % Question

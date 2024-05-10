@@ -1261,17 +1261,17 @@ is_relative_of_taxpayer(Dependent,Taxp,Start_dependent,End_dependent,First_day_y
     is_before(Last_day_year,End_dependent).
 
 % %For purposes of this paragraph, an individual shall be considered as maintaining a household only if over half of the cost of maintaining the household during the taxable year is furnished by such individual.
-s2_a_1_B(Taxp,Household,Dependent,Taxy) :-
-    % who maintains as his home a household
-    first_day_year(Taxy,First_day_year),
-    last_day_year(Taxy,Last_day_year),
-    residence_(Taxpayer_residence),
-    agent_(Taxpayer_residence,Taxp),
-    patient_(Taxpayer_residence,Household),
-    start_(Taxpayer_residence,Start_taxpayer_residence),
-    is_before(Start_taxpayer_residence,First_day_year),
-    taxp_residence_not_end_after_year(Taxpayer_residence,End_taxpayer_residence,Last_day_year),
-    % which constitutes for the taxable year the principal place of abode (as a member of such household) of...
+%s2_a_1_B(Taxp,Household,Dependent,Taxy) :-
+%    % who maintains as his home a household
+%    first_day_year(Taxy,First_day_year),
+%    last_day_year(Taxy,Last_day_year),
+%    residence_(Taxpayer_residence),
+%    agent_(Taxpayer_residence,Taxp),
+%    patient_(Taxpayer_residence,Household),
+%    start_(Taxpayer_residence,Start_taxpayer_residence),
+%    is_before(Start_taxpayer_residence,First_day_year),
+%    taxp_residence_not_end_after_year(Taxpayer_residence,End_taxpayer_residence,Last_day_year),
+%    % which constitutes for the taxable year the principal place of abode (as a member of such household) of...
     residence_(Dependent_residence),
     agent_(Dependent_residence,Dependent),
     patient_(Dependent_residence,Household),
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % Alice and Bob got married on Feb 3rd, 1992. Alice has a child, Charlie, born October 9th, 2000. Alice died on July 9th, 2021. From 2011 to 2024, Bob furnished the costs of maintaining the home where he and Charlie lived during that time. In 2020, Charlie filed a joint return with his spouse whom he married on Dec 1st, 2019. Charlie earned $312489 in 2020.
 
 % Question

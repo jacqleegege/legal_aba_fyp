@@ -3079,15 +3079,15 @@ s63_f_1_A(Taxp,Taxy) :-
     Y > 64.
 
 %(B) for the spouse of the taxpayer if the spouse has attained age 65 before the close of the taxable year and an additional exemption is allowable to the taxpayer for such spouse under section 151(b).
-s63_f_1_B(Taxp,Spouse,Taxy) :-
-    s7703(Taxp,Spouse,_,Taxy),
-    birth_(Spouse_birth),
-    agent_(Spouse_birth,Spouse),
-    start_(Spouse_birth,Day_of_birth),
-    last_day_year(Taxy,Last_day_year),
-    duration(Day_of_birth,Last_day_year,Y,M,D),
-    Y > 64,
-    s151_b_applies(Taxp,Spouse,Taxy).
+%s63_f_1_B(Taxp,Spouse,Taxy) :-
+%    s7703(Taxp,Spouse,_,Taxy),
+%    birth_(Spouse_birth),
+%    agent_(Spouse_birth,Spouse),
+%    start_(Spouse_birth,Day_of_birth),
+%    last_day_year(Taxy,Last_day_year),
+%    duration(Day_of_birth,Last_day_year,Y,M,D),
+%    Y > 64,
+%    s151_b_applies(Taxp,Spouse,Taxy).
 
 %(2) Additional amount for blind
 
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % In 2017, Alice was paid $33200. Alice and Bob have been married since Feb 3rd, 2017. Alice was born March 2nd, 1950 and Bob was born March 3rd, 1955. In addition, Alice is allowed an exemption for Bob under section 151(b) for the year 2017.
 
 % Question

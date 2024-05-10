@@ -1291,17 +1291,17 @@ s2_a_2(Taxp,Spouse,Previous_marriage,Taxy) :-
     not_s2_a_2_B(Taxp,Spouse,Taxy).
 
 %(A) if the taxpayer has remarried at any time before the close of the taxable year, or
-s2_a_2_A(Taxp,Remarriage,Previous_marriage,S31,Taxy) :-
-    marriage_(Previous_marriage),
-    agent_(Previous_marriage,Taxp),
-    start_(Previous_marriage,Start_previous_marriage),
-    marriage_(Remarriage),
-    agent_(Remarriage,Taxp),
-    start_(Remarriage,S31),
-    not_same_marriage(Remarriage,Previous_marriage),
-    is_before(Start_previous_marriage,S31),
-    last_day_year(Taxy,Last_day_year),
-    is_before(S31,Last_day_year).
+%s2_a_2_A(Taxp,Remarriage,Previous_marriage,S31,Taxy) :-
+%    marriage_(Previous_marriage),
+%    agent_(Previous_marriage,Taxp),
+%    start_(Previous_marriage,Start_previous_marriage),
+%    marriage_(Remarriage),
+%    agent_(Remarriage,Taxp),
+%    start_(Remarriage,S31),
+%    not_same_marriage(Remarriage,Previous_marriage),
+%    is_before(Start_previous_marriage,S31),
+%    last_day_year(Taxy,Last_day_year),
+%    is_before(S31,Last_day_year).
 
 agent2_1(Taxp,Spouse) :- person(Spouse), agent_(Someone_is_nra,Taxp).
 agent2_1(Taxp,Spouse) :- person(Taxp), agent_(Someone_is_nra,Spouse).
@@ -4720,7 +4720,9 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+% CASES START HERE 
+% Text
 % Alice and Bob got married on Feb 3rd, 1992. Alice died on July 9th, 2014. Bob married Charlie on September 14th, 2015.
 
 % Question

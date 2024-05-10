@@ -3111,12 +3111,12 @@ s63_f_2_count2(Taxp,Taxy,Count2):-
     
 
 %(A) for himself if he is blind at the close of the taxable year, and
-s63_f_2_A(Taxp,Taxy) :-
-    blindness_(Taxp_is_blind),
-    agent_(Taxp_is_blind,Taxp),
-    start_(Taxp_is_blind,Start_time),
-    last_day_year(Taxy,Last_day_year),
-    is_before(Start_time,Last_day_year).
+%s63_f_2_A(Taxp,Taxy) :-
+%    blindness_(Taxp_is_blind),
+%    agent_(Taxp_is_blind,Taxp),
+%    start_(Taxp_is_blind,Start_time),
+%    last_day_year(Taxy,Last_day_year),
+%    is_before(Start_time,Last_day_year).
 
 %(B) for the spouse of the taxpayer if the spouse is blind as of the close of the taxable year and an additional exemption is allowable to the taxpayer for such spouse under section 151(b).
 s63_f_2_B(Taxp,Spouse,Taxy) :-
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % In 2017, Alice was paid $33200. Alice and Bob have been married since Feb 3rd, 2017. Alice and Bob file separate returns in 2017. Alice has been blind since April 19, 2015.
 
 % Question

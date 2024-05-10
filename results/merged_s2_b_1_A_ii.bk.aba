@@ -1478,9 +1478,9 @@ s2_b_1_A_i_II(Dependent,Taxp,Taxy) :-
     s152_b_2(Dependent,_,Taxp,Taxy).
 
 %(ii) any other person who is a dependent of the taxpayer, if the taxpayer is entitled to a deduction for the taxable year for such person under section 151, or
-s2_b_1_A_ii(Taxp,Dependent,Taxy) :-
-    s152(Dependent,Taxp,Taxy),
-    s151_b_or_c_applies(Taxp,Dependent,Taxy).
+%s2_b_1_A_ii(Taxp,Dependent,Taxy) :-
+%    s152(Dependent,Taxp,Taxy),
+%    s151_b_or_c_applies(Taxp,Dependent,Taxy).
 
 s151_b_or_c_applies(Taxp,Dependent,Taxy):-
     s151_b_applies(Taxp,Dependent,Taxy).
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % Alice and Bob got married on Feb 3rd, 1992. Bob has a brother, Charlie, born October 9th, 2000. Alice died on July 9th, 2014. From 2004 to 2019, Bob furnished the costs of maintaining the home where he and Charlie lived during that time. From 2015 to 2019, Bob was entitled to a deduction for Charlie under section 151(c). In 2017, Bob earned $5254312.
 
 % Question

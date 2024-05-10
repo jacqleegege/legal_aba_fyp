@@ -3133,11 +3133,11 @@ s63_f_2_B(Taxp,Spouse,Taxy) :-
 %(3) Higher amount for certain unmarried individuals
 
 %In the case of an individual who is not married and is not a surviving spouse, paragraphs (1) and (2) shall be applied by substituting "$750" for "$600".
-s63_f_3(Taxp,Taxy,Amount) :-
-    person(Taxp),year(Taxy),
-    not_s7703(Taxp,_,_,Taxy),
-    not_s2_a(Taxp,_,Taxy),
-    Amount = 750.
+%s63_f_3(Taxp,Taxy,Amount) :-
+%    person(Taxp),year(Taxy),
+%    not_s7703(Taxp,_,_,Taxy),
+%    not_s2_a(Taxp,_,Taxy),
+%    Amount = 750.
 
 %(g) Marital status
 
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % In 2017, Alice was paid $33200. Alice was born March 2nd, 1950 and Bob was born March 3rd, 1955.
 
 % Question

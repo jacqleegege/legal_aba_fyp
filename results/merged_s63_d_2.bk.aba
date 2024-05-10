@@ -3031,8 +3031,8 @@ deductions(Deduction,Amount,Taxp,First,Last):-
 %(1) the deductions allowable in arriving at adjusted gross income, and
 
 %(2) the deduction for personal exemptions provided by section 151.
-s63_d_2(Taxp,Ded151,Taxy) :-
-    s151(Taxp,_,_,Ded151,Taxy).
+%s63_d_2(Taxp,Ded151,Taxy) :-
+%    s151(Taxp,_,_,Ded151,Taxy).
 
 %(f) Aged or blind additional amounts
 s63_f(Taxp,Additional_amounts,Taxy) :-
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % In 2017, Alice was paid $33200 in remuneration. She is allowed deductions under section 63(c)(3) of $1200 for the year 2017.
 
 % Question

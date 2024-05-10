@@ -36,14 +36,24 @@ rename_list = ['alice','bob','charlie','cameron','dan','dorothy','emily',
                'alice_is_venezuelan','charlie_is_born','charlie_residence','alice_s_house',
                'alice_residence','alice_maintains_household_','bob_lives_alice_house']
 
+if 'neg' in filename:
+    prefix = filename[6:-3].partition('_neg')[0]
+    prefix = '_' + prefix + '_neg'
+else:
+    prefix = filename[6:-3].partition('_pos')[0]
+    prefix = '_' + prefix + '_pos'
+    
 replacements = {}
 for name in rename_list:
     section = '_' + filename[6:-3]
     old_name = rf'\b{name}\b'
+    # To replace new vars created from replaced files
+    replacements[rf'\b{name+prefix}\b'] = name+section
     if name[-1] == '_' or name[-1] == '-' :
-        old_name = name
-        section = filename[6:-3]
+        continue
     replacements[old_name] = name+section
+
+# print(replacements)
 
 def replace_all(text, dic):
     for i, j in dic.items():

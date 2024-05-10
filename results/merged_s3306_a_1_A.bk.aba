@@ -1767,8 +1767,8 @@ s3306_a_1_is_wages(Person, Year, Remuneration, Wages) :-
 	% Wages = #sum{Amount,Remuneration : s3306_a_1_A_wages(Employee,Remuneration,Caly,Amount)},
 	% Wages>1499.
 
-s3306_a_1_A_wages(Employee,Remuneration,Caly,Amount):-
-	s3306_a_1_is_wages(Employee, Caly, Remuneration, Amount).
+%s3306_a_1_A_wages(Employee,Remuneration,Caly,Amount):-
+%	s3306_a_1_is_wages(Employee, Caly, Remuneration, Amount).
 s3306_a_1_A_wages(Employee,Remuneration,Caly,Amount):-
 	Pyear=Caly-1,
 	s3306_a_1_is_wages(Employee, Pyear, Remuneration, Amount).
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % Alice has paid wages of $3200 to Bob for work done from Feb 1st, 2017 to Sep 2nd, 2017. Bob has paid wages of $4500 to Alice for work done from Apr 1st, 2017 to Sep 2nd, 2018.
 
 % Question

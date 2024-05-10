@@ -466,14 +466,14 @@ s151_d_3(Taxp,Exemption_amount_in,Ea,Taxy) :-
 
 % Removed cut '!' operators, assumption that ASP can handle without cut operator
 %In the case of any taxpayer whose adjusted gross income for the taxable year exceeds the applicable amount in effect under section 68(b), the exemption amount shall be reduced by the applicable percentage.
-s151_d_3_A(Taxp,Agi,Aa,Ap,Exemption_amount_in,Ea,Taxy) :-
-    finance(Exemption_amount_in),
-    gross_income(Taxp,Taxy,Agi),
-    s68_b(Taxp,Aa,Taxy),
-    Agi>Aa,
-    s151_d_3_B(Ap,Taxp,Agi,Taxy,_),
-    Reduction_amount = (Exemption_amount_in*Ap)/100,
-    max(Ea,Exemption_amount_in-Reduction_amount,0).
+%s151_d_3_A(Taxp,Agi,Aa,Ap,Exemption_amount_in,Ea,Taxy) :-
+%    finance(Exemption_amount_in),
+%    gross_income(Taxp,Taxy,Agi),
+%    s68_b(Taxp,Aa,Taxy),
+%    Agi>Aa,
+%    s151_d_3_B(Ap,Taxp,Agi,Taxy,_),
+%    Reduction_amount = (Exemption_amount_in*Ap)/100,
+%    max(Ea,Exemption_amount_in-Reduction_amount,0).
 
 %(B) Applicable percentage
 
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % Alice's income in 2015 was $260932. For 2015, Alice received one exemption of $2000 under section 151(c). Alice's applicable percentage under section 151(d)(3)(B) is equal to 10%.
 
 % Question

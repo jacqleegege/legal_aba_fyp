@@ -146,10 +146,10 @@ s1_b_iv(Taxinc,Tax) :-
     127500 < Taxinc,
     Tax = 33385+((Taxinc-127500)*36)/100.
 %(v) $77,485, plus 39.6% of the excess over $250,000 if the taxable income is over $250,000.
-s1_b_v(Taxinc,Tax) :-
-    finance(Taxinc),
-    250000 < Taxinc,
-    Tax = 77485+((Taxinc-250000)*396)/1000.
+%s1_b_v(Taxinc,Tax) :-
+%    finance(Taxinc),
+%    250000 < Taxinc,
+%    Tax = 77485+((Taxinc-250000)*396)/1000.
 
 %(c) Unmarried individuals (other than surviving spouses and heads of households)
 
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % Alice is a head of household for the year 2017. Alice's taxable income for the year 2017 is $194512.
 
 % Question

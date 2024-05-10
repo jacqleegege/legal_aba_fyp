@@ -1215,25 +1215,25 @@ marriage_not_ended_with_spouse_death(Marriage, End_marriage, Time_death) :-
     is_before(Time_death,End_marriage).
 
 %(A) whose spouse died during either of the two years immediately preceding the taxable year, and
-s2_a_1_A(Taxp,Spouse,Marriage,YS,Taxy) :-
-    marriage_(Marriage),
-    agent_(Marriage,Taxp),
-    agent_(Marriage,Spouse),
-    not_same_person(Taxp,Spouse),
-    start_(Marriage,Start_marriage),
-    death_(Death),
-    agent_(Death,Spouse),
-    start_(Death,Time_death),
-    date_split(Time_death,YS,M,D),
-    is_before(Start_marriage,Time_death),
-    % check whether the marriage ended with the death of the spouse
-    marriage_not_ended_with_spouse_death(Marriage, End_marriage, Time_death),
-    Taxy2 = Taxy-2,
-    first_day_year(Taxy2,First_day_year),
-    is_before(First_day_year,Time_death),
-    Taxy1 = Taxy-1,
-    last_day_year(Taxy1,Last_day_year),
-    is_before(Time_death,Last_day_year).
+%s2_a_1_A(Taxp,Spouse,Marriage,YS,Taxy) :-
+%    marriage_(Marriage),
+%    agent_(Marriage,Taxp),
+%    agent_(Marriage,Spouse),
+%    not_same_person(Taxp,Spouse),
+%    start_(Marriage,Start_marriage),
+%    death_(Death),
+%    agent_(Death,Spouse),
+%    start_(Death,Time_death),
+%    date_split(Time_death,YS,M,D),
+%    is_before(Start_marriage,Time_death),
+%    % check whether the marriage ended with the death of the spouse
+%    marriage_not_ended_with_spouse_death(Marriage, End_marriage, Time_death),
+%    Taxy2 = Taxy-2,
+%    first_day_year(Taxy2,First_day_year),
+%    is_before(First_day_year,Time_death),
+%    Taxy1 = Taxy-1,
+%    last_day_year(Taxy1,Last_day_year),
+%    is_before(Time_death,Last_day_year).
 
 % %(B) who maintains as his home a household which constitutes for the taxable year the principal place of abode (as a member of such household) of a dependent (i) who (within the meaning of section 152) is a son, stepson, daughter, or stepdaughter of the taxpayer, and (ii) with respect to whom the taxpayer is entitled to a deduction for the taxable year under section 151.
 
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % Alice and Bob got married on Feb 3rd, 1992. Alice died on July 9th, 2014.
 
 % Question

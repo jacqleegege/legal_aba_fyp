@@ -2968,13 +2968,13 @@ end_taxp_is_nra(Taxp_is_nra,End_nra,First_day_year):-
     is_before(First_day_year,End_nra).
 
 %(D) an estate or trust, common trust fund, or partnership,
-s63_c_6_D(Taxp,Taxy) :-
-    business_trust_(Taxp_is_trust),
-    agent_(Taxp_is_trust,Taxp),
-    first_day_year(Taxy,First_day_year),
-    last_day_year(Taxy,Last_day_year),
-    start_taxp_is_trust(Taxp_is_trust,Start_trust,Last_day_year),
-    end_taxp_is_trust(Taxp_is_trust,End_trust,First_day_year).
+%s63_c_6_D(Taxp,Taxy) :-
+%    business_trust_(Taxp_is_trust),
+%    agent_(Taxp_is_trust,Taxp),
+%    first_day_year(Taxy,First_day_year),
+%    last_day_year(Taxy,Last_day_year),
+%    start_taxp_is_trust(Taxp_is_trust,Start_trust,Last_day_year),
+%    end_taxp_is_trust(Taxp_is_trust,End_trust,First_day_year).
 
 start_taxp_is_trust(Taxp_is_trust,Start_trust,Last_day_year):-
     nonresident_alien_(Taxp_is_trust), date(Start_trust),
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % From 1973 to 2019, the Walter Brown Family Trust II was considered to be a business trust.
 
 % Question

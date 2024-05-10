@@ -823,10 +823,10 @@ s152_c_2_A(Dependent,Taxp,Childc2a,Start_relationship,End_relationship) :-
     is_descendent_of(Dependent,Childc2a,Start_relationship,End_relationship).
 
 %(B) a brother, sister, stepbrother, or stepsister of the taxpayer or a descendant of any such relative.
-s152_c_2_B(S65,Taxp,Bsssc2b,Start_relationship,End_relationship) :-
-	% a brother, sister, stepbrother, or stepsister of the taxpayer
-	s152_c_2_B_sibling(Bsssc2b,Taxp,Start_relationship,End_relationship),
-    s152_c_2_B_S65(S65,Bsssc2b,Start_relationship,End_relationship).
+%s152_c_2_B(S65,Taxp,Bsssc2b,Start_relationship,End_relationship) :-
+%	% a brother, sister, stepbrother, or stepsister of the taxpayer
+%	s152_c_2_B_sibling(Bsssc2b,Taxp,Start_relationship,End_relationship),
+%    s152_c_2_B_S65(S65,Bsssc2b,Start_relationship,End_relationship).
 
 s152_c_2_B_sibling(Bsssc2b,Taxp,Start_relationship,End_relationship):-
     is_sibling_of(Bsssc2b,Taxp,Start_relationship,End_relationship).
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % Alice has a son, Bob, who was born January 31st, 2014.
 
 % Question

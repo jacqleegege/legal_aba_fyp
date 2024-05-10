@@ -2459,16 +2459,16 @@ s3306_c_16(Service,Employer) :-
 	agent_(Employer_is_international_organization,Employer).
 
 %(21) service performed by a person committed to a penal institution.
-s3306_c_21(Service,Employee,S235,Workday) :-
-	agent_(Service,Employee),
-	penal_institution_(Jail_is_a_penal_institution),
-	agent_(Jail_is_a_penal_institution,S235),
-	incarceration_(Person_goes_to_jail),
-	agent_(Person_goes_to_jail,Employee),
-	patient_(Person_goes_to_jail,S235),
-	start_(Person_goes_to_jail,Start_incarceration),
-	is_before(Start_incarceration,Workday),
-	s3306_c_21_end(Person_goes_to_jail,End_incarceration,Workday).
+%s3306_c_21(Service,Employee,S235,Workday) :-
+%	agent_(Service,Employee),
+%	penal_institution_(Jail_is_a_penal_institution),
+%	agent_(Jail_is_a_penal_institution,S235),
+%	incarceration_(Person_goes_to_jail),
+%	agent_(Person_goes_to_jail,Employee),
+%	patient_(Person_goes_to_jail,S235),
+%	start_(Person_goes_to_jail,Start_incarceration),
+%	is_before(Start_incarceration,Workday),
+%	s3306_c_21_end(Person_goes_to_jail,End_incarceration,Workday).
 
 s3306_c_21_end(Person_goes_to_jail,End_incarceration,Workday):-
 	incarceration_(Person_goes_to_jail),date(End_incarceration),
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % Alice was paid $200 in 2017 for services performed in jail. Alice was committed to jail from January 24, 2015 to May 5th, 2019.
 
 % Question

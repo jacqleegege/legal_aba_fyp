@@ -2036,11 +2036,11 @@ s3306_b_10_A_disability_or_death(S105):-
 	death_(S105).
 
 %(B) under a plan established by the employer which makes provision for his employees generally or a class or classes of his employees (or for such employees or class or classes of employees and their dependents),
-s3306_b_10_B(Employer,Remuneration,Plan) :-
-	means_(Remuneration,Plan),
-	plan_(Plan),
-	agent_(Plan,Employer),
-    purpose_(Plan,"make provisions for employees or dependents").
+%s3306_b_10_B(Employer,Remuneration,Plan) :-
+%	means_(Remuneration,Plan),
+%	plan_(Plan),
+%	agent_(Plan,Employer),
+%    purpose_(Plan,"make provisions for employees or dependents").
 
 %other than any such payment or series of payments which would have been paid if the employee's employment relationship had not been so terminated;
 
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % Alice has employed Bob from Jan 2nd, 2011 to Oct 10, 2019. On Oct 10, 2019 Bob was diagnosed as disabled and retired. Alice paid Bob $12980 because she had to terminate their contract due to Bob's disability, using the disability plan set up for all of Alice's employees.
 
 % Question

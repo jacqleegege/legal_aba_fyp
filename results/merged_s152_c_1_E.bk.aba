@@ -790,8 +790,8 @@ s152_c_1_C(Dependent,Taxp,Taxy) :-
     s152_c_3(Dependent,Taxp,Taxy).
 
 %(E) who has not filed a joint return (other than only for a claim of refund) with the individual's spouse for the taxable year beginning in the calendar year in which the taxable year of the taxpayer begins.
-s152_c_1_E(Dependent,Spouse,Taxy) :-
-    person(Dependent),person(Spouse),year(Taxy),not_s152_c_1_E_joint_return(Dependent,Spouse,Taxy).
+%s152_c_1_E(Dependent,Spouse,Taxy) :-
+%    person(Dependent),person(Spouse),year(Taxy),not_s152_c_1_E_joint_return(Dependent,Spouse,Taxy).
 
 s152_c_1_E_joint_return(Dependent,Spouse,Taxy):-
     s7703(Dependent,Spouse,_,Taxy),
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % Alice has a son, Bob. From September 1st, 2015 to November 3rd, 2019, Alice and Bob lived in the same home. Bob married Charlie on October 23rd, 2018. Bob and Charlie file separate returns.
 
 % Question

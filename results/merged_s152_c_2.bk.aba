@@ -806,8 +806,8 @@ s152_c_1_E_joint_return(Dependent,Spouse,Taxy):-
 %(2) Relationship
 
 %For purposes of paragraph (1)(A), an individual bears a relationship to the taxpayer described in this paragraph if such individual is-
-s152_c_2(Dependent,Taxp,Start_relationship,End_relationship) :-
-    s152_c_2_A(Dependent,Taxp,_,Start_relationship,End_relationship).
+%s152_c_2(Dependent,Taxp,Start_relationship,End_relationship) :-
+%    s152_c_2_A(Dependent,Taxp,_,Start_relationship,End_relationship).
 s152_c_2(Dependent,Taxp,Start_relationship,End_relationship) :-
     s152_c_2_B(Dependent,Taxp,_,Start_relationship,End_relationship).
 
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % Alice has a son, Bob, who was born January 31st, 2014.
 
 % Question

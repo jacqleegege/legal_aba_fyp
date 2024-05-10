@@ -2014,16 +2014,16 @@ s3306_b_10_Employee(Employee,Payee,Year_int):-
 	Any_of_his_dependents=Payee.
 
 %(A) upon or after the termination of an employee's employment relationship because of (i) death, or (ii) retirement for disability, and
-s3306_b_10_A(Remuneration,Employment,Employee,Employer,S101,S105) :-
-	start_(Remuneration,Start_remuneration),
-	termination_(S101),
-    agent_(S101,Employer),
-	patient_(S101,Employment),
-	s3306_b_10_A_start_end(S101,Start_termination,Employment),
-    is_before(Start_termination,Start_remuneration),
-	reason_(S101,S105),
-	s3306_b_10_A_disability_or_death(S105),
-	agent_(S105,Employee).
+%s3306_b_10_A(Remuneration,Employment,Employee,Employer,S101,S105) :-
+%	start_(Remuneration,Start_remuneration),
+%	termination_(S101),
+%    agent_(S101,Employer),
+%	patient_(S101,Employment),
+%	s3306_b_10_A_start_end(S101,Start_termination,Employment),
+%    is_before(Start_termination,Start_remuneration),
+%	reason_(S101,S105),
+%	s3306_b_10_A_disability_or_death(S105),
+%	agent_(S105,Employee).
 
 s3306_b_10_A_start_end(S101,Start_termination,Employment):-
 	service_(Employment),start_(S101,Start_termination).
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % Alice has employed Bob from Jan 2nd, 2011 to Oct 10, 2019. On Oct 10, 2019 Bob retired because he reached age 65. Alice paid Bob $12980 as a retirement bonus.
 
 % Question

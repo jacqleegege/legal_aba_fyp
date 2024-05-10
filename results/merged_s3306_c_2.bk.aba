@@ -2244,13 +2244,13 @@ s3306_c_1_B_not(Service,Employee):-
 	purpose_(Employee_migration,"agricultural labor").
 
 %(2) domestic service in a private home, local college club, or local chapter of a college fraternity or sorority unless performed for a person who paid cash remuneration of $1,000 or more to individuals employed in such domestic service in any calendar quarter in the calendar year or the preceding calendar year;
-s3306_c_2(Service,Location,Caly) :-
-	year(Caly),
-	s3306_c_2_service(Service),
-    patient_(Service,Person),
-    location_(Service,Location),
-	s3306_c_2_location(Location),
-	not_s3306_a_3(Person,_,Caly).
+%s3306_c_2(Service,Location,Caly) :-
+%	year(Caly),
+%	s3306_c_2_service(Service),
+%    patient_(Service,Person),
+%    location_(Service,Location),
+%	s3306_c_2_location(Location),
+%	not_s3306_a_3(Person,_,Caly).
 
 s3306_c_2_service(Service):-
 	type_(Service,"domestic service").
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % Alice has paid wages of $3200 to Bob for domestic service done in her home from Feb 1st, 2017 to Sep 2nd, 2017, in Baltimore, Maryland, USA.
 
 % Question

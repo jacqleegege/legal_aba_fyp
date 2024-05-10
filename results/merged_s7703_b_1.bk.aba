@@ -3627,21 +3627,21 @@ s7703_b(Taxp,Spouse,Taxy) :-
 
 
 %(1) an individual who is married (within the meaning of subsection (a)) and who files a separate return maintains as his home a household which constitutes for more than one-half of the taxable year the principal place of abode of a child with respect to whom such individual is entitled to a deduction for the taxable year under section 151,
-s7703_b_1(Taxp,Household,Dependent,Taxy) :-
-	first_day_year(Taxy,First_day_year),
-	last_day_year(Taxy,Last_day_year),
-	not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),
-	residence_(Taxp_residence),
-	agent_(Taxp_residence,Taxp),
-	patient_(Taxp_residence,Household),
-	residence_(Child_lives_at_home),
-	agent_(Child_lives_at_home,Dependent),
-	patient_(Child_lives_at_home,Household),
-	start_(Child_lives_at_home,Start_time),
-    later(Start,Start_time,First_day_year),
-    s7703_b_1_end(Child_lives_at_home,End_time),
-	earlier(End,End_time,Last_day_year),
-	% now compute time stamp of end minus time stamp of beginning and compare with time stamps of 1/2 of the year 0.
+%s7703_b_1(Taxp,Household,Dependent,Taxy) :-
+%	first_day_year(Taxy,First_day_year),
+%	last_day_year(Taxy,Last_day_year),
+%	not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),
+%	residence_(Taxp_residence),
+%	agent_(Taxp_residence,Taxp),
+%	patient_(Taxp_residence,Household),
+%	residence_(Child_lives_at_home),
+%	agent_(Child_lives_at_home,Dependent),
+%	patient_(Child_lives_at_home,Household),
+%	start_(Child_lives_at_home,Start_time),
+%    later(Start,Start_time,First_day_year),
+%    s7703_b_1_end(Child_lives_at_home,End_time),
+%	earlier(End,End_time,Last_day_year),
+%	% now compute time stamp of end minus time stamp of beginning and compare with time stamps of 1/2 of the year 0.
 	duration(Start,End,Years,Months,Days),
 	more_than_half_a_year(Years,Months),
     s152_a_1(Dependent,Taxp,Taxy).
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % Alice and Bob got married on April 5th, 2012. Alice and Bob have a son, Charlie, who was born on September 16th, 2017. Alice and Charlie live in a home maintained by Alice since September 16th, 2017. Alice is entitled to a deduction for Charlie under section 151(c) for the years 2017 to 2019. Alice and Bob file a joint return for the years 2017 to 2019.
 
 % Question

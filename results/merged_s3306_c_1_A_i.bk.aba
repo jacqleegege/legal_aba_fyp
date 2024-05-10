@@ -2205,8 +2205,8 @@ s3306_c_1_A(Service,Employer,Caly) :-
 	% },
     % Remuneration > 19999.
 
-s3306_c_1_A_i_service(Service_):-
-	purpose_(Service_,"agricultural labor").
+%s3306_c_1_A_i_service(Service_):-
+%	purpose_(Service_,"agricultural labor").
 s3306_c_1_A_i_service(Service_):-
 	type_(Service_,"agricultural labor").
 
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % Alice has paid $2300 to Bob for agricultural labor done from Feb 1st, 2017 to Sep 2nd, 2017, in Caracas, Venezuela. Alice and Bob are both American citizens.
 
 % Question

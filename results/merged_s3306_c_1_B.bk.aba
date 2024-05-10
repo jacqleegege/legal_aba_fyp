@@ -2220,8 +2220,8 @@ s3306_c_1_A_ii(Employer,Caly) :-
 	s3306_a_2_B(Employer,Caly).
 
 %(B) such labor is not agricultural labor performed by an individual who is an alien admitted to the United States to perform agricultural labor.
-s3306_c_1_B(Service,Employee) :-
-	service_(Service),person(Employee),not_s3306_c_1_B_not(Service,Employee).
+%s3306_c_1_B(Service,Employee) :-
+%	service_(Service),person(Employee),not_s3306_c_1_B_not(Service,Employee).
 
 s3306_c_1_B_not(Service,Employee):-
 	type_(Service,"agricultural labor"),
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % Alice has paid $3200 to Bob for agricultural labor done from Feb 1st, 2017 to Sep 2nd, 2017, in Stanley, Wisconsin, USA. Alice is an american citizen, and Bob is a Mexican citizen who was admitted to the USA to perform agricultural labor pursuant to sections 214(c) and 101(a)(15)(H) of the Immigration and Nationality Act.
 
 % Question

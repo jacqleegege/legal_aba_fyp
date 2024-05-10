@@ -970,11 +970,11 @@ s152_d_2_E(Dependent,Taxp,S121,Start_day,End_day) :-
     earlier(End_day,End_day_sibling,End_day_child).
 
 %(F) A brother or sister of the father or mother of the taxpayer.
-s152_d_2_F(Dependent,Taxp,S125,Start_day,End_day) :-
-    is_child_of(Taxp,S125,Start_day_child,End_day_child),
-    is_sibling_of(S125,Dependent,Start_day_sibling,End_day_sibling),
-    later(Start_day,Start_day_sibling,Start_day_child),
-    earlier(End_day,End_day_sibling,End_day_child).
+%s152_d_2_F(Dependent,Taxp,S125,Start_day,End_day) :-
+%    is_child_of(Taxp,S125,Start_day_child,End_day_child),
+%    is_sibling_of(S125,Dependent,Start_day_sibling,End_day_sibling),
+%    later(Start_day,Start_day_sibling,Start_day_child),
+%    earlier(End_day,End_day_sibling,End_day_child).
 
 %(G) A son-in-law, daughter-in-law, father-in-law, mother-in-law, brother-in-law, or sister-in-law.
 s152_d_2_G(Dependent,Taxp,Start_day,End_day) :-
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % Charlie is Bob's father since April 15th, 2014. Alice married Charlie on October 12th, 1992.
 
 % Question

@@ -3296,10 +3296,10 @@ s68_a_1(Agi,Aa,S9) :-
     S9 = X / 100.
 
 %(2) 80 percent of the amount of the itemized deductions otherwise allowable for such taxable year.
-s68_a_2(Taxp,Itemded,S14,Taxy) :-
-    s63_d(Taxp,_,Itemded,Taxy),
-    X = 80*Itemded,
-    S14 = X / 100.
+%s68_a_2(Taxp,Itemded,S14,Taxy) :-
+%    s63_d(Taxp,_,Itemded,Taxy),
+%    X = 80*Itemded,
+%    S14 = X / 100.
 
 
 %(b) Applicable amount
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % In 2016, Alice's income was $295192. Alice is a surviving spouse for the year 2016. Alice is allowed itemized deductions of $60000 under section 63.
 
 % Question

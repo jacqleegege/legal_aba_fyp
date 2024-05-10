@@ -1976,8 +1976,8 @@ s3306_b_2_A(Plan) :-
 	purpose_(Plan,"make provisions for employees in case of accident disability").
 
 %(C) death;
-s3306_b_2_C(Plan) :-
-	purpose_(Plan,"make provisions for employees in case of death").
+%s3306_b_2_C(Plan) :-
+%	purpose_(Plan,"make provisions for employees in case of death").
 
 %(7) remuneration paid in any medium other than cash to an employee for service not in the course of the employer's trade or business;
 s3306_b_7(Remuneration,Service,Employer,Employee,Medium,S92) :-
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % Alice has paid $45252 to Bob for work done in the year 2017. In 2017, Alice has also paid $9832 into a retirement fund for Bob, and $5322 into life insurance for Charlie, who is Alice's father and has retired in 2016.
 
 % Question

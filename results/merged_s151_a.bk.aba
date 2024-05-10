@@ -373,8 +373,8 @@ s151_joint_return(Taxp,First_day_year,Last_day_year,Taxy) :-
 %(a) Allowance of deductions
 
 %In the case of an individual, the exemptions provided by this section shall be allowed as deductions in computing taxable income.
-s151_a(Taxp,S2,Taxy) :- % simpler interface
-    s151(Taxp,S2,_,_,Taxy).
+%s151_a(Taxp,S2,Taxy) :- % simpler interface
+%    s151(Taxp,S2,_,_,Taxy).
 
 %(b) Taxpayer and spouse
 
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % Alice's income in 2015 is $100000. She gets one exemption of $2000 for the year 2015 under section 151(c). Alice is not married.
 
 % Question

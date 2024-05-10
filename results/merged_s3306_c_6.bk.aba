@@ -2313,9 +2313,9 @@ s3306_c_5_B(Service,Employee,Employer,Workday) :-
     is_before(Workday,Date_21).
 
 %(6) service performed in the employ of the United States Government
-s3306_c_6(Service) :-
-	patient_(Service,Employer),
-	Employer="united states government".
+%s3306_c_6(Service) :-
+%	patient_(Service,Employer),
+%	Employer="united states government".
 
 %(7) service performed in the employ of a State, or any political subdivision thereof.
 s3306_c_7(Service,Employer) :-
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % Alice was paid $73200 in 2017 as an employee of the United States Government in Arlington, Virginia, USA.
 
 % Question

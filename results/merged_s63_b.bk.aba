@@ -2742,8 +2742,8 @@ s63(Taxp,Taxy,Taxinc) :-
     s63_b_xor_a(Taxp,Taxy,Taxable_income_tmp),
 	max(Taxinc,Taxable_income_tmp,0).
 
-s63_b_xor_a(Taxp,Taxy,Taxable_income_tmp):-
-    s63_b(Taxp,Taxy,Taxable_income_tmp,_).
+%s63_b_xor_a(Taxp,Taxy,Taxable_income_tmp):-
+%    s63_b(Taxp,Taxy,Taxable_income_tmp,_).
 s63_b_xor_a(Taxp,Taxy,Taxable_income_tmp):-
     not_s63_b(Taxp,Taxy,_,_),
     s63_a(Taxp,Taxy,Taxable_income_tmp,_,_).
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % In 2017, Alice was paid $33200. She is allowed a deduction under section 63(c)(1) of $2000 for the year 2017, and no deduction under section 151. Alice takes the standard deduction.
 
 % Question

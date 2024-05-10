@@ -1435,8 +1435,8 @@ end_individual_residence(Individual_residence,End_individual_residence,Last_day_
 end_individual_residence(Individual_residence,End_individual_residence,Last_day_year):-
     date(Last_day_year),end_(Individual_residence,End_individual_residence).
 
-s2_b_1_A_i_or_ii(Taxp,Dependent,Taxy):-
-    s2_b_1_A_i(Taxp,Dependent,Taxy).
+%s2_b_1_A_i_or_ii(Taxp,Dependent,Taxy):-
+%    s2_b_1_A_i(Taxp,Dependent,Taxy).
 s2_b_1_A_i_or_ii(Taxp,Dependent,Taxy):-
     s2_b_1_A_ii(Taxp,Dependent,Taxy).
 %(A) maintains as his home a household which constitutes for more than one-half of such taxable year the principal place of abode, as a member of such household, of-
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % Alice and Bob got married on Feb 3rd, 1992. Alice and Bob have a child, Charlie, born October 9th, 2000. Alice died on July 9th, 2014. From 2004 to 2019, Bob furnished the costs of maintaining the home where he and Charlie lived during that time.
 
 % Question

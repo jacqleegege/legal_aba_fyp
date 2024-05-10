@@ -913,9 +913,9 @@ s152_d_1_B(Dependent,Taxy) :-
     Gross_income = 0.
 
 %(D) who is not a qualifying child of such taxpayer or of any other taxpayer for any taxable year beginning in the calendar year in which such taxable year begins.
-s152_d_1_D(Dependent,Taxy) :-
-    person(Dependent),year(Taxy),
-    not_s152_c(Dependent,_,Taxy).
+%s152_d_1_D(Dependent,Taxy) :-
+%    person(Dependent),year(Taxy),
+%    not_s152_c(Dependent,_,Taxy).
 
 %(2) Relationship
 s152_d_2(Dependent,Taxp,Taxy,Start_day,End_day) :-
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % In 2015, Alice's income was $312. The exemption amount for Alice under section 151(d) for the year 2015 was $2000. Alice is Bob's mother, and Bob is a dependent of Alice under 152(c) for the year 2015.
 
 % Question

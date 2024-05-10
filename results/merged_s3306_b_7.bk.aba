@@ -1980,15 +1980,15 @@ s3306_b_2_C(Plan) :-
 	purpose_(Plan,"make provisions for employees in case of death").
 
 %(7) remuneration paid in any medium other than cash to an employee for service not in the course of the employer's trade or business;
-s3306_b_7(Remuneration,Service,Employer,Employee,Medium,S92) :-
-	s3306_c(Service,Employer,Employee,_,_),
-	means_(Remuneration,Medium),
-	not_medium_is_cash(Medium),
-    business_(Employers_business),
-	agent_(Employers_business,Employer),
-	type_(Employers_business,S92),
-    type_(Service,Type_service),
-	not_s92_equals_service_type(Service,S92).
+%s3306_b_7(Remuneration,Service,Employer,Employee,Medium,S92) :-
+%	s3306_c(Service,Employer,Employee,_,_),
+%	means_(Remuneration,Medium),
+%	not_medium_is_cash(Medium),
+%    business_(Employers_business),
+%	agent_(Employers_business,Employer),
+%	type_(Employers_business,S92),
+%    type_(Service,Type_service),
+%	not_s92_equals_service_type(Service,S92).
 
 medium_is_cash(Medium):-
 	medium(Medium),Medium="cash".
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % Alice has been running a typewriter factory since February 1st, 2016. Bob is an employee at the typewriter factory. On October 2nd 2017, Alice has given a typewriter of value $323 to Bob in exchange for Bob painting Alice's house.
 
 % Question

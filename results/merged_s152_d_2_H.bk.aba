@@ -985,26 +985,26 @@ s152_d_2_G(Dependent,Taxp,Start_day,End_day) :-
     is_sibling_in_law_of(Dependent,Taxp,Start_day,End_day).
 
 %(H) An individual (other than an individual who at any time during the taxable year was the spouse, determined without regard to section 7703, of the taxpayer) who, for the taxable year of the taxpayer, has the same principal place of abode as the taxpayer and is a member of the taxpayer's household.
-s152_d_2_H(Dependent,Taxp,Taxy,S143,Start_day,End_day) :-
-    not_same_person(Dependent,Taxp),
-    first_day_year(Taxy,First_day_year),
-    last_day_year(Taxy,Last_day_year),
-    not_s152_d_2_H_end_marriage(Dependent,Taxp,Last_day_year,First_day_year),
-    residence_(Taxpayer_residence),
-    agent_(Taxpayer_residence,Taxp),
-    patient_(Taxpayer_residence,S145),
-    start_(Taxpayer_residence,Start_taxpayer_residence),
-    is_before(Start_taxpayer_residence,First_day_year),
-	s152_d_2_H_end_residence(Taxpayer_residence,End_taxpayer_residence,Last_day_year),
-    residence_(Individual_residence),
-    agent_(Individual_residence,Dependent),
-    patient_(Individual_residence,S143),
-    start_(Individual_residence,Start_individual_residence),
-    is_before(Start_individual_residence,First_day_year),
-	s152_d_2_H_end_residence(Individual_residence,End_individual_residence,Last_day_year),
-    later(Start_day,Start_taxpayer_residence,Start_individual_residence),
-    earliest(End_day,End_taxpayer_residence,End_individual_residence),
-	S145=S143.
+%s152_d_2_H(Dependent,Taxp,Taxy,S143,Start_day,End_day) :-
+%    not_same_person(Dependent,Taxp),
+%    first_day_year(Taxy,First_day_year),
+%    last_day_year(Taxy,Last_day_year),
+%    not_s152_d_2_H_end_marriage(Dependent,Taxp,Last_day_year,First_day_year),
+%    residence_(Taxpayer_residence),
+%    agent_(Taxpayer_residence,Taxp),
+%    patient_(Taxpayer_residence,S145),
+%    start_(Taxpayer_residence,Start_taxpayer_residence),
+%    is_before(Start_taxpayer_residence,First_day_year),
+%	s152_d_2_H_end_residence(Taxpayer_residence,End_taxpayer_residence,Last_day_year),
+%    residence_(Individual_residence),
+%    agent_(Individual_residence,Dependent),
+%    patient_(Individual_residence,S143),
+%    start_(Individual_residence,Start_individual_residence),
+%    is_before(Start_individual_residence,First_day_year),
+%	s152_d_2_H_end_residence(Individual_residence,End_individual_residence,Last_day_year),
+%    later(Start_day,Start_taxpayer_residence,Start_individual_residence),
+%    earliest(End_day,End_taxpayer_residence,End_individual_residence),
+%	S145=S143.
 
 s152_d_2_H_end_marriage(Dependent,Taxp,Last_day_year,First_day_year):-
     marriage_(Marriage),
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % Alice and Bob started living together on April 15th, 2014. Alice and Bob are not married.
 
 % Question

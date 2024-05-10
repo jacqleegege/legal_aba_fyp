@@ -241,11 +241,11 @@ s1_d_ii(Taxinc,Tax) :-
     18450 < Taxinc,
     Tax = 2768+((Taxinc-18450)*28)/100.
 %(iii) $10,082.50, plus 31% of the excess over $44,575 if the taxable income is over $44,575 but not over $70,000;
-s1_d_iii(Taxinc,Tax) :-
-    finance(Taxinc),
-    Taxinc < 70001,
-    44575 < Taxinc,
-    Tax = 10083+(Taxinc-44575)*31/100.
+%s1_d_iii(Taxinc,Tax) :-
+%    finance(Taxinc),
+%    Taxinc < 70001,
+%    44575 < Taxinc,
+%    Tax = 10083+(Taxinc-44575)*31/100.
 %(iv) $17,964.25, plus 36% of the excess over $70,000 if the taxable income is over $70,000 but not over $125,000;
 s1_d_iv(Taxinc,Tax) :-
     finance(Taxinc), 
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % Alice is married under section 7703 for the year 2017. Alice's taxable income for the year 2017 is $67285. Alice files a separate return.
 
 % Question

@@ -908,9 +908,9 @@ s152_d_1_A(Dependent,Taxp,Taxy,Start_relationship,End_relationship) :-
     earlier(End_relationship,Earlier,End_day).
 
 %(B) who has no income for the calendar year in which such taxable year begins, and
-s152_d_1_B(Dependent,Taxy) :-
-    gross_income(Dependent,Taxy,Gross_income),
-    Gross_income = 0.
+%s152_d_1_B(Dependent,Taxy) :-
+%    gross_income(Dependent,Taxy,Gross_income),
+%    Gross_income = 0.
 
 %(D) who is not a qualifying child of such taxpayer or of any other taxpayer for any taxable year beginning in the calendar year in which such taxable year begins.
 s152_d_1_D(Dependent,Taxy) :-
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % In 2015, Alice's income was $2312. The exemption amount for Alice under section 151(d) for the year 2015 was $2000.
 
 % Question

@@ -38,4 +38,4 @@ for example in split:
 
 command = f"consult('aba_asp.pl'), aba_asp('{new_file}',[{', '.join(pos)}],[{', '.join(negs)}])"
 print(command)
-subprocess.run(["swipl", "-g",command,"-t","halt"]) 
+subprocess.run(["swipl", "-s","-g",command,"-t","halt"]) 

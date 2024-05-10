@@ -86,11 +86,11 @@ s1_a_ii(Taxinc,Tax) :-
     36900 < Taxinc,
     Tax = 5535+(Taxinc-36900)*28/100.
 %(iii) $20,165, plus 31% of the excess over $89,150 if the taxable income is over $89,150 but not over $140,000;
-s1_a_iii(Taxinc,Tax) :-
-    finance(Taxinc),
-    Taxinc < 140001,
-    89150 < Taxinc,
-    Tax = 20165+(Taxinc-89150)*31/100.
+%s1_a_iii(Taxinc,Tax) :-
+%    finance(Taxinc),
+%    Taxinc < 140001,
+%    89150 < Taxinc,
+%    Tax = 20165+(Taxinc-89150)*31/100.
 %(iv) $35,928.50, plus 36% of the excess over $140,000 if the taxable income is over $140,000 but not over $250,000;
 s1_a_iv(Taxinc,Tax) :-
     finance(Taxinc),
@@ -4720,15 +4720,16 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % alice_s1_a_iii_pos is married under section 7703 for the year 2017. alice_s1_a_iii_pos files a joint return with her spouse_s1_a_iii_pos for 2017. alice_s1_a_iii_pos's and her spouse_s1_a_iii_pos's taxable income for the year 2017 is $103272.
 
 % Question
 % alice_s1_a_iii_pos and her spouse_s1_a_iii_pos have to pay $24543 in taxes for the year 2017 under section 1(a)(iii). Entailment
 
 % Facts
-person(alice_s1_a_iii_pos).
-person(spouse_s1_a_iii_pos).
+person(alice_s1_a_1_iii_pos).
+person(spouse_s1_a_1_iii_pos).
 year(2017).
 date("2017-01-01").
 date("2017-12-31").
@@ -4737,15 +4738,15 @@ date_split("2017-12-31",2017,12,31).
 finance(103272).
 finance(24543).
 
-s7703(alice_s1_a_iii_pos,spouse_s1_a_iii_pos,alice_and_spouse_s1_a_iii_pos,2017).
-s7703_short(alice_s1_a_iii_pos,spouse_s1_a_iii_pos,2017).
-marriage_(alice_and_spouse_s1_a_iii_pos).
-joint_return_(joint_return_s1_a_iii_pos).
-agent_(joint_return_s1_a_iii_pos,alice_s1_a_iii_pos).
-agent_(joint_return_s1_a_iii_pos,spouse_s1_a_iii_pos).
-start_(joint_return_s1_a_iii_pos,"2017-01-01").
-end_(joint_return_s1_a_iii_pos,"2017-12-31").
-s63(alice_s1_a_iii_pos,2017,103272).
+s7703(alice_s1_a_1_iii_pos,spouse_s1_a_1_iii_pos,alice_and_spouse_s1_a_1_iii_pos,2017).
+s7703_short(alice_s1_a_1_iii_pos,spouse_s1_a_1_iii_pos,2017).
+marriage_(alice_and_spouse_s1_a_1_iii_pos).
+joint_return_(joint_return_s1_a_1_iii_pos).
+agent_(joint_return_s1_a_1_iii_pos,alice_s1_a_1_iii_pos).
+agent_(joint_return_s1_a_1_iii_pos,spouse_s1_a_1_iii_pos).
+start_(joint_return_s1_a_1_iii_pos,"2017-01-01").
+end_(joint_return_s1_a_1_iii_pos,"2017-12-31").
+s63(alice_s1_a_1_iii_pos,2017,103272).
 
 % Text
 % Alice is married under section 7703 for the year 2017. Alice files a joint return with her spouse for 2017. Alice's and her spouse's taxable income for the year 2017 is $120000.
@@ -4754,8 +4755,8 @@ s63(alice_s1_a_iii_pos,2017,103272).
 % Alice and her spouse have to pay $37200 in taxes for the year 2017 under section 1(a)(iii). Contradiction
 
 % Facts
-person(alice_s1_a_iii_neg).
-person(spouse_s1_a_iii_neg).
+person(alice_s1_a_1_iii_neg_2).
+person(spouse_s1_a_1_iii_neg_2).
 year(2017).
 date("2017-01-01").
 date("2017-12-31").
@@ -4764,14 +4765,14 @@ date_split("2017-12-31",2017,12,31).
 finance(120000).
 finance(37200).
 
-s7703(alice_s1_a_iii_neg,spouse_s1_a_iii_neg,alice_and_spouse_s1_a_iii_neg,2017).
-marriage_(alice_and_spouse_s1_a_iii_neg).
-joint_return_(joint_return_s1_a_iii_neg).
-agent_(joint_return_s1_a_iii_neg,alice_s1_a_iii_neg).
-agent_(joint_return_s1_a_iii_neg,spouse_s1_a_iii_neg).
-start_(joint_return_s1_a_iii_neg,"2017-01-01").
-end_(joint_return_s1_a_iii_neg,"2017-12-31").
-s63(alice_s1_a_iii_neg,2017,120000).
+s7703(alice_s1_a_1_iii_neg_2,spouse_s1_a_1_iii_neg_2,alice_and_spouse_s1_a_1_iii_neg_2_2_2_2_2,2017).
+marriage_(alice_and_spouse_s1_a_1_iii_neg_2_2_2_2_2).
+joint_return_(joint_return_s1_a_1_iii_neg_2).
+agent_(joint_return_s1_a_1_iii_neg_2,alice_s1_a_1_iii_neg_2).
+agent_(joint_return_s1_a_1_iii_neg_2,spouse_s1_a_1_iii_neg_2).
+start_(joint_return_s1_a_1_iii_neg_2,"2017-01-01").
+end_(joint_return_s1_a_1_iii_neg_2,"2017-12-31").
+s63(alice_s1_a_1_iii_neg_2,2017,120000).
 
 % Text
 % Alice is married under section 7703 for the year 2017. Alice files a joint return with her spouse for 2017. Alice's and her spouse's taxable income for the year 2017 is $164612.
@@ -4780,8 +4781,8 @@ s63(alice_s1_a_iii_neg,2017,120000).
 % Alice and her spouse have to pay $44789 in taxes for the year 2017 under section 1(a)(iii). Contradiction
 
 % Facts
-person(alice_s1_a_iii_neg).
-person(spouse_s1_a_iii_neg).
+person(alice_s1_a_1_iii_neg).
+person(spouse_s1_a_1_iii_neg).
 year(2017).
 date("2017-01-01").
 date("2017-12-31").
@@ -4790,14 +4791,14 @@ date_split("2017-12-31",2017,12,31).
 finance(164612).
 finance(44789).
 
-s7703(alice_s1_a_iii_neg,spouse_s1_a_iii_neg,alice_and_spouse_s1_a_iii_neg,2017).
-marriage_(alice_and_spouse_s1_a_iii_neg).
-joint_return_(joint_return_s1_a_iii_neg).
-agent_(joint_return_s1_a_iii_neg,alice_s1_a_iii_neg).
-agent_(joint_return_s1_a_iii_neg,spouse_s1_a_iii_neg).
-start_(joint_return_s1_a_iii_neg,"2017-01-01").
-end_(joint_return_s1_a_iii_neg,"2017-12-31").
-s63(alice_s1_a_iii_neg,2017,164612).
+s7703(alice_s1_a_1_iii_neg,spouse_s1_a_1_iii_neg,alice_and_spouse_s1_a_1_iii_neg,2017).
+marriage_(alice_and_spouse_s1_a_1_iii_neg).
+joint_return_(joint_return_s1_a_1_iii_neg).
+agent_(joint_return_s1_a_1_iii_neg,alice_s1_a_1_iii_neg).
+agent_(joint_return_s1_a_1_iii_neg,spouse_s1_a_1_iii_neg).
+start_(joint_return_s1_a_1_iii_neg,"2017-01-01").
+end_(joint_return_s1_a_1_iii_neg,"2017-12-31").
+s63(alice_s1_a_1_iii_neg,2017,164612).
 
 % Text
 % alice_s1_a_iii_pos is married under section 7703 for the year 2017. alice_s1_a_iii_pos files a joint return with her spouse_s1_a_iii_pos for 2017. alice_s1_a_iii_pos's and her spouse_s1_a_iii_pos's taxable income for the year 2017 is $127500.
@@ -4806,8 +4807,8 @@ s63(alice_s1_a_iii_neg,2017,164612).
 % alice_s1_a_iii_pos and her spouse_s1_a_iii_pos have to pay $33385 in taxes for the year 2017 under section 1(a)(iii). Entailment
 
 % Facts
-person(alice_s1_a_iii_pos).
-person(spouse_s1_a_iii_pos).
+person(alice_s1_a_1_iii_pos_2).
+person(spouse_s1_a_1_iii_pos_2).
 year(2017).
 date("2017-01-01").
 date("2017-12-31").
@@ -4816,13 +4817,13 @@ date_split("2017-12-31",2017,12,31).
 finance(127500).
 finance(33385).
 
-s7703(alice_s1_a_iii_pos,spouse_s1_a_iii_pos,alice_and_spouse_s1_a_iii_pos,2017).
-s7703_short(alice_s1_a_iii_pos,spouse_s1_a_iii_pos,2017).
-marriage_(alice_and_spouse_s1_a_iii_pos).
-joint_return_(joint_return_s1_a_iii_pos).
-agent_(joint_return_s1_a_iii_pos,alice_s1_a_iii_pos).
-agent_(joint_return_s1_a_iii_pos,spouse_s1_a_iii_pos).
-start_(joint_return_s1_a_iii_pos,"2017-01-01").
-end_(joint_return_s1_a_iii_pos,"2017-12-31").
-s63(alice_s1_a_iii_pos,2017,127500).
+s7703(alice_s1_a_1_iii_pos_2,spouse_s1_a_1_iii_pos_2,alice_and_spouse_s1_a_1_iii_pos_2_2_2,2017).
+s7703_short(alice_s1_a_1_iii_pos_2,spouse_s1_a_1_iii_pos_2,2017).
+marriage_(alice_and_spouse_s1_a_1_iii_pos_2_2_2).
+joint_return_(joint_return_s1_a_1_iii_pos_2).
+agent_(joint_return_s1_a_1_iii_pos_2,alice_s1_a_1_iii_pos_2).
+agent_(joint_return_s1_a_1_iii_pos_2,spouse_s1_a_1_iii_pos_2).
+start_(joint_return_s1_a_1_iii_pos_2,"2017-01-01").
+end_(joint_return_s1_a_1_iii_pos_2,"2017-12-31").
+s63(alice_s1_a_1_iii_pos_2,2017,127500).
 

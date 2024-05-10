@@ -19,10 +19,10 @@ s1(Taxp, Taxy, Taxinc, Tax) :-
     s1_d(Taxp, _, Taxy, Taxinc, Tax).
 
 %(a) Married individuals filing joint returns and surviving spouses
-s1_a(Taxp,Taxy,Taxinc,Tax) :-
-    s1_a_1(Taxp,_,_,Taxy,Taxinc,Tax).
-s1_a(Taxp,Taxy,Taxinc,Tax) :-
-    s1_a_2(Taxp,Taxy,Taxinc,Tax).
+%s1_a(Taxp,Taxy,Taxinc,Tax) :-
+%    s1_a_1(Taxp,_,_,Taxy,Taxinc,Tax).
+%s1_a(Taxp,Taxy,Taxinc,Tax) :-
+%    s1_a_2(Taxp,Taxy,Taxinc,Tax).
 
 %There is hereby imposed on the taxable income of-
 
@@ -4720,15 +4720,17 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+% CASES START HERE 
+% Text
 % Alice is married under section 7703 for the year 2017. Alice files a joint return with her spouse for 2017. Alice's and her husband's taxable income for the year 2017 is $140000.
 
 % Question
 % Alice and her husband have to pay $35929 in taxes for the year 2017 under section 1(a). Entailment
 
 % Facts
-person(alice_s1_a_1_pos).
-person(spouse_s1_a_1_pos).
+person(alice_s1_a_1_pos_2).
+person(spouse_s1_a_1_pos_2).
 year(2017).
 date("2017-01-01").
 date("2017-12-31").
@@ -4736,14 +4738,14 @@ date_split("2017-01-01",2017,1,1).
 date_split("2017-12-31",2017,12,31).
 finance(140000).
 finance(35929).
-s7703(alice_s1_a_1_pos,spouse_s1_a_1_pos,alice_and_spouse_s1_a_1_pos,2017).
-marriage_(alice_and_spouse_s1_a_1_pos).
-joint_return_(joint_return_s1_a_1_pos).
-agent_(joint_return_s1_a_1_pos,alice_s1_a_1_pos).
-agent_(joint_return_s1_a_1_pos,spouse_s1_a_1_pos).
-start_(joint_return_s1_a_1_pos,"2017-01-01").
-end_(joint_return_s1_a_1_pos,"2017-12-31").
-s63(alice_s1_a_1_pos,2017,140000).
+s7703(alice_s1_a_1_pos_2,spouse_s1_a_1_pos_2,alice_and_spouse_s1_a_1_pos_2_2_2_2,2017).
+marriage_(alice_and_spouse_s1_a_1_pos_2_2_2_2).
+joint_return_(joint_return_s1_a_1_pos_2).
+agent_(joint_return_s1_a_1_pos_2,alice_s1_a_1_pos_2).
+agent_(joint_return_s1_a_1_pos_2,spouse_s1_a_1_pos_2).
+start_(joint_return_s1_a_1_pos_2,"2017-01-01").
+end_(joint_return_s1_a_1_pos_2,"2017-12-31").
+s63(alice_s1_a_1_pos_2,2017,140000).
 
 % Text
 % Alice is married under section 7703 for the year 2017. Alice files a joint return with her spouse for 2017. Alice's and her husband's taxable income for the year 2017 is $17330.
@@ -4796,7 +4798,7 @@ s63(alice_s1_a_1_neg,2017,97407).
 % Alice has to pay $20165 in taxes for the year 2017 under section 1(a). Contradiction
 
 % Facts
-person(alice_s1_a_1_neg).
+person(alice_s1_a_1_neg_2).
 year(2017).
 date("2017-01-01").
 date("2017-12-31").
@@ -4805,6 +4807,6 @@ date_split("2017-12-31",2017,12,31).
 finance(89150).
 finance(20165).
 % s2_b(alice,_,2017).
-s2_b(alice_s1_a_1_neg,alice_s1_a_1_neg,2017).
-s63(alice_s1_a_1_neg,2017,89150).
+s2_b(alice_s1_a_1_neg_2,alice_s1_a_1_neg_2,2017).
+s63(alice_s1_a_1_neg_2,2017,89150).
 

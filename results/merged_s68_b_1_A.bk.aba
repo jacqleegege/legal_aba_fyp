@@ -3328,9 +3328,9 @@ amount("D",Amount) :-
     Amount = Amount_A/2.
 
 %(A) $300,000 in the case of a joint return or a surviving spouse (as defined in section 2(a)),
-s68_b_1_A(Taxp,Joint_return,Surviving_spouse,Aa,Taxy) :-
-    joint_return_or_s2_a(Taxp,Joint_return,Surviving_spouse,Taxy),
-    amount("A",Aa).
+%s68_b_1_A(Taxp,Joint_return,Surviving_spouse,Aa,Taxy) :-
+%    joint_return_or_s2_a(Taxp,Joint_return,Surviving_spouse,Taxy),
+%    amount("A",Aa).
 
 joint_return_or_s2_a(Taxp,Joint_return,Surviving_spouse,Taxy):-
     person(Surviving_spouse),
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % In 2016, Alice's income was $567192. Alice is a surviving spouse for the year 2016.
 
 % Question

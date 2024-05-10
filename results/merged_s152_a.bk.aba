@@ -672,8 +672,8 @@ s152(Dependent,Taxp,Taxy) :-
 %(a) In general
 
 %For purposes of this subtitle, the term "dependent" means-
-s152_a(Dependent,Taxp,Taxy,Start_relationship,End_relationship) :-
-    date(Start_relationship),date(End_relationship),s152_a_1(Dependent,Taxp,Taxy).
+%s152_a(Dependent,Taxp,Taxy,Start_relationship,End_relationship) :-
+%    date(Start_relationship),date(End_relationship),s152_a_1(Dependent,Taxp,Taxy).
 s152_a(Dependent,Taxp,Taxy,Start_relationship,End_relationship) :-
     s152_a_2(Dependent,Taxp,Taxy,Start_relationship,End_relationship).
 
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % Alice has a son, Bob, who satisfies section 152(c)(1) for the year 2015.
 
 % Question

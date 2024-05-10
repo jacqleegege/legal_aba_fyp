@@ -2788,8 +2788,8 @@ s63_c(Taxp,Taxy,Standed) :- % exceptions are already dealt with earlier
 %(1) In general
 
 %Except as otherwise provided in this subsection, the term "standard deduction" means the sum of-
-s63_c_1(Taxp,Taxy,Standed) :-
-    s63_c_6_xor_1_AB(Taxp,Taxy,Standed).
+%s63_c_1(Taxp,Taxy,Standed) :-
+%    s63_c_6_xor_1_AB(Taxp,Taxy,Standed).
 
 s63_c_6_xor_1_AB(Taxp,Taxy,Standed):-
     s63_c_6(Taxp,Taxy,Standed).
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % In 2017, Alice was paid $33200. For the year 2017, Alice is allowed a basic standard deduction under section 63(c)(2) of $2000 and an additional standard deduction of $3000 under section 63(c)(3) for the year 2017.
 
 % Question

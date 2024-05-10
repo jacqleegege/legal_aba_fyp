@@ -211,8 +211,8 @@ single_return_joint_with_spouse(Joint_return, Taxp, Spouse, Taxy, First_day, Las
     start_(Joint_return,First_day),
     end_(Joint_return,Last_day).
 
-s1_d_subsections(Taxinc, Tax) :-
-    s1_d_i(Taxinc,Tax).
+%s1_d_subsections(Taxinc, Tax) :-
+%    s1_d_i(Taxinc,Tax).
 s1_d_subsections(Taxinc, Tax) :-
     s1_d_ii(Taxinc,Tax).
 s1_d_subsections(Taxinc, Tax) :-
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % Alice is married under section 7703 for the year 2017. Alice's taxable income for the year 2017 is $554313. Alice files a separate return.
 
 % Question

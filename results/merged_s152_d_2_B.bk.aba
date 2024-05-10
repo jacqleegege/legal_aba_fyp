@@ -949,8 +949,8 @@ s152_d_2_A(Dependent,Taxp,Start_day,End_day) :-
     is_descendent_of(Dependent,Child,Start_day,End_day).
 
 %(B) A brother, sister, stepbrother, or stepsister.
-s152_d_2_B(Dependent,Taxp,Start_day,End_day) :-
-    is_sibling_of(Dependent,Taxp,Start_day,End_day).
+%s152_d_2_B(Dependent,Taxp,Start_day,End_day) :-
+%    is_sibling_of(Dependent,Taxp,Start_day,End_day).
 s152_d_2_B(Dependent,Taxp,Start_day,End_day) :-
     is_stepsibling_of(Dependent,Taxp,Start_day,End_day).
 
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % Bob is Alice's brother since April 15th, 2014.
 
 % Question

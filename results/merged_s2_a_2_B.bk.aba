@@ -1333,12 +1333,12 @@ nonresident_alien_cant_file_jointly_2(Taxp,Spouse, Someone_is_nra, Start_nra, En
 % A husband and wife may make a single return jointly of income taxes, 
 % even though one of the spouses has neither gross income nor deductions, 
 % except that no joint return shall be made if either the husband or wife at any time during the taxable year is a nonresident alien.
-s2_a_2_B(Taxp,Spouse,Taxy) :-
-    % no joint return shall be made if either the husband or wife at any time during the taxable year is a nonresident alien
-    person(Taxp),person(Spouse),nonresident_alien_(Someone_is_nra), 
-    date(Start_nra), date(End_nra), year(Taxy), 
-date(First_day_year), date(Last_day_year),
-    not_nonresident_alien_cant_file_jointly_2(Taxp,Spouse, Someone_is_nra, Start_nra, End_nra, Taxy, First_day_year, Last_day_year).
+%s2_a_2_B(Taxp,Spouse,Taxy) :-
+%    % no joint return shall be made if either the husband or wife at any time during the taxable year is a nonresident alien
+%    person(Taxp),person(Spouse),nonresident_alien_(Someone_is_nra), 
+%    date(Start_nra), date(End_nra), year(Taxy), 
+%date(First_day_year), date(Last_day_year),
+%    not_nonresident_alien_cant_file_jointly_2(Taxp,Spouse, Someone_is_nra, Start_nra, End_nra, Taxy, First_day_year, Last_day_year).
 
 %(b) Definition of head of household
 s2_b(Taxp,Dependent,Taxy) :- 
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % Alice and Bob got married on Feb 3rd, 1992. Alice died on July 9th, 2014.
 
 % Question

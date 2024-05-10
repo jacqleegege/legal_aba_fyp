@@ -408,8 +408,8 @@ s151_b(Taxp,Spouse,Ea,Taxy) :- % and an additional exemption of the exemption am
 %(c) Additional exemption for dependents
 
 %An exemption of the exemption amount for each individual who is a dependent (as defined in section 152) of the taxpayer for the taxable year.
-s151_c_applies(Taxp,S24,Taxy) :- % defining this auxiliary function allows to test whether "a deduction under this section is allowable" without going into an inf loop (c) -> (d) -> (c)...
-    s152(S24,Taxp,Taxy).
+%s151_c_applies(Taxp,S24,Taxy) :- % defining this auxiliary function allows to test whether "a deduction under this section is allowable" without going into an inf loop (c) -> (d) -> (c)...
+%    s152(S24,Taxp,Taxy).
 
 s151_c(Taxp,S24,Ea,Taxy) :-
     s151_c_applies(Taxp,S24,Taxy),
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % Alice and Charlie have been married since 2 Feb 2015. Bob counts as Alice's dependent under section 152(c)(1) for 2015.
 
 % Question

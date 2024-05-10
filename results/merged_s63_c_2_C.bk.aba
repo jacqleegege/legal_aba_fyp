@@ -2871,8 +2871,8 @@ s63_c_2_B_bassd(Taxp,Taxy,Bassd):-
     Bassd = 4400.
 
 %(C) $3,000 in any other case.
-s63_c_2_C(Taxy,Bassd) :-
-    s63_c_7_ii(Taxy,Bassd).
+%s63_c_2_C(Taxy,Bassd) :-
+%    s63_c_7_ii(Taxy,Bassd).
 s63_c_2_C(Taxy,Bassd) :-
     year(Taxy),
     not_s63_c_7_ii(Taxy,_),
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % In 2017, Alice was paid $33200. Alice and Bob have been married since Feb 3rd, 2017, and they file a joint return for 2017.
 
 % Question

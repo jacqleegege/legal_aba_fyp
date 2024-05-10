@@ -2387,18 +2387,18 @@ s3306_c_10_A_ii_end(Marriage,Workday):-
 	is_before(Workday,End_marriage).
 
 %(B) service performed in the employ of a hospital, if such service is performed by a patient of such hospital;
-s3306_c_10_B(Service,Employer,Employee,Workday) :-
-    service_(Service),
-	patient_(Service,Employer),
-	agent_(Service,Employee),
-	hospital_(Employer_is_hospital),
-	agent_(Employer_is_hospital,Employer),
-	medical_patient_(Employee_is_medical_patient),
-	agent_(Employee_is_medical_patient,Employee),
-	patient_(Employee_is_medical_patient,Employer),
-	start_(Employee_is_medical_patient,Start_patient),
-	is_before(Start_patient,Workday),
-	s3306_c_10_B_end(Employee_is_medical_patient,Workday).
+%s3306_c_10_B(Service,Employer,Employee,Workday) :-
+%    service_(Service),
+%	patient_(Service,Employer),
+%	agent_(Service,Employee),
+%	hospital_(Employer_is_hospital),
+%	agent_(Employer_is_hospital,Employer),
+%	medical_patient_(Employee_is_medical_patient),
+%	agent_(Employee_is_medical_patient,Employee),
+%	patient_(Employee_is_medical_patient,Employer),
+%	start_(Employee_is_medical_patient,Start_patient),
+%	is_before(Start_patient,Workday),
+%	s3306_c_10_B_end(Employee_is_medical_patient,Workday).
 
 s3306_c_10_B_end(Employee_is_medical_patient,Workday):-
 	medical_patient_(Employee_is_medical_patient),date(Workday),not_end_(Employee_is_medical_patient,_).
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % Alice was paid $200 in March 2017 for services performed at Johns Hopkins Hospital in March 2017. Alice was a patient at Johns Hopkins Hospital from January 12th, 2017 to February 20th, 2017.
 
 % Question

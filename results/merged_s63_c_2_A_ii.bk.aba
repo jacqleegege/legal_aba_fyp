@@ -2855,8 +2855,8 @@ s63_c_2_A_i(Taxp,Joint_return,Taxy) :-
     end_(Joint_return,Last_day).
 
 %(ii) a surviving spouse (as defined in section 2(a)),
-s63_c_2_A_ii(Taxp,Taxy) :-
-    s2_a(Taxp,_,Taxy).
+%s63_c_2_A_ii(Taxp,Taxy) :-
+%    s2_a(Taxp,_,Taxy).
 
 %(B) $4,400 in the case of a head of household (as defined in section 2(b)), or
 s63_c_2_B(Taxp,Taxy,Bassd) :-
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % In 2017, Alice was paid $33200. Alice is a surviving spouse for 2017.
 
 % Question

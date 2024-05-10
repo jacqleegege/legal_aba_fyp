@@ -1563,19 +1563,19 @@ end_spouse_is_nra(Spouse_is_nra,Stop_nra,First_day_year):-
     is_before(First_day_year,Stop_nra).
 
 %(C) a taxpayer shall be considered as married at the close of his taxable year if his spouse (other than a spouse described in subparagraph (B)) died during the taxable year.
-s2_b_2_C(Taxp,Marriage,Spouse,Taxy) :-
-    first_day_year(Taxy,First_day_year),
-    last_day_year(Taxy,Last_day_year),
-    marriage_(Marriage),
-    agent_(Marriage,Taxp),
-    agent_(Marriage,Spouse),
-    not_s2_b_2_B(Taxp,Spouse,Taxy),
-    death_(Spouse_dies),
-    agent_(Spouse_dies,Spouse),
-    start_(Spouse_dies,Time_death),
-    died_and_married(Marriage,Time_death,End_marriage),  
-    is_before(First_day_year,Time_death),
-    is_before(Time_death,Last_day_year).
+%s2_b_2_C(Taxp,Marriage,Spouse,Taxy) :-
+%    first_day_year(Taxy,First_day_year),
+%    last_day_year(Taxy,Last_day_year),
+%    marriage_(Marriage),
+%    agent_(Marriage,Taxp),
+%    agent_(Marriage,Spouse),
+%    not_s2_b_2_B(Taxp,Spouse,Taxy),
+%    death_(Spouse_dies),
+%    agent_(Spouse_dies,Spouse),
+%    start_(Spouse_dies,Time_death),
+%    died_and_married(Marriage,Time_death,End_marriage),  
+%    is_before(First_day_year,Time_death),
+%    is_before(Time_death,Last_day_year).
 
 died_and_married(Marriage,Time_death,End_marriage):-
     marriage_(Marriage),date(Time_death),date(End_marriage),
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % Alice and Bob got married on Feb 3rd, 1992. Alice was a nonresident alien. Alice died on July 9th, 2014.
 
 % Question

@@ -442,8 +442,8 @@ s151_d_3_ea(Taxp,Exemption_in,Ea,Taxy):-
 %(1) In general
 
 %Except as otherwise provided in this subsection, the term "exemption amount" means $2,000.
-s151_d_1(Ea) :-
-    Ea = 2000.
+%s151_d_1(Ea) :-
+%    Ea = 2000.
 
 %(2) Exemption amount disallowed in case of certain dependents
 
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % Alice is entitled to an exemption under section 151(b) for the year 2015. No other taxpayer is entitled to a deduction for Alice in 2015.
 
 % Question

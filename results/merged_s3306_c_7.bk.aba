@@ -2318,9 +2318,9 @@ s3306_c_6(Service) :-
 	Employer="united states government".
 
 %(7) service performed in the employ of a State, or any political subdivision thereof.
-s3306_c_7(Service,Employer) :-
-	patient_(Service,Employer),
-	atom_prefix(Employer,"state of ").
+%s3306_c_7(Service,Employer) :-
+%	patient_(Service,Employer),
+%	atom_prefix(Employer,"state of ").
 
 %(10)
 s3306_c_10(Service,Employer,Employee,Workday) :-
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % Alice was paid $73200 in 2017 as an employee of the State of Maryland in Baltimore, Maryland, USA.
 
 % Question

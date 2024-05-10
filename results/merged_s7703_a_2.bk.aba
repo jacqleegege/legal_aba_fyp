@@ -3599,17 +3599,17 @@ s7703_a_1_start(Marriage,Start_marriage,First_day_year):-
 	start_(Marriage,Start_marriage).
 
 %(2) an individual legally separated from his spouse under a decree of divorce or of separate maintenance shall not be considered as married.
-s7703_a_2(Taxp,Spouse,Marriage,S19,Taxy) :-
-    marriage_(Marriage),
-    agent_(Marriage,Taxp),
-    agent_(Marriage,Spouse),
-	not_same_person(Taxp,Spouse),
-	legal_separation_(S19),
-	patient_(S19,Marriage),
-	s7703_a_2_agent(S19),
-	start_(S19,Divorce_time),
-	last_day_year(Taxy,Last_day_year),
-	is_before(Divorce_time,Last_day_year).
+%s7703_a_2(Taxp,Spouse,Marriage,S19,Taxy) :-
+%    marriage_(Marriage),
+%    agent_(Marriage,Taxp),
+%    agent_(Marriage,Spouse),
+%	not_same_person(Taxp,Spouse),
+%	legal_separation_(S19),
+%	patient_(S19,Marriage),
+%	s7703_a_2_agent(S19),
+%	start_(S19,Divorce_time),
+%	last_day_year(Taxy,Last_day_year),
+%	is_before(Divorce_time,Last_day_year).
 
 s7703_a_2_agent(S19) :-
 	agent_(S19,"decree of divorce").
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % Alice and Bob got married on April 5th, 2012. Alice and Bob were legally separated under a decree of divorce on September 16th, 2017.
 
 % Question

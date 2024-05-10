@@ -1593,13 +1593,13 @@ s2_b_3(Taxp,Dependent,Taxy) :-
     s2_b_3_B(Taxp,Dependent,Taxy).
 
 %(A) if at any time during the taxable year he is a nonresident alien; or
-s2_b_3_A(Taxp,Taxy,S119) :-
-    first_day_year(Taxy,First_day_year),
-    last_day_year(Taxy,Last_day_year),
-    nonresident_alien_(Taxpayer_is_nra),
-    agent_(Taxpayer_is_nra,Taxp),
-    start_taxp_is_nra(Taxpayer_is_nra,Start_nra,First_day_year,Last_day_year,S119),
-    end_taxp_is_nra(Taxpayer_is_nra,Stop_nra,Last_day_year,S119).
+%s2_b_3_A(Taxp,Taxy,S119) :-
+%    first_day_year(Taxy,First_day_year),
+%    last_day_year(Taxy,Last_day_year),
+%    nonresident_alien_(Taxpayer_is_nra),
+%    agent_(Taxpayer_is_nra,Taxp),
+%    start_taxp_is_nra(Taxpayer_is_nra,Start_nra,First_day_year,Last_day_year,S119),
+%    end_taxp_is_nra(Taxpayer_is_nra,Stop_nra,Last_day_year,S119).
 
 start_taxp_is_nra(Taxpayer_is_nra,Start_nra,First_day_year,Last_day_year,S119):-
     date(First_day_year),date(Last_day_year),date(S119),
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % Alice and Bob got married on Feb 3rd, 1992. Alice died on July 9th, 2014. From 2004 to 2019, Bob furnished the costs of maintaining the home where he and and his father Charlie lived during that time. Bob is entitled to a deduction for Charlie under section 151(c) for the years 2015 to 2019. Bob was a nonresident alien until Feb 12, 2018.
 
 % Question

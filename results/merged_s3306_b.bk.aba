@@ -1901,25 +1901,25 @@ s3306_a_2_A_wages(Employer, Caly,Amount):-
 %(b) Wages
 
 %For purposes of this chapter, the term "wages" means all remuneration for employment, including the cash value of all remuneration (including benefits) paid in any medium other than cash; except that such term shall not include-
-s3306_b(Wages,Remuneration,Employment,Payer,Payee,Employer,Employee,Medium) :-
-	payment_(Remuneration),
-    s3306_b_means(Remuneration,Medium),
-    agent_(Remuneration,Payer),
-    s3306_b_patient(Remuneration,Payee,Plan),
-	service_(Employment),
-    agent_(Employment,Employee),
-    patient_(Employment,Employer),
-	purpose_(Remuneration,Employment),
-    end_(Employment,End_service),
-	date_split(End_service,Year,M,D),
-	s3306_c(Employment,_,_,_,Year),
-	amount_(Remuneration,Wages_before),
-    s3306_b_1(Wages_before,Wages),
-	not_s3306_b_2(Remuneration,Employment,Payer,Payee,_,Plan),
-    not_s3306_b_7(Remuneration,Employment,Payer,Payee,_,_),
-	not_s3306_b_10(Remuneration,Employment,Payer,Payee,_,Plan),
-	not_s3306_b_11(Remuneration,Employment,_),
-    not_s3306_b_15(Remuneration,Employer,Payee,Employee,_).
+%s3306_b(Wages,Remuneration,Employment,Payer,Payee,Employer,Employee,Medium) :-
+%	payment_(Remuneration),
+%    s3306_b_means(Remuneration,Medium),
+%    agent_(Remuneration,Payer),
+%    s3306_b_patient(Remuneration,Payee,Plan),
+%	service_(Employment),
+%    agent_(Employment,Employee),
+%    patient_(Employment,Employer),
+%	purpose_(Remuneration,Employment),
+%    end_(Employment,End_service),
+%	date_split(End_service,Year,M,D),
+%	s3306_c(Employment,_,_,_,Year),
+%	amount_(Remuneration,Wages_before),
+%    s3306_b_1(Wages_before,Wages),
+%	not_s3306_b_2(Remuneration,Employment,Payer,Payee,_,Plan),
+%    not_s3306_b_7(Remuneration,Employment,Payer,Payee,_,_),
+%	not_s3306_b_10(Remuneration,Employment,Payer,Payee,_,Plan),
+%	not_s3306_b_11(Remuneration,Employment,_),
+%    not_s3306_b_15(Remuneration,Employer,Payee,Employee,_).
 
 s3306_b_means(Remuneration,Medium):-
 	medium(Medium),payment_(Remuneration), not_means_(Remuneration,_).
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % Over the year 2018, Alice has paid $2325 in hay to Bob for agricultural labor.
 
 % Question

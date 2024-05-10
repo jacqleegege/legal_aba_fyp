@@ -3361,10 +3361,10 @@ s68_b_1_C(Taxp,Aa,Taxy) :-
     amount("C",Aa).
 
 %(D) ½ the amount applicable under subparagraph (A) in the case of a married individual filing a separate return.
-s68_b_1_D(Taxp,Aa,Taxy) :-
-    s7703(Taxp,Spouse,_,Taxy),
-    not_joint_return_def(Taxp,Spouse,Taxy),
-    amount("D",Aa).
+%s68_b_1_D(Taxp,Aa,Taxy) :-
+%    s7703(Taxp,Spouse,_,Taxy),
+%    not_joint_return_def(Taxp,Spouse,Taxy),
+%    amount("D",Aa).
 
 joint_return_def(Taxp,Spouse,Taxy):-
     joint_return_(Joint_return),
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % In 2016, Alice's income was $567192. Alice is not married.
 
 % Question

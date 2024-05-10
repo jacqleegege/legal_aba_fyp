@@ -2452,11 +2452,11 @@ s3306_c_13_student(Student_is_enrolled,Stop_enrollment,Workday):-
 	is_before(Workday,Stop_enrollment).
 
 %(16) service performed in the employ of an international organization;
-s3306_c_16(Service,Employer) :-
-    service_(Service),
-	patient_(Service,Employer),
-	international_organization_(Employer_is_international_organization),
-	agent_(Employer_is_international_organization,Employer).
+%s3306_c_16(Service,Employer) :-
+%    service_(Service),
+%	patient_(Service,Employer),
+%	international_organization_(Employer_is_international_organization),
+%	agent_(Employer_is_international_organization,Employer).
 
 %(21) service performed by a person committed to a penal institution.
 s3306_c_21(Service,Employee,S235,Workday) :-
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % Alice was paid $73200 in 2017 as an employee of the International Monetary Fund in Washington, D.C., USA.
 
 % Question

@@ -746,32 +746,32 @@ individual_death(Individual,Death_time):-
     start_(Death_individual,Death_time).
 
 %(B) who has the same principal place of abode as the taxpayer for more than one-half of such taxable year,
-s152_c_1_B(Dependent,S38,Taxp,Start_relationship,End_relationship,Taxy) :-
-    residence_(Residence_individual),
-    agent_(Residence_individual,Dependent),
-    patient_(Residence_individual,S38),
-    % get first day the Dependent lived at Place_of_abode; if unspecified, take first day of Taxy
-	start_individual_residence(Residence_individual,Taxy,Start_individual),
-    % get last day the Dependent lived at Place_of_abode; if ongoing, take last day of Taxy
-	end_individual_residence(Residence_individual,Taxy,End_individual),
-    residence_(Residence_taxpayer),
-    agent_(Residence_taxpayer,Taxp),
-    patient_(Residence_taxpayer,S38),
-    % get first day the Taxp lived at Place_of_abode; if unspecified, take first day of Taxy
-	start_individual_residence(Residence_taxpayer,Taxy,Start_taxpayer),
-    % get last day the Taxp lived at Place_of_abode; if ongoing, take last day of Taxy
-    end_individual_residence(Residence_taxpayer,Taxy,End_taxpayer),
-	% now compute overlap of Taxy, time when Taxp resided at Place_of_abode, and Dependent resided at Place_of_abode
-    last_day_year(Taxy,Last_day_of_year),
-    earlier(End1,End_individual,End_taxpayer),
-    earlier(End2,Last_day_of_year,End_relationship),
-    earlier(End_day,End1,End2),
-    first_day_year(Taxy,First_day_of_year),
-    later(Start1,Start_individual,Start_taxpayer),
-    later(Start2,First_day_of_year,Start_relationship),
-    later(Start_day,Start1,Start2),
-    duration(Start_day,End_day,Years,Months,Days),
-	more_than_half_a_year(Years,Months).
+%s152_c_1_B(Dependent,S38,Taxp,Start_relationship,End_relationship,Taxy) :-
+%    residence_(Residence_individual),
+%    agent_(Residence_individual,Dependent),
+%    patient_(Residence_individual,S38),
+%    % get first day the Dependent lived at Place_of_abode; if unspecified, take first day of Taxy
+%	start_individual_residence(Residence_individual,Taxy,Start_individual),
+%    % get last day the Dependent lived at Place_of_abode; if ongoing, take last day of Taxy
+%	end_individual_residence(Residence_individual,Taxy,End_individual),
+%    residence_(Residence_taxpayer),
+%    agent_(Residence_taxpayer,Taxp),
+%    patient_(Residence_taxpayer,S38),
+%    % get first day the Taxp lived at Place_of_abode; if unspecified, take first day of Taxy
+%	start_individual_residence(Residence_taxpayer,Taxy,Start_taxpayer),
+%    % get last day the Taxp lived at Place_of_abode; if ongoing, take last day of Taxy
+%    end_individual_residence(Residence_taxpayer,Taxy,End_taxpayer),
+%	% now compute overlap of Taxy, time when Taxp resided at Place_of_abode, and Dependent resided at Place_of_abode
+%    last_day_year(Taxy,Last_day_of_year),
+%    earlier(End1,End_individual,End_taxpayer),
+%    earlier(End2,Last_day_of_year,End_relationship),
+%    earlier(End_day,End1,End2),
+%    first_day_year(Taxy,First_day_of_year),
+%    later(Start1,Start_individual,Start_taxpayer),
+%    later(Start2,First_day_of_year,Start_relationship),
+%    later(Start_day,Start1,Start2),
+%    duration(Start_day,End_day,Years,Months,Days),
+%	more_than_half_a_year(Years,Months).
 
 start_individual_residence(Residence_individual,Taxy,Start_individual):-
     year(Taxy),start_(Residence_individual,Start_individual).
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % Alice has a son, Bob. From September 1st, 2015 to November 3rd, 2019, Alice and Bob lived in the same home.
 
 % Question

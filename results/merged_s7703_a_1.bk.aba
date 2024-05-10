@@ -3525,20 +3525,20 @@ s7703_a(Taxp,Spouse,Marriage,Taxy) :-
 	not_s7703_a_2(Taxp,Spouse,Marriage,_,Taxy).
 
 %(1) the determination of whether an individual is married shall be made as of the close of his taxable year; except that if his spouse dies during his taxable year such determination shall be made as of the time of such death; and
-s7703_a_1(Taxp,Spouse,Marriage,S13,Taxy) :-
-	% useful constants
-	last_day_year(Taxy,Last_day_year),
-	first_day_year(Taxy,First_day_year),
-	Taxy1=Taxy+1,
-	first_day_year(Taxy1,First_day_next_year),
-	% main body
-	marriage_(Marriage),
-	agent_(Marriage,Taxp),
-	agent_(Marriage,Spouse),
-	not_same_person(Taxp,Spouse),
-    s7703_a_1_start(Marriage,Start_marriage,First_day_year),
-    is_before(Start_marriage,Last_day_year),
-	s7703_a_1_death_spouse_if(Spouse,S13,First_day_year,Last_day_year,Start_marriage).
+%s7703_a_1(Taxp,Spouse,Marriage,S13,Taxy) :-
+%	% useful constants
+%	last_day_year(Taxy,Last_day_year),
+%	first_day_year(Taxy,First_day_year),
+%	Taxy1=Taxy+1,
+%	first_day_year(Taxy1,First_day_next_year),
+%	% main body
+%	marriage_(Marriage),
+%	agent_(Marriage,Taxp),
+%	agent_(Marriage,Spouse),
+%	not_same_person(Taxp,Spouse),
+%    s7703_a_1_start(Marriage,Start_marriage,First_day_year),
+%    is_before(Start_marriage,Last_day_year),
+%	s7703_a_1_death_spouse_if(Spouse,S13,First_day_year,Last_day_year,Start_marriage).
 
 s7703_a_1_death_spouse_if(Spouse,S13,First_day_year,Last_day_year,Start_marriage):-
 	s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),
@@ -4720,7 +4720,8 @@ contrary(not_s7703_b_1_joint_return(Taxp,First_day_year,Last_day_year),s7703_b_1
 contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)) :-
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
-    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).% Text
+    assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
+ %CASES START HERE% Text
 % Alice and Bob got married on April 5th, 2012. Bob died September 16th, 2017.
 
 % Question
