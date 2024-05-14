@@ -1,15 +1,15 @@
 %(A) if the taxpayer has remarried at any time before the close of the taxable year, or
-s2_a_2_A(Taxp,Remarriage,Previous_marriage,S31,Taxy) :-
-    marriage_(Previous_marriage),
-    agent_(Previous_marriage,Taxp),
-    start_(Previous_marriage,Start_previous_marriage),
-    marriage_(Remarriage),
-    agent_(Remarriage,Taxp),
-    start_(Remarriage,S31),
-    not_same_marriage(Remarriage,Previous_marriage),
-    is_before(Start_previous_marriage,S31),
-    last_day_year(Taxy,Last_day_year),
-    is_before(S31,Last_day_year).
+%s2_a_2_A(Taxp,Remarriage,Previous_marriage,S31,Taxy) :-
+%    marriage_(Previous_marriage),
+%    agent_(Previous_marriage,Taxp),
+%    start_(Previous_marriage,Start_previous_marriage),
+%    marriage_(Remarriage),
+%    agent_(Remarriage,Taxp),
+%    start_(Remarriage,S31),
+%    not_same_marriage(Remarriage,Previous_marriage),
+%    is_before(Start_previous_marriage,S31),
+%    last_day_year(Taxy,Last_day_year),
+%    is_before(S31,Last_day_year).
 
 last_day_year(Year,Day):-
     date_split(Day,Year,12,31).

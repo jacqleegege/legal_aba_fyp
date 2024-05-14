@@ -1,4 +1,10 @@
 %(A) for himself if he is blind at the close of the taxable year, and
+%s63_f_2_A(Taxp,Taxy) :-
+%    blindness_(Taxp_is_blind),
+%    agent_(Taxp_is_blind,Taxp),
+%    start_(Taxp_is_blind,Start_time),
+%    last_day_year(Taxy,Last_day_year),
+%    is_before(Start_time,Last_day_year).
 
 is_before(Day1,Day2):-
     date_split(Day1,Y1,M1,D1),
