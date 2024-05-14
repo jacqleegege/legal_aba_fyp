@@ -77,8 +77,8 @@ s1_a_tax(Taxinc,Tax) :-
 
 
 %(i) 15% of taxable income if the taxable income is not over $36,900;
-% s1_a_i(Taxinc,Tax) :-
-%     finance(Taxinc), Taxinc <= 36900, Tax = (Taxinc*15)/100.
+s1_a_i(Taxinc,Tax) :-
+    finance(Taxinc), Taxinc < 36901, Tax = (Taxinc*15)/100.
 %(ii) $5,535, plus 28% of the excess over $36,900 if the taxable income is over $36,900 but not over $89,150;
 s1_a_ii(Taxinc,Tax) :-
     finance(Taxinc), 
@@ -2742,8 +2742,8 @@ s63(Taxp,Taxy,Taxinc) :-
     s63_b_xor_a(Taxp,Taxy,Taxable_income_tmp),
 	max(Taxinc,Taxable_income_tmp,0).
 
-%s63_b_xor_a(Taxp,Taxy,Taxable_income_tmp):-
-%    s63_b(Taxp,Taxy,Taxable_income_tmp,_).
+s63_b_xor_a(Taxp,Taxy,Taxable_income_tmp):-
+    s63_b(Taxp,Taxy,Taxable_income_tmp,_).
 s63_b_xor_a(Taxp,Taxy,Taxable_income_tmp):-
     not_s63_b(Taxp,Taxy,_,_),
     s63_a(Taxp,Taxy,Taxable_income_tmp,_,_).
@@ -2763,13 +2763,13 @@ s63_a(Taxp,Taxy,Taxinc,Grossinc,Ded63) :-
 %(b) Individuals who do not itemize their deductions
 
 %In the case of an individual who does not elect to itemize his deductions for the taxable year, for purposes of this subtitle, the term "taxable income" means adjusted gross income, minus-
-s63_b(Taxp,Taxy,Taxinc,Grossinc) :-
-    not_s63_d(Taxp,_,_,Taxy),
-    gross_income(Taxp,Taxy,Grossinc),
-    s63_b_1(Taxp,Taxy,Amount1),
-    s63_b_2(Taxp,Taxy,Amount2),
-    Taxable_income_tmp = Grossinc - Amount1 - Amount2,
-	max(Taxinc,Taxable_income_tmp,0).
+%s63_b(Taxp,Taxy,Taxinc,Grossinc) :-
+%    not_s63_d(Taxp,_,_,Taxy),
+%    gross_income(Taxp,Taxy,Grossinc),
+%    s63_b_1(Taxp,Taxy,Amount1),
+%    s63_b_2(Taxp,Taxy,Amount2),
+%    Taxable_income_tmp = Grossinc - Amount1 - Amount2,
+%	max(Taxinc,Taxable_income_tmp,0).
 
 %(1) the standard deduction, and
 s63_b_1(Taxp,Taxy,Standed) :-
@@ -4721,7 +4721,8 @@ contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s77
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
     assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
- %CASES START HERE% Text
+% CASES START HERE 
+% Text
 % In 2017, Alice was paid $33200. She is allowed a deduction under section 63(c)(1) of $2000 for the year 2017, and no deduction under section 151. Alice takes the standard deduction.
 
 % Question

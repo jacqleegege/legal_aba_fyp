@@ -77,8 +77,8 @@ s1_a_tax(Taxinc,Tax) :-
 
 
 %(i) 15% of taxable income if the taxable income is not over $36,900;
-% s1_a_i(Taxinc,Tax) :-
-%     finance(Taxinc), Taxinc <= 36900, Tax = (Taxinc*15)/100.
+s1_a_i(Taxinc,Tax) :-
+    finance(Taxinc), Taxinc < 36901, Tax = (Taxinc*15)/100.
 %(ii) $5,535, plus 28% of the excess over $36,900 if the taxable income is over $36,900 but not over $89,150;
 s1_a_ii(Taxinc,Tax) :-
     finance(Taxinc), 
@@ -478,12 +478,12 @@ s151_d_3_A(Taxp,Agi,Aa,Ap,Exemption_amount_in,Ea,Taxy) :-
 %(B) Applicable percentage
 
 %For purposes of subparagraph (A), the term "applicable percentage" means 2 percentage points for each $2,500 (or fraction thereof) by which the taxpayer's adjusted gross income for the taxable year exceeds the applicable amount in effect under section 68(b). In the case of a married individual filing a separate return, the preceding sentence shall be applied by substituting "$1,250" for "$2,500". In no event shall the applicable percentage exceed 100 percent.
-%s151_d_3_B(Ap,Taxp,Agi,Taxy,Aa) :-
-%    gross_income(Taxp,Taxy,Agi),
-%    s68_b(Taxp,Aa,Taxy),
-%    max(Difference,Agi-Aa,0),
-%    s151_d_3_B_number(Taxp,Taxy,Number,Difference),
-%    min(Ap,Number,100).
+s151_d_3_B(Ap,Taxp,Agi,Taxy,Aa) :-
+    gross_income(Taxp,Taxy,Agi),
+    s68_b(Taxp,Aa,Taxy),
+    max(Difference,Agi-Aa,0),
+    s151_d_3_B_number(Taxp,Taxy,Number,Difference),
+    min(Ap,Number,100).
 
 s151_d_3_B_number(Taxp,Taxy,Number,Difference):-
     finance(Difference),
@@ -4721,7 +4721,8 @@ contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s77
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
     assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
- %CASES START HERE% Text
+% CASES START HERE 
+% Text
 % Alice's income in 2015 is $276932. Alice is not married. The applicable amount according to section 68(b) is $250000.
 
 % Question

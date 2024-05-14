@@ -77,8 +77,8 @@ s1_a_tax(Taxinc,Tax) :-
 
 
 %(i) 15% of taxable income if the taxable income is not over $36,900;
-% s1_a_i(Taxinc,Tax) :-
-%     finance(Taxinc), Taxinc <= 36900, Tax = (Taxinc*15)/100.
+s1_a_i(Taxinc,Tax) :-
+    finance(Taxinc), Taxinc < 36901, Tax = (Taxinc*15)/100.
 %(ii) $5,535, plus 28% of the excess over $36,900 if the taxable income is over $36,900 but not over $89,150;
 s1_a_ii(Taxinc,Tax) :-
     finance(Taxinc), 
@@ -812,11 +812,11 @@ s152_c_2(Dependent,Taxp,Start_relationship,End_relationship) :-
     s152_c_2_B(Dependent,Taxp,_,Start_relationship,End_relationship).
 
 %(A) a child of the taxpayer or a descendant of such a child, or
-%s152_c_2_A(Dependent,Taxp,Childc2a,Start_relationship,End_relationship) :-
-%	is_child_of(Childc2a,Taxp,Start_child,End_child),
-%    Dependent=Childc2a,
-%    Start_relationship=Start_child,
-%    End_relationship=End_child.
+s152_c_2_A(Dependent,Taxp,Childc2a,Start_relationship,End_relationship) :-
+	is_child_of(Childc2a,Taxp,Start_child,End_child),
+    Dependent=Childc2a,
+    Start_relationship=Start_child,
+    End_relationship=End_child.
 s152_c_2_A(Dependent,Taxp,Childc2a,Start_relationship,End_relationship) :-
     is_child_of(Childc2a,Taxp,Start_child,End_child),
     not_same_person(Dependent,Childc2a),
@@ -4721,7 +4721,8 @@ contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s77
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
     assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
- %CASES START HERE% Text
+% CASES START HERE 
+% Text
 % Alice has a son, Bob, who was born January 31st, 2014.
 
 % Question

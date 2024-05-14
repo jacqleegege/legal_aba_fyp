@@ -77,8 +77,8 @@ s1_a_tax(Taxinc,Tax) :-
 
 
 %(i) 15% of taxable income if the taxable income is not over $36,900;
-% s1_a_i(Taxinc,Tax) :-
-%     finance(Taxinc), Taxinc <= 36900, Tax = (Taxinc*15)/100.
+s1_a_i(Taxinc,Tax) :-
+    finance(Taxinc), Taxinc < 36901, Tax = (Taxinc*15)/100.
 %(ii) $5,535, plus 28% of the excess over $36,900 if the taxable income is over $36,900 but not over $89,150;
 s1_a_ii(Taxinc,Tax) :-
     finance(Taxinc), 
@@ -3684,8 +3684,8 @@ s7703_b_1_end(Child_lives_at_home,End_time):-
 	Ratio = Payment_by_individual/Cost,
 	Ratio>=5/10.
 
-%s7703_b_2_purpose(Payment,Residence,Household):-
-%	household(Household),purpose_(Payment,Residence).
+s7703_b_2_purpose(Payment,Residence,Household):-
+	household(Household),purpose_(Payment,Residence).
 s7703_b_2_purpose(Payment,Residence,Household):-
 	residence_(Residence),purpose_(Payment,Household).
 
@@ -4721,7 +4721,8 @@ contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s77
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
     assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
- %CASES START HERE% Text
+% CASES START HERE 
+% Text
 % Alice and Bob got married on April 5th, 2012. Alice and Bob have a son, Charlie, who was born on September 16th, 2017. Alice and Charlie live in a home maintained by Alice since September 16th, 2017. Alice is entitled to a deduction for Charlie under section 151(c) for the years 2017 to 2019. Alice and Bob file a joint return for the years 2017 to 2019.
 
 % Question

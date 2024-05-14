@@ -77,8 +77,8 @@ s1_a_tax(Taxinc,Tax) :-
 
 
 %(i) 15% of taxable income if the taxable income is not over $36,900;
-% s1_a_i(Taxinc,Tax) :-
-%     finance(Taxinc), Taxinc <= 36900, Tax = (Taxinc*15)/100.
+s1_a_i(Taxinc,Tax) :-
+    finance(Taxinc), Taxinc < 36901, Tax = (Taxinc*15)/100.
 %(ii) $5,535, plus 28% of the excess over $36,900 if the taxable income is over $36,900 but not over $89,150;
 s1_a_ii(Taxinc,Tax) :-
     finance(Taxinc), 
@@ -2883,8 +2883,8 @@ s63_c_2_C(Taxy,Bassd) :-
 %(3) Additional standard deduction for aged and blind
 
 %For purposes of paragraph (1), the additional standard deduction is the sum of each additional amount to which the taxpayer is entitled under subsection (f).
-%s63_c_3(Taxp,Addsd,Taxy) :-
-%    s63_f(Taxp,Addsd,Taxy).
+s63_c_3(Taxp,Addsd,Taxy) :-
+    s63_f(Taxp,Addsd,Taxy).
 
 %(5) Limitation on basic standard deduction in the case of certain dependents
 
@@ -4721,7 +4721,8 @@ contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s77
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
     assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
- %CASES START HERE% Text
+% CASES START HERE 
+% Text
 % In 2017, Alice was paid $33200. Alice and Bob have been married since Feb 3rd, 2017. Alice is entitled to an additional standard deduction of $600 each for herself and for Bob, under section 63(f)(1)(A) and 63(f)(1)(B), respectively.
 
 % Question

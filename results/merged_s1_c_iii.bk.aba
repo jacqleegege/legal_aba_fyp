@@ -77,8 +77,8 @@ s1_a_tax(Taxinc,Tax) :-
 
 
 %(i) 15% of taxable income if the taxable income is not over $36,900;
-% s1_a_i(Taxinc,Tax) :-
-%     finance(Taxinc), Taxinc <= 36900, Tax = (Taxinc*15)/100.
+s1_a_i(Taxinc,Tax) :-
+    finance(Taxinc), Taxinc < 36901, Tax = (Taxinc*15)/100.
 %(ii) $5,535, plus 28% of the excess over $36,900 if the taxable income is over $36,900 but not over $89,150;
 s1_a_ii(Taxinc,Tax) :-
     finance(Taxinc), 
@@ -184,11 +184,11 @@ s1_c_ii(Taxinc,Tax) :-
     22100 < Taxinc,
     Tax = 3315+((Taxinc-22100)*28)/100.
 %(iii) $12,107, plus 31% of the excess over $53,500 if the taxable income is over $53,500 but not over $115,000;
-%s1_c_iii(Taxinc,Tax) :-
-%    finance(Taxinc), 
-%    Taxinc < 115001,
-%    53500 < Taxinc,
-%    Tax = 12107+((Taxinc-53500)*31)/100.
+s1_c_iii(Taxinc,Tax) :-
+    finance(Taxinc), 
+    Taxinc < 115001,
+    53500 < Taxinc,
+    Tax = 12107+((Taxinc-53500)*31)/100.
 %(iv) $31,172, plus 36% of the excess over $115,000 if the taxable income is over $115,000 but not over $250,000;
 s1_c_iv(Taxinc,Tax) :-
     finance(Taxinc),
@@ -4721,7 +4721,8 @@ contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s77
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
     assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
- %CASES START HERE% Text
+% CASES START HERE 
+% Text
 % Alice's taxable income for the year 2017 is $22895. Alice is not married, is not a surviving spouse, and is not a head of household in 2017.
 
 % Question

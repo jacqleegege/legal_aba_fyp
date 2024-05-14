@@ -77,8 +77,8 @@ s1_a_tax(Taxinc,Tax) :-
 
 
 %(i) 15% of taxable income if the taxable income is not over $36,900;
-% s1_a_i(Taxinc,Tax) :-
-%     finance(Taxinc), Taxinc <= 36900, Tax = (Taxinc*15)/100.
+s1_a_i(Taxinc,Tax) :-
+    finance(Taxinc), Taxinc < 36901, Tax = (Taxinc*15)/100.
 %(ii) $5,535, plus 28% of the excess over $36,900 if the taxable income is over $36,900 but not over $89,150;
 s1_a_ii(Taxinc,Tax) :-
     finance(Taxinc), 
@@ -2804,9 +2804,9 @@ s63_c_1_A(Taxp,Taxy,Bassd) :-
     s63_c_2(Taxp,Taxy,Basic_amount),
     s63_c_5_bassd(Taxp,Taxy,Basic_amount,Bassd).
 
-%s63_c_5_bassd(Taxp,Taxy,Basic_amount,Bassd):-
-%    s63_c_5(Taxp,_,_,Taxy,Max_amount),
-%    min(Bassd,Basic_amount,Max_amount).
+s63_c_5_bassd(Taxp,Taxy,Basic_amount,Bassd):-
+    s63_c_5(Taxp,_,_,Taxy,Max_amount),
+    min(Bassd,Basic_amount,Max_amount).
 s63_c_5_bassd(Taxp,Taxy,Basic_amount,Bassd):-
     person(Taxp),year(Taxy),finance(Basic_amount),
     not_s63_c_5(Taxp,_,_,Taxy,_),
@@ -2893,12 +2893,12 @@ s63_c_3(Taxp,Addsd,Taxy) :-
 %(A) $500, or
 
 %(B) the sum of $250 and such individual's earned income.
-s63_c_5(Taxp,S45,Grossinc,Taxy,Bassd) :-
-    s151_b_or_c_applies(S45,Taxp,Taxy),
-    Amount1 = 500,
-    gross_income(Taxp,Taxy,Grossinc),
-    Amount2 = 250+Grossinc,
-    max(Bassd,Amount1,Amount2).
+%s63_c_5(Taxp,S45,Grossinc,Taxy,Bassd) :-
+%    s151_b_or_c_applies(S45,Taxp,Taxy),
+%    Amount1 = 500,
+%    gross_income(Taxp,Taxy,Grossinc),
+%    Amount2 = 250+Grossinc,
+%    max(Bassd,Amount1,Amount2).
 
 s151_b_or_c_applies(S45,Taxp,Taxy):-
     s151_b_applies(S45,Taxp,Taxy).
@@ -4721,7 +4721,8 @@ contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s77
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
     assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
- %CASES START HERE% Text
+% CASES START HERE 
+% Text
 % In 2017, Alice was paid $33200. Alice and Bob have been married since Feb 3rd, 2017. Alice is entitled to a deduction for Bob under section 151(b). Bob had no gross income in 2017.
 
 % Question

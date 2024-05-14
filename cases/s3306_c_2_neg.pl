@@ -41,7 +41,7 @@ patient_(alice_pays_s3306_c_2_neg,bob_s3306_c_2_neg).
 start_(alice_pays_s3306_c_2_neg,"2017-09-02").
 purpose_(alice_pays_s3306_c_2_neg,alice_employer_s3306_c_2_neg).
 amount_(alice_pays_s3306_c_2_neg,3200).
-s3306_b(3200,alice_pays_s3306_c_2_neg,alice_employer_s3306_c_2_neg,alice_s3306_c_2_neg,bob_s3306_c_2_neg,alice_s3306_c_2_neg,bob_s3306_c_2_neg,"cash")
+s3306_b(3200,alice_pays_s3306_c_2_neg,alice_employer_s3306_c_2_neg,alice_s3306_c_2_neg,bob_s3306_c_2_neg,alice_s3306_c_2_neg,bob_s3306_c_2_neg,"cash").
 
 % Test
 :- \+ s3306_c_2(alice_employer_s3306_c_2_neg,baltimore,2017).

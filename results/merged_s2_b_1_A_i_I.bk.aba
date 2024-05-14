@@ -77,8 +77,8 @@ s1_a_tax(Taxinc,Tax) :-
 
 
 %(i) 15% of taxable income if the taxable income is not over $36,900;
-% s1_a_i(Taxinc,Tax) :-
-%     finance(Taxinc), Taxinc <= 36900, Tax = (Taxinc*15)/100.
+s1_a_i(Taxinc,Tax) :-
+    finance(Taxinc), Taxinc < 36901, Tax = (Taxinc*15)/100.
 %(ii) $5,535, plus 28% of the excess over $36,900 if the taxable income is over $36,900 but not over $89,150;
 s1_a_ii(Taxinc,Tax) :-
     finance(Taxinc), 
@@ -1465,13 +1465,13 @@ s2_b_1_A_i(Taxp,Dependent,Taxy) :-
     s152_c(Dependent,Taxp,Taxy),
     not_s2_b_1_A_i_I_and_II(Dependent,Taxp,Taxy).
 
-%s2_b_1_A_i_I_and_II(Dependent,Taxp,Taxy):-
-%    s2_b_1_A_i_I(Dependent,Taxy),
-%    s2_b_1_A_i_II(Dependent,Taxp,Taxy).
+s2_b_1_A_i_I_and_II(Dependent,Taxp,Taxy):-
+    s2_b_1_A_i_I(Dependent,Taxy),
+    s2_b_1_A_i_II(Dependent,Taxp,Taxy).
 
 %(I) is married at the close of the taxpayer's taxable year, and
-s2_b_1_A_i_I(Dependent,Taxy) :-
-    s7703(Dependent,_,_,Taxy).
+%s2_b_1_A_i_I(Dependent,Taxy) :-
+%    s7703(Dependent,_,_,Taxy).
 
 %(II) is not a dependent of such individual by reason of section 152(b)(2), or
 s2_b_1_A_i_II(Dependent,Taxp,Taxy) :-
@@ -4721,7 +4721,8 @@ contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s77
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
     assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
- %CASES START HERE% Text
+% CASES START HERE 
+% Text
 % Alice and Bob got married on Feb 3rd, 1992. Alice and Bob have a child, Charlie, born October 9th, 2000. Alice died on July 9th, 2014. From 2004 to 2019, Bob furnished the costs of maintaining the home where he and Charlie lived during that time. Charlie married Dan on Feb 14th, 2018.
 
 % Question

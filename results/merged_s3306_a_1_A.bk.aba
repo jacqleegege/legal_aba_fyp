@@ -77,8 +77,8 @@ s1_a_tax(Taxinc,Tax) :-
 
 
 %(i) 15% of taxable income if the taxable income is not over $36,900;
-% s1_a_i(Taxinc,Tax) :-
-%     finance(Taxinc), Taxinc <= 36900, Tax = (Taxinc*15)/100.
+s1_a_i(Taxinc,Tax) :-
+    finance(Taxinc), Taxinc < 36901, Tax = (Taxinc*15)/100.
 %(ii) $5,535, plus 28% of the excess over $36,900 if the taxable income is over $36,900 but not over $89,150;
 s1_a_ii(Taxinc,Tax) :-
     finance(Taxinc), 
@@ -1767,8 +1767,8 @@ s3306_a_1_is_wages(Person, Year, Remuneration, Wages) :-
 	% Wages = #sum{Amount,Remuneration : s3306_a_1_A_wages(Employee,Remuneration,Caly,Amount)},
 	% Wages>1499.
 
-%s3306_a_1_A_wages(Employee,Remuneration,Caly,Amount):-
-%	s3306_a_1_is_wages(Employee, Caly, Remuneration, Amount).
+s3306_a_1_A_wages(Employee,Remuneration,Caly,Amount):-
+	s3306_a_1_is_wages(Employee, Caly, Remuneration, Amount).
 s3306_a_1_A_wages(Employee,Remuneration,Caly,Amount):-
 	Pyear=Caly-1,
 	s3306_a_1_is_wages(Employee, Pyear, Remuneration, Amount).
@@ -4721,7 +4721,8 @@ contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s77
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
     assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
- %CASES START HERE% Text
+% CASES START HERE 
+% Text
 % Alice has paid wages of $3200 to Bob for work done from Feb 1st, 2017 to Sep 2nd, 2017. Bob has paid wages of $4500 to Alice for work done from Apr 1st, 2017 to Sep 2nd, 2018.
 
 % Question

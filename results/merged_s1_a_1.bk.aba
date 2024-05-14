@@ -19,10 +19,10 @@ s1(Taxp, Taxy, Taxinc, Tax) :-
     s1_d(Taxp, _, Taxy, Taxinc, Tax).
 
 %(a) Married individuals filing joint returns and surviving spouses
-%s1_a(Taxp,Taxy,Taxinc,Tax) :-
-%    s1_a_1(Taxp,_,_,Taxy,Taxinc,Tax).
-%s1_a(Taxp,Taxy,Taxinc,Tax) :-
-%    s1_a_2(Taxp,Taxy,Taxinc,Tax).
+s1_a(Taxp,Taxy,Taxinc,Tax) :-
+    s1_a_1(Taxp,_,_,Taxy,Taxinc,Tax).
+s1_a(Taxp,Taxy,Taxinc,Tax) :-
+    s1_a_2(Taxp,Taxy,Taxinc,Tax).
 
 %There is hereby imposed on the taxable income of-
 
@@ -77,8 +77,8 @@ s1_a_tax(Taxinc,Tax) :-
 
 
 %(i) 15% of taxable income if the taxable income is not over $36,900;
-% s1_a_i(Taxinc,Tax) :-
-%     finance(Taxinc), Taxinc <= 36900, Tax = (Taxinc*15)/100.
+s1_a_i(Taxinc,Tax) :-
+    finance(Taxinc), Taxinc < 36901, Tax = (Taxinc*15)/100.
 %(ii) $5,535, plus 28% of the excess over $36,900 if the taxable income is over $36,900 but not over $89,150;
 s1_a_ii(Taxinc,Tax) :-
     finance(Taxinc), 

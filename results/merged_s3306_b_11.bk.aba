@@ -77,8 +77,8 @@ s1_a_tax(Taxinc,Tax) :-
 
 
 %(i) 15% of taxable income if the taxable income is not over $36,900;
-% s1_a_i(Taxinc,Tax) :-
-%     finance(Taxinc), Taxinc <= 36900, Tax = (Taxinc*15)/100.
+s1_a_i(Taxinc,Tax) :-
+    finance(Taxinc), Taxinc < 36901, Tax = (Taxinc*15)/100.
 %(ii) $5,535, plus 28% of the excess over $36,900 if the taxable income is over $36,900 but not over $89,150;
 s1_a_ii(Taxinc,Tax) :-
     finance(Taxinc), 
@@ -2045,16 +2045,16 @@ s3306_b_10_B(Employer,Remuneration,Plan) :-
 %other than any such payment or series of payments which would have been paid if the employee's employment relationship had not been so terminated;
 
 %(11) remuneration for agricultural labor paid in any medium other than cash;
-%s3306_b_11(Remuneration,Service,Medium) :-
-%    service_(Service),
-%	purpose_(Service,"agricultural labor"),
-%	patient_(Service,Employer),
-%	agent_(Service,Employee),
-%    agent_(Remuneration,Employer),
-%	patient_(Remuneration,Employee),
-%	purpose_(Remuneration,Service),
-%	means_(Remuneration,Medium),
-%    not_medium_is_cash(Medium).
+s3306_b_11(Remuneration,Service,Medium) :-
+    service_(Service),
+	purpose_(Service,"agricultural labor"),
+	patient_(Service,Employer),
+	agent_(Service,Employee),
+    agent_(Remuneration,Employer),
+	patient_(Remuneration,Employee),
+	purpose_(Remuneration,Service),
+	means_(Remuneration,Medium),
+    not_medium_is_cash(Medium).
 
 %(15) any payment made by an employer to a survivor or the estate of a former employee after the calendar year in which such employee died;
 s3306_b_15(Remuneration,Employer,Payee,Employee,Caly) :-
@@ -4721,7 +4721,8 @@ contrary(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year),s77
     assumption(not_s7703_a_1_death_spouse(Spouse,S13,First_day_year,Last_day_year)).
 contrary(not_s7703_a_1_death_2(Spouse,Spouse_dies),s7703_a_1_death_2(Spouse,Spouse_dies)) :-
     assumption(not_s7703_a_1_death_2(Spouse,Spouse_dies)).
- %CASES START HERE% Text
+% CASES START HERE 
+% Text
 % Alice has paid $3200 to Bob for agricultural labor done from Feb 1st, 2017 to Sep 2nd, 2017. Alice paid Bob with eggs, grapes and hay.
 
 % Question

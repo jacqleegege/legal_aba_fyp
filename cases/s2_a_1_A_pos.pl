@@ -9,6 +9,7 @@ person(alice_s2_a_1_A_pos).
 person(bob_s2_a_1_A_pos).
 year(2014).
 year(1992).
+year(2015).
 date("1992-02-03").
 date_split("1992-02-03",1992,2,3).
 date("1992-01-01").

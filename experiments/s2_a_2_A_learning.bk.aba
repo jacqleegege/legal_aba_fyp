@@ -1,0 +1,137 @@
+%(A) if the taxpayer has remarried at any time before the close of the taxable year, or
+s2_a_2_A(Taxp,Remarriage,Previous_marriage,S31,Taxy) :-
+    marriage_(Previous_marriage),
+    agent_(Previous_marriage,Taxp),
+    start_(Previous_marriage,Start_previous_marriage),
+    marriage_(Remarriage),
+    agent_(Remarriage,Taxp),
+    start_(Remarriage,S31),
+    not_same_marriage(Remarriage,Previous_marriage),
+    is_before(Start_previous_marriage,S31),
+    last_day_year(Taxy,Last_day_year),
+    is_before(S31,Last_day_year).
+
+last_day_year(Year,Day):-
+    date_split(Day,Year,12,31).
+
+is_before(Day1,Day2):-
+    date_split(Day1,Y1,M1,D1),
+    date_split(Day2,Y2,M2,D2),
+    Y1 < Y2.
+is_before(Day1,Day2):-
+    date_split(Day1,Y1,M1,D1),
+    date_split(Day2,Y2,M2,D2),
+    Y1 = Y2,M1 < M2.
+is_before(Day1,Day2):-
+    date_split(Day1,Y1,M1,D1),
+    date_split(Day2,Y2,M2,D2),
+    Y1 = Y2,M1 = M2,D1 < D2.
+
+same_marriage(M1,M2):-
+    marriage_(M1),marriage_(M2),M1=M2.
+
+assumption(not_same_marriage(M1,M2)).
+contrary(not_same_marriage(M1,M2),same_marriage(M1,M2)):-
+    assumption(not_same_marriage(M1,M2)).
+    
+% Text
+% Alice and Bob got married on Feb 3rd, 1992. Alice died on July 9th, 2014. Bob married Charlie on September 14th, 2015.
+
+% Question
+% Section 2(a)(2)(A) applies to Bob in 2014. Contradiction
+
+% Facts
+person(alice_s2_a_2_A_neg).
+person(bob_s2_a_2_A_neg).
+person(charlie_s2_a_2_A_neg).
+
+year(1992).
+date("1992-02-03").
+date_split("1992-02-03",1992,2,3).
+date("1992-01-01").
+date_split("1992-01-01",1992,1,1).
+date("1992-12-31").
+date_split("1992-12-31",1992,12,31).
+
+year(2014).
+date("2014-07-09").
+date_split("2014-07-09",2014,7,9).
+date("2014-01-01").
+date_split("2014-01-01",2014,1,1).
+date("2014-12-31").
+date_split("2014-12-31",2014,12,31).
+
+year(2015).
+date("2015-09-14").
+date_split("2015-09-14",2015,9,14).
+date("2015-01-01").
+date_split("2015-01-01",2015,1,1).
+date("2015-12-31").
+date_split("2015-12-31",2015,12,31).
+
+marriage_(alice_and_bob_s2_a_2_A_neg).
+agent_(alice_and_bob_s2_a_2_A_neg,alice_s2_a_2_A_neg).
+agent_(alice_and_bob_s2_a_2_A_neg,bob_s2_a_2_A_neg).
+start_(alice_and_bob_s2_a_2_A_neg,"1992-02-03").
+death_(alice_dies_s2_a_2_A_neg).
+agent_(alice_dies_s2_a_2_A_neg,alice_s2_a_2_A_neg).
+start_(alice_dies_s2_a_2_A_neg,"2014-07-09").
+end_(alice_dies_s2_a_2_A_neg,"2014-07-09").
+marriage_(alice_and_charlie_s2_a_2_A_neg).
+agent_(alice_and_charlie_s2_a_2_A_neg,charlie_s2_a_2_A_neg).
+agent_(alice_and_charlie_s2_a_2_A_neg,bob_s2_a_2_A_neg).
+start_(alice_and_charlie_s2_a_2_A_neg,"2015-09-14").
+
+% Text
+% Alice and Bob got married on Feb 3rd, 1992. Alice died on July 9th, 2014. Bob married Charlie on September 14th, 2015.
+
+% Question
+% Section 2(a)(2)(A) applies to Bob in 2015. Entailment
+
+% Facts
+person(alice_s2_a_2_A_pos).
+person(bob_s2_a_2_A_pos).
+person(charlie_s2_a_2_A_pos).
+
+year(1992).
+date("1992-02-03").
+date_split("1992-02-03",1992,2,3).
+date("1992-01-01").
+date_split("1992-01-01",1992,1,1).
+date("1992-12-31").
+date_split("1992-12-31",1992,12,31).
+
+year(2014).
+date("2014-07-09").
+date_split("2014-07-09",2014,7,9).
+date("2014-01-01").
+date_split("2014-01-01",2014,1,1).
+date("2014-12-31").
+date_split("2014-12-31",2014,12,31).
+
+year(2015).
+date("2015-09-14").
+date_split("2015-09-14",2015,9,14).
+date("2015-01-01").
+date_split("2015-01-01",2015,1,1).
+date("2015-12-31").
+date_split("2015-12-31",2015,12,31).
+
+marriage_(alice_and_bob_s2_a_2_A_pos).
+agent_(alice_and_bob_s2_a_2_A_pos,alice_s2_a_2_A_pos).
+agent_(alice_and_bob_s2_a_2_A_pos,bob_s2_a_2_A_pos).
+start_(alice_and_bob_s2_a_2_A_pos,"1992-02-03").
+death_(alice_dies_s2_a_2_A_pos).
+agent_(alice_dies_s2_a_2_A_pos,alice_s2_a_2_A_pos).
+start_(alice_dies_s2_a_2_A_pos,"2014-07-09").
+end_(alice_dies_s2_a_2_A_pos,"2014-07-09").
+marriage_(bob_and_charlie_s2_a_2_A_pos).
+agent_(bob_and_charlie_s2_a_2_A_pos,charlie_s2_a_2_A_pos).
+agent_(bob_and_charlie_s2_a_2_A_pos,bob_s2_a_2_A_pos).
+start_(bob_and_charlie_s2_a_2_A_pos,"2015-09-14").
+
+%pos example: s2_a_2_A(bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,alice_and_bob_s2_a_2_A_pos,"2015-09-14",2015)
+%neg example: s2_a_2_A(bob_s2_a_2_A_neg,alice_and_charlie_s2_a_2_A_neg,alice_and_bob_s2_a_2_A_neg,"2015-09-14",2014)
+
+% Test
+% aba_asp('./experiments/s2_a_2_A_learning.bk',[s2_a_2_A(bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,alice_and_bob_s2_a_2_A_pos,"2015-09-14",2015)],[s2_a_2_A(bob_s2_a_2_A_neg,alice_and_charlie_s2_a_2_A_neg,alice_and_bob_s2_a_2_A_neg,"2015-09-14",2014)]).
