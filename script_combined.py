@@ -2,9 +2,7 @@ import subprocess
 import sys
 import os
 import shutil 
-from pyswip import Prolog
 
-prolog = Prolog()
 
 #  Merges cases of the same statute/predicate and run them together
 #  in ABALearn.
@@ -94,18 +92,6 @@ for prefix in prefixes:
     f_edit.writelines(initial)
     f_edit.close()
 
-    # prolog.consult("aba_asp.pl")
-    # for solns in prolog.query("set_lopt(learning_mode(brave))"):
-    #     print(solns)
-    # for solns in prolog.query("set_lopt(folding_steps(5))"):
-    #     print(solns)
-    # command = f"aba_asp('{new_file}',[{', '.join(pos)}],[{', '.join(negs)}])"
-    # print(command)
-    # print(prefix)
-    # for solns in prolog.query(command):
-    #     continue
-    # prolog.query(f"aba_asp('{new_file}',[{', '.join(pos)}],[{', '.join(negs)}])")
-
     command = f"consult('aba_asp.pl'), set_lopt(learning_mode(brave)), aba_asp('{new_file}',[{', '.join(pos)}],[{', '.join(negs)}])"
     print(command)
-    # subprocess.run(["swipl","-g",command,"-t","halt"]) 
+    subprocess.run(["swipl","-g",command,"-t","halt"]) 
