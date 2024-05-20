@@ -9,18 +9,18 @@ person(alice_s63_c_2_A_ii_pos).
 person(spouse_s63_c_2_A_ii_pos).
 
 year(2017).
-date("2017-02-03").
-date_split("2017-02-03",2017,2,3).
-date("2017-01-01").
-date_split("2017-01-01",2017,1,1).
-date("2017-12-31").
-date_split("2017-12-31",2017,12,31).
+date(d2017_02_03).
+date_split(d2017_02_03,2017,2,3).
+date(d2017_01_01).
+date_split(d2017_01_01,2017,1,1).
+date(d2017_12_31).
+date_split(d2017_12_31,2017,12,31).
 
 finance(33200).
 
 payment_(alice_is_paid_s63_c_2_A_ii_pos).
 patient_(alice_is_paid_s63_c_2_A_ii_pos,alice_s63_c_2_A_ii_pos).
-start_(alice_is_paid_s63_c_2_A_ii_pos,"2017-12-31").
+start_(alice_is_paid_s63_c_2_A_ii_pos,d2017_12_31).
 amount_(alice_is_paid_s63_c_2_A_ii_pos,33200).
 s2_a(alice_s63_c_2_A_ii_pos,spouse_s63_c_2_A_ii_pos,2017).
 

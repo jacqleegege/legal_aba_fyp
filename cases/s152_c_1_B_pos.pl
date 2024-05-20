@@ -9,26 +9,26 @@ person(alice_s152_c_1_B_pos).
 person(bob_s152_c_1_B_pos).
 
 year(2015).
-date("2015-09-01").
-date_split("2015-09-01", 2015, 9, 1).
-date("2015-01-01").
-date_split("2015-01-01", 2015, 1, 1).
-date("2015-12-31").
-date_split("2015-12-31", 2015, 12, 31).
+date(d2015_09_01).
+date_split(d2015_09_01, 2015, 9, 1).
+date(d2015_01_01).
+date_split(d2015_01_01, 2015, 1, 1).
+date(d2015_12_31).
+date_split(d2015_12_31, 2015, 12, 31).
 
 year(2016).
-date("2016-01-01").
-date_split("2016-01-01", 2016, 1, 1).
-date("2016-12-31").
-date_split("2016-12-31", 2016, 12, 31).
+date(d2016_01_01).
+date_split(d2016_01_01, 2016, 1, 1).
+date(d2016_12_31).
+date_split(d2016_12_31, 2016, 12, 31).
 
 year(2019).
-date("2019-11-03").
-date_split("2019-11-03", 2019, 11, 3).
-date("2019-01-01").
-date_split("2019-01-01", 2019, 1, 1).
-date("2019-12-31").
-date_split("2019-12-31", 2019, 12, 31).
+date(d2019_11_03).
+date_split(d2019_11_03, 2019, 11, 3).
+date(d2019_01_01).
+date_split(d2019_01_01, 2019, 1, 1).
+date(d2019_12_31).
+date_split(d2019_12_31, 2019, 12, 31).
 
 son_(bob_is_son_s152_c_1_B_pos).
 agent_(bob_is_son_s152_c_1_B_pos,bob_s152_c_1_B_pos).
@@ -37,9 +37,9 @@ residence_(alice_and_bob_s152_c_1_B_pos).
 agent_(alice_and_bob_s152_c_1_B_pos,alice_s152_c_1_B_pos).
 agent_(alice_and_bob_s152_c_1_B_pos,bob_s152_c_1_B_pos).
 patient_(alice_and_bob_s152_c_1_B_pos,home_s152_c_1_B_pos).
-start_(alice_and_bob_s152_c_1_B_pos,"2015-09-01").
-end_(alice_and_bob_s152_c_1_B_pos,"2019-11-03").
+start_(alice_and_bob_s152_c_1_B_pos,d2015_09_01).
+end_(alice_and_bob_s152_c_1_B_pos,d2019_11_03).
 
 % Test
-:- s152_c_1_B(bob_s152_c_1_B_pos,home_s152_c_1_B_pos,alice_s152_c_1_B_pos,"2015-09-01","2019-11-03",2016).
+:- s152_c_1_B(bob_s152_c_1_B_pos,home_s152_c_1_B_pos,alice_s152_c_1_B_pos,d2015_09_01,"2019-11-03",2016).
 :- halt.

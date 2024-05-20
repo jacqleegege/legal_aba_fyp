@@ -2,7 +2,7 @@
 % person(alice).
 % person(spouse).
 % year(2017).
-% date("2017-01-01").
+% date(d2017_01_01).
 
 
 %(a) Definition of surviving spouse

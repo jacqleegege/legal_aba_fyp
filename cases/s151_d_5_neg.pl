@@ -9,10 +9,10 @@ person(alice_s151_d_5_neg).
 finance(2000).
 
 year(2018).
-date("2018-01-01").
-date_split("2018-01-01", 2018, 1, 1).
-date("2018-12-31").
-date_split("2018-12-31", 2018, 12, 31).
+date(d2018_01_01).
+date_split(d2018_01_01, 2018, 1, 1).
+date(d2018_12_31).
+date_split(d2018_12_31, 2018, 12, 31).
 
 s151_b_applies(alice_s151_d_5_neg,2018).
 

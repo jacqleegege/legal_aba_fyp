@@ -9,30 +9,30 @@ person(alice_s3306_a_1_pos).
 person(bob_s3306_a_1_pos).
 
 year(2017).
-date("2017-02-01").
-date_split("2017-02-01", 2017, 2, 1).
-date("2017-09-02").
-date_split("2017-09-02", 2017, 9, 2).
-date("2017-01-01").
-date_split("2017-01-01", 2017, 1, 1).
-date("2017-12-31").
-date_split("2017-12-31", 2017, 12, 31).
+date(d2017_02_01).
+date_split(d2017_02_01, 2017, 2, 1).
+date(d2017_09_02).
+date_split(d2017_09_02, 2017, 9, 2).
+date(d2017_01_01).
+date_split(d2017_01_01, 2017, 1, 1).
+date(d2017_12_31).
+date_split(d2017_12_31, 2017, 12, 31).
 
 year(2019).
-date("2019-01-01").
-date_split("2019-01-01", 2019, 1, 1).
-date("2019-09-02").
-date_split("2019-09-02", 2019, 9, 2).
-date("2019-12-31").
-date_split("2019-12-31", 2019, 12, 31).
+date(d2019_01_01).
+date_split(d2019_01_01, 2019, 1, 1).
+date(d2019_09_02).
+date_split(d2019_09_02, 2019, 9, 2).
+date(d2019_12_31).
+date_split(d2019_12_31, 2019, 12, 31).
 
 year(2018).
-date("2018-01-01").
-date_split("2018-01-01", 2018, 1, 1).
-date("2018-09-02").
-date_split("2018-09-02", 2018, 9, 2).
-date("2018-12-31").
-date_split("2018-12-31", 2018, 12, 31).
+date(d2018_01_01).
+date_split(d2018_01_01, 2018, 1, 1).
+date(d2018_09_02).
+date_split(d2018_09_02, 2018, 9, 2).
+date(d2018_12_31).
+date_split(d2018_12_31, 2018, 12, 31).
 
 finance(3200).
 finance(4500).
@@ -40,26 +40,26 @@ finance(4500).
 service_(alice_employer_s3306_a_1_pos).
 patient_(alice_employer_s3306_a_1_pos,alice_s3306_a_1_pos).
 agent_(alice_employer_s3306_a_1_pos,bob_s3306_a_1_pos).
-start_(alice_employer_s3306_a_1_pos,"2017-02-01").
-end_(alice_employer_s3306_a_1_pos,"2017-09-02").
+start_(alice_employer_s3306_a_1_pos,d2017_02_01).
+end_(alice_employer_s3306_a_1_pos,d2017_09_02).
 purpose_(alice_employer_s3306_a_1_pos,"domestic service").
 payment_(alice_pays_s3306_a_1_pos).
 agent_(alice_pays_s3306_a_1_pos,alice_s3306_a_1_pos).
 patient_(alice_pays_s3306_a_1_pos,bob_s3306_a_1_pos).
-start_(alice_pays_s3306_a_1_pos,"2019-09-02").
+start_(alice_pays_s3306_a_1_pos,d2019_09_02).
 purpose_(alice_pays_s3306_a_1_pos,alice_employer_s3306_a_1_pos).
 amount_(alice_pays_s3306_a_1_pos,3200).
 s3306_b(3200,alice_pays_s3306_a_1_pos,alice_employer_s3306_a_1_pos,alice_s3306_a_1_pos,bob_s3306_a_1_pos,alice_s3306_a_1_pos,bob_s3306_a_1_pos,"cash").
 service_(bob_employer_s3306_a_1_pos).
 patient_(bob_employer_s3306_a_1_pos,bob_s3306_a_1_pos).
 agent_(bob_employer_s3306_a_1_pos,alice_s3306_a_1_pos).
-start_(bob_employer_s3306_a_1_pos,"2017-02-01").
-end_(bob_employer_s3306_a_1_pos,"2017-09-02").
+start_(bob_employer_s3306_a_1_pos,d2017_02_01).
+end_(bob_employer_s3306_a_1_pos,d2017_09_02).
 payment_(bob_pays_s3306_a_1_pos).
 agent_(bob_pays_s3306_a_1_pos,bob_s3306_a_1_pos).
 patient_(bob_pays_s3306_a_1_pos,alice_s3306_a_1_pos).
-start_(bob_pays_s3306_a_1_pos,"2018-09-02").
-end_(bob_pays_s3306_a_1_pos,"2018-09-02").
+start_(bob_pays_s3306_a_1_pos,d2018_09_02).
+end_(bob_pays_s3306_a_1_pos,d2018_09_02).
 purpose_(bob_pays_s3306_a_1_pos,bob_employer_s3306_a_1_pos).
 amount_(bob_pays_s3306_a_1_pos,4500).
 s3306_b(4500,bob_pays_s3306_a_1_pos,bob_employer_s3306_a_1_pos,bob_s3306_a_1_pos,alice_s3306_a_1_pos,bob_s3306_a_1_pos,alice_s3306_a_1_pos,"cash").

@@ -12,16 +12,16 @@ finance(2000).
 finance(312).
 
 year(2015).
-date("2015-01-01").
-date_split("2015-01-01", 2015, 1, 1).
-date("2015-12-31").
-date_split("2015-12-31", 2015, 12, 31).
+date(d2015_01_01).
+date_split(d2015_01_01, 2015, 1, 1).
+date(d2015_12_31).
+date_split(d2015_12_31, 2015, 12, 31).
 
 income_(alice_makes_money_s152_d_1_D_neg).
 agent_(alice_makes_money_s152_d_1_D_neg,alice_s152_d_1_D_neg).
 amount_(alice_makes_money_s152_d_1_D_neg,312).
-start_(alice_makes_money_s152_d_1_D_neg,"2015-01-01").
-end_(alice_makes_money_s152_d_1_D_neg,"2015-12-31").
+start_(alice_makes_money_s152_d_1_D_neg,d2015_01_01).
+end_(alice_makes_money_s152_d_1_D_neg,d2015_12_31).
 father_(alice_and_bob_s152_d_1_D_neg).
 agent_(alice_and_bob_s152_d_1_D_neg,bob_s152_d_1_D_neg).
 patient_(alice_and_bob_s152_d_1_D_neg,alice_s152_d_1_D_neg).

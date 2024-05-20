@@ -1,0 +1,61 @@
+%This section shall not apply to any taxable year beginning after December 31, 2017, and before January 1, 2026.
+%s68_f(Taxy) :_
+%    between(2018,2025,Taxy).
+
+% Text
+% In 2014, Alice's income was $310192. Alice is a surviving spouse for the year 2014. Alice is allowed itemized deductions of $600 under section 63.
+
+% Question
+% Section 68(f) applies to Alice for the year 2014. Contradiction
+
+% Facts
+person(alice_s68_f_neg).
+person(bob_s68_f_neg).
+finance(310192).
+
+year(2014).
+date(d2014_01_01).
+date_split(d2014_01_01, 2014, 1, 1).
+date(d2014_12_31).
+date_split(d2014_12_31, 2014, 12, 31).
+
+income_(alice_is_paid_s68_f_neg).
+agent_(alice_is_paid_s68_f_neg,alice_s68_f_neg).
+start_(alice_is_paid_s68_f_neg,2014_12_31).
+amount_(alice_is_paid_s68_f_neg,310192).
+s2_a(alice_s68_f_neg,bob_s68_f_neg,2014).
+
+% Text
+% In 2018, Alice's income was $310192. Alice is a surviving spouse for the year 2018. Alice is allowed itemized deductions of $600 under section 63.
+
+% Question
+% Section 68(f) applies to Alice for the year 2018. Entailment
+
+% Facts
+person(alice_s68_f_pos).
+person(bob_s68_f_pos).
+finance(310192).
+
+year(2018).
+date(d2018_01_01).
+date_split(d2018_01_01, 2018, 1, 1).
+date(d2018_12_31).
+date_split(d2018_12_31, 2018, 12, 31).
+
+income_(alice_is_paid_s68_f_pos).
+agent_(alice_is_paid_s68_f_pos,alice_s68_f_pos).
+start_(alice_is_paid_s68_f_pos,d2018_12_31).
+amount_(alice_is_paid_s68_f_pos,310192).
+s2_a(alice_s68_f_pos,bob_s68_f_pos,2018).
+
+year(2025).
+year(2019).
+year(2015).
+between(2018,2025,2018).
+between(2018,2025,2019). 
+between(2018,2025,2020). 
+
+%between(Y1,Y2,Year):_ year(Y1),year(Y2),Year<Y2+1,Year>Y1_1.
+
+
+%aba_asp('./experiments/s68_f_learning.bk',[s68_f(2018),s68_f(2019)],[s68_f(2014),s68_f(2015)])

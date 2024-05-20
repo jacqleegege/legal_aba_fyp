@@ -9,23 +9,23 @@ person(alice_s152_d_2_G_neg).
 person(bob_s152_d_2_G_neg).
 
 year(2014).
-date("2014-04-15").
-date_split("2014-04-15", 2014, 4, 15).
-date("2014-01-01").
-date_split("2014-01-01", 2014, 1, 1).
-date("2014-12-31").
-date_split("2014-12-31", 2014, 12, 31).
+date(d2014_04_15).
+date_split(d2014_04_15, 2014, 4, 15).
+date(d2014_01_01).
+date_split(d2014_01_01, 2014, 1, 1).
+date(d2014_12_31).
+date_split(d2014_12_31, 2014, 12, 31).
 
 year(2100).
-date("2100-01-01").
-date_split("2100-01-01", 2100, 1, 1).
+date(d2100_01_01).
+date_split(d2100_01_01, 2100, 1, 1).
 
 residence_(alice_and_bob_s152_d_2_G_neg).
 agent_(alice_and_bob_s152_d_2_G_neg,alice_s152_d_2_G_neg).
 agent_(alice_and_bob_s152_d_2_G_neg,bob_s152_d_2_G_neg).
-start_(alice_and_bob_s152_d_2_G_neg,"2014-04-15").
+start_(alice_and_bob_s152_d_2_G_neg,d2014_04_15).
 patient_(alice_and_bob_s152_d_2_G_neg,home_s152_d_2_G_neg).
 
 % Test
-:- \+ s152_d_2_G(alice_s152_d_2_G_neg,bob_s152_d_2_G_neg,"2014-04-15","2100-01-01").
+:- \+ s152_d_2_G(alice_s152_d_2_G_neg,bob_s152_d_2_G_neg,d2014_04_15,"2100-01-01").
 :- halt.

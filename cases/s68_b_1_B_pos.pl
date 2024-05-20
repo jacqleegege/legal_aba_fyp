@@ -10,14 +10,14 @@ finance(567192).
 finance(275000).
 
 year(2016).
-date("2016-01-01").
-date_split("2016-01-01", 2016, 1, 1).
-date("2016-12-31").
-date_split("2016-12-31", 2016, 12, 31).
+date(d2016_01_01).
+date_split(d2016_01_01, 2016, 1, 1).
+date(d2016_12_31).
+date_split(d2016_12_31, 2016, 12, 31).
 
 income_(alice_is_paid_s68_b_1_B_pos).
 agent_(alice_is_paid_s68_b_1_B_pos,alice_s68_b_1_B_pos).
-start_(alice_is_paid_s68_b_1_B_pos,"2016-12-31").
+start_(alice_is_paid_s68_b_1_B_pos,d2016_12_31).
 amount_(alice_is_paid_s68_b_1_B_pos,567192).
 s2_b(alice_s68_b_1_B_pos,alice_s68_b_1_B_pos,2016).
 

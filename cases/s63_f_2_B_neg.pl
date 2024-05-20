@@ -10,32 +10,32 @@ person(bob_s63_f_2_B_neg).
 finance(33200).
 
 year(2013).
-date("2013-10-04").
-date_split("2013-10-04", 2013, 10, 4).
-date("2013-01-01").
-date_split("2013-01-01", 2013, 1, 1).
-date("2013-12-31").
-date_split("2013-12-31", 2013, 12, 31).
+date(d2013_10_04).
+date_split(d2013_10_04, 2013, 10, 4).
+date(d2013_01_01).
+date_split(d2013_01_01, 2013, 1, 1).
+date(d2013_12_31).
+date_split(d2013_12_31, 2013, 12, 31).
 
 year(2017).
-date("2017-02-03").
-date_split("2017-02-03", 2017, 2, 3).
-date("2017-01-01").
-date_split("2017-01-01", 2017, 1, 1).
-date("2017-12-31").
-date_split("2017-12-31", 2017, 12, 31).
+date(d2017_02_03).
+date_split(d2017_02_03, 2017, 2, 3).
+date(d2017_01_01).
+date_split(d2017_01_01, 2017, 1, 1).
+date(d2017_12_31).
+date_split(d2017_12_31, 2017, 12, 31).
 
 payment_(alice_is_paid_s63_f_2_B_neg).
 patient_(alice_is_paid_s63_f_2_B_neg,alice_s63_f_2_B_neg).
-start_(alice_is_paid_s63_f_2_B_neg,"2017-12-31").
+start_(alice_is_paid_s63_f_2_B_neg,d2017_12_31).
 amount_(alice_is_paid_s63_f_2_B_neg,33200).
 marriage_(alice_and_bob_s63_f_2_B_neg).
 agent_(alice_and_bob_s63_f_2_B_neg,alice_s63_f_2_B_neg).
 agent_(alice_and_bob_s63_f_2_B_neg,bob_s63_f_2_B_neg).
-start_(alice_and_bob_s63_f_2_B_neg,"2017-02-03").
+start_(alice_and_bob_s63_f_2_B_neg,d2017_02_03).
 blindness_(alice_is_blind_s63_f_2_B_neg).
 agent_(alice_is_blind_s63_f_2_B_neg,alice_s63_f_2_B_neg).
-start_(alice_is_blind_s63_f_2_B_neg,"2013-10-04").
+start_(alice_is_blind_s63_f_2_B_neg,d2013_10_04).
 s151_b_applies(alice_s63_f_2_B_neg,bob_s63_f_2_B_neg,2017).
 
 % Test

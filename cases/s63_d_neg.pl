@@ -10,13 +10,13 @@ finance(33200).
 finance(2000).
 
 year(2017).
-date_split("2017-01-01", 2017, 1, 1).
-date("2017-12-31").
-date_split("2017-12-31", 2017, 12, 31).
+date_split(d2017_01_01, 2017, 1, 1).
+date(d2017_12_31).
+date_split(d2017_12_31, 2017, 12, 31).
 
 payment_(alice_is_paid_s63_d_neg).
 patient_(alice_is_paid_s63_d_neg,alice_s63_d_neg).
-start_(alice_is_paid_s63_d_neg,"2017-12-31").
+start_(alice_is_paid_s63_d_neg,d2017_12_31).
 amount_(alice_is_paid_s63_d_neg,33200).
 s151_b(alice_s63_d_neg,2000,2017).
 

@@ -10,14 +10,14 @@ person(bob_s68_f_pos).
 finance(310192).
 
 year(2018).
-date("2018-01-01").
-date_split("2018-01-01", 2018, 1, 1).
-date("2018-12-31").
-date_split("2018-12-31", 2018, 12, 31).
+date(d2018_01_01).
+date_split(d2018_01_01, 2018, 1, 1).
+date(d2018_12_31).
+date_split(d2018_12_31, 2018, 12, 31).
 
 income_(alice_is_paid_s68_f_pos).
 agent_(alice_is_paid_s68_f_pos,alice_s68_f_pos).
-start_(alice_is_paid_s68_f_pos,"2018-12-31").
+start_(alice_is_paid_s68_f_pos,d2018_12_31).
 amount_(alice_is_paid_s68_f_pos,310192).
 s2_a(alice_s68_f_pos,bob_s68_f_pos,2018).
 

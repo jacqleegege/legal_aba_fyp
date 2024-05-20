@@ -9,10 +9,10 @@ person(alice_s1_a_2_v_neg).
 person(spouse_s1_a_2_v_neg).
 
 year(2017).
-date("2017-01-01").
-date("2017-12-31").
-date_split("2017-01-01",2017,1,1).
-date_split("2017-12-31",2017,12,31).
+date(d2017_01_01).
+date(d2017_12_31).
+date_split(d2017_01_01,2017,1,1).
+date_split(d2017_12_31,2017,12,31).
 finance(25561).
 finance(3834).
 

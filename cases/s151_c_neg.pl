@@ -12,17 +12,17 @@ person(charlie_s151_c_neg).
 finance(2000).
 
 year(2015).
-date("2015-02-02").
-date_split("2015-02-02", 2015, 2, 2).
-date("2015-01-01").
-date_split("2015-01-01", 2015, 1, 1).
-date("2015-12-31").
-date_split("2015-12-31", 2015, 12, 31).
+date(d2015_02_02).
+date_split(d2015_02_02, 2015, 2, 2).
+date(d2015_01_01).
+date_split(d2015_01_01, 2015, 1, 1).
+date(d2015_12_31).
+date_split(d2015_12_31, 2015, 12, 31).
 
 marriage_(alice_and_bob_s151_c_neg).
 agent_(alice_and_bob_s151_c_neg,alice_s151_c_neg).
 agent_(alice_and_bob_s151_c_neg,bob_s151_c_neg).
-start_(alice_and_bob_s151_c_neg,"2015-02-02").
+start_(alice_and_bob_s151_c_neg,d2015_02_02).
 s152_c_1(charlie_s151_c_neg,alice_s151_c_neg,2015).
 
 % Test

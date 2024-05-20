@@ -1,0 +1,462 @@
+% Text
+% Alice is a surviving spouse for the year 2017. Alice's taxable income for the year 2017 is $615572.
+
+% Question
+% Alice has to pay $220295 in taxes for the year 2017 under section 1(a)(iv). Contradiction
+
+% Facts
+person(alice_s1_a_2_iv_neg).
+person(spouse_s1_a_2_iv_neg).
+
+year(2017).
+date("2017-01-01").
+date("2017-12-31").
+date_split("2017-01-01",2017,1,1).
+date_split("2017-12-31",2017,12,31).
+finance(615572).
+finance(220295).
+s2_a(alice_s1_a_2_iv_neg,spouse_s1_a_2_iv_neg,2017).
+s63(alice_s1_a_2_iv_neg,2017,615572).
+
+% Test
+:- \+ s1_a_iv(615572,220295).
+:- halt.
+% Text
+% Alice is a surviving spouse for the year 2017. Alice's taxable income for the year 2017 is $236422.
+
+% Question
+% Alice has to pay $70640 in taxes for the year 2017 under section 1(a)(iv). Entailment
+
+% Facts
+person(alice_s1_a_2_iv_pos).
+person(spouse_s1_a_2_iv_pos).
+
+year(2017).
+date("2017-01-01").
+date("2017-12-31").
+date_split("2017-01-01",2017,1,1).
+date_split("2017-12-31",2017,12,31).
+finance(236422).
+finance(70640).
+
+s2_a(alice_s1_a_2_iv_pos,spouse_s1_a_2_iv_pos,2017).
+s63(alice_s1_a_2_iv_pos,2017,236422).
+
+% Test
+:- s1_a_iv(236422,70640).
+:- halt.
+% Text
+% Alice's taxable income for the year 2017 is $210204. Alice is not married, is not a surviving spouse, and is not a head of household in 2017.
+
+% Question
+% Alice has to pay $65445 in taxes for the year 2017 under section 1(a). Contradiction
+
+% Facts
+person(alice_s1_a_2_neg).
+year(2017).
+date("2017-01-01").
+date("2017-12-31").
+date_split("2017-01-01",2017,1,1).
+date_split("2017-12-31",2017,12,31).
+finance(2102047).
+finance(65445).
+
+s63(alice_s1_a_2_neg,2017,2102047).
+
+% Test
+:- \+ s1_a(alice_s1_a_2_neg,2017,2102047,65445).
+:- halt.
+% Text
+% Alice is a surviving spouse for the year 2017. Alice's taxable income for the year 2017 is $70117.
+
+% Question
+% Alice has to pay $14836 in taxes for the year 2017 under section 1(a). Entailment
+
+% Facts
+person(alice_s1_a_2_pos).
+person(spouse_s1_a_2_pos).
+year(2017).
+date("2017-01-01").
+date("2017-12-31").
+date_split("2017-01-01",2017,1,1).
+date_split("2017-12-31",2017,12,31).
+finance(70117).
+finance(14836).
+s2_a(alice_s1_a_2_pos,spouse_s1_a_2_pos,2017).
+s63(alice_s1_a_2_pos,2017,70117).
+
+% Test
+:- s1_a(alice_s1_a_2_pos,2017,70117,14836).
+:- halt.
+% Text
+% Alice is a surviving spouse for the year 2017. Alice's taxable income for the year 2017 is $25561.
+
+% Question
+% Alice has to pay $3834 in taxes for the year 2017 under section 1(a)(v). Contradiction
+
+% Facts
+person(alice_s1_a_2_v_neg).
+person(spouse_s1_a_2_v_neg).
+
+year(2017).
+date("2017-01-01").
+date("2017-12-31").
+date_split("2017-01-01",2017,1,1).
+date_split("2017-12-31",2017,12,31).
+finance(25561).
+finance(3834).
+
+s2_a(alice_s1_a_2_v_neg,spouse_s1_a_2_v_neg,2017).
+s63(alice_s1_a_2_v_neg,2017,25561).
+
+% Test
+:- \+ s1_a_v(25561,3834).
+:- halt.
+% Text
+% Alice is a surviving spouse for the year 2017. Alice's taxable income for the year 2017 is $615572.
+
+% Question
+% Alice has to pay $220295 in taxes for the year 2017 under section 1(a)(v). Entailment
+
+% Facts
+person(alice_s1_a_2_v_pos).
+person(spouse_s1_a_2_v_pos).
+year(2017).
+date("2017-01-01").
+date("2017-12-31").
+date_split("2017-01-01",2017,1,1).
+date_split("2017-12-31",2017,12,31).
+finance(615572).
+finance(220295).
+
+s2_a(alice_s1_a_2_v_pos,spouse_s1_a_2_v_pos,2017).
+s63(alice_s1_a_2_v_pos,2017,615572).
+
+% Test
+:- s1_a_v(615572,220295).
+:- halt.
+% Text
+% Alice is a head of household for the year 2017. Alice's taxable income for the year 2017 is $1172980.
+
+% Question
+% Alice has to pay $442985 in taxes for the year 2017 under section 1(b)(i). Contradiction
+
+% Facts
+person(alice_s1_b_i_neg).
+year(2017).
+date("2017-01-01").
+date("2017-12-31").
+date_split("2017-01-01",2017,1,1).
+date_split("2017-12-31",2017,12,31).
+finance(1172980).
+finance(442985).
+
+s2_b(alice_s1_b_i_neg,alice_s1_b_i_neg,2017).
+s63(alice_s1_b_i_neg,2017,1172980).
+
+% Test
+:- \+ s1_b_i(1172980,442985).
+:- halt.
+% Text
+% Alice is a head of household for the year 2017. Alice's taxable income for the year 2017 is $9560.
+
+% Question
+% Alice has to pay $1434 in taxes for the year 2017 under section 1(b)(i). Entailment
+
+% Facts
+person(alice_s1_b_i_pos).
+year(2017).
+date("2017-01-01").
+date("2017-12-31").
+date_split("2017-01-01",2017,1,1).
+date_split("2017-12-31",2017,12,31).
+finance(9560).
+finance(1434).
+
+s2_b(alice_s1_b_i_pos,alice_s1_b_i_pos,2017).
+s63(alice_s1_b_i_pos,2017,9560).
+
+% Test
+:- s1_b_i(9560,1434).
+:- halt.
+% Text
+% Alice is married under section 7703 for the year 2017. Alice's taxable income for the year 2017 is $554313. Alice files a separate return from her spouse.
+
+% Question
+% Alice has to pay $207772 in taxes for the year 2017 under section 1(b). Contradiction
+
+% Facts
+person(alice_s1_b_neg).
+person(spouse_s1_b_neg).
+year(2017).
+date("2017-01-01").
+date("2017-12-31").
+date_split("2017-01-01",2017,1,1).
+date_split("2017-12-31",2017,12,31).
+finance(554313).
+finance(207772).
+
+marriage_(alice_and_spouse_s1_b_neg).
+s7703(alice_s1_b_neg,spouse_s1_b_neg,alice_and_spouse_s1_b_neg,2017).
+s63(alice_s1_b_neg,2017,554313).
+
+% Test
+:- \+ s1_b(alice_s1_b_neg,2017,554313,207772).
+:- halt.
+% Text
+% Alice is a head of household for the year 2017. Alice's taxable income for the year 2017 is $97407.
+
+% Question
+% Alice has to pay $24056 in taxes for the year 2017 under section 1(b). Entailment
+
+% Facts
+person(alice_s1_b_pos).
+year(2017).
+date("2017-01-01").
+date("2017-12-31").
+date_split("2017-01-01",2017,1,1).
+date_split("2017-12-31",2017,12,31).
+finance(97407).
+finance(24056).
+
+s2_b(alice_s1_b_pos,alice_s1_b_pos,2017).
+s63(alice_s1_b_pos,2017,97407).
+
+% Test
+:- s1_b(alice_s1_b_pos,2017,97407,24056).
+:- halt.
+% Text
+% Alice's taxable income for the year 2017 is $22895. Alice is not married, is not a surviving spouse, and is not a head of household in 2017.
+
+% Question
+% Alice has to pay $3538 in taxes for the year 2017 under section 1(c)(iii). Contradiction
+
+% Facts
+person(alice_s1_c_iii_neg).
+year(2017).
+date("2017-01-01").
+date("2017-12-31").
+date_split("2017-01-01",2017,1,1).
+date_split("2017-12-31",2017,12,31).
+finance(22895).
+finance(3538).
+
+s63(alice_s1_c_iii_neg,2017,22895).
+
+% Test
+:- \+ s1_c_iii(22895,3538).
+:- halt.
+% Text
+% Alice's taxable income for the year 2017 is $102268. Alice is not married, is not a surviving spouse, and is not a head of household in 2017.
+
+% Question
+% Alice has to pay $27225 in taxes for the year 2017 under section 1(c)(iii). Entailment
+
+% Facts
+person(alice_s1_c_iii_pos).
+year(2017).
+date("2017-01-01").
+date("2017-12-31").
+date_split("2017-01-01",2017,1,1).
+date_split("2017-12-31",2017,12,31).
+finance(102268).
+finance(27225).
+
+s63(alice_s1_c_iii_pos,2017,102268).
+
+% Test
+:- s1_c_iii(102268,27225).
+:- halt.
+% Text
+% Alice is married under section 7703 for the year 2017. Alice files a joint return with her spouse for 2017. Alice's and her spouse's taxable income for the year 2017 is $17330.
+
+% Question
+% Alice and her spouse have to pay $2600 in taxes for the year 2017 under section 1(c). Contradiction
+
+% Facts
+person(alice_s1_c_neg).
+person(spouse_s1_c_neg).
+year(2017).
+date("2017-01-01").
+date("2017-12-31").
+date_split("2017-01-01",2017,1,1).
+date_split("2017-12-31",2017,12,31).
+finance(17330).
+finance(2600).
+
+marriage_(alice_and_spouse_s1_c_neg).
+s7703(alice_s1_c_neg,spouse_s1_c_neg,alice_and_spouse_s1_c_neg,2017).
+joint_return_(joint_return_s1_c_neg).
+agent_(joint_return_s1_c_neg,alice_s1_c_neg).
+agent_(joint_return_s1_c_neg,spouse_s1_c_neg).
+start_(joint_return_s1_c_neg,"2017-01-01").
+end_(joint_return_s1_c_neg,"2017-12-31").
+s63(alice_s1_c_neg,2017,17330).
+
+% Test
+:- \+ s1_c(alice_s1_c_neg,2017,17330,2600).
+:- halt.
+% Text
+% Alice's taxable income for the year 2017 is $210204. Alice is not married, is not a surviving spouse, and is not a head of household in 2017.
+
+% Question
+% Alice has to pay $65445 in taxes for the year 2017 under section 1(c). Entailment
+
+% Facts
+person(alice_s1_c_pos).
+year(2017).
+date("2017-01-01").
+date("2017-12-31").
+date_split("2017-01-01",2017,1,1).
+date_split("2017-12-31",2017,12,31).
+finance(210204).
+finance(65445).
+
+s63(alice_s1_c_pos,2017,210204).
+
+% Test
+:- s1_c(alice_s1_c_pos,2017,210204,65445).
+:- halt.
+% Text
+% Alice is married under section 7703 for the year 2017. Alice's taxable income for the year 2017 is $67285. Alice files taxes separately in 2017.
+
+% Question
+% Alice has to pay $17123 in taxes for the year 2017 under section 1(d)(i). Contradiction
+
+% Facts
+person(alice_s1_d_i_neg).
+person(spouse_s1_d_i_neg).
+year(2017).
+date("2017-01-01").
+date("2017-12-31").
+date_split("2017-01-01",2017,1,1).
+date_split("2017-12-31",2017,12,31).
+finance(67285).
+finance(17123).
+
+marriage_(alice_and_spouse_s1_d_i_neg).
+s7703(alice_s1_d_i_neg,spouse_s1_d_i_neg,alice_and_spouse_s1_d_i_neg,2017).
+s63(alice_s1_d_i_neg,2017,67285).
+
+% Test
+:- \+ s1_d_i(67285,17123).
+:- halt.
+% Text
+% Alice is married under section 7703 for the year 2017. Alice's taxable income for the year 2017 is $6662. Alice files taxes separately in 2017.
+
+% Question
+% Alice has to pay $999 in taxes for the year 2017 under section 1(d)(i). Entailment
+
+% Facts
+person(alice_s1_d_i_pos).
+person(spouse_s1_d_i_pos).
+year(2017).
+date("2017-01-01").
+date("2017-12-31").
+date_split("2017-01-01",2017,1,1).
+date_split("2017-12-31",2017,12,31).
+finance(6662).
+finance(999).
+
+marriage_(alice_and_spouse_s1_d_i_pos).
+s7703(alice_s1_d_i_pos,spouse_s1_d_i_pos,alice_and_spouse_s1_d_i_pos,2017).
+s63(alice_s1_d_i_pos,2017,6662).
+
+% Test
+:- s1_d_i(6662,999).
+:- halt.
+% Text
+% Alice is married under section 7703 for the year 2017. Alice's taxable income for the year 2017 is $113580. Alice files a separate return.
+
+% Question
+% Alice has to pay $33653 in taxes for the year 2017 under section 1(d)(ii). Contradiction
+
+% Facts
+person(alice_s1_d_ii_neg).
+person(spouse_s1_d_ii_neg).
+year(2017).
+date("2017-01-01").
+date("2017-12-31").
+date_split("2017-01-01",2017,1,1).
+date_split("2017-12-31",2017,12,31).
+finance(113580).
+finance(33653).
+
+marriage_(alice_and_spouse_s1_d_ii_neg).
+s7703(alice_s1_d_ii_neg,spouse_s1_d_ii_neg,_alice_and_spouse,2017).
+s63(alice_s1_d_ii_neg,2017,113580).
+
+% Test
+:- \+ s1_d_ii(113580,33653).
+:- halt.
+% Text
+% Alice is married under section 7703 for the year 2017. Alice's taxable income for the year 2017 is $28864. Alice files a separate return.
+
+% Question
+% Alice has to pay $5683 in taxes for the year 2017 under section 1(d)(ii). Entailment
+
+% Facts
+person(alice_s1_d_ii_pos).
+person(spouse_s1_d_ii_pos).
+year(2017).
+date("2017-01-01").
+date("2017-12-31").
+date_split("2017-01-01",2017,1,1).
+date_split("2017-12-31",2017,12,31).
+finance(28864).
+finance(5683).
+
+marriage_(alice_and_spouse_s1_d_ii_pos).
+s7703(alice_s1_d_ii_pos,spouse_s1_d_ii_pos,alice_and_spouse_s1_d_ii_pos,2017).
+s63(alice_s1_d_ii_pos,2017,28864).
+
+% Test
+:- s1_d_ii(28864,5683).
+:- halt.
+% Text
+% Alice is a surviving spouse for the year 2017. Alice's taxable income for the year 2017 is $70117.
+
+% Question
+% Alice has to pay $14836 in taxes for the year 2017 under section 1(d). Contradiction
+
+% Facts
+person(alice_s1_d_neg).
+person(spouse_s1_d_neg).
+year(2017).
+date("2017-01-01").
+date("2017-12-31").
+date_split("2017-01-01",2017,1,1).
+date_split("2017-12-31",2017,12,31).
+finance(70117).
+finance(14836).
+
+s2_a(alice_s1_d_neg,spouse_s1_d_neg,2017).
+s63(alice_s1_d_neg,2017,70117).
+
+% Test
+:- \+ s1_d(alice_s1_d_neg,spouse_s1_d_neg,2017,70117,14836).
+:- halt.
+% Text
+% Alice is married under section 7703 for the year 2017. Alice's taxable income for the year 2017 is $554313. Alice files a separate return.
+
+% Question
+% Alice has to pay $207772 in taxes for the year 2017 under section 1(d). Entailment
+
+% Facts
+person(alice_s1_d_pos).
+person(spouse_s1_d_pos).
+year(2017).
+date("2017-01-01").
+date("2017-12-31").
+date_split("2017-01-01",2017,1,1).
+date_split("2017-12-31",2017,12,31).
+finance(554313).
+finance(207772).
+
+marriage_(alice_and_spouse_s1_d_pos).
+s7703(alice_s1_d_pos,spouse_s1_d_pos,alice_and_spouse_s1_d_pos,2017).
+s63(alice_s1_d_pos,2017,554313).
+
+% Test
+:- s1_d(alice_s1_d_pos,spouse_s1_d_pos,2017,554313,207772).
+:- halt.

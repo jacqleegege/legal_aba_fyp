@@ -15,16 +15,16 @@ finance(1800).
 
 
 year(2015).
-date("2015-01-01").
-date_split("2015-01-01", 2015, 1, 1).
-date("2015-12-31").
-date_split("2015-12-31", 2015, 12, 31).
+date(d2015_01_01).
+date_split(d2015_01_01, 2015, 1, 1).
+date(d2015_12_31).
+date_split(d2015_12_31, 2015, 12, 31).
 
 income_(alice_makes_money_s151_d_3_A_pos).
 agent_(alice_makes_money_s151_d_3_A_pos,alice_s151_d_3_A_pos).
 amount_(alice_makes_money_s151_d_3_A_pos,260932).
-start_(alice_makes_money_s151_d_3_A_pos,"2015-01-01").
-end_(alice_makes_money_s151_d_3_A_pos,"2015-12-31").
+start_(alice_makes_money_s151_d_3_A_pos,d2015_01_01).
+end_(alice_makes_money_s151_d_3_A_pos,d2015_12_31).
 s151_c(alice_s151_d_3_A_pos,alice_s151_d_3_A_pos,2000,2015).
 
 % Test

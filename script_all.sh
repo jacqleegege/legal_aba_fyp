@@ -16,4 +16,9 @@ do
   python3 script.py $file $MERGED_PATH
 done
 
+# for file in sara_translated/*
+# do
+#   python3 date_change.py $file
+# done
+
 

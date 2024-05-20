@@ -9,43 +9,43 @@ person(alice_s3306_b_10_B_neg).
 person(bob_s3306_b_10_B_neg).
 
 year(2011).
-date("2011-01-01").
-date_split("2011-01-01", 2011, 1, 1).
-date("2011-01-02").
-date_split("2011-01-02", 2011, 1, 2).
-date("2011-12-31").
-date_split("2011-12-31", 2011, 12, 31).
+date(d2011_01_01).
+date_split(d2011_01_01, 2011, 1, 1).
+date(d2011_01_02).
+date_split(d2011_01_02, 2011, 1, 2).
+date(d2011_12_31).
+date_split(d2011_12_31, 2011, 12, 31).
 
 year(2019).
-date("2019-01-01").
-date_split("2019-01-01", 2019, 1, 1).
-date("2019-10-10").
-date_split("2019-10-10", 2019, 10, 10).
-date("2019-12-31").
-date_split("2019-12-31", 2019, 12, 31).
+date(d2019_01_01).
+date_split(d2019_01_01, 2019, 1, 1).
+date(d2019_10_10).
+date_split(d2019_10_10, 2019, 10, 10).
+date(d2019_12_31).
+date_split(d2019_12_31, 2019, 12, 31).
 
 finance(12980).
 
 service_(alice_employer_s3306_b_10_B_neg).
 patient_(alice_employer_s3306_b_10_B_neg,alice_s3306_b_10_B_neg).
 agent_(alice_employer_s3306_b_10_B_neg,bob_s3306_b_10_B_neg).
-start_(alice_employer_s3306_b_10_B_neg,"2011-01-02").
-end_(alice_employer_s3306_b_10_B_neg,"2019-10-10").
+start_(alice_employer_s3306_b_10_B_neg,d2011_01_02).
+end_(alice_employer_s3306_b_10_B_neg,d2019_10_10).
 disability_(bob_is_disabled_s3306_b_10_B_neg).
 agent_(bob_is_disabled_s3306_b_10_B_neg,bob_s3306_b_10_B_neg).
-start_(bob_is_disabled_s3306_b_10_B_neg,"2019-10-10").
+start_(bob_is_disabled_s3306_b_10_B_neg,d2019_10_10).
 termination_(alice_lays_bob_off_s3306_b_10_B_neg).
 agent_(alice_lays_bob_off_s3306_b_10_B_neg,alice_s3306_b_10_B_neg).
 patient_(alice_lays_bob_off_s3306_b_10_B_neg,alice_employer_s3306_b_10_B_neg).
 reason_(alice_lays_bob_off_s3306_b_10_B_neg,bob_is_disabled_s3306_b_10_B_neg).
 retirement_(bob_retires_s3306_b_10_B_neg).
 agent_(bob_retires_s3306_b_10_B_neg,bob_s3306_b_10_B_neg).
-start_(bob_retires_s3306_b_10_B_neg,"2019-10-10").
+start_(bob_retires_s3306_b_10_B_neg,d2019_10_10).
 reason_(bob_retires_s3306_b_10_B_neg,disability).
 payment_(alice_pays_s3306_b_10_B_neg).
 agent_(alice_pays_s3306_b_10_B_neg,alice_s3306_b_10_B_neg).
 patient_(alice_pays_s3306_b_10_B_neg,bob_s3306_b_10_B_neg).
-start_(alice_pays_s3306_b_10_B_neg,"2019-10-10").
+start_(alice_pays_s3306_b_10_B_neg,d2019_10_10).
 purpose_(alice_pays_s3306_b_10_B_neg,alice_lays_bob_off_s3306_b_10_B_neg).
 amount_(alice_pays_s3306_b_10_B_neg,12980).
 

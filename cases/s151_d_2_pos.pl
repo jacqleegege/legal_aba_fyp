@@ -10,10 +10,10 @@ person(bob_s151_d_2_pos).
 finance(0).
 
 year(2015).
-date("2015-01-01").
-date_split("2015-01-01", 2015, 1, 1).
-date("2015-12-31").
-date_split("2015-12-31", 2015, 12, 31).
+date(d2015_01_01).
+date_split(d2015_01_01, 2015, 1, 1).
+date(d2015_12_31).
+date_split(d2015_12_31, 2015, 12, 31).
 
 s151_c_applies(alice_s151_d_2_pos,bob_s151_d_2_pos,2015).
 

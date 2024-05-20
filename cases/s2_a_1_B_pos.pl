@@ -10,106 +10,106 @@ person(bob_s2_a_1_B_pos).
 person(charlie_s2_a_1_B_pos).
 
 year(1992).
-date("1992-02-03").
-date_split("1992-02-03",1992,2,3).
-date("1992-01-01").
-date_split("1992-01-01",1992,1,1).
-date("1992-12-31").
-date_split("1992-12-31",1992,12,31).
+date(d1992_02_03).
+date_split(d1992_02_03,1992,2,3).
+date(d1992_01_01).
+date_split(d1992_01_01,1992,1,1).
+date(d1992_12_31).
+date_split(d1992_12_31,1992,12,31).
 
 year(2000).
-date("2000-10-09").
-date_split("2000-10-09",2000,10,9).
-date("2000-01-01").
-date_split("2000-01-01",2000,1,1).
-date("2000-12-31").
-date_split("2000-12-31",2000,12,31).
+date(d2000_10_09).
+date_split(d2000_10_09,2000,10,9).
+date(d2000_01_01).
+date_split(d2000_01_01,2000,1,1).
+date(d2000_12_31).
+date_split(d2000_12_31,2000,12,31).
 
 year(2004).
-date("2004-01-01").
-date_split("2004-01-01",2004,1,1).
-date("2004-12-31").
-date_split("2004-12-31",2004,12,31).
+date(d2004_01_01).
+date_split(d2004_01_01,2004,1,1).
+date(d2004_12_31).
+date_split(d2004_12_31,2004,12,31).
 
 year(2005).
-date("2005-01-01").
-date_split("2005-01-01",2005,1,1).
-date("2005-12-31").
-date_split("2005-12-31",2005,12,31).
+date(d2005_01_01).
+date_split(d2005_01_01,2005,1,1).
+date(d2005_12_31).
+date_split(d2005_12_31,2005,12,31).
 
 year(2006).
-date("2006-01-01").
-date_split("2006-01-01",2006,1,1).
-date("2006-12-31").
-date_split("2006-12-31",2006,12,31).
+date(d2006_01_01).
+date_split(d2006_01_01,2006,1,1).
+date(d2006_12_31).
+date_split(d2006_12_31,2006,12,31).
 
 year(2007).
-date("2007-01-01").
-date_split("2007-01-01",2007,1,1).
-date("2007-12-31").
-date_split("2007-12-31",2007,12,31).
+date(d2007_01_01).
+date_split(d2007_01_01,2007,1,1).
+date(d2007_12_31).
+date_split(d2007_12_31,2007,12,31).
 
 year(2008).
-date("2008-01-01").
-date_split("2008-01-01",2008,1,1).
-date("2008-12-31").
-date_split("2008-12-31",2008,12,31).
+date(d2008_01_01).
+date_split(d2008_01_01,2008,1,1).
+date(d2008_12_31).
+date_split(d2008_12_31,2008,12,31).
 
 year(2009).
-date("2009-01-01").
-date_split("2009-01-01",2009,1,1).
-date("2009-12-31").
-date_split("2009-12-31",2009,12,31).
+date(d2009_01_01).
+date_split(d2009_01_01,2009,1,1).
+date(d2009_12_31).
+date_split(d2009_12_31,2009,12,31).
 
 year(2010).
-date("2010-01-01").
-date_split("2010-01-01",2010,1,1).
-date("2010-12-31").
-date_split("2010-12-31",2010,12,31).
+date(d2010_01_01).
+date_split(d2010_01_01,2010,1,1).
+date(d2010_12_31).
+date_split(d2010_12_31,2010,12,31).
 
 year(2011).
-date("2011-01-01").
-date_split("2011-01-01",2011,1,1).
-date("2011-12-31").
-date_split("2011-12-31",2011,12,31).
+date(d2011_01_01).
+date_split(d2011_01_01,2011,1,1).
+date(d2011_12_31).
+date_split(d2011_12_31,2011,12,31).
 
 year(2012).
-date("2012-01-01").
-date_split("2012-01-01",2012,1,1).
-date("2012-12-31").
-date_split("2012-12-31",2012,12,31).
+date(d2012_01_01).
+date_split(d2012_01_01,2012,1,1).
+date(d2012_12_31).
+date_split(d2012_12_31,2012,12,31).
 
 year(2013).
-date("2013-01-01").
-date_split("2013-01-01",2013,1,1).
-date("2013-12-31").
-date_split("2013-12-31",2013,12,31).
+date(d2013_01_01).
+date_split(d2013_01_01,2013,1,1).
+date(d2013_12_31).
+date_split(d2013_12_31,2013,12,31).
 
 year(2014).
-date("2014-07-09").
-date_split("2014-07-09",2014,7,9).
-date("2014-01-01").
-date_split("2014-01-01",2014,1,1).
-date("2014-12-31").
-date_split("2014-12-31",2014,12,31).
+date(d2014_07_09).
+date_split(d2014_07_09,2014,7,9).
+date(d2014_01_01).
+date_split(d2014_01_01,2014,1,1).
+date(d2014_12_31).
+date_split(d2014_12_31,2014,12,31).
 
 year(2015).
-date("2015-01-01").
-date_split("2015-01-01",2015,1,1).
-date("2015-12-31").
-date_split("2015-12-31",2015,12,31).
+date(d2015_01_01).
+date_split(d2015_01_01,2015,1,1).
+date(d2015_12_31).
+date_split(d2015_12_31,2015,12,31).
 
 year(2016).
-date("2016-01-01").
-date_split("2016-01-01",2016,1,1).
-date("2016-12-31").
-date_split("2016-12-31",2016,12,31).
+date(d2016_01_01).
+date_split(d2016_01_01,2016,1,1).
+date(d2016_12_31).
+date_split(d2016_12_31,2016,12,31).
 
 year(2017).
-date("2017-01-01").
-date_split("2017-01-01",2017,1,1).
-date("2017-12-31").
-date_split("2017-12-31",2017,12,31).
+date(d2017_01_01).
+date_split(d2017_01_01,2017,1,1).
+date(d2017_12_31).
+date_split(d2017_12_31,2017,12,31).
 
 finance(553252).
 finance(0).
@@ -133,22 +133,22 @@ atom_concat('bob_maintains_household_s2_a_1_B_pos',2017,bob_maintains_household_
 marriage_(alice_and_bob_s2_a_1_B_pos).
 agent_(alice_and_bob_s2_a_1_B_pos,alice_s2_a_1_B_pos).
 agent_(alice_and_bob_s2_a_1_B_pos,bob_s2_a_1_B_pos).
-start_(alice_and_bob_s2_a_1_B_pos,"1992-02-03").
+start_(alice_and_bob_s2_a_1_B_pos,d1992_02_03).
 death_(alice_dies_s2_a_1_B_pos).
 agent_(alice_dies_s2_a_1_B_pos,alice_s2_a_1_B_pos).
-start_(alice_dies_s2_a_1_B_pos,"2014-07-09").
-end_(alice_dies_s2_a_1_B_pos,"2014-07-09").
+start_(alice_dies_s2_a_1_B_pos,d2014_07_09).
+end_(alice_dies_s2_a_1_B_pos,d2014_07_09).
 son_(charlie_is_son_s2_a_1_B_pos).
 agent_(charlie_is_son_s2_a_1_B_pos,charlie_s2_a_1_B_pos).
 patient_(charlie_is_son_s2_a_1_B_pos,alice_s2_a_1_B_pos).
 patient_(charlie_is_son_s2_a_1_B_pos,bob_s2_a_1_B_pos).
-start_(charlie_is_son_s2_a_1_B_pos,"2000-10-09").
+start_(charlie_is_son_s2_a_1_B_pos,d2000_10_09).
 residence_(charlie_and_bob_residence_s2_a_1_B_pos).
 agent_(charlie_and_bob_residence_s2_a_1_B_pos,charlie_s2_a_1_B_pos).
 agent_(charlie_and_bob_residence_s2_a_1_B_pos,bob_s2_a_1_B_pos).
 patient_(charlie_and_bob_residence_s2_a_1_B_pos,bob_s_house_s2_a_1_B_pos).
-start_(charlie_and_bob_residence_s2_a_1_B_pos,"2004-01-01").
-end_(charlie_and_bob_residence_s2_a_1_B_pos,"2017-12-31").
+start_(charlie_and_bob_residence_s2_a_1_B_pos,d2004_01_01).
+end_(charlie_and_bob_residence_s2_a_1_B_pos,d2017_12_31).
 bob_household_maintenance(Year,Event,Start_day,End_day) :-
     between(2004,2017,Year),
     atom_concat('bob_maintains_household_s2_a_1_B_pos',Year,Event),
@@ -164,7 +164,7 @@ s151(bob_s2_a_1_B_pos,_,charlie_s2_a_1_B_pos,0,Year) :- between(2014,2017,Year).
 income_(bob_income_s2_a_1_B_poss2_a_1_B_poss2_a_1_B_poss2_a_1_B_poss2_a_1_B_pos2016s2_a_1_B_pos).
 agent_(bob_income_s2_a_1_B_poss2_a_1_B_poss2_a_1_B_poss2_a_1_B_poss2_a_1_B_pos2016s2_a_1_B_pos,bob_s2_a_1_B_pos).
 amount_(bob_income_s2_a_1_B_poss2_a_1_B_poss2_a_1_B_poss2_a_1_B_poss2_a_1_B_pos2016s2_a_1_B_pos,553252).
-start_(bob_income_s2_a_1_B_poss2_a_1_B_poss2_a_1_B_poss2_a_1_B_poss2_a_1_B_pos2016s2_a_1_B_pos,"2016-12-31").
+start_(bob_income_s2_a_1_B_poss2_a_1_B_poss2_a_1_B_poss2_a_1_B_poss2_a_1_B_pos2016s2_a_1_B_pos,d2016_12_31).
 
 % Test
 :- s2_a_1_B(bob_s2_a_1_B_pos,bob_s_house_s2_a_1_B_pos,charlie_s2_a_1_B_pos,2016).

@@ -1,7 +1,7 @@
 % finance(17330).
 % person(alice).
 % year(2017).
-% date("2017-01-01").
+% date(d2017_01_01).
 max(Result, Val1, Val2) :-
     finance(Val1), finance(Val2), Val1 >= Val2, Result = Val1.
 max(Result, Val1, Val2) :-

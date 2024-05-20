@@ -8,10 +8,10 @@
 person(alice_s63_a_pos).
 
 year(2017).
-date("2017-01-01").
-date_split("2017-01-01",2017,1,1).
-date("2017-12-31").
-date_split("2017-12-31",2017,12,31).
+date(d2017_01_01).
+date_split(d2017_01_01,2017,1,1).
+date(d2017_12_31).
+date_split(d2017_12_31,2017,12,31).
 
 finance(33200).
 finance(26948).
@@ -21,12 +21,12 @@ finance(6252).
 
 payment_(alice_is_paid_s63_a_pos).
 patient_(alice_is_paid_s63_a_pos,alice_s63_a_pos).
-start_(alice_is_paid_s63_a_pos,"2017-12-31").
+start_(alice_is_paid_s63_a_pos,d2017_12_31).
 amount_(alice_is_paid_s63_a_pos,33200).
 s151(alice_s63_a_pos,2000,alice_s63_a_pos,0,2017).
 deduction_(itemized_deduction_s63_a_pos).
 agent_(itemized_deduction_s63_a_pos,alice_s63_a_pos).
-start_(itemized_deduction_s63_a_pos,"2017-12-31").
+start_(itemized_deduction_s63_a_pos,d2017_12_31).
 amount_(itemized_deduction_s63_a_pos,4252).
 
 % Test

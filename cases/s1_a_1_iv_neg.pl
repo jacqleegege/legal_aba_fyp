@@ -8,10 +8,10 @@
 person(alice_s1_a_1_iv_neg).
 person(spouse_s1_a_1_iv_neg).
 year(2017).
-date("2017-01-01").
-date("2017-12-31").
-date_split("2017-01-01",2017,1,1).
-date_split("2017-12-31",2017,12,31).
+date(d2017_01_01).
+date(d2017_12_31).
+date_split(d2017_01_01,2017,1,1).
+date_split(d2017_12_31,2017,12,31).
 finance(684642).
 finance(247647).
 
@@ -20,8 +20,8 @@ marriage_(alice_and_spouse_s1_a_1_iv_neg).
 joint_return_(joint_return_s1_a_1_iv_neg).
 agent_(joint_return_s1_a_1_iv_neg,alice_s1_a_1_iv_neg).
 agent_(joint_return_s1_a_1_iv_neg,spouse_s1_a_1_iv_neg).
-start_(joint_return_s1_a_1_iv_neg,"2017-01-01").
-end_(joint_return_s1_a_1_iv_neg,"2017-12-31").
+start_(joint_return_s1_a_1_iv_neg,d2017_01_01).
+end_(joint_return_s1_a_1_iv_neg,d2017_12_31).
 s63(alice_s1_a_1_iv_neg,2017,684642).
 
 % Test

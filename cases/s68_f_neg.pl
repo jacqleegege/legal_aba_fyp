@@ -10,14 +10,14 @@ person(bob_s68_f_neg).
 finance(310192).
 
 year(2014).
-date("2014-01-01").
-date_split("2014-01-01", 2014, 1, 1).
-date("2014-12-31").
-date_split("2014-12-31", 2014, 12, 31).
+date(d2014_01_01).
+date_split(d2014_01_01, 2014, 1, 1).
+date(d2014_12_31).
+date_split(d2014_12_31, 2014, 12, 31).
 
 income_(alice_is_paid_s68_f_neg).
 agent_(alice_is_paid_s68_f_neg,alice_s68_f_neg).
-start_(alice_is_paid_s68_f_neg,"2014-12-31").
+start_(alice_is_paid_s68_f_neg,d2014_12_31).
 amount_(alice_is_paid_s68_f_neg,310192).
 s2_a(alice_s68_f_neg,bob_s68_f_neg,2014).
 

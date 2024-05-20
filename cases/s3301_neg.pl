@@ -12,21 +12,21 @@ finance(26362).
 
 
 year(2015).
-date("2015-01-01").
-date_split("2015-01-01", 2015, 1, 1).
-date("2015-12-31").
-date_split("2015-12-31", 2015, 12, 31).
+date(d2015_01_01).
+date_split(d2015_01_01, 2015, 1, 1).
+date(d2015_12_31).
+date_split(d2015_12_31, 2015, 12, 31).
 
 year(2016).
-date("2016-01-01").
-date_split("2016-01-01", 2016, 1, 1).
-date("2016-12-31").
-date_split("2016-12-31", 2016, 12, 31).
+date(d2016_01_01).
+date_split(d2016_01_01, 2016, 1, 1).
+date(d2016_12_31).
+date_split(d2016_12_31, 2016, 12, 31).
 
 s3306_a(alice_s3301_neg,2015).
 s3306_a(alice_s3301_neg,2016).
-total_wages_employer(alice_s3301_neg,453009,alice_s3301_neg,service,"2015-01-01","2015-12-31").
-total_wages_employer(alice_s3301_neg,443870,alice_s3301_neg,service,"2016-01-01","2016-12-31").
+total_wages_employer(alice_s3301_neg,453009,alice_s3301_neg,service,d2015_01_01,"2015-12-31").
+total_wages_employer(alice_s3301_neg,443870,alice_s3301_neg,service,d2016_01_01,"2016-12-31").
 
 % Test
 :- \+ s3301(alice_s3301_neg,2016,_,_,_,26362).

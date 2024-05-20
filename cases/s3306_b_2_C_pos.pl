@@ -9,10 +9,10 @@ person(alice_s3306_b_2_C_pos).
 person(bob_s3306_b_2_C_pos).
 
 year(2017).
-date("2017-01-01").
-date_split("2017-01-01", 2017, 1, 1).
-date("2017-12-31").
-date_split("2017-12-31", 2017, 12, 31).
+date(d2017_01_01).
+date_split(d2017_01_01, 2017, 1, 1).
+date(d2017_12_31).
+date_split(d2017_12_31, 2017, 12, 31).
 
 
 finance(45252).
@@ -22,13 +22,13 @@ finance(5322).
 service_(alice_employer_s3306_b_2_C_pos).
 patient_(alice_employer_s3306_b_2_C_pos,alice_s3306_b_2_C_pos).
 agent_(alice_employer_s3306_b_2_C_pos,bob_s3306_b_2_C_pos).
-start_(alice_employer_s3306_b_2_C_pos,"2017-01-01").
-end_(alice_employer_s3306_b_2_C_pos,"2017-12-31").
+start_(alice_employer_s3306_b_2_C_pos,d2017_01_01).
+end_(alice_employer_s3306_b_2_C_pos,d2017_12_31).
 payment_(alice_pays_bob_s3306_b_2_C_pos).
 agent_(alice_pays_bob_s3306_b_2_C_pos,alice_s3306_b_2_C_pos).
 patient_(alice_pays_bob_s3306_b_2_C_pos,bob_s3306_b_2_C_pos).
-start_(alice_pays_bob_s3306_b_2_C_pos,"2017-01-01").
-end_(alice_pays_bob_s3306_b_2_C_pos,"2017-12-31").
+start_(alice_pays_bob_s3306_b_2_C_pos,d2017_01_01).
+end_(alice_pays_bob_s3306_b_2_C_pos,d2017_12_31).
 purpose_(alice_pays_bob_s3306_b_2_C_pos,alice_employer_s3306_b_2_C_pos).
 amount_(alice_pays_bob_s3306_b_2_C_pos,45252).
 payment_(alice_pays_retirement_s3306_b_2_C_pos).
@@ -37,8 +37,8 @@ patient_(alice_pays_retirement_s3306_b_2_C_pos,retirement_fund_s3306_b_2_C_pos).
 plan_(retirement_fund_s3306_b_2_C_pos).
 purpose_(retirement_fund_s3306_b_2_C_pos,"make provisions for employees in case of retirement").
 beneficiary_(retirement_fund_s3306_b_2_C_pos,bob_s3306_b_2_C_pos).
-start_(alice_pays_retirement_s3306_b_2_C_pos,"2017-01-01").
-end_(alice_pays_retirement_s3306_b_2_C_pos,"2017-12-31").
+start_(alice_pays_retirement_s3306_b_2_C_pos,d2017_01_01).
+end_(alice_pays_retirement_s3306_b_2_C_pos,d2017_12_31).
 amount_(alice_pays_retirement_s3306_b_2_C_pos,9832).
 payment_(alice_pays_insurance_s3306_b_2_C_pos).
 agent_(alice_pays_insurance_s3306_b_2_C_pos,alice_s3306_b_2_C_pos).
@@ -46,8 +46,8 @@ patient_(alice_pays_insurance_s3306_b_2_C_pos,life_insurance_fund_s3306_b_2_C_po
 plan_(life_insurance_fund_s3306_b_2_C_pos).
 purpose_(life_insurance_fund_s3306_b_2_C_pos,"make provisions for employees in case of death").
 beneficiary_(life_insurance_fund_s3306_b_2_C_pos,bob_s3306_b_2_C_pos).
-start_(alice_pays_insurance_s3306_b_2_C_pos,"2017-01-01").
-end_(alice_pays_insurance_s3306_b_2_C_pos,"2017-12-31").
+start_(alice_pays_insurance_s3306_b_2_C_pos,d2017_01_01).
+end_(alice_pays_insurance_s3306_b_2_C_pos,d2017_12_31).
 amount_(alice_pays_insurance_s3306_b_2_C_pos,5322).
 
 % Test

@@ -9,15 +9,15 @@ person(alice_s152_b_2_neg).
 person(bob_s152_b_2_neg).
 
 year(2015).
-date("2015-01-01").
-date_split("2015-01-01", 2015, 1, 1).
-date("2015-12-31").
-date_split("2015-12-31", 2015, 12, 31).
+date(d2015_01_01).
+date_split(d2015_01_01, 2015, 1, 1).
+date(d2015_12_31).
+date_split(d2015_12_31, 2015, 12, 31).
 
 marriage_(alice_and_bob_s152_b_2_neg).
 agent_(alice_and_bob_s152_b_2_neg,alice_s152_b_2_neg).
 agent_(alice_and_bob_s152_b_2_neg,bob_s152_b_2_neg).
-start_(alice_and_bob_s152_b_2_neg,"2015-01-01").
+start_(alice_and_bob_s152_b_2_neg,d2015_01_01).
 joint_return_(random_joint_return).
 
 % Test

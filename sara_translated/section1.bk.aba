@@ -4,7 +4,7 @@
 % taxpayer(alice).
 % dependent(dependent).
 % marriage(alice_and_bob).
-% date("2017-01-01").
+% date(d2017_01_01).
 % year(2017).
 % finance(17330).
 % joint_return(joint_return).
