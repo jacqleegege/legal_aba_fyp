@@ -42,7 +42,7 @@ patient_(alice_employer_s3306_a_1_neg,alice_s3306_a_1_neg).
 agent_(alice_employer_s3306_a_1_neg,bob_s3306_a_1_neg).
 start_(alice_employer_s3306_a_1_neg,d2017_02_01).
 end_(alice_employer_s3306_a_1_neg,d2017_09_02).
-purpose_(alice_employer_s3306_a_1_neg,"domestic service").
+purpose_(alice_employer_s3306_a_1_neg,domestic_service).
 payment_(alice_pays_s3306_a_1_neg).
 agent_(alice_pays_s3306_a_1_neg,alice_s3306_a_1_neg).
 patient_(alice_pays_s3306_a_1_neg,bob_s3306_a_1_neg).

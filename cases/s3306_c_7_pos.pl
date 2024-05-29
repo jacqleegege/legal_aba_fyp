@@ -20,7 +20,7 @@ location_name(usa).
 finance(73200).
 
 service_(alice_employed_s3306_c_7_pos).
-patient_(alice_employed_s3306_c_7_pos,"state of maryland").
+patient_(alice_employed_s3306_c_7_pos,state_of_maryland).
 agent_(alice_employed_s3306_c_7_pos,alice_s3306_c_7_pos).
 start_(alice_employed_s3306_c_7_pos,d2017_01_01).
 end_(alice_employed_s3306_c_7_pos,d2017_12_31).
@@ -28,7 +28,7 @@ location_(alice_employed_s3306_c_7_pos,baltimore).
 location_(alice_employed_s3306_c_7_pos,maryland).
 location_(alice_employed_s3306_c_7_pos,usa).
 payment_(alice_is_paid_s3306_c_7_pos).
-agent_(alice_is_paid_s3306_c_7_pos,"state of maryland").
+agent_(alice_is_paid_s3306_c_7_pos,state_of_maryland).
 patient_(alice_is_paid_s3306_c_7_pos,alice_s3306_c_7_pos).
 start_(alice_is_paid_s3306_c_7_pos,d2017_12_31).
 purpose_(alice_is_paid_s3306_c_7_pos,alice_employed_s3306_c_7_pos).

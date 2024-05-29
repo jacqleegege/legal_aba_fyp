@@ -27,5 +27,5 @@ start_(alice_and_bob_s152_d_2_G_neg,d2014_04_15).
 patient_(alice_and_bob_s152_d_2_G_neg,home_s152_d_2_G_neg).
 
 % Test
-:- \+ s152_d_2_G(alice_s152_d_2_G_neg,bob_s152_d_2_G_neg,d2014_04_15,"2100-01-01").
+:- \+ s152_d_2_G(alice_s152_d_2_G_neg,bob_s152_d_2_G_neg,d2014_04_15,d2100_01_01).
 :- halt.

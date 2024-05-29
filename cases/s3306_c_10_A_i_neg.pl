@@ -36,9 +36,9 @@ location_name(usa).
 finance(3200).
 
 educational_institution_(hopkins_is_a_university_s3306_c_10_A_i_neg).
-agent_(hopkins_is_a_university_s3306_c_10_A_i_neg,"johns hopkins university").
+agent_(hopkins_is_a_university_s3306_c_10_A_i_neg,johns_hopkins_university).
 service_(alice_employed_s3306_c_10_A_i_neg).
-patient_(alice_employed_s3306_c_10_A_i_neg,"johns hopkins university").
+patient_(alice_employed_s3306_c_10_A_i_neg,johns_hopkins_university).
 agent_(alice_employed_s3306_c_10_A_i_neg,alice_s3306_c_10_A_i_neg).
 start_(alice_employed_s3306_c_10_A_i_neg,d2017_01_01).
 end_(alice_employed_s3306_c_10_A_i_neg,d2017_12_31).
@@ -46,22 +46,22 @@ location_(alice_employed_s3306_c_10_A_i_neg,baltimore).
 location_(alice_employed_s3306_c_10_A_i_neg,maryland).
 location_(alice_employed_s3306_c_10_A_i_neg,usa).
 payment_(alice_is_paid_s3306_c_10_A_i_neg).
-agent_(alice_is_paid_s3306_c_10_A_i_neg,"johns hopkins university").
+agent_(alice_is_paid_s3306_c_10_A_i_neg,johns_hopkins_university).
 patient_(alice_is_paid_s3306_c_10_A_i_neg,alice_s3306_c_10_A_i_neg).
 start_(alice_is_paid_s3306_c_10_A_i_neg,d2017_12_31).
 purpose_(alice_is_paid_s3306_c_10_A_i_neg,alice_employed_s3306_c_10_A_i_neg).
 amount_(alice_is_paid_s3306_c_10_A_i_neg,3200).
 enrollment_(alice_goes_to_hopkins_s3306_c_10_A_i_neg).
 agent_(alice_goes_to_hopkins_s3306_c_10_A_i_neg,alice_s3306_c_10_A_i_neg).
-patient_(alice_goes_to_hopkins_s3306_c_10_A_i_neg,"johns hopkins university").
+patient_(alice_goes_to_hopkins_s3306_c_10_A_i_neg,johns_hopkins_university).
 start_(alice_goes_to_hopkins_s3306_c_10_A_i_neg,d2011_08_27).
 end_(alice_goes_to_hopkins_s3306_c_10_A_i_neg,d2016_05_29).
 attending_classes_(alice_goes_to_class_s3306_c_10_A_i_neg).
 agent_(alice_goes_to_class_s3306_c_10_A_i_neg,alice_s3306_c_10_A_i_neg).
-location_(alice_goes_to_class_s3306_c_10_A_i_neg,"johns hopkins university").
+location_(alice_goes_to_class_s3306_c_10_A_i_neg,johns_hopkins_university).
 start_(alice_goes_to_class_s3306_c_10_A_i_neg,d2011_08_27).
 end_(alice_goes_to_class_s3306_c_10_A_i_neg,d2016_05_29).
 
 % Test
-:- \+ s3306_c_10_A_i(alice_s3306_c_10_A_i_neg,"johns hopkins university",d2017_01_01).
+:- \+ s3306_c_10_A_i(alice_s3306_c_10_A_i_neg,johns_hopkins_university,d2017_01_01).
 :- halt.

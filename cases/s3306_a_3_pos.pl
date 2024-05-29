@@ -31,15 +31,15 @@ date_split(d2018_12_31, 2018, 12, 31).
 finance(3200).
 finance(4200).
 
-medium("cash").
-location_name("private home_s3306_a_3_pos").
+medium(cash).
+location_name(private_home_s3306_a_3_pos).
 
 service_(alice_employer_s3306_a_3_pos).
 patient_(alice_employer_s3306_a_3_pos,alice_s3306_a_3_pos).
 agent_(alice_employer_s3306_a_3_pos,bob_s3306_a_3_pos).
 start_(alice_employer_s3306_a_3_pos,d2017_02_01).
 end_(alice_employer_s3306_a_3_pos,d2017_09_02).
-purpose_(alice_employer_s3306_a_3_pos,"agricultural labor").
+purpose_(alice_employer_s3306_a_3_pos,agricultural_labor).
 payment_(alice_pays_s3306_a_3_pos).
 agent_(alice_pays_s3306_a_3_pos,alice_s3306_a_3_pos).
 patient_(alice_pays_s3306_a_3_pos,bob_s3306_a_3_pos).
@@ -47,15 +47,15 @@ start_(alice_pays_s3306_a_3_pos,d2017_09_02).
 end_(alice_pays_s3306_a_3_pos,d2017_09_02).
 purpose_(alice_pays_s3306_a_3_pos,alice_employer_s3306_a_3_pos).
 amount_(alice_pays_s3306_a_3_pos,3200).
-means_(alice_pays_s3306_a_3_pos,"cash").
-s3306_b(3200,alice_pays_s3306_a_3_pos,alice_employer_s3306_a_3_pos,alice_s3306_a_3_pos,bob_s3306_a_3_pos,alice_s3306_a_3_pos,bob_s3306_a_3_pos,"cash").
+means_(alice_pays_s3306_a_3_pos,cash).
+s3306_b(3200,alice_pays_s3306_a_3_pos,alice_employer_s3306_a_3_pos,alice_s3306_a_3_pos,bob_s3306_a_3_pos,alice_s3306_a_3_pos,bob_s3306_a_3_pos,cash).
 service_(bob_employer_s3306_a_3_pos).
 patient_(bob_employer_s3306_a_3_pos,bob_s3306_a_3_pos).
 agent_(bob_employer_s3306_a_3_pos,alice_s3306_a_3_pos).
 start_(bob_employer_s3306_a_3_pos,d2017_04_01).
 end_(bob_employer_s3306_a_3_pos,d2018_09_02).
-purpose_(bob_employer_s3306_a_3_pos, "domestic service").
-location_(bob_employer_s3306_a_3_pos, "private home_s3306_a_3_pos").
+purpose_(bob_employer_s3306_a_3_pos, domestic_service).
+location_(bob_employer_s3306_a_3_pos, private_home_s3306_a_3_pos).
 payment_(bob_pays_s3306_a_3_pos).
 agent_(bob_pays_s3306_a_3_pos,bob_s3306_a_3_pos).
 patient_(bob_pays_s3306_a_3_pos,alice_s3306_a_3_pos).
@@ -63,8 +63,8 @@ start_(bob_pays_s3306_a_3_pos,d2018_09_02).
 end_(bob_pays_s3306_a_3_pos,d2018_09_02).
 purpose_(bob_pays_s3306_a_3_pos,bob_employer_s3306_a_3_pos).
 amount_(bob_pays_s3306_a_3_pos,4200).
-means_(bob_pays_s3306_a_3_pos,"cash").
-s3306_b(4200,bob_pays_s3306_a_3_pos,bob_employer_s3306_a_3_pos,bob_s3306_a_3_pos,alice_s3306_a_3_pos,bob_s3306_a_3_pos,alice_s3306_a_3_pos,"cash").
+means_(bob_pays_s3306_a_3_pos,cash).
+s3306_b(4200,bob_pays_s3306_a_3_pos,bob_employer_s3306_a_3_pos,bob_s3306_a_3_pos,alice_s3306_a_3_pos,bob_s3306_a_3_pos,alice_s3306_a_3_pos,cash).
 
 % Test
 :- s3306_a_3(bob_s3306_a_3_pos,4200,2018).

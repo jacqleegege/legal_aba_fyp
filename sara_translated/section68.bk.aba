@@ -66,20 +66,20 @@ s68_b(Taxp,Aa,Taxy) :-
 %(1) In general
 
 %For purposes of this section, the term "applicable amount" means-
-amount("A",Amount) :-
+amount(a,Amount) :-
     Amount = 300000.
-amount("B",Amount) :-
+amount(b,Amount) :-
     Amount = 275000.
-amount("C",Amount) :-
+amount(c,Amount) :-
     Amount = 250000.
-amount("D",Amount) :-
-    amount("A",Amount_A),
+amount(d,Amount) :-
+    amount(a,Amount_A),
     Amount = Amount_A/2.
 
 %(A) $300,000 in the case of a joint return or a surviving spouse (as defined in section 2(a)),
 s68_b_1_A(Taxp,Joint_return,Surviving_spouse,Aa,Taxy) :-
     joint_return_or_s2_a(Taxp,Joint_return,Surviving_spouse,Taxy),
-    amount("A",Aa).
+    amount(a,Aa).
 
 joint_return_or_s2_a(Taxp,Joint_return,Surviving_spouse,Taxy):-
     person(Surviving_spouse),
@@ -99,7 +99,7 @@ joint_return_or_s2_a(Taxp,Joint_return,Surviving_spouse,Taxy):-
 %(B) $275,000 in the case of a head of household (as defined in section 2(b)),
 s68_b_1_B(Taxp,Aa,Taxy) :-
     s2_b(Taxp,_,Taxy),
-    amount("B",Aa).
+    amount(b,Aa).
 
 %(C) $250,000 in the case of an individual who is not married and who is not a surviving spouse or head of household, and
 s68_b_1_C(Taxp,Aa,Taxy) :-
@@ -107,13 +107,13 @@ s68_b_1_C(Taxp,Aa,Taxy) :-
     not_s7703(Taxp,_,_,Taxy),
     not_s2_a(Taxp,_,Taxy), 
     not_s2_b(Taxp,_,Taxy),
-    amount("C",Aa).
+    amount(c,Aa).
 
 %(D) ½ the amount applicable under subparagraph (A) in the case of a married individual filing a separate return.
 s68_b_1_D(Taxp,Aa,Taxy) :-
     s7703(Taxp,Spouse,_,Taxy),
     not_joint_return_def(Taxp,Spouse,Taxy),
-    amount("D",Aa).
+    amount(d,Aa).
 
 joint_return_def(Taxp,Spouse,Taxy):-
     joint_return_(Joint_return),

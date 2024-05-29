@@ -44,7 +44,7 @@ s3306_c(alice_employer_s3306_b_15_pos,alice_s3306_b_15_pos,bob_s3306_b_15_pos,Da
     is_before(d2011_02_01,Day),
     is_before(Day,d2019_11_19).
 
-purpose_(alice_employer_s3306_b_15_pos,"agricultural labor").
+purpose_(alice_employer_s3306_b_15_pos,agricultural_labor).
 death_(bob_dies_s3306_b_15_pos).
 agent_(bob_dies_s3306_b_15_pos,bob_s3306_b_15_pos).
 start_(bob_dies_s3306_b_15_pos,d2019_11_25).

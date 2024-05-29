@@ -36,7 +36,7 @@ agent_(alice_and_bob_s7703_a_2_pos,bob_s7703_a_2_pos).
 start_(alice_and_bob_s7703_a_2_pos,d2012_04_05).
 legal_separation_(alice_and_bob_divorce_s7703_a_2_pos).
 patient_(alice_and_bob_divorce_s7703_a_2_pos,alice_and_bob_s7703_a_2_pos).
-agent_(alice_and_bob_divorce_s7703_a_2_pos,"decree of divorce").
+agent_(alice_and_bob_divorce_s7703_a_2_pos,decree_of_divorce).
 start_(alice_and_bob_divorce_s7703_a_2_pos,d2017_09_16).
 
 % Test

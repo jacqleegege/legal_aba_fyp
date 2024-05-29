@@ -31,7 +31,7 @@ agent_(alice_and_bob_s2_b_2_A_neg,alice_s2_b_2_A_neg).
 agent_(alice_and_bob_s2_b_2_A_neg,bob_s2_b_2_A_neg).
 start_(alice_and_bob_s2_b_2_A_neg,d1992_02_03).
 legal_separation_(alice_and_bob_divorce_s2_b_2_A_neg).
-agent_(alice_and_bob_divorce_s2_b_2_A_neg,"decree of separate maintenance").
+agent_(alice_and_bob_divorce_s2_b_2_A_neg,decree_of_separate_maintenance).
 patient_(alice_and_bob_divorce_s2_b_2_A_neg,alice_and_bob_s2_b_2_A_neg).
 start_(alice_and_bob_divorce_s2_b_2_A_neg,d2014_07_09).
 

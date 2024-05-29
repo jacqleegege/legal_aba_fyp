@@ -20,7 +20,7 @@ location_name(usa).
 finance(73200).
 
 service_(alice_employed_s3306_c_16_neg).
-patient_(alice_employed_s3306_c_16_neg,"united states government").
+patient_(alice_employed_s3306_c_16_neg,united_states_government).
 agent_(alice_employed_s3306_c_16_neg,alice_s3306_c_16_neg).
 start_(alice_employed_s3306_c_16_neg,d2017_01_01).
 end_(alice_employed_s3306_c_16_neg,d2017_12_31).
@@ -28,12 +28,12 @@ location_(alice_employed_s3306_c_16_neg,arlington).
 location_(alice_employed_s3306_c_16_neg,virginia).
 location_(alice_employed_s3306_c_16_neg,usa).
 payment_(alice_is_paid_s3306_c_16_neg).
-agent_(alice_is_paid_s3306_c_16_neg,"united states government").
+agent_(alice_is_paid_s3306_c_16_neg,united_states_government).
 patient_(alice_is_paid_s3306_c_16_neg,alice_s3306_c_16_neg).
 start_(alice_is_paid_s3306_c_16_neg,d2017_12_31).
 purpose_(alice_is_paid_s3306_c_16_neg,alice_employed_s3306_c_16_neg).
 amount_(alice_is_paid_s3306_c_16_neg,73200).
 
 % Test
-:- \+ s3306_c_16(alice_employed_s3306_c_16_neg,"united states government").
+:- \+ s3306_c_16(alice_employed_s3306_c_16_neg,united_states_government).
 :- halt.

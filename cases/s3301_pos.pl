@@ -22,8 +22,8 @@ date(d2016_12_31).
 date_split(d2016_12_31, 2016, 12, 31).
 
 s3306_a(alice_s3301_pos,Year) :- between(2015,2016,Year).
-total_wages_employer(alice_s3301_pos,453009,_,_,d2015_01_01,"2015-12-31").
-total_wages_employer(alice_s3301_pos,443870,_,_,d2016_01_01,"2016-12-31").
+total_wages_employer(alice_s3301_pos,453009,_,_,d2015_01_01,d2015_12_31).
+total_wages_employer(alice_s3301_pos,443870,_,_,d2016_01_01,d2016_12_31).
 
 % Test
 :- s3301(alice_s3301_pos,2015,_,_,_,27181).

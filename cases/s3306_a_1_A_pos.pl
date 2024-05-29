@@ -31,10 +31,10 @@ date(d2018_12_31).
 date_split(d2018_12_31, 2018, 12, 31).
 
 
-s3306_b(3200,3200,bob_works_s3306_a_1_A_pos,alice_s3306_a_1_A_pos,bob_s3306_a_1_A_pos,alice_s3306_a_1_A_pos,bob_s3306_a_1_A_pos,"cash").
+s3306_b(3200,3200,bob_works_s3306_a_1_A_pos,alice_s3306_a_1_A_pos,bob_s3306_a_1_A_pos,alice_s3306_a_1_A_pos,bob_s3306_a_1_A_pos,cash).
 start_(bob_works_s3306_a_1_A_pos,d2017_02_01).
 end_(bob_works_s3306_a_1_A_pos,d2017_09_02).
-s3306_b(4500,4500,alice_works_s3306_a_1_A_pos,bob_s3306_a_1_A_pos,alice_s3306_a_1_A_pos,bob_s3306_a_1_A_pos,alice_s3306_a_1_A_pos,"cash").
+s3306_b(4500,4500,alice_works_s3306_a_1_A_pos,bob_s3306_a_1_A_pos,alice_s3306_a_1_A_pos,bob_s3306_a_1_A_pos,alice_s3306_a_1_A_pos,cash).
 start_(alice_works_s3306_a_1_A_pos,d2017_04_01).
 end_(alice_works_s3306_a_1_A_pos,d2018_09_02).
 

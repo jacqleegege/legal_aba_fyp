@@ -16,7 +16,7 @@ between(Y1,Y2,Year):- year(Y1),year(Y2),Year<Y2+1,Year>Y1-1.
 
 % time
 % day_to_stamp(Day, Stamp) :- % convert day in YYYY-MM-DD format to time stamp
-% 	split_string(Day,"-","",[YS,MS,DS]),
+% 	split_string(Day,-,"",[YS,MS,DS]),
 % 	atom_number(YS,YI),
 % 	atom_number(MS,MI),
 % 	atom_number(DS,DI),
@@ -47,14 +47,14 @@ last_day_year(Year,Day):-
 
 % last_day_year(Year,Day) :-
 % 	atom_string(Year,Year_s),
-% 	string_concat(Year_s,"-12-31",Day).
+% 	string_concat(Year_s,-12-31,Day).
 
 first_day_year(Year,Day) :-
 	date_split(Day,Year,1,1).
 
 % first_day_year(Year,Day) :-
 % 	atom_string(Year,Year_s),
-% 	string_concat(Year_s,"-01-01",Day).
+% 	string_concat(Year_s,-01-01,Day).
 
 % out of days in format YYYY-MM-DD, extract latest day
 % UNUSED

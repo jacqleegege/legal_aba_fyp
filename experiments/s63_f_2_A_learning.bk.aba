@@ -30,8 +30,8 @@
 last_day_year(2015,d2015_12_31).
 last_day_year(2017,d2017_12_31).
 last_day_year(2016,d2016_12_31).
-%last_day_year(2018,d2018_12_31).
-%last_day_year(2019,d2019_12_31).
+last_day_year(2018,d2018_12_31).
+last_day_year(2019,d2019_12_31).
 
 is_before(d2015_04_19,d2015_12_31).
 is_before(d2017_02_03,d2017_12_31).
@@ -48,19 +48,19 @@ is_before(d2015_04_19,d2016_03_20).
 is_before(d2015_12_31,d2016_03_20).
 is_before(d2015_04_19,d2016_12_31).
 is_before(d2015_12_31,d2016_12_31).
-%is_before(d2015_04_19,d2018_12_31).
-%is_before(d2015_12_31,d2018_12_31).
-%is_before(d2017_02_03,d2018_12_31).
-%is_before(d2017_12_31,d2018_12_31).
-%is_before(d2016_03_20,d2018_12_31).
-%is_before(d2016_12_31,d2018_12_31).
-%is_before(d2015_04_19,d2019_12_31).
-%is_before(d2015_12_31,d2019_12_31).
-%is_before(d2017_02_03,d2019_12_31).
-%is_before(d2017_12_31,d2019_12_31).
-%is_before(d2016_03_20,d2019_12_31).
-%is_before(d2016_12_31,d2019_12_31).
-%is_before(d2018_12_31,d2019_12_31).
+is_before(d2015_04_19,d2018_12_31).
+is_before(d2015_12_31,d2018_12_31).
+is_before(d2017_02_03,d2018_12_31).
+is_before(d2017_12_31,d2018_12_31).
+is_before(d2016_03_20,d2018_12_31).
+is_before(d2016_12_31,d2018_12_31).
+is_before(d2015_04_19,d2019_12_31).
+is_before(d2015_12_31,d2019_12_31).
+is_before(d2017_02_03,d2019_12_31).
+is_before(d2017_12_31,d2019_12_31).
+is_before(d2016_03_20,d2019_12_31).
+is_before(d2016_12_31,d2019_12_31).
+is_before(d2018_12_31,d2019_12_31).
 
 
 % Text
@@ -122,13 +122,13 @@ date_split(d2017_02_03, 2017, 2, 3).
 date(d2017_12_31).
 date_split(d2017_12_31, 2017, 12, 31).
 
-%year(2018).
-%date(d2018_12_31).
-%date_split(d2018_12_31, 2018, 12, 31).
+year(2018).
+date(d2018_12_31).
+date_split(d2018_12_31, 2018, 12, 31).
 
-%year(2019).
-%date(d2019_12_31).
-%date_split(d2019_12_31, 2019, 12, 31).
+year(2019).
+date(d2019_12_31).
+date_split(d2019_12_31, 2019, 12, 31).
 
 payment_(alice_is_paid_s63_f_2_A_pos).
 patient_(alice_is_paid_s63_f_2_A_pos,alice_s63_f_2_A_pos).
@@ -142,15 +142,15 @@ blindness_(alice_is_blind_s63_f_2_A_pos).
 agent_(alice_is_blind_s63_f_2_A_pos,alice_s63_f_2_A_pos).
 start_(alice_is_blind_s63_f_2_A_pos,d2016_03_20).
 
-%blindness_(alice_is_blind).
-%agent_(alice_is_blind,alice).
-%start_(alice_is_blind,"2016_01_01").
+blindness_(alice_is_blind).
+agent_(alice_is_blind,alice).
+start_(alice_is_blind,d2016_01_01).
 %pos: s63_f_2_A(alice,2017),s63_f_2_A(alice,2016)
 %neg: s63_f_2_A(alice,2015)
 
-%blindness_(bob_is_blind).
-%agent_(bob_is_blind,bob).
-%start_(bob_is_blind,"2018_01_01").
+blindness_(bob_is_blind).
+agent_(bob_is_blind,bob).
+start_(bob_is_blind,d2018_01_01).
 %pos: s63_f_2_A(bob,2018),s63_f_2_A(bob,2019)
 %neg: s63_f_2_A(bob,2015),s63_f_2_A(bob,2017),s63_f_2_A(bob,2016)
 
@@ -160,3 +160,5 @@ start_(alice_is_blind_s63_f_2_A_pos,d2016_03_20).
 
 
 %aba_asp('./experiments/s63_f_2_A_learning.bk',[s63_f_2_A(alice_s63_f_2_A_pos,2017)],[s63_f_2_A(bob_s63_f_2_A_neg,2017)])
+
+%aba_asp('./experiments/s63_f_2_A_learning.bk', [s63_f_2_A(alice,2017),s63_f_2_A(alice,2016),s63_f_2_A(bob,2018),s63_f_2_A(bob,2019),s63_f_2_A(alice_s63_f_2_A_neg,2015), s63_f_2_A(alice_s63_f_2_A_neg,2017), s63_f_2_A(alice_s63_f_2_A_neg,2016), s63_f_2_A(alice_s63_f_2_A_neg,2018), s63_f_2_A(alice_s63_f_2_A_neg,2019), s63_f_2_A(alice_s63_f_2_A_pos,2016), s63_f_2_A(alice_s63_f_2_A_pos,2017), s63_f_2_A(alice_s63_f_2_A_pos,2018), s63_f_2_A(alice_s63_f_2_A_pos,2019)], [s63_f_2_A(bob_s63_f_2_A_neg,2015), s63_f_2_A(bob_s63_f_2_A_neg,2017), s63_f_2_A(bob_s63_f_2_A_neg,2016), s63_f_2_A(bob_s63_f_2_A_neg,2018), s63_f_2_A(bob_s63_f_2_A_neg,2019), s63_f_2_A(alice_s63_f_2_A_pos,2015), s63_f_2_A(bob_s63_f_2_A_pos,2015), s63_f_2_A(bob_s63_f_2_A_pos,2017), s63_f_2_A(bob_s63_f_2_A_pos,2016), s63_f_2_A(bob_s63_f_2_A_pos,2018), s63_f_2_A(bob_s63_f_2_A_pos,2019),s63_f_2_A(bob,2015),s63_f_2_A(bob,2017),s63_f_2_A(bob,2016),s63_f_2_A(alice,2015)]).

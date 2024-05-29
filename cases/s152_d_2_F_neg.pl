@@ -39,5 +39,5 @@ agent_(alice_and_charlie_s152_d_2_F_neg,charlie_s152_d_2_F_neg).
 start_(alice_and_charlie_s152_d_2_F_neg,d1992_10_12).
 
 % Test
-:- \+ s152_d_2_F(alice_s152_d_2_F_neg,bob_s152_d_2_F_neg,charlie_s152_d_2_F_neg,d2014_04_15,"2100-01-01").
+:- \+ s152_d_2_F(alice_s152_d_2_F_neg,bob_s152_d_2_F_neg,charlie_s152_d_2_F_neg,d2014_04_15,d2100_01_01).
 :- halt.

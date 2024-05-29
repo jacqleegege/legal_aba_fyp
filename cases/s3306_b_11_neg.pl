@@ -19,7 +19,7 @@ date(d2017_12_31).
 date_split(d2017_12_31, 2017, 12, 31).
 
 finance(3200).
-medium("kind").
+medium(kind).
 
 service_(alice_employer_s3306_b_11_neg).
 patient_(alice_employer_s3306_b_11_neg,alice_s3306_b_11_neg).
@@ -32,8 +32,8 @@ patient_(alice_pays_s3306_b_11_neg,bob_s3306_b_11_neg).
 start_(alice_pays_s3306_b_11_neg,d2017_09_02).
 purpose_(alice_pays_s3306_b_11_neg,alice_employer_s3306_b_11_neg).
 amount_(alice_pays_s3306_b_11_neg,3200).
-means_(alice_pays_s3306_b_11_neg,"kind").
+means_(alice_pays_s3306_b_11_neg,kind).
 
 % Test
-:- \+ s3306_b_11(alice_pays_s3306_b_11_neg,alice_employer_s3306_b_11_neg,"kind").
+:- \+ s3306_b_11(alice_pays_s3306_b_11_neg,alice_employer_s3306_b_11_neg,kind).
 :- halt.

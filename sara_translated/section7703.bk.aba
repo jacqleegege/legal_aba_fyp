@@ -112,9 +112,9 @@ s7703_a_2(Taxp,Spouse,Marriage,S19,Taxy) :-
 	is_before(Divorce_time,Last_day_year).
 
 s7703_a_2_agent(S19) :-
-	agent_(S19,"decree of divorce").
+	agent_(S19,decree_of_divorce).
 s7703_a_2_agent(S19) :-
-	agent_(S19,"decree of separate maintenance").
+	agent_(S19,decree_of_separate_maintenance).
 
 
 %(b) Certain married individuals living apart

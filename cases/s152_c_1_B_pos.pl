@@ -41,5 +41,5 @@ start_(alice_and_bob_s152_c_1_B_pos,d2015_09_01).
 end_(alice_and_bob_s152_c_1_B_pos,d2019_11_03).
 
 % Test
-:- s152_c_1_B(bob_s152_c_1_B_pos,home_s152_c_1_B_pos,alice_s152_c_1_B_pos,d2015_09_01,"2019-11-03",2016).
+:- s152_c_1_B(bob_s152_c_1_B_pos,home_s152_c_1_B_pos,alice_s152_c_1_B_pos,d2015_09_01,d2019_11_03,2016).
 :- halt.

@@ -51,7 +51,7 @@ amount_(alice_pays_s3306_b_10_B_pos,12980).
 means_(alice_pays_s3306_b_10_B_pos,disability_plan_s3306_b_10_B_pos).
 plan_(disability_plan_s3306_b_10_B_pos).
 agent_(disability_plan_s3306_b_10_B_pos,alice_s3306_b_10_B_pos).
-purpose_(disability_plan_s3306_b_10_B_pos,"make provisions for employees or dependents").
+purpose_(disability_plan_s3306_b_10_B_pos,make_provisions_for_employees_or_dependents).
 
 
 % Test

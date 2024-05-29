@@ -61,7 +61,7 @@ marriage_(bob_and_charlie_s152_c_1_pos).
 agent_(bob_and_charlie_s152_c_1_pos,bob_s152_c_1_pos).
 agent_(bob_and_charlie_s152_c_1_pos,charlie_s152_c_1_pos).
 start_(bob_and_charlie_s152_c_1_pos,d2018_10_23).
-s152_c_2(bob_s152_c_1_pos,alice_s152_c_1_pos,d2015_01_01,"2020-12-31").
+s152_c_2(bob_s152_c_1_pos,alice_s152_c_1_pos,d2015_01_01,d2020_12_31).
 s152_c_3(bob_s152_c_1_pos,alice_s152_c_1_pos,Year) :- between(2015,2020,Year).
 
 % Test

@@ -35,7 +35,7 @@ payment_(alice_pays_retirement_s3306_b_2_C_pos).
 agent_(alice_pays_retirement_s3306_b_2_C_pos,alice_s3306_b_2_C_pos).
 patient_(alice_pays_retirement_s3306_b_2_C_pos,retirement_fund_s3306_b_2_C_pos).
 plan_(retirement_fund_s3306_b_2_C_pos).
-purpose_(retirement_fund_s3306_b_2_C_pos,"make provisions for employees in case of retirement").
+purpose_(retirement_fund_s3306_b_2_C_pos,make_provisions_for_employees_in_case_of_retirement).
 beneficiary_(retirement_fund_s3306_b_2_C_pos,bob_s3306_b_2_C_pos).
 start_(alice_pays_retirement_s3306_b_2_C_pos,d2017_01_01).
 end_(alice_pays_retirement_s3306_b_2_C_pos,d2017_12_31).
@@ -44,7 +44,7 @@ payment_(alice_pays_insurance_s3306_b_2_C_pos).
 agent_(alice_pays_insurance_s3306_b_2_C_pos,alice_s3306_b_2_C_pos).
 patient_(alice_pays_insurance_s3306_b_2_C_pos,life_insurance_fund_s3306_b_2_C_pos).
 plan_(life_insurance_fund_s3306_b_2_C_pos).
-purpose_(life_insurance_fund_s3306_b_2_C_pos,"make provisions for employees in case of death").
+purpose_(life_insurance_fund_s3306_b_2_C_pos,make_provisions_for_employees_in_case_of_death).
 beneficiary_(life_insurance_fund_s3306_b_2_C_pos,bob_s3306_b_2_C_pos).
 start_(alice_pays_insurance_s3306_b_2_C_pos,d2017_01_01).
 end_(alice_pays_insurance_s3306_b_2_C_pos,d2017_12_31).

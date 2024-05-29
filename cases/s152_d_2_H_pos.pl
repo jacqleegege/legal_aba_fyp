@@ -33,5 +33,5 @@ start_(alice_and_bob_s152_d_2_H_pos,d2014_04_15).
 patient_(alice_and_bob_s152_d_2_H_pos,home_s152_d_2_H_pos).
 
 % Test
-:- s152_d_2_H(alice_s152_d_2_H_pos,bob_s152_d_2_H_pos,2018,home_s152_d_2_H_pos,d2014_04_15,"2100-01-01").
+:- s152_d_2_H(alice_s152_d_2_H_pos,bob_s152_d_2_H_pos,2018,home_s152_d_2_H_pos,d2014_04_15,d2100_01_01).
 :- halt.

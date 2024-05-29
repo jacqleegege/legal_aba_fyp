@@ -35,10 +35,10 @@ date_split(d2019_01_01, 2019, 1, 1).
 date(d2019_12_31).
 date_split(d2019_12_31, 2019, 12, 31).
 
-s3306_b(3200,3200,bob_works_s3306_a_1_A_neg,alice_s3306_a_1_A_neg,bob_s3306_a_1_A_neg,alice_s3306_a_1_A_neg,bob_s3306_a_1_A_neg,"cash").
+s3306_b(3200,3200,bob_works_s3306_a_1_A_neg,alice_s3306_a_1_A_neg,bob_s3306_a_1_A_neg,alice_s3306_a_1_A_neg,bob_s3306_a_1_A_neg,cash).
 start_(bob_works_s3306_a_1_A_neg,d2017_02_01).
 end_(bob_works_s3306_a_1_A_neg,d2017_09_02).
-s3306_b(4500,4500,alice_works_s3306_a_1_A_neg,bob_s3306_a_1_A_neg,alice_s3306_a_1_A_neg,bob_s3306_a_1_A_neg,alice_s3306_a_1_A_neg,"cash").
+s3306_b(4500,4500,alice_works_s3306_a_1_A_neg,bob_s3306_a_1_A_neg,alice_s3306_a_1_A_neg,bob_s3306_a_1_A_neg,alice_s3306_a_1_A_neg,cash).
 start_(alice_works_s3306_a_1_A_neg,d2017_04_01).
 end_(alice_works_s3306_a_1_A_neg,d2018_09_02).
 

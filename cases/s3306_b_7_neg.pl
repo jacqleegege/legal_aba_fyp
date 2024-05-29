@@ -29,18 +29,18 @@ date(d2017_12_31).
 date_split(d2017_12_31, 2017, 12, 31).
 
 finance(323).
-medium("cash").
+medium(cash).
 
 business_(alice_runs_a_factory_s3306_b_7_neg).
 agent_(alice_runs_a_factory_s3306_b_7_neg,alice_s3306_b_7_neg).
-type_(alice_runs_a_factory_s3306_b_7_neg,"manufacturing").
+type_(alice_runs_a_factory_s3306_b_7_neg,manufacturing).
 start_(alice_runs_a_factory_s3306_b_7_neg,d2016_02_01).
 service_(alice_employer_s3306_b_7_neg).
 patient_(alice_employer_s3306_b_7_neg,alice_s3306_b_7_neg).
 agent_(alice_employer_s3306_b_7_neg,bob_s3306_b_7_neg).
 start_(alice_employer_s3306_b_7_neg,d2017_06_01).
 end_(alice_employer_s3306_b_7_neg,d2017_08_31).
-type_(alice_employer_s3306_b_7_neg,"painting Alice's house").
+type_(alice_employer_s3306_b_7_neg,painting_Alices_house).
 payment_(alice_pays_bob_s3306_b_7_neg).
 agent_(alice_pays_bob_s3306_b_7_neg,alice_s3306_b_7_neg).
 patient_(alice_pays_bob_s3306_b_7_neg,bob_s3306_b_7_neg).
@@ -48,11 +48,11 @@ start_(alice_pays_bob_s3306_b_7_neg,d2017_10_02).
 end_(alice_pays_bob_s3306_b_7_neg,d2017_10_02).
 purpose_(alice_pays_bob_s3306_b_7_neg,alice_employer_s3306_b_7_neg).
 amount_(alice_pays_bob_s3306_b_7_neg,323).
-means_(alice_pays_bob_s3306_b_7_neg,"cash").
+means_(alice_pays_bob_s3306_b_7_neg,cash).
 s3306_c(alice_employer_s3306_b_7_neg,alice_s3306_b_7_neg,bob_s3306_b_7_neg,Day,2017) :-
     is_before(d2017_06_01,Day),
     is_before(Day,d2017_08_31).
 
 % Test
-:- \+ s3306_b_7(alice_pays_bob_s3306_b_7_neg,alice_employer_s3306_b_7_neg,alice_s3306_b_7_neg,bob_s3306_b_7_neg,"cash","manufacturing").
+:- \+ s3306_b_7(alice_pays_bob_s3306_b_7_neg,alice_employer_s3306_b_7_neg,alice_s3306_b_7_neg,bob_s3306_b_7_neg,cash,manufacturing).
 :- halt.

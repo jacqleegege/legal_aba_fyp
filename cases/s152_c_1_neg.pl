@@ -51,7 +51,7 @@ marriage_(bob_and_charlie_s152_c_1_neg).
 agent_(bob_and_charlie_s152_c_1_neg,bob_s152_c_1_neg).
 agent_(bob_and_charlie_s152_c_1_neg,charlie_s152_c_1_neg).
 start_(bob_and_charlie_s152_c_1_neg,d2018_10_23).
-s152_c_2(bob_s152_c_1_neg,alice_s152_c_1_neg,d2015_01_01,"2020-12-31").
+s152_c_2(bob_s152_c_1_neg,alice_s152_c_1_neg,d2015_01_01,d2020_12_31).
 
 % Test
 :- \+ s152_c_1(bob_s152_c_1_neg,alice_s152_c_1_neg,2019).

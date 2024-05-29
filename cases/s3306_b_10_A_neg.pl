@@ -37,7 +37,7 @@ patient_(alice_lays_bob_off_s3306_b_10_A_neg,alice_employer_s3306_b_10_A_neg).
 retirement_(bob_retires_s3306_b_10_A_neg).
 agent_(bob_retires_s3306_b_10_A_neg,bob_s3306_b_10_A_neg).
 start_(bob_retires_s3306_b_10_A_neg,d2019_10_10).
-reason_(bob_retires_s3306_b_10_A_neg,"reached age 65").
+reason_(bob_retires_s3306_b_10_A_neg,reached_age_65).
 payment_(alice_pays_s3306_b_10_A_neg).
 agent_(alice_pays_s3306_b_10_A_neg,alice_s3306_b_10_A_neg).
 patient_(alice_pays_s3306_b_10_A_neg,bob_s3306_b_10_A_neg).

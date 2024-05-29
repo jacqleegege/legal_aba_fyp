@@ -18,8 +18,8 @@ date_split(d2017_09_02, 2017, 9, 2).
 date(d2017_12_31).
 date_split(d2017_12_31, 2017, 12, 31).
 
-location_name("caracas, venezuela").
-country_name("venezuela").
+location_name(caracas__venezuela).
+country_name(venezuela).
 
 finance(2300).
 
@@ -28,9 +28,9 @@ patient_(alice_employer_s3306_c_1_A_i_neg,alice_s3306_c_1_A_i_neg).
 agent_(alice_employer_s3306_c_1_A_i_neg,bob_s3306_c_1_A_i_neg).
 start_(alice_employer_s3306_c_1_A_i_neg,d2017_02_01).
 end_(alice_employer_s3306_c_1_A_i_neg,d2017_09_02).
-location_(alice_employer_s3306_c_1_A_i_neg,"caracas, venezuela").
-country_("caracas, venezuela", "venezuela").
-purpose_(alice_employer_s3306_c_1_A_i_neg,"agricultural labor").
+location_(alice_employer_s3306_c_1_A_i_neg,caracas__venezuela).
+country_(caracas__venezuela, venezuela).
+purpose_(alice_employer_s3306_c_1_A_i_neg,agricultural_labor).
 payment_(alice_pays_s3306_c_1_A_i_neg).
 agent_(alice_pays_s3306_c_1_A_i_neg,alice_s3306_c_1_A_i_neg).
 patient_(alice_pays_s3306_c_1_A_i_neg,bob_s3306_c_1_A_i_neg).
@@ -39,10 +39,10 @@ purpose_(alice_pays_s3306_c_1_A_i_neg,alice_employer_s3306_c_1_A_i_neg).
 amount_(alice_pays_s3306_c_1_A_i_neg,2300).
 citizenship_(alice_is_american_s3306_c_1_A_i_neg).
 agent_(alice_is_american_s3306_c_1_A_i_neg,alice_s3306_c_1_A_i_neg).
-patient_(alice_is_american_s3306_c_1_A_i_neg,"usa").
+patient_(alice_is_american_s3306_c_1_A_i_neg,usa).
 citizenship_(bob_is_american_s3306_c_1_A_i_neg).
 agent_(bob_is_american_s3306_c_1_A_i_neg,bob_s3306_c_1_A_i_neg).
-patient_(bob_is_american_s3306_c_1_A_i_neg,"usa").
+patient_(bob_is_american_s3306_c_1_A_i_neg,usa).
 
 % Test
 :- \+ s3306_c_1_A_i(alice_s3306_c_1_A_i_neg,2300,bob_s3306_c_1_A_i_neg,alice_employer_s3306_c_1_A_i_neg,2017).

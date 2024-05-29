@@ -42,14 +42,14 @@ patient_(alice_employer_s3306_a_1_pos,alice_s3306_a_1_pos).
 agent_(alice_employer_s3306_a_1_pos,bob_s3306_a_1_pos).
 start_(alice_employer_s3306_a_1_pos,d2017_02_01).
 end_(alice_employer_s3306_a_1_pos,d2017_09_02).
-purpose_(alice_employer_s3306_a_1_pos,"domestic service").
+purpose_(alice_employer_s3306_a_1_pos,domestic_service).
 payment_(alice_pays_s3306_a_1_pos).
 agent_(alice_pays_s3306_a_1_pos,alice_s3306_a_1_pos).
 patient_(alice_pays_s3306_a_1_pos,bob_s3306_a_1_pos).
 start_(alice_pays_s3306_a_1_pos,d2019_09_02).
 purpose_(alice_pays_s3306_a_1_pos,alice_employer_s3306_a_1_pos).
 amount_(alice_pays_s3306_a_1_pos,3200).
-s3306_b(3200,alice_pays_s3306_a_1_pos,alice_employer_s3306_a_1_pos,alice_s3306_a_1_pos,bob_s3306_a_1_pos,alice_s3306_a_1_pos,bob_s3306_a_1_pos,"cash").
+s3306_b(3200,alice_pays_s3306_a_1_pos,alice_employer_s3306_a_1_pos,alice_s3306_a_1_pos,bob_s3306_a_1_pos,alice_s3306_a_1_pos,bob_s3306_a_1_pos,cash).
 service_(bob_employer_s3306_a_1_pos).
 patient_(bob_employer_s3306_a_1_pos,bob_s3306_a_1_pos).
 agent_(bob_employer_s3306_a_1_pos,alice_s3306_a_1_pos).
@@ -62,7 +62,7 @@ start_(bob_pays_s3306_a_1_pos,d2018_09_02).
 end_(bob_pays_s3306_a_1_pos,d2018_09_02).
 purpose_(bob_pays_s3306_a_1_pos,bob_employer_s3306_a_1_pos).
 amount_(bob_pays_s3306_a_1_pos,4500).
-s3306_b(4500,bob_pays_s3306_a_1_pos,bob_employer_s3306_a_1_pos,bob_s3306_a_1_pos,alice_s3306_a_1_pos,bob_s3306_a_1_pos,alice_s3306_a_1_pos,"cash").
+s3306_b(4500,bob_pays_s3306_a_1_pos,bob_employer_s3306_a_1_pos,bob_s3306_a_1_pos,alice_s3306_a_1_pos,bob_s3306_a_1_pos,alice_s3306_a_1_pos,cash).
 
 % Test
 :- s3306_a_1(bob_s3306_a_1_pos,2018).

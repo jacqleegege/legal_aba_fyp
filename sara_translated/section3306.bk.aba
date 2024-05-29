@@ -15,7 +15,7 @@ s3306_a(Employer,Caly) :-
 
 %(1) In general
 
-%The term "employer" means, with respect to any calendar year, any person who-
+%The term employer means, with respect to any calendar year, any person who-
 s3306_a_1(Employer,Caly) :-
 	s3306_a_1_A(Employer,Caly,_).
 s3306_a_1(Employer,Caly) :-
@@ -29,8 +29,8 @@ s3306_a_1_is_wages(Person, Year, Remuneration, Wages) :-
     is_before(Time,Last_day_year),
     first_day_year(Year,First_day_year),
     is_before(First_day_year,Time),
-    not_purpose_(Service, "agricultural labor"),
-	not_purpose_(Service, "domestic service").
+    not_purpose_(Service, agricultural_labor),
+	not_purpose_(Service, domestic_service).
 
 % s3306_a_1_A(Employee,Caly,Wages) :-
 % 	year(Caly),person(Employee),
@@ -46,10 +46,10 @@ s3306_a_1_A_wages(Employee,Remuneration,Caly,Amount):-
 %(B) on each of some 10 days during the calendar year or during the preceding calendar year, each day being in a different calendar week, employed at least one individual in employment for some portion of the day.
 s3306_a_1_is_day_of_employment(Person, Employee, Day) :-
 	s3306_c(Service,Person,Employee,Day,_),
-    not_purpose_(Service,"agricultural labor"),
-    not_purpose_(Service,"domestic service"),
-    not_type_(Service,"agricultural labor"),
-    not_type_(Service,"domestic service").
+    not_purpose_(Service,agricultural_labor),
+    not_purpose_(Service,domestic_service),
+    not_type_(Service,agricultural_labor),
+    not_type_(Service,domestic_service).
 
 % s3306_a_1_B(Employer,Caly) :-
 % 	person(Employer),
@@ -72,7 +72,7 @@ s3306_a_1_is_day_of_employment(Person, Employee, Day) :-
 
 %(2) Agricultural labor
 
-%In the case of agricultural labor, the term "employer" means, with respect to any calendar year, any person who-
+%In the case of agricultural labor, the term employer means, with respect to any calendar year, any person who-
 s3306_a_2(Employer,Caly) :-
 	s3306_a_2_A(Employer,Caly,_,_).
 s3306_a_2(Employer,Caly) :-
@@ -86,7 +86,7 @@ s3306_a_2_is_wages(Person, Year, Remuneration, Wages, Service) :-
     is_before(Time,Last_day_year),
     first_day_year(Year,First_day_year),
     is_before(First_day_year,Time),
-    purpose_(Service, "agricultural labor").
+    purpose_(Service, agricultural_labor).
 
 % s3306_a_2_A(Employer,Caly,Wages,Service) :-
 	% year(Caly),person(Employer),
@@ -108,10 +108,10 @@ s3306_a_2_A_wages(Employer, Caly,Amount):-
 
 s3306_a_2_is_day_of_employment_labor(Employee,Service,Day,Person):-
 	s3306_c(Service,Person,Employee,Day,_),
-	purpose_(Service,"agricultural labor").
+	purpose_(Service,agricultural_labor).
 s3306_a_2_is_day_of_employment_labor(Employee,Service,Day,Person):-
 	s3306_c(Service,Person,Employee,Day,_),
-	type_(Service,"agricultural labor").
+	type_(Service,agricultural_labor).
 
 
 % s3306_a_2_B(Employer,Caly) :-
@@ -135,7 +135,7 @@ s3306_a_2_is_day_of_employment_labor(Employee,Service,Day,Person):-
 
 %(3) Domestic service
 
-%In the case of domestic service in a private home, local college club, or local chapter of a college fraternity or sorority, the term "employer" means, with respect to any calendar year, any person who during any calendar quarter in the calendar year or the preceding calendar year paid wages in cash of $1,000 or more for such service.
+%In the case of domestic service in a private home, local college club, or local chapter of a college fraternity or sorority, the term employer means, with respect to any calendar year, any person who during any calendar quarter in the calendar year or the preceding calendar year paid wages in cash of $1,000 or more for such service.
 s3306_a_3_is_wages(Person, Year, Remuneration, Service, Wages) :-
     s3306_b(Wages,Remuneration,Service,Person,_,_,_,_),
     start_(Remuneration,Time),
@@ -144,12 +144,12 @@ s3306_a_3_is_wages(Person, Year, Remuneration, Service, Wages) :-
     first_day_year(Year,First_day_year),
     is_before(First_day_year,Time),
 	s3306_a_3_is_wages_means(Remuneration),
-	purpose_(Service, "domestic service").
+	purpose_(Service, domestic_service).
 
 s3306_a_3_is_wages_means(Remuneration):-
 	payment_(Remuneration),not_means_(Remuneration,_).
 s3306_a_3_is_wages_means(Remuneration):-
-	means_(Remuneration,"cash").	
+	means_(Remuneration,cash).	
 
 % s3306_a_3(Employer,Wages,Caly) :-
 	% person(Employer),year(Caly),
@@ -170,7 +170,7 @@ s3306_a_2_A_wages(Employer, Caly,Amount):-
 
 %(b) Wages
 
-%For purposes of this chapter, the term "wages" means all remuneration for employment, including the cash value of all remuneration (including benefits) paid in any medium other than cash; except that such term shall not include-
+%For purposes of this chapter, the term wages means all remuneration for employment, including the cash value of all remuneration (including benefits) paid in any medium other than cash; except that such term shall not include-
 s3306_b(Wages,Remuneration,Employment,Payer,Payee,Employer,Employee,Medium) :-
 	payment_(Remuneration),
     s3306_b_means(Remuneration,Medium),
@@ -241,13 +241,13 @@ s3306_b_2_patient(Remuneration,Plan,Payee):-
 
 %(A) sickness or accident disability, or
 s3306_b_2_A(Plan) :-
-	purpose_(Plan,"make provisions for employees in case of sickness").
+	purpose_(Plan,make_provisions_for_employees_in_case_of_sickness).
 s3306_b_2_A(Plan) :-
-	purpose_(Plan,"make provisions for employees in case of accident disability").
+	purpose_(Plan,make_provisions_for_employees_in_case_of_accident_disability).
 
 %(C) death;
 s3306_b_2_C(Plan) :-
-	purpose_(Plan,"make provisions for employees in case of death").
+	purpose_(Plan,make_provisions_for_employees_in_case_of_death).
 
 %(7) remuneration paid in any medium other than cash to an employee for service not in the course of the employer's trade or business;
 s3306_b_7(Remuneration,Service,Employer,Employee,Medium,S92) :-
@@ -261,7 +261,7 @@ s3306_b_7(Remuneration,Service,Employer,Employee,Medium,S92) :-
 	not_s92_equals_service_type(Service,S92).
 
 medium_is_cash(Medium):-
-	medium(Medium),Medium="cash".
+	medium(Medium),Medium=cash.
 s92_equals_service_type(Service,S92):-
 	type_(Service,Type_service),
 	S92=Type_service.
@@ -310,14 +310,14 @@ s3306_b_10_B(Employer,Remuneration,Plan) :-
 	means_(Remuneration,Plan),
 	plan_(Plan),
 	agent_(Plan,Employer),
-    purpose_(Plan,"make provisions for employees or dependents").
+    purpose_(Plan,make_provisions_for_employees_or_dependents).
 
 %other than any such payment or series of payments which would have been paid if the employee's employment relationship had not been so terminated;
 
 %(11) remuneration for agricultural labor paid in any medium other than cash;
 s3306_b_11(Remuneration,Service,Medium) :-
     service_(Service),
-	purpose_(Service,"agricultural labor"),
+	purpose_(Service,agricultural_labor),
 	patient_(Service,Employer),
 	agent_(Service,Employee),
     agent_(Remuneration,Employer),
@@ -350,7 +350,7 @@ s3306_b_15_end(Emar,Time_death):-
 
 %(c) Employment
 
-%For purposes of this chapter, the term "employment" means any service, of whatever nature,
+%For purposes of this chapter, the term employment means any service, of whatever nature,
 
 s3306_c(Service,Employer,Employee,Workday,Caly) :-
 	service_(Service),
@@ -385,15 +385,15 @@ s3306_c_A_location(Service,Geographical_location):-
 	% by default, assume it's in the US
 	service_(Service),
 	not_location_(Service,_),
-	Geographical_location = "usa".
+	Geographical_location = usa.
 
 s3306_c_A_country(Geographical_location,Country):-
 	country_(Geographical_location,Country),
-	Country="usa".
+	Country=usa.
 s3306_c_A_country(Geographical_location,Country):-
 	country_name(Country),
 	not_country_(Geographical_location,_),
-	Geographical_location="usa".
+	Geographical_location=usa.
 
 %(B) performed outside the United States (except in a contiguous country with which the United States has an agreement relating to unemployment compensation) by a citizen of the United States as an employee of an American employer, except-
 s3306_c_B(Service,Employer,Employee,Location) :-
@@ -405,7 +405,7 @@ s3306_c_B(Service,Employer,Employee,Location) :-
     agent_(Employer_is_american_employer, Employer),
 	citizenship_(Employee_is_american),
 	agent_(Employee_is_american,Employee),
-    patient_(Employee_is_american,"usa").
+    patient_(Employee_is_american,usa).
 
 s3306_c_B_location(Location,Country):-
 	country_(Location,Country),
@@ -417,25 +417,25 @@ s3306_c_B_location(Location,Country):-
 
 country_equals_usa(Country):-
 	country_name(Country),
-	Country = "usa".
+	Country = usa.
 
 location_equals_usa(Location):-
 	location_name(Location),
-	Location = "usa".
+	Location = usa.
 
 s3306_c_B_agreement(Location):-
 	unemployment_compensation_agreement_(Agreement),
-	agent_(Agreement,"usa"),
+	agent_(Agreement,usa),
 	agent_(Agreement,Location).
 
 %(1) agricultural labor unless-
 s3306_c_1(Service,Caly) :-
 	year(Caly),
-	purpose_(Service,"agricultural labor"),
+	purpose_(Service,agricultural_labor),
 	not_s3306_c_1_A_and_B(Service,Caly).
 s3306_c_1(Service,Caly) :-
 	year(Caly),
-	type_(Service,"agricultural labor"),
+	type_(Service,agricultural_labor),
 	not_s3306_c_1_A_and_B(Service,Caly).
 
 s3306_c_1_A_and_B(Service,Caly):-
@@ -476,14 +476,14 @@ s3306_c_1_A(Service,Employer,Caly) :-
     % Remuneration > 19999.
 
 s3306_c_1_A_i_service(Service_):-
-	purpose_(Service_,"agricultural labor").
+	purpose_(Service_,agricultural_labor).
 s3306_c_1_A_i_service(Service_):-
-	type_(Service_,"agricultural labor").
+	type_(Service_,agricultural_labor).
 
 s3306_c_1_A_i_means(Payment):-
 	payment_(Payment),not_means_(Payment,_).
 s3306_c_1_A_i_means(Payment):-
-	means_(Payment,"cash").
+	means_(Payment,cash).
 
 %(ii) on each of some 10 days during the calendar year or the preceding calendar year, each day being in a different calendar week, employed in agricultural labor (including labor performed by an alien referred to in subparagraph (B)) for some portion of the day (whether or not at the same moment of time) 5 or more individuals; and
 s3306_c_1_A_ii(Employer,Caly) :-
@@ -494,24 +494,24 @@ s3306_c_1_B(Service,Employee) :-
 	service_(Service),person(Employee),not_s3306_c_1_B_not(Service,Employee).
 
 s3306_c_1_B_not(Service,Employee):-
-	type_(Service,"agricultural labor"),
+	type_(Service,agricultural_labor),
 	citizenship_(Employee_citizenship),
 	agent_(Employee_citizenship,Employee),
 	patient_(Employee_citizenship,Country),
 	not_country_equals_usa(Country),
 	migration_(Employee_migration),
 	agent_(Employee_migration,Employee),
-	destination_(Employee_migration,"usa"),
-	purpose_(Employee_migration,"agricultural labor").
+	destination_(Employee_migration,usa),
+	purpose_(Employee_migration,agricultural_labor).
 s3306_c_1_B_not(Service,Employee):-
-	purpose_(Service,"agricultural labor"),
+	purpose_(Service,agricultural_labor),
 	agent_(Employee_citizenship,Employee),
 	patient_(Employee_citizenship,Country),
 	not_country_equals_usa(Country),
 	migration_(Employee_migration),
 	agent_(Employee_migration,Employee),
-	destination_(Employee_migration,"usa"),
-	purpose_(Employee_migration,"agricultural labor").
+	destination_(Employee_migration,usa),
+	purpose_(Employee_migration,agricultural_labor).
 
 %(2) domestic service in a private home, local college club, or local chapter of a college fraternity or sorority unless performed for a person who paid cash remuneration of $1,000 or more to individuals employed in such domestic service in any calendar quarter in the calendar year or the preceding calendar year;
 s3306_c_2(Service,Location,Caly) :-
@@ -523,18 +523,18 @@ s3306_c_2(Service,Location,Caly) :-
 	not_s3306_a_3(Person,_,Caly).
 
 s3306_c_2_service(Service):-
-	type_(Service,"domestic service").
+	type_(Service,domestic_service).
 s3306_c_2_service(Service):-
-	purpose_(Service,"domestic service").
+	purpose_(Service,domestic_service).
 
 s3306_c_2_location(Location):-
-	Location="private home".
+	Location=private_home.
 s3306_c_2_location(Location):-
-	Location="local college club".
+	Location=local_college_club.
 s3306_c_2_location(Location):-
-	Location="local chapter of a college fraternity".
+	Location=local_chapter_of_a_college_fraternity.
 s3306_c_2_location(Location):-
-	Location="local chapter of a college sorority".
+	Location=local_chapter_of_a_college_sorority.
 
 % (5) 
 s3306_c_5(Service,Employer,Employee,Workday) :-
@@ -585,12 +585,12 @@ s3306_c_5_B(Service,Employee,Employer,Workday) :-
 %(6) service performed in the employ of the United States Government
 s3306_c_6(Service) :-
 	patient_(Service,Employer),
-	Employer="united states government".
+	Employer=united_states_government.
 
 %(7) service performed in the employ of a State, or any political subdivision thereof.
 s3306_c_7(Service,Employer) :-
 	patient_(Service,Employer),
-	atom_prefix(Employer,"state of ").
+	atom_prefix(Employer,state_of_).
 
 %(10)
 s3306_c_10(Service,Employer,Employee,Workday) :-
@@ -681,12 +681,12 @@ s3306_c_11(Service,Employer) :-
     service_(Service),
 	patient_(Service,Employer),
 	sub_atom(Employer,_,11,0,Suffix),
-	Suffix=" government",
+	Suffix=_government,
 	not_employer_is_usa_government(Service,Employer).
 
 employer_is_usa_government(Service,Employer):-
 	patient_(Service,Employer),
-	Employer="united states government".
+	Employer=united_states_government.
 
 %(13) service performed as a student nurse in the employ of a hospital or a nurses' training school by an individual who is enrolled and is regularly attending classes in a nurses' training school;
 s3306_c_13(Service,Employer,Employee,Workday) :-

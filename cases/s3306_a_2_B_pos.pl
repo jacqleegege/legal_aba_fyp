@@ -130,7 +130,7 @@ s3306_c(alice_employer_2017-s3306_a_2_B_pos12-03,alice_s3306_a_2_B_pos,emily_s33
 s3306_c(alice_employer_2017-s3306_a_2_B_pos12-03,alice_s3306_a_2_B_pos,george_s3306_a_2_B_pos,d2017_12_03,2017).
 
 % s3306_c(Service_event,alice,Employee,Day,_) :-
-%     member(Day, [d2017_01_24,"2017-02-04","2017-03-03","2017-03-19","2017-04-02","2017-05-09","2017-10-15","2017-10-25","2017-11-08","2017-11-22","2017-12-01","2017-12-03"]),
+%     member(Day, [d2017_01_24,d2017_02_04,d2017_03_03,d2017_03_19,d2017_04_02,d2017_05_09,d2017_10_15,d2017_10_25,d2017_11_08,d2017_11_22,d2017_12_01,d2017_12_03]),
 %     (
 %         (
 %             Day == d2017_01_24,
@@ -181,19 +181,19 @@ s3306_c(alice_employer_2017-s3306_a_2_B_pos12-03,alice_s3306_a_2_B_pos,george_s3
 %             member(Employee, [bob,cameron,dan,emily,george])
 %         )
 %     ),
-%     atom_concat("alice_employer_",Day,Service_event).
-purpose_(alice_employer_2017-s3306_a_2_B_pos01-24,"agricultural labor").
-purpose_(alice_employer_2017-s3306_a_2_B_pos02-04,"agricultural labor").
-purpose_(alice_employer_2017-s3306_a_2_B_pos03-03,"agricultural labor").
-purpose_(alice_employer_2017-s3306_a_2_B_pos03-19,"agricultural labor").
-purpose_(alice_employer_2017-s3306_a_2_B_pos04-02,"agricultural labor").
-purpose_(alice_employer_2017-s3306_a_2_B_pos05-09,"agricultural labor").
-purpose_(alice_employer_2017-s3306_a_2_B_pos10-15,"agricultural labor").
-purpose_(alice_employer_2017-s3306_a_2_B_pos10-25,"agricultural labor").
-purpose_(alice_employer_2017-s3306_a_2_B_pos11-08,"agricultural labor").
-purpose_(alice_employer_2017-s3306_a_2_B_pos11-22,"agricultural labor").
-purpose_(alice_employer_2017-s3306_a_2_B_pos12-01,"agricultural labor").
-purpose_(alice_employer_2017-s3306_a_2_B_pos12-03,"agricultural labor"). % all that's mentioned here is agricultural labor
+%     atom_concat(alice_employer_,Day,Service_event).
+purpose_(alice_employer_2017-s3306_a_2_B_pos01-24,agricultural_labor).
+purpose_(alice_employer_2017-s3306_a_2_B_pos02-04,agricultural_labor).
+purpose_(alice_employer_2017-s3306_a_2_B_pos03-03,agricultural_labor).
+purpose_(alice_employer_2017-s3306_a_2_B_pos03-19,agricultural_labor).
+purpose_(alice_employer_2017-s3306_a_2_B_pos04-02,agricultural_labor).
+purpose_(alice_employer_2017-s3306_a_2_B_pos05-09,agricultural_labor).
+purpose_(alice_employer_2017-s3306_a_2_B_pos10-15,agricultural_labor).
+purpose_(alice_employer_2017-s3306_a_2_B_pos10-25,agricultural_labor).
+purpose_(alice_employer_2017-s3306_a_2_B_pos11-08,agricultural_labor).
+purpose_(alice_employer_2017-s3306_a_2_B_pos11-22,agricultural_labor).
+purpose_(alice_employer_2017-s3306_a_2_B_pos12-01,agricultural_labor).
+purpose_(alice_employer_2017-s3306_a_2_B_pos12-03,agricultural_labor). % all that's mentioned here is agricultural labor
 
 % Test
 :- s3306_a_2_B(alice_s3306_a_2_B_pos,2017).

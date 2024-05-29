@@ -40,7 +40,7 @@ amount_(alice_pays_bob_s3306_b_2_A_neg,45252).
 payment_(alice_pays_retirement_s3306_b_2_A_neg).
 agent_(alice_pays_retirement_s3306_b_2_A_neg,alice_s3306_b_2_A_neg).
 patient_(alice_pays_retirement_s3306_b_2_A_neg,retirement_fund_s3306_b_2_A_neg).
-purpose_(alice_pays_retirement_s3306_b_2_A_neg,"make provisions for employees in case of retirement").
+purpose_(alice_pays_retirement_s3306_b_2_A_neg,make_provisions_for_employees_in_case_of_retirement).
 plan_(retirement_fund_s3306_b_2_A_neg).
 beneficiary_(alice_pays_retirement_s3306_b_2_A_neg,bob_s3306_b_2_A_neg).
 start_(alice_pays_retirement_s3306_b_2_A_neg,d2017_01_01).
@@ -50,7 +50,7 @@ payment_(alice_pays_insurance_s3306_b_2_A_neg).
 agent_(alice_pays_insurance_s3306_b_2_A_neg,alice_s3306_b_2_A_neg).
 patient_(alice_pays_insurance_s3306_b_2_A_neg,health_insurance_fund_s3306_b_2_A_neg).
 plan_(health_insurance_fund_s3306_b_2_A_neg).
-purpose_(alice_pays_insurance_s3306_b_2_A_neg,"make provisions in case of sickness").
+purpose_(alice_pays_insurance_s3306_b_2_A_neg,make_provisions_in_case_of_sickness).
 beneficiary_(alice_pays_insurance_s3306_b_2_A_neg,charlie_s3306_b_2_A_neg).
 start_(alice_pays_insurance_s3306_b_2_A_neg,d2017_01_01).
 end_(alice_pays_insurance_s3306_b_2_A_neg,d2017_12_31).

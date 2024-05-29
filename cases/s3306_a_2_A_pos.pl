@@ -34,27 +34,27 @@ finance(4520).
 finance(6771).
 finance(6954).
 finance(6872).
-medium("cash").
+medium(cash).
 
 service_(alice_employer_bob_s3306_a_2_A_pos).
 patient_(alice_employer_bob_s3306_a_2_A_pos,alice_s3306_a_2_A_pos).
 agent_(alice_employer_bob_s3306_a_2_A_pos,bob_s3306_a_2_A_pos).
 start_(alice_employer_bob_s3306_a_2_A_pos,d2017_02_01).
 end_(alice_employer_bob_s3306_a_2_A_pos,d2017_09_02).
-purpose_(alice_employer_bob_s3306_a_2_A_pos,"agricultural labor").
+purpose_(alice_employer_bob_s3306_a_2_A_pos,agricultural_labor).
 payment_(alice_pays_bob_s3306_a_2_A_pos).
 agent_(alice_pays_bob_s3306_a_2_A_pos,alice_s3306_a_2_A_pos).
 patient_(alice_pays_bob_s3306_a_2_A_pos,bob_s3306_a_2_A_pos).
 start_(alice_pays_bob_s3306_a_2_A_pos,d2017_09_02).
 purpose_(alice_pays_bob_s3306_a_2_A_pos,alice_employer_bob_s3306_a_2_A_pos).
 amount_(alice_pays_bob_s3306_a_2_A_pos,6771).
-s3306_b(6771,alice_pays_bob_s3306_a_2_A_pos,alice_employer_bob_s3306_a_2_A_pos,alice_s3306_a_2_A_pos,bob_s3306_a_2_A_pos,alice_s3306_a_2_A_pos,bob_s3306_a_2_A_pos,"cash").
+s3306_b(6771,alice_pays_bob_s3306_a_2_A_pos,alice_employer_bob_s3306_a_2_A_pos,alice_s3306_a_2_A_pos,bob_s3306_a_2_A_pos,alice_s3306_a_2_A_pos,bob_s3306_a_2_A_pos,cash).
 service_(alice_employer_charlie_s3306_a_2_A_pos).
 patient_(alice_employer_charlie_s3306_a_2_A_pos,alice_s3306_a_2_A_pos).
 agent_(alice_employer_charlie_s3306_a_2_A_pos,charlie_s3306_a_2_A_pos).
 start_(alice_employer_charlie_s3306_a_2_A_pos,d2017_02_01).
 end_(alice_employer_charlie_s3306_a_2_A_pos,d2017_09_02).
-purpose_(alice_employer_charlie_s3306_a_2_A_pos,"agricultural labor").
+purpose_(alice_employer_charlie_s3306_a_2_A_pos,agricultural_labor).
 payment_(alice_pays_charlie_s3306_a_2_A_pos).
 agent_(alice_pays_charlie_s3306_a_2_A_pos,alice_s3306_a_2_A_pos).
 patient_(alice_pays_charlie_s3306_a_2_A_pos,charlie_s3306_a_2_A_pos).
@@ -67,7 +67,7 @@ patient_(alice_employer_dan_s3306_a_2_A_pos,alice_s3306_a_2_A_pos).
 agent_(alice_employer_dan_s3306_a_2_A_pos,dan_s3306_a_2_A_pos).
 start_(alice_employer_dan_s3306_a_2_A_pos,d2017_02_01).
 end_(alice_employer_dan_s3306_a_2_A_pos,d2017_09_02).
-purpose_(alice_employer_dan_s3306_a_2_A_pos,"agricultural labor").
+purpose_(alice_employer_dan_s3306_a_2_A_pos,agricultural_labor).
 payment_(alice_pays_dan_s3306_a_2_A_pos).
 agent_(alice_pays_dan_s3306_a_2_A_pos,alice_s3306_a_2_A_pos).
 patient_(alice_pays_dan_s3306_a_2_A_pos,dan_s3306_a_2_A_pos).
@@ -87,7 +87,7 @@ start_(bob_pays_s3306_a_2_A_pos,d2018_09_02).
 end_(bob_pays_s3306_a_2_A_pos,d2018_09_02).
 purpose_(bob_pays_s3306_a_2_A_pos,bob_employer_s3306_a_2_A_pos).
 amount_(bob_pays_s3306_a_2_A_pos,4520).
-s3306_b(4520,bob_pays_s3306_a_2_A_pos,bob_employer_s3306_a_2_A_pos,bob_s3306_a_2_A_pos,alice_s3306_a_2_A_pos,bob_s3306_a_2_A_pos,alice_s3306_a_2_A_pos,"cash").
+s3306_b(4520,bob_pays_s3306_a_2_A_pos,bob_employer_s3306_a_2_A_pos,bob_s3306_a_2_A_pos,alice_s3306_a_2_A_pos,bob_s3306_a_2_A_pos,alice_s3306_a_2_A_pos,cash).
 
 % Test
 :- s3306_a_2_A(alice_s3306_a_2_A_pos,2017,6771,alice_employer_bob_s3306_a_2_A_pos),s3306_a_2_A(alice_s3306_a_2_A_pos,2017,6954,alice_employer_charlie_s3306_a_2_A_pos),s3306_a_2_A(alice_s3306_a_2_A_pos,2017,6872,alice_employer_dan_s3306_a_2_A_pos).

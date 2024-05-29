@@ -58,40 +58,40 @@ patient_(home_s7703_b_2_pos,alice_s_house_s7703_b_2_pos).
 start_(home_s7703_b_2_pos,d2017_09_16).
 
 % NOTE: should be generated to 2117 + dates should be validated
-alice_household_maintenance(2017,'alice_maintains_household_2017',d2017_09_16,"2017-12-31").
-alice_household_maintenance(2018,'alice_maintains_household_2018',d2018_01_01,"2018-12-31").
-alice_household_maintenance(2019,'alice_maintains_household_2019',d2019_01_01,"2019-12-31").
-alice_household_maintenance(2020,'alice_maintains_household_2020',d2020_01_01,"2020-12-31").
-alice_household_maintenance(2021,'alice_maintains_household_2021',d2021_01_01,"2021-12-31").
-alice_household_maintenance(2022,'alice_maintains_household_2022',d2022_01_01,"2022-12-31").
-alice_household_maintenance(2023,'alice_maintains_household_2023',d2023_01_01,"2023-12-31").
-alice_household_maintenance(2024,'alice_maintains_household_2024',d2024_01_01,"2024-12-31").
-alice_household_maintenance(2025,'alice_maintains_household_2025',d2025_01_01,"2025-12-31").
-alice_household_maintenance(2026,'alice_maintains_household_2026',d2026_01_01,"2026-12-31").
-alice_household_maintenance(2027,'alice_maintains_household_2027',d2027_01_01,"2027-12-31").
-alice_household_maintenance(2028,'alice_maintains_household_2028',d2028_01_01,"2028-12-31").
-alice_household_maintenance(2029,'alice_maintains_household_2029',d2029_01_01,"2029-12-31").
-alice_household_maintenance(2030,'alice_maintains_household_2030',d2030_01_01,"2030-12-31").
-alice_household_maintenance(2031,'alice_maintains_household_2031',d2031_01_01,"2031-12-31").
-alice_household_maintenance(2032,'alice_maintains_household_2032',d2032_01_01,"2032-12-31").
-alice_household_maintenance(2033,'alice_maintains_household_2033',d2033_01_01,"2033-12-31").
-alice_household_maintenance(2034,'alice_maintains_household_2034',d2034_01_01,"2034-12-31").
-alice_household_maintenance(2035,'alice_maintains_household_2035',d2035_01_01,"2035-12-31").
-alice_household_maintenance(2036,'alice_maintains_household_2036',d2036_01_01,"2036-12-31").
-alice_household_maintenance(2037,'alice_maintains_household_2037',d2037_01_01,"2037-12-31").
-alice_household_maintenance(2038,'alice_maintains_household_2038',d2038_01_01,"2038-12-31").
-alice_household_maintenance(2039,'alice_maintains_household_2039',d2039_01_01,"2039-12-31").
-alice_household_maintenance(2040,'alice_maintains_household_2040',d2040_01_01,"2040-12-31").
-alice_household_maintenance(2041,'alice_maintains_household_2041',d2041_01_01,"2041-12-31").
-alice_household_maintenance(2042,'alice_maintains_household_2042',d2042_01_01,"2042-12-31").
-alice_household_maintenance(2043,'alice_maintains_household_2043',d2043_01_01,"2043-12-31").
-alice_household_maintenance(2044,'alice_maintains_household_2044',d2044_01_01,"2044-12-31").
-alice_household_maintenance(2045,'alice_maintains_household_2045',d2045_01_01,"2045-12-31").
-alice_household_maintenance(2046,'alice_maintains_household_2046',d2046_01_01,"2046-12-31").
-alice_household_maintenance(2047,'alice_maintains_household_2047',d2047_01_01,"2047-12-31").
-alice_household_maintenance(2048,'alice_maintains_household_2048',d2048_01_01,"2048-12-31").
-alice_household_maintenance(2049,'alice_maintains_household_2049',d2049_01_01,"2049-12-31").
-alice_household_maintenance(2050,'alice_maintains_household_2050',d2050_01_01,"2050-12-31").
+alice_household_maintenance(2017,'alice_maintains_household_2017',d2017_09_16,d2017_12_31).
+alice_household_maintenance(2018,'alice_maintains_household_2018',d2018_01_01,d2018_12_31).
+alice_household_maintenance(2019,'alice_maintains_household_2019',d2019_01_01,d2019_12_31).
+alice_household_maintenance(2020,'alice_maintains_household_2020',d2020_01_01,d2020_12_31).
+alice_household_maintenance(2021,'alice_maintains_household_2021',d2021_01_01,d2021_12_31).
+alice_household_maintenance(2022,'alice_maintains_household_2022',d2022_01_01,d2022_12_31).
+alice_household_maintenance(2023,'alice_maintains_household_2023',d2023_01_01,d2023_12_31).
+alice_household_maintenance(2024,'alice_maintains_household_2024',d2024_01_01,d2024_12_31).
+alice_household_maintenance(2025,'alice_maintains_household_2025',d2025_01_01,d2025_12_31).
+alice_household_maintenance(2026,'alice_maintains_household_2026',d2026_01_01,d2026_12_31).
+alice_household_maintenance(2027,'alice_maintains_household_2027',d2027_01_01,d2027_12_31).
+alice_household_maintenance(2028,'alice_maintains_household_2028',d2028_01_01,d2028_12_31).
+alice_household_maintenance(2029,'alice_maintains_household_2029',d2029_01_01,d2029_12_31).
+alice_household_maintenance(2030,'alice_maintains_household_2030',d2030_01_01,d2030_12_31).
+alice_household_maintenance(2031,'alice_maintains_household_2031',d2031_01_01,d2031_12_31).
+alice_household_maintenance(2032,'alice_maintains_household_2032',d2032_01_01,d2032_12_31).
+alice_household_maintenance(2033,'alice_maintains_household_2033',d2033_01_01,d2033_12_31).
+alice_household_maintenance(2034,'alice_maintains_household_2034',d2034_01_01,d2034_12_31).
+alice_household_maintenance(2035,'alice_maintains_household_2035',d2035_01_01,d2035_12_31).
+alice_household_maintenance(2036,'alice_maintains_household_2036',d2036_01_01,d2036_12_31).
+alice_household_maintenance(2037,'alice_maintains_household_2037',d2037_01_01,d2037_12_31).
+alice_household_maintenance(2038,'alice_maintains_household_2038',d2038_01_01,d2038_12_31).
+alice_household_maintenance(2039,'alice_maintains_household_2039',d2039_01_01,d2039_12_31).
+alice_household_maintenance(2040,'alice_maintains_household_2040',d2040_01_01,d2040_12_31).
+alice_household_maintenance(2041,'alice_maintains_household_2041',d2041_01_01,d2041_12_31).
+alice_household_maintenance(2042,'alice_maintains_household_2042',d2042_01_01,d2042_12_31).
+alice_household_maintenance(2043,'alice_maintains_household_2043',d2043_01_01,d2043_12_31).
+alice_household_maintenance(2044,'alice_maintains_household_2044',d2044_01_01,d2044_12_31).
+alice_household_maintenance(2045,'alice_maintains_household_2045',d2045_01_01,d2045_12_31).
+alice_household_maintenance(2046,'alice_maintains_household_2046',d2046_01_01,d2046_12_31).
+alice_household_maintenance(2047,'alice_maintains_household_2047',d2047_01_01,d2047_12_31).
+alice_household_maintenance(2048,'alice_maintains_household_2048',d2048_01_01,d2048_12_31).
+alice_household_maintenance(2049,'alice_maintains_household_2049',d2049_01_01,d2049_12_31).
+alice_household_maintenance(2050,'alice_maintains_household_2050',d2050_01_01,d2050_12_31).
 % alice_household_maintenance(Year,Event,Start_day,End_day) :-
 %     between(2017,2117,Year), % avoid infinite forward loop
 %     atom_concat('alice_maintains_household_',Year,Event),
@@ -105,9 +105,9 @@ purpose_(Event,home_s7703_b_2_pos) :- alice_household_maintenance(_,Event,_,_).
 start_(Event,Start_day) :- alice_household_maintenance(_,Event,Start_day,_).
 end_(Event,End_day) :- alice_household_maintenance(_,Event,_,End_day).
 
-joint_return_alice_and_bob(2017,'alice_and_bob_joint_return_2017',d2017_01_01,"2017-12-31").
-joint_return_alice_and_bob(2018,'alice_and_bob_joint_return_2017',d2018_01_01,"2018-12-31").
-joint_return_alice_and_bob(2019,'alice_and_bob_joint_return_2017',d2019_01_01,"2019-12-31").
+joint_return_alice_and_bob(2017,'alice_and_bob_joint_return_2017',d2017_01_01,d2017_12_31).
+joint_return_alice_and_bob(2018,'alice_and_bob_joint_return_2017',d2018_01_01,d2018_12_31).
+joint_return_alice_and_bob(2019,'alice_and_bob_joint_return_2017',d2019_01_01,d2019_12_31).
 
 s151_c_applies(alice_s7703_b_2_pos,charlie_s7703_b_2_pos,Year) :- between(2017,2019,Year).
 % joint_return_alice_and_bob(Year,Event,Start_day,End_day) :-

@@ -19,22 +19,22 @@ date(d2017_12_31).
 date_split(d2017_12_31, 2017, 12, 31).
 
 finance(3200).
-medium("kind").
+medium(kind).
 
 service_(alice_employer_s3306_b_11_pos).
 patient_(alice_employer_s3306_b_11_pos,alice_s3306_b_11_pos).
 agent_(alice_employer_s3306_b_11_pos,bob_s3306_b_11_pos).
 start_(alice_employer_s3306_b_11_pos,d2017_02_01).
 end_(alice_employer_s3306_b_11_pos,d2017_09_02).
-purpose_(alice_employer_s3306_b_11_pos,"agricultural labor").
+purpose_(alice_employer_s3306_b_11_pos,agricultural_labor).
 payment_(alice_pays_s3306_b_11_pos).
 agent_(alice_pays_s3306_b_11_pos,alice_s3306_b_11_pos).
 patient_(alice_pays_s3306_b_11_pos,bob_s3306_b_11_pos).
 start_(alice_pays_s3306_b_11_pos,d2017_09_02).
 purpose_(alice_pays_s3306_b_11_pos,alice_employer_s3306_b_11_pos).
 amount_(alice_pays_s3306_b_11_pos,3200).
-means_(alice_pays_s3306_b_11_pos,"kind").
+means_(alice_pays_s3306_b_11_pos,kind).
 
 % Test
-:- s3306_b_11(alice_pays_s3306_b_11_pos,alice_employer_s3306_b_11_pos,"kind").
+:- s3306_b_11(alice_pays_s3306_b_11_pos,alice_employer_s3306_b_11_pos,kind).
 :- halt.

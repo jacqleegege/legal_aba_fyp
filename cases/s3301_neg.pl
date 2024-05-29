@@ -25,8 +25,8 @@ date_split(d2016_12_31, 2016, 12, 31).
 
 s3306_a(alice_s3301_neg,2015).
 s3306_a(alice_s3301_neg,2016).
-total_wages_employer(alice_s3301_neg,453009,alice_s3301_neg,service,d2015_01_01,"2015-12-31").
-total_wages_employer(alice_s3301_neg,443870,alice_s3301_neg,service,d2016_01_01,"2016-12-31").
+total_wages_employer(alice_s3301_neg,453009,alice_s3301_neg,service,d2015_01_01,d2015_12_31).
+total_wages_employer(alice_s3301_neg,443870,alice_s3301_neg,service,d2016_01_01,d2016_12_31).
 
 % Test
 :- \+ s3301(alice_s3301_neg,2016,_,_,_,26362).

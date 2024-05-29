@@ -41,7 +41,7 @@ reason_(alice_lays_bob_off_s3306_b_10_A_pos,bob_is_disabled_s3306_b_10_A_pos).
 retirement_(bob_retires_s3306_b_10_A_pos).
 agent_(bob_retires_s3306_b_10_A_pos,bob_s3306_b_10_A_pos).
 start_(bob_retires_s3306_b_10_A_pos,d2019_10_10).
-reason_(bob_retires_s3306_b_10_A_pos,"disability").
+reason_(bob_retires_s3306_b_10_A_pos,disability).
 payment_(alice_pays_s3306_b_10_A_pos).
 agent_(alice_pays_s3306_b_10_A_pos,alice_s3306_b_10_A_pos).
 patient_(alice_pays_s3306_b_10_A_pos,bob_s3306_b_10_A_pos).

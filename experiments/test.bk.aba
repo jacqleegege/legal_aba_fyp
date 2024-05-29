@@ -1,0 +1,16 @@
+slay(a).
+slay(b).
+cool(a).
+cool(c).
+cool(stanley__wisconsin__usa).
+
+%win(A):- slay(A).
+%,cool(A).
+
+% UNABLE TO LEARN INCOMPLETE HEAD RULE
+
+ok(A):-slay(A),coolio(A).
+
+%coolio(A):-cool(A).
+
+% ABLE TO LEARN IF RULE IN BODY IS INCOMPLETE

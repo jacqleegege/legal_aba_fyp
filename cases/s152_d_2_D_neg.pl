@@ -47,5 +47,5 @@ start_(bob_and_charlie_s152_d_2_D_neg,d1992_10_12).
 %     is_before(Start_relationship,First_day).
 
 % Test
-:- \+ s152_d_2_D(alice_s152_d_2_D_neg,bob_s152_d_2_D_neg,d2014_04_15,"2100-01-01").
+:- \+ s152_d_2_D(alice_s152_d_2_D_neg,bob_s152_d_2_D_neg,d2014_04_15,d2100_01_01).
 :- halt.

@@ -12,7 +12,7 @@ s2_a(Taxp,Spouse,Taxy) :-
 
 %(1) In general
 
-%For purposes of section 1, the term "surviving spouse" means a taxpayer-
+%For purposes of section 1, the term surviving_spouse means a taxpayer-
 s2_a_1(Taxp,Spouse,Previous_marriage,Household,Dependent,Taxy) :-
     s2_a_1_A(Taxp,Spouse,Previous_marriage,_,Taxy),
     s2_a_1_B(Taxp,Household,Dependent,Taxy).
@@ -343,9 +343,9 @@ s2_b_2_A(Taxp,Spouse,S98,Marriage,Taxy) :-
     is_before(Divorce_time,Last_day_year).
 
 decree_of_divorce_or_separate_maintenance(S98):-
-    agent_(S98,"decree of divorce").
+    agent_(S98,decree_of_divorce).
 decree_of_divorce_or_separate_maintenance(S98):-
-    agent_(S98,"decree of separate maintenance").
+    agent_(S98,decree_of_separate_maintenance).
 
 %(B) a taxpayer shall be considered as not married at the close of his taxable year if at any time during the taxable year his spouse is a nonresident alien; and
 s2_b_2_B(Taxp,Spouse,Taxy) :-

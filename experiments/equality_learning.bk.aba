@@ -1,0 +1,8 @@
+yes(a).
+yes(b).
+yes(c).
+
+% Test
+% aba_asp('./experiments/equality_learning.bk',[equal(a,a),equal(b,b),equal(c,c)],[equal(a,b),equal(b,c),equal(c,a),equal(a,c),equal(b,a),equal(c,b)]).
+
+% UNABLE TO LEARN EQUALITY!!!
