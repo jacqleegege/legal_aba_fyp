@@ -1,0 +1,223 @@
+%(B) service performed in the employ of a hospital, if such service is performed by a patient of such hospital;
+%s3306_c_10_B(Service,Employer,Employee,Workday) :-
+%    service_(Service),
+%	patient_(Service,Employer),
+%	agent_(Service,Employee),
+%	hospital_(Employer_is_hospital),
+%	agent_(Employer_is_hospital,Employer),
+%	medical_patient_(Employee_is_medical_patient),
+%	agent_(Employee_is_medical_patient,Employee),
+%	patient_(Employee_is_medical_patient,Employer),
+%	start_(Employee_is_medical_patient,Start_patient),
+%	is_before(Start_patient,Workday),
+%	s3306_c_10_B_end(Employee_is_medical_patient,Workday).
+
+%not_s3306_c_10_B(Service,Employer,Employee,Workday) :- service_(Service), patient_(_,Employer),person(Employee),date(Workday), not s3306_c_10_B(Service,Employer,Employee,Workday).
+
+%#show not_s3306_c_10_B/4.
+%#show is_before/2.
+
+%s3306_c_10_B_end(Employee_is_medical_patient,Workday):-
+%	medical_patient_(Employee_is_medical_patient),date(Workday),not_end_(Employee_is_medical_patient,_).
+s3306_c_10_B_end(Employee_is_medical_patient,Workday):-
+	end_(Employee_is_medical_patient,End_patient),
+	is_before(Workday,End_patient).
+
+%is_before(Day1,Day2):-
+%    date_split(Day1,Y1,M1,D1),
+%    date_split(Day2,Y2,M2,D2),
+%    Y1 < Y2.
+%is_before(Day1,Day2):-
+%    date_split(Day1,Y1,M1,D1),
+%    date_split(Day2,Y2,M2,D2),
+%    Y1 = Y2,M1 < M2.
+%is_before(Day1,Day2):-
+%    date_split(Day1,Y1,M1,D1),
+%    date_split(Day2,Y2,M2,D2),
+%    Y1 = Y2,M1 = M2,D1 <= D2.
+
+assumption(not_end_(Event,Time)).
+
+contrary(not_end_(Event,Time),end_(Event,Time)) :- 
+    assumption(not_end_(Event,Time)).
+
+is_before(d2017_01_01, d2017_01_01).
+is_before(d2017_12_31, d2017_12_31).
+is_before(d2017_03_01, d2017_03_01).
+is_before(d2017_03_01, d2017_03_31).
+is_before(d2017_03_31, d2017_03_31).
+is_before(d2017_03_15, d2017_03_31).
+is_before(d2017_03_20, d2017_03_31).
+is_before(d2017_01_01, d2017_01_12).
+is_before(d2017_01_12, d2017_01_12).
+is_before(d2017_01_01, d2017_01_15).
+is_before(d2017_01_12, d2017_01_15).
+is_before(d2017_01_15, d2017_01_15).
+is_before(d2017_02_20, d2017_02_20).
+is_before(d2017_03_01, d2017_03_15).
+is_before(d2017_03_15, d2017_03_15).
+is_before(d2017_03_01, d2017_03_20).
+is_before(d2017_03_15, d2017_03_20).
+is_before(d2017_03_20, d2017_03_20).
+is_before(d2017_04_01, d2017_04_01).
+is_before(d2017_04_01, d2017_04_02).
+is_before(d2017_04_02, d2017_04_02).
+is_before(d2017_01_01, d2017_12_31).
+is_before(d2017_03_01, d2017_12_31).
+is_before(d2017_03_31, d2017_12_31).
+is_before(d2017_01_12, d2017_12_31).
+is_before(d2017_01_15, d2017_12_31).
+is_before(d2017_02_20, d2017_12_31).
+is_before(d2017_03_15, d2017_12_31).
+is_before(d2017_03_20, d2017_12_31).
+is_before(d2017_04_01, d2017_12_31).
+is_before(d2017_04_02, d2017_12_31).
+is_before(d2017_01_01, d2017_03_01).
+is_before(d2017_01_12, d2017_03_01).
+is_before(d2017_01_15, d2017_03_01).
+is_before(d2017_02_20, d2017_03_01).
+is_before(d2017_01_01, d2017_03_31).
+is_before(d2017_01_12, d2017_03_31).
+is_before(d2017_01_15, d2017_03_31).
+is_before(d2017_02_20, d2017_03_31).
+is_before(d2017_01_01, d2017_02_20).
+is_before(d2017_01_12, d2017_02_20).
+is_before(d2017_01_15, d2017_02_20).
+is_before(d2017_01_01, d2017_03_15).
+is_before(d2017_01_12, d2017_03_15).
+is_before(d2017_01_15, d2017_03_15).
+is_before(d2017_02_20, d2017_03_15).
+is_before(d2017_01_01, d2017_03_20).
+is_before(d2017_01_12, d2017_03_20).
+is_before(d2017_01_15, d2017_03_20).
+is_before(d2017_02_20, d2017_03_20).
+is_before(d2017_01_01, d2017_04_01).
+is_before(d2017_03_01, d2017_04_01).
+is_before(d2017_03_31, d2017_04_01).
+is_before(d2017_01_12, d2017_04_01).
+is_before(d2017_01_15, d2017_04_01).
+is_before(d2017_02_20, d2017_04_01).
+is_before(d2017_03_15, d2017_04_01).
+is_before(d2017_03_20, d2017_04_01).
+is_before(d2017_01_01, d2017_04_02).
+is_before(d2017_03_01, d2017_04_02).
+is_before(d2017_03_31, d2017_04_02).
+is_before(d2017_01_12, d2017_04_02).
+is_before(d2017_01_15, d2017_04_02).
+is_before(d2017_02_20, d2017_04_02).
+is_before(d2017_03_15, d2017_04_02).
+is_before(d2017_03_20, d2017_04_02).
+
+% Text
+% Alice was paid $200 in March 2017 for services performed at Johns Hopkins Hospital in March 2017. Alice was a patient at Johns Hopkins Hospital from January 12th, 2017 to February 20th, 2017.
+
+% Question
+% Section 3306(c)(10)(B) applies to Alice's employment situation in 2017. Contradiction
+
+% Facts
+person(alice_s3306_c_10_B_neg).
+
+year(2017).
+date(d2017_01_01).
+date_split(d2017_01_01, 2017, 1, 1).
+date(d2017_12_31).
+date_split(d2017_12_31, 2017, 12, 31).
+date(d2017_03_01).
+date_split(d2017_03_01, 2017, 3, 1).
+date(d2017_03_31).
+date_split(d2017_03_31, 2017, 3, 31).
+date(d2017_01_12).
+date_split(d2017_01_12, 2017, 1, 12).
+date(d2017_01_15).
+date_split(d2017_01_15, 2017, 1, 15).
+date(d2017_02_20).
+date_split(d2017_02_20, 2017, 2, 20).
+
+location_name(baltimore).
+location_name(maryland).
+location_name(usa).
+
+finance(200).
+
+hospital_(hopkins_is_a_hospital_s3306_c_10_B_neg).
+agent_(hopkins_is_a_hospital_s3306_c_10_B_neg,johns_hopkins_hospital_s3306_c_10_B_neg).
+service_(alice_employed_s3306_c_10_B_neg).
+patient_(alice_employed_s3306_c_10_B_neg,johns_hopkins_hospital_s3306_c_10_B_neg).
+agent_(alice_employed_s3306_c_10_B_neg,alice_s3306_c_10_B_neg).
+start_(alice_employed_s3306_c_10_B_neg,d2017_03_01).
+end_(alice_employed_s3306_c_10_B_neg,d2017_03_31).
+location_(alice_employed_s3306_c_10_B_neg,baltimore).
+location_(alice_employed_s3306_c_10_B_neg,maryland).
+location_(alice_employed_s3306_c_10_B_neg,usa).
+payment_(alice_is_paid_s3306_c_10_B_neg).
+agent_(alice_is_paid_s3306_c_10_B_neg,johns_hopkins_hospital_s3306_c_10_B_neg).
+patient_(alice_is_paid_s3306_c_10_B_neg,alice_s3306_c_10_B_neg).
+start_(alice_is_paid_s3306_c_10_B_neg,d2017_03_31).
+purpose_(alice_is_paid_s3306_c_10_B_neg,alice_employed_s3306_c_10_B_neg).
+amount_(alice_is_paid_s3306_c_10_B_neg,200).
+medical_patient_(alice_goes_to_hopkins_s3306_c_10_B_neg).
+agent_(alice_goes_to_hopkins_s3306_c_10_B_neg,alice_s3306_c_10_B_neg).
+patient_(alice_goes_to_hopkins_s3306_c_10_B_neg,johns_hopkins_hospital_s3306_c_10_B_neg).
+start_(alice_goes_to_hopkins_s3306_c_10_B_neg,d2017_01_12).
+end_(alice_goes_to_hopkins_s3306_c_10_B_neg,d2017_02_20).
+
+% Text
+% Alice was paid $200 in March 2017 for services performed at Johns Hopkins Hospital in March 2017. Alice was a patient at Johns Hopkins Hospital from March 15th, 2017 to April 2nd, 2017.
+
+% Question
+% Section 3306(c)(10)(B) applies to Alice's employment situation in 2017. Entailment
+
+% Facts
+person(alice_s3306_c_10_B_pos).
+
+year(2017).
+date(d2017_01_01).
+date_split(d2017_01_01, 2017, 1, 1).
+date(d2017_12_31).
+date_split(d2017_12_31, 2017, 12, 31).
+date(d2017_03_31).
+date_split(d2017_03_31, 2017, 3, 31).
+date(d2017_03_15).
+date_split(d2017_03_15, 2017, 3, 15).
+date(d2017_03_20).
+date_split(d2017_03_20, 2017, 3, 20).
+date(d2017_04_01).
+date_split(d2017_04_01, 2017, 4, 1).
+date(d2017_04_02).
+date_split(d2017_04_02, 2017, 4, 2).
+
+location_name(baltimore).
+location_name(maryland).
+location_name(usa).
+
+finance(200).
+
+hospital_(hopkins_is_a_hospital_s3306_c_10_B_pos).
+agent_(hopkins_is_a_hospital_s3306_c_10_B_pos,johns_hopkins_hospital_s3306_c_10_B_pos).
+service_(alice_employed_s3306_c_10_B_pos).
+patient_(alice_employed_s3306_c_10_B_pos,johns_hopkins_hospital_s3306_c_10_B_pos).
+agent_(alice_employed_s3306_c_10_B_pos,alice_s3306_c_10_B_pos).
+start_(alice_employed_s3306_c_10_B_pos,d2017_03_15).
+end_(alice_employed_s3306_c_10_B_pos,d2017_03_31).
+location_(alice_employed_s3306_c_10_B_pos,baltimore).
+location_(alice_employed_s3306_c_10_B_pos,maryland).
+location_(alice_employed_s3306_c_10_B_pos,usa).
+payment_(alice_is_paid_s3306_c_10_B_pos).
+agent_(alice_is_paid_s3306_c_10_B_pos,johns_hopkins_hospital_s3306_c_10_B_pos).
+patient_(alice_is_paid_s3306_c_10_B_pos,alice_s3306_c_10_B_pos).
+start_(alice_is_paid_s3306_c_10_B_pos,d2017_03_31).
+purpose_(alice_is_paid_s3306_c_10_B_pos,alice_employed_s3306_c_10_B_pos).
+amount_(alice_is_paid_s3306_c_10_B_pos,200).
+medical_patient_(alice_goes_to_hopkins_s3306_c_10_B_pos).
+agent_(alice_goes_to_hopkins_s3306_c_10_B_pos,alice_s3306_c_10_B_pos).
+patient_(alice_goes_to_hopkins_s3306_c_10_B_pos,johns_hopkins_hospital_s3306_c_10_B_pos).
+start_(alice_goes_to_hopkins_s3306_c_10_B_pos,d2017_03_15).
+end_(alice_goes_to_hopkins_s3306_c_10_B_pos,d2017_04_02).
+
+%positives:s3306_c_10_B(alice_employed_s3306_c_10_B_neg, johns_hopkins_hospital_s3306_c_10_B_neg, alice_s3306_c_10_B_neg, d2017_02_20),s3306_c_10_B(alice_employed_s3306_c_10_B_neg, johns_hopkins_hospital_s3306_c_10_B_neg, alice_s3306_c_10_B_neg, d2017_01_12),s3306_c_10_B(alice_employed_s3306_c_10_B_neg, johns_hopkins_hospital_s3306_c_10_B_neg, alice_s3306_c_10_B_neg, d2017_01_15),s3306_c_10_B(alice_employed_s3306_c_10_B_pos, johns_hopkins_hospital_s3306_c_10_B_pos, alice_s3306_c_10_B_pos, d2017_04_01),s3306_c_10_B(alice_employed_s3306_c_10_B_pos, johns_hopkins_hospital_s3306_c_10_B_pos, alice_s3306_c_10_B_pos, d2017_04_02),s3306_c_10_B(alice_employed_s3306_c_10_B_pos, johns_hopkins_hospital_s3306_c_10_B_pos, alice_s3306_c_10_B_pos, d2017_03_31),s3306_c_10_B(alice_employed_s3306_c_10_B_pos, johns_hopkins_hospital_s3306_c_10_B_pos, alice_s3306_c_10_B_pos, d2017_03_15),s3306_c_10_B(alice_employed_s3306_c_10_B_pos, johns_hopkins_hospital_s3306_c_10_B_pos, alice_s3306_c_10_B_pos, d2017_03_20)
+%negatives:s3306_c_10_B(alice_employed_s3306_c_10_B_neg,johns_hopkins_hospital_s3306_c_10_B_neg,alice_s3306_c_10_B_neg,d2017_03_01),s3306_c_10_B(alice_employed_s3306_c_10_B_neg,johns_hopkins_hospital_s3306_c_10_B_neg,alice_s3306_c_10_B_neg,d2017_03_31),s3306_c_10_B(alice_employed_s3306_c_10_B_pos,johns_hopkins_hospital_s3306_c_10_B_neg,alice_s3306_c_10_B_neg,d2017_03_15),s3306_c_10_B(alice_employed_s3306_c_10_B_neg,johns_hopkins_hospital_s3306_c_10_B_neg,alice_s3306_c_10_B_pos,d2017_02_20),s3306_c_10_B(alice_employed_s3306_c_10_B_pos,johns_hopkins_hospital_s3306_c_10_B_neg,alice_s3306_c_10_B_pos,d2017_03_15),s3306_c_10_B(alice_employed_s3306_c_10_B_pos,johns_hopkins_hospital_s3306_c_10_B_neg,alice_s3306_c_10_B_pos,d2017_04_02),s3306_c_10_B(alice_employed_s3306_c_10_B_neg,alice_s3306_c_10_B_neg,alice_s3306_c_10_B_neg,d2017_04_02),s3306_c_10_B(alice_employed_s3306_c_10_B_neg,alice_s3306_c_10_B_pos,alice_s3306_c_10_B_pos,d2017_01_01)
+
+%pos:s3306_c_10_B(alice_employed_s3306_c_10_B_pos,johns_hopkins_hospital_s3306_c_10_B_pos,alice_s3306_c_10_B_pos,d2017_03_15).
+%neg:s3306_c_10_B(alice_employed_s3306_c_10_B_neg,johns_hopkins_hospital_s3306_c_10_B_neg,alice_s3306_c_10_B_neg,d2017_03_01).
+
+% aba_asp('./experiments/s3306_c_10_B_learning.bk',[s3306_c_10_B(alice_employed_s3306_c_10_B_pos,johns_hopkins_hospital_s3306_c_10_B_pos,alice_s3306_c_10_B_pos,d2017_03_15)],[s3306_c_10_B(alice_employed_s3306_c_10_B_neg,johns_hopkins_hospital_s3306_c_10_B_neg,alice_s3306_c_10_B_neg,d2017_03_01)]).

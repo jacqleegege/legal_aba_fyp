@@ -1,33 +1,35 @@
-% EXCEPTION?
-% ABALEARN DOES NOT PROCESS " WELL
+% EXCEPTION
 %(B) such labor is not agricultural labor performed by an individual who is an alien admitted to the United States to perform agricultural labor.
-
 %s3306_c_1_B(Service,Employee) :-
 %	service_(Service),person(Employee),not_s3306_c_1_B_not(Service,Employee).
 
+%not_s3306_c_1_B(Service,Employee) :- service_(Service),person(Employee), not s3306_c_1_B(Service,Employee).
+
+%#show not_s3306_c_1_B/2.
+
 s3306_c_1_B_not(Service,Employee):-
-	type_(Service,"agricultural labor"),
+	type_(Service,agricultural_labor),
 	citizenship_(Employee_citizenship),
 	agent_(Employee_citizenship,Employee),
 	patient_(Employee_citizenship,Country),
 	not_country_equals_usa(Country),
 	migration_(Employee_migration),
 	agent_(Employee_migration,Employee),
-	destination_(Employee_migration,"usa"),
-	purpose_(Employee_migration,"agricultural labor").
+	destination_(Employee_migration,usa),
+	purpose_(Employee_migration,agricultural_labor).
 s3306_c_1_B_not(Service,Employee):-
-	purpose_(Service,"agricultural labor"),
+	purpose_(Service,agricultural_labor),
 	agent_(Employee_citizenship,Employee),
 	patient_(Employee_citizenship,Country),
 	not_country_equals_usa(Country),
 	migration_(Employee_migration),
 	agent_(Employee_migration,Employee),
-	destination_(Employee_migration,"usa"),
-	purpose_(Employee_migration,"agricultural labor").
+	destination_(Employee_migration,usa),
+	purpose_(Employee_migration,agricultural_labor).
 
 country_equals_usa(Country):-
 	country_name(Country),
-	Country = "usa".
+	Country = usa.
 
 assumption(not_country_equals_usa(Location)).
 contrary(not_country_equals_usa(Location),country_equals_usa(Location)) :-
@@ -54,8 +56,11 @@ date_split(d2017_09_02, 2017, 9, 2).
 date(d2017_12_31).
 date_split(d2017_12_31, 2017, 12, 31).
 
-location_name("stanley, wisconsin, usa").
-country_name("usa").
+location_name(stanley__wisconsin__usa).
+country_name(usa).
+location_name(london).
+country_name(uk).
+country_(london,uk).
 
 finance(3200).
 
@@ -64,9 +69,9 @@ patient_(alice_employer_s3306_c_1_B_neg,alice_s3306_c_1_B_neg).
 agent_(alice_employer_s3306_c_1_B_neg,bob_s3306_c_1_B_neg).
 start_(alice_employer_s3306_c_1_B_neg,d2017_02_01).
 end_(alice_employer_s3306_c_1_B_neg,d2017_09_02).
-location_(alice_employer_s3306_c_1_B_neg,"stanley, wisconsin, usa").
-country_("stanley, wisconsin, usa","usa").
-purpose_(alice_employer_s3306_c_1_B_neg,"agricultural labor").
+location_(alice_employer_s3306_c_1_B_neg,stanley__wisconsin__usa).
+country_(stanley__wisconsin__usa,usa).
+purpose_(alice_employer_s3306_c_1_B_neg,agricultural_labor).
 payment_(alice_pays_s3306_c_1_B_neg).
 agent_(alice_pays_s3306_c_1_B_neg,alice_s3306_c_1_B_neg).
 patient_(alice_pays_s3306_c_1_B_neg,bob_s3306_c_1_B_neg).
@@ -75,15 +80,14 @@ purpose_(alice_pays_s3306_c_1_B_neg,alice_employer_s3306_c_1_B_neg).
 amount_(alice_pays_s3306_c_1_B_neg,3200).
 citizenship_(alice_is_american_s3306_c_1_B_neg).
 agent_(alice_is_american_s3306_c_1_B_neg,alice_s3306_c_1_B_neg).
-patient_(alice_is_american_s3306_c_1_B_neg,"usa").
+patient_(alice_is_american_s3306_c_1_B_neg,usa).
 citizenship_(bob_is_mexican_s3306_c_1_B_neg).
 agent_(bob_is_mexican_s3306_c_1_B_neg,bob_s3306_c_1_B_neg).
 patient_(bob_is_mexican_s3306_c_1_B_neg,mexico).
 migration_(bob_migrates_to_usa_s3306_c_1_B_neg).
-destination_(bob_migrates_to_usa_s3306_c_1_B_neg,"usa").
+destination_(bob_migrates_to_usa_s3306_c_1_B_neg,usa).
 agent_(bob_migrates_to_usa_s3306_c_1_B_neg,bob_s3306_c_1_B_neg).
-purpose_(bob_migrates_to_usa_s3306_c_1_B_neg,"agricultural labor").
-
+purpose_(bob_migrates_to_usa_s3306_c_1_B_neg,agricultural_labor).
 
 % Alice has paid $3200 to Bob for agricultural labor done from Feb 1st, 2017 to Sep 2nd, 2017, in Caracas, Venezuela. Bob is an American citizen. Alice is an American employer.
 
@@ -104,8 +108,8 @@ date_split(d2017_09_02, 2017, 9, 2).
 date(d2017_12_31).
 date_split(d2017_12_31, 2017, 12, 31).
 
-location_name("caracas, venezuela").
-country_name("venezuela").
+location_name(caracas__venezuela).
+country_name(venezuela).
 
 finance(3200).
 
@@ -114,9 +118,9 @@ patient_(alice_employer_s3306_c_1_B_pos,alice_s3306_c_1_B_pos).
 agent_(alice_employer_s3306_c_1_B_pos,bob_s3306_c_1_B_pos).
 start_(alice_employer_s3306_c_1_B_pos,d2017_02_01).
 end_(alice_employer_s3306_c_1_B_pos,d2017_09_02).
-location_(alice_employer_s3306_c_1_B_pos,"caracas, venezuela").
-country_("caracas, venezuela","venezuela").
-purpose_(alice_employer_s3306_c_1_B_pos,"agricultural labor").
+location_(alice_employer_s3306_c_1_B_pos,caracas__venezuela).
+country_(caracas__venezuela,venezuela).
+purpose_(alice_employer_s3306_c_1_B_pos,agricultural_labor).
 payment_(alice_pays_s3306_c_1_B_pos).
 agent_(alice_pays_s3306_c_1_B_pos,alice_s3306_c_1_B_pos).
 patient_(alice_pays_s3306_c_1_B_pos,bob_s3306_c_1_B_pos).
@@ -127,18 +131,17 @@ american_employer_(alice_is_american_employer_s3306_c_1_B_pos).
 agent_(alice_is_american_employer_s3306_c_1_B_pos,alice_s3306_c_1_B_pos).
 citizenship_(bob_is_american_s3306_c_1_B_pos).
 agent_(bob_is_american_s3306_c_1_B_pos,bob_s3306_c_1_B_pos).
-patient_(bob_is_american_s3306_c_1_B_pos,"usa").
+patient_(bob_is_american_s3306_c_1_B_pos,usa).
+
+%positives(5):s3306_c_1_B(alice_employer_s3306_c_1_B_neg,alice_s3306_c_1_B_neg),s3306_c_1_B(alice_employer_s3306_c_1_B_neg,alice_s3306_c_1_B_pos),s3306_c_1_B(alice_employer_s3306_c_1_B_neg,bob_s3306_c_1_B_pos),s3306_c_1_B(alice_employer_s3306_c_1_B_pos,alice_s3306_c_1_B_neg),s3306_c_1_B(alice_employer_s3306_c_1_B_pos,alice_s3306_c_1_B_pos),s3306_c_1_B(alice_employer_s3306_c_1_B_pos,bob_s3306_c_1_B_pos)
+%negatives(2):s3306_c_1_B(alice_employer_s3306_c_1_B_neg,bob_s3306_c_1_B_neg),s3306_c_1_B(alice_employer_s3306_c_1_B_pos,bob_s3306_c_1_B_neg)
 
 %pos: s3306_c_1_B(alice_employer_s3306_c_1_B_pos,bob_s3306_c_1_B_pos).
 %neg: s3306_c_1_B(alice_employer_s3306_c_1_B_neg,bob_s3306_c_1_B_neg).
 
 %aba_asp('./experiments/s3306_c_1_B_learning.bk',[s3306_c_1_B(alice_employer_s3306_c_1_B_pos,bob_s3306_c_1_B_pos)],[s3306_c_1_B(alice_employer_s3306_c_1_B_neg,bob_s3306_c_1_B_neg)])
 
-
-
-
-
-
-
-
-
+%ACCURACY_BRAVE: 6/7
+%ACCURACY_CAUTIOUS: 6/7
+%WRONG POSITIVES: []
+%WRONG NEGATIVES: ['experiments/s3306_c_1_B_neg_2.bk.sol.asp']

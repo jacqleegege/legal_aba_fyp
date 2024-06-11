@@ -1,0 +1,172 @@
+%(A) sickness or accident disability, or
+%s3306_b_2_A(Plan) :-
+%	purpose_(Plan,make_provisions_for_employees_in_case_of_sickness).
+%s3306_b_2_A(Plan) :-
+%	purpose_(Plan,make_provisions_for_employees_in_case_of_accident_disability).
+
+%not_s3306_b_2_A(Plan) :- plan_(Plan),not s3306_b_2_A(Plan).
+
+%#show not_s3306_b_2_A/1.
+
+% Text
+% Alice has paid $45252 to Bob for work done in the year 2017. In 2017, Alice has also paid $9832 into a retirement fund for Bob, and $5322 into health insurance for Charlie, who is Alice's father and has retired in 2016.
+
+% Question
+% Section 3306(b)(2)(A) applies to the payment Alice made to Bob for the year 2017. Contradiction
+
+% Facts
+person(alice_s3306_b_2_A_neg).
+person(bob_s3306_b_2_A_neg).
+person(charlie_s3306_b_2_A_neg).
+
+year(2017).
+date(d2017_01_01).
+date_split(d2017_01_01, 2017, 1, 1).
+date(d2017_12_31).
+date_split(d2017_12_31, 2017, 12, 31).
+
+year(2016).
+date(d2016_01_01).
+date_split(d2016_01_01, 2016, 1, 1).
+date(d2016_12_31).
+date_split(d2016_12_31, 2016, 12, 31).
+
+finance(45252).
+finance(9832).
+finance(5322).
+
+service_(alice_employer_s3306_b_2_A_neg).
+patient_(alice_employer_s3306_b_2_A_neg,alice_s3306_b_2_A_neg).
+agent_(alice_employer_s3306_b_2_A_neg,bob_s3306_b_2_A_neg).
+start_(alice_employer_s3306_b_2_A_neg,d2017_01_01).
+end_(alice_employer_s3306_b_2_A_neg,d2017_12_31).
+payment_(alice_pays_bob_s3306_b_2_A_neg).
+agent_(alice_pays_bob_s3306_b_2_A_neg,alice_s3306_b_2_A_neg).
+patient_(alice_pays_bob_s3306_b_2_A_neg,bob_s3306_b_2_A_neg).
+start_(alice_pays_bob_s3306_b_2_A_neg,d2017_01_01).
+end_(alice_pays_bob_s3306_b_2_A_neg,d2017_12_31).
+purpose_(alice_pays_bob_s3306_b_2_A_neg,alice_employer_s3306_b_2_A_neg).
+amount_(alice_pays_bob_s3306_b_2_A_neg,45252).
+payment_(alice_pays_retirement_s3306_b_2_A_neg).
+agent_(alice_pays_retirement_s3306_b_2_A_neg,alice_s3306_b_2_A_neg).
+patient_(alice_pays_retirement_s3306_b_2_A_neg,retirement_fund_s3306_b_2_A_neg).
+purpose_(alice_pays_retirement_s3306_b_2_A_neg,make_provisions_for_employees_in_case_of_retirement).
+plan_(retirement_fund_s3306_b_2_A_neg).
+beneficiary_(alice_pays_retirement_s3306_b_2_A_neg,bob_s3306_b_2_A_neg).
+start_(alice_pays_retirement_s3306_b_2_A_neg,d2017_01_01).
+end_(alice_pays_retirement_s3306_b_2_A_neg,d2017_12_31).
+amount_(alice_pays_retirement_s3306_b_2_A_neg,9832).
+payment_(alice_pays_insurance_s3306_b_2_A_neg).
+agent_(alice_pays_insurance_s3306_b_2_A_neg,alice_s3306_b_2_A_neg).
+patient_(alice_pays_insurance_s3306_b_2_A_neg,health_insurance_fund_s3306_b_2_A_neg).
+plan_(health_insurance_fund_s3306_b_2_A_neg).
+purpose_(alice_pays_insurance_s3306_b_2_A_neg,make_provisions_in_case_of_sickness).
+beneficiary_(alice_pays_insurance_s3306_b_2_A_neg,charlie_s3306_b_2_A_neg).
+start_(alice_pays_insurance_s3306_b_2_A_neg,d2017_01_01).
+end_(alice_pays_insurance_s3306_b_2_A_neg,d2017_12_31).
+amount_(alice_pays_insurance_s3306_b_2_A_neg,5322).
+father_(alice_and_charlie_s3306_b_2_A_neg).
+agent_(alice_and_charlie_s3306_b_2_A_neg,charlie_s3306_b_2_A_neg).
+patient_(alice_and_charlie_s3306_b_2_A_neg,alice_s3306_b_2_A_neg).
+retirement_(charlie_retires_s3306_b_2_A_neg).
+agent_(charlie_retires_s3306_b_2_A_neg,charlie_s3306_b_2_A_neg).
+start_(charlie_retires_s3306_b_2_A_neg,d2016_01_01).
+
+% Text
+% Alice has paid $45252 to Bob for work done in the year 2017. In 2017, Alice has also paid $9832 into a retirement fund for Bob, and $5322 into health insurance for Bob.
+
+% Question
+% Section 3306(b)(2)(A) applies to the payment Alice made to the health insurance fund for the year 2017. Entailment
+
+% Facts
+person(alice_s3306_b_2_A_pos).
+person(bob_s3306_b_2_A_pos).
+
+year(2017).
+date(d2017_01_01).
+date_split(d2017_01_01, 2017, 1, 1).
+date(d2017_12_31).
+date_split(d2017_12_31, 2017, 12, 31).
+
+year(2016).
+date(d2016_01_01).
+date_split(d2016_01_01, 2016, 1, 1).
+date(d2016_12_31).
+date_split(d2016_12_31, 2016, 12, 31).
+
+finance(45252).
+finance(9832).
+finance(5322).
+
+service_(alice_employer_s3306_b_2_A_pos).
+patient_(alice_employer_s3306_b_2_A_pos,alice_s3306_b_2_A_pos).
+agent_(alice_employer_s3306_b_2_A_pos,bob_s3306_b_2_A_pos).
+start_(alice_employer_s3306_b_2_A_pos,d2017_01_01).
+end_(alice_employer_s3306_b_2_A_pos,d2017_12_31).
+payment_(alice_pays_bob_s3306_b_2_A_pos).
+agent_(alice_pays_bob_s3306_b_2_A_pos,alice_s3306_b_2_A_pos).
+patient_(alice_pays_bob_s3306_b_2_A_pos,bob_s3306_b_2_A_pos).
+start_(alice_pays_bob_s3306_b_2_A_pos,d2017_01_01).
+end_(alice_pays_bob_s3306_b_2_A_pos,d2017_12_31).
+purpose_(alice_pays_bob_s3306_b_2_A_pos,alice_employer_s3306_b_2_A_pos).
+amount_(alice_pays_bob_s3306_b_2_A_pos,45252).
+payment_(alice_pays_retirement_s3306_b_2_A_pos).
+agent_(alice_pays_retirement_s3306_b_2_A_pos,alice_s3306_b_2_A_pos).
+patient_(alice_pays_retirement_s3306_b_2_A_pos,retirement_fund_s3306_b_2_A_pos).
+plan_(retirement_fund_s3306_b_2_A_pos).
+purpose_(retirement_fund_s3306_b_2_A_pos,make_provisions_for_employees_in_case_of_retirement).
+beneficiary_(retirement_fund_s3306_b_2_A_pos,bob_s3306_b_2_A_pos).
+start_(alice_pays_retirement_s3306_b_2_A_pos,d2017_01_01).
+end_(alice_pays_retirement_s3306_b_2_A_pos,d2017_12_31).
+amount_(alice_pays_retirement_s3306_b_2_A_pos,9832).
+payment_(alice_pays_insurance_s3306_b_2_A_pos).
+agent_(alice_pays_insurance_s3306_b_2_A_pos,alice_s3306_b_2_A_pos).
+patient_(alice_pays_insurance_s3306_b_2_A_pos,health_insurance_fund_s3306_b_2_A_pos).
+plan_(health_insurance_fund_s3306_b_2_A_pos).
+purpose_(health_insurance_fund_s3306_b_2_A_pos,make_provisions_for_employees_in_case_of_sickness).
+beneficiary_(health_insurance_fund_s3306_b_2_A_pos,bob_s3306_b_2_A_pos).
+start_(alice_pays_insurance_s3306_b_2_A_pos,d2017_01_01).
+end_(alice_pays_insurance_s3306_b_2_A_pos,d2017_12_31).
+amount_(alice_pays_insurance_s3306_b_2_A_pos,5322).
+
+plan_(health_insurance).
+purpose_(health_insurance,make_provisions_for_employees_in_case_of_sickness).
+plan_(health_insurance2).
+purpose_(health_insurance2,make_provisions_for_employees_in_case_of_sickness).
+plan_(health_insurance3).
+purpose_(health_insurance3,make_provisions_for_employees_in_case_of_sickness).
+plan_(disability_insurance4).
+purpose_(disability_insurance4,make_provisions_for_employees_in_case_of_accident_disability).
+plan_(disability_insurance5).
+purpose_(disability_insurance5,make_provisions_for_employees_in_case_of_accident_disability).
+plan_(disability_insurance6).
+purpose_(disability_insurance6,make_provisions_for_employees_in_case_of_accident_disability).
+plan_(disability_insurance7).
+purpose_(disability_insurance7,make_provisions_for_employees_in_case_of_accident_disability).
+plan_(disability_insurance8).
+purpose_(disability_insurance8,make_provisions_for_employees_in_case_of_accident_disability).
+
+plan_(life_insurance).
+purpose_(life_insurance,make_provisions_for_employees_in_case_of_death).
+plan_(life_insurance2).
+purpose_(life_insurance2,make_provisions_for_employees_in_case_of_death).
+plan_(life_insurance3).
+purpose_(life_insurance3,make_provisions_for_employees_in_case_of_death).
+plan_(life_insurance4).
+purpose_(life_insurance4,make_provisions_for_employees_in_case_of_death).
+plan_(life_insurance5).
+purpose_(life_insurance5,make_provisions_for_employees_in_case_of_death).
+plan_(life_insurance6).
+purpose_(life_insurance6,make_provisions_for_employees_in_case_of_death).
+plan_(life_insurance7).
+purpose_(life_insurance7,make_provisions_for_employees_in_case_of_death).
+
+%pos:s3306_b_2_A(health_insurance_fund_s3306_b_2_A_pos).
+%neg:s3306_b_2_A(alice_pays_bob_s3306_b_2_A_neg).
+
+%positives(6):s3306_b_2_A(health_insurance_fund_s3306_b_2_A_pos), s3306_b_2_A(health_insurance), s3306_b_2_A(health_insurance2), s3306_b_2_A(health_insurance3), s3306_b_2_A(disability_insurance4), s3306_b_2_A(disability_insurance5)
+%negatives(7):s3306_b_2_A(alice_pays_bob_s3306_b_2_A_neg),s3306_b_2_A(retirement_fund_s3306_b_2_A_neg), s3306_b_2_A(life_insurance), s3306_b_2_A(life_insurance2), s3306_b_2_A(life_insurance3), s3306_b_2_A(life_insurance4)
+
+
+% aba_asp('./experiments/s3306_b_2_A_learning.bk',[s3306_b_2_A(health_insurance_fund_s3306_b_2_A_pos)],[s3306_b_2_A(alice_pays_bob_s3306_b_2_A_neg)]).
+%Test :  s3306_b_2_A(health_insurance)

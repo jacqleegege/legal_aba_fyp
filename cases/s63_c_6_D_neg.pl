@@ -22,10 +22,10 @@ date(d2021_12_31).
 date_split(d2021_12_31,2021,12,31).
 
 business_trust_(wbft_is_a_trust_s63_c_6_D_neg).
-agent_(wbft_is_a_trust_s63_c_6_D_neg,Walter_Brown_Family_Trust_II).
+agent_(wbft_is_a_trust_s63_c_6_D_neg,walter_Brown_Family_Trust_II).
 start_(wbft_is_a_trust_s63_c_6_D_neg,d1973_01_01).
 end_(wbft_is_a_trust_s63_c_6_D_neg,d2019_12_31).
 
 % Test
-:- \+ s63_c_6_D(Walter_Brown_Family_Trust_II,2021).
+:- \+ s63_c_6_D(walter_Brown_Family_Trust_II,2021).
 :- halt.

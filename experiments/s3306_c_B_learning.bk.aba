@@ -1,0 +1,195 @@
+% EXCEPTION
+%(B) performed outside the United States (except in a contiguous country with which the United States has an agreement relating to unemployment compensation) by a citizen of the United States as an employee of an American employer, except-
+%s3306_c_B(Service,Employer,Employee,Location) :-
+%	agent_(Service, Employee),
+%	patient_(Service, Employer),
+%	s3306_c_B_location(Location,Country),
+%	not s3306_c_B_agreement(Location),
+%   american_employer_(Employer_is_american_employer),
+%   agent_(Employer_is_american_employer, Employer),
+%	citizenship_(Employee_is_american),
+%	agent_(Employee_is_american,Employee),
+%   patient_(Employee_is_american,usa).
+
+%not_s3306_c_B(Service,Employer,Employee,Location) :-
+%	service_(Service),person(Employee), person(Employer), location_name(caracas_venezuela), s3306_c_B(Service,Employer,Employee,Location).
+
+%#show s3306_c_B/4.
+
+s3306_c_B_location(Location,Country):-
+	country_(Location,Country),
+	not_country_equals_usa(Country).
+%s3306_c_B_location(Location,Country):-
+%	country_name(Country),location_name(Location),
+%	not_country_(Location,_),
+%	not_location_equals_usa(Location).
+
+country_equals_usa(Country):-
+	country_name(Country),
+	Country = usa.
+
+location_equals_usa(Location):-
+	location_name(Location),
+	Location = usa.
+
+s3306_c_B_agreement(Location):-
+	unemployment_compensation_agreement_(Agreement),
+	agent_(Agreement,usa),
+	agent_(Agreement,Location).
+
+assumption(not_country_(Geographical_location,Country)).
+assumption(not_country_equals_usa(Location)).
+assumption(not_location_equals_usa(Location)).
+
+contrary(not_country_(Geographical_location,Country),country_(Geographical_location,Country)) :-
+    assumption(not_country_(Geographical_location,Country)).
+contrary(not_country_equals_usa(Location),country_equals_usa(Location)) :-
+    assumption(not_country_equals_usa(Location)).
+contrary(not_location_equals_usa(Location),location_equals_usa(Location)) :-
+    assumption(not_location_equals_usa(Location)).
+
+% Text
+% Alice has paid $3200 to Bob for work done from Feb 1st, 2017 to Sep 2nd, 2017, in Caracas, Venezuela. Alice is a citizen of Venezuela, and Bob is an American citizen.
+
+% Question
+% Section 3306(c)(B) applies to Alice employing Bob for the year 2017. Contradiction
+
+% Facts
+person(alice_s3306_c_B_neg).
+person(bob_s3306_c_B_neg).
+
+year(2017).
+date(d2017_01_01).
+date_split(d2017_01_01, 2017, 1, 1).
+date(d2017_02_01).
+date_split(d2017_02_01, 2017, 2, 1).
+date(d2017_09_02).
+date_split(d2017_09_02, 2017, 9, 2).
+date(d2017_12_31).
+date_split(d2017_12_31, 2017, 12, 31).
+
+location_name(caracas_venezuela).
+country_name(venezuela).
+finance(3200).
+
+service_(alice_employer_s3306_c_B_neg).
+patient_(alice_employer_s3306_c_B_neg,alice_s3306_c_B_neg).
+agent_(alice_employer_s3306_c_B_neg,bob_s3306_c_B_neg).
+start_(alice_employer_s3306_c_B_neg,d2017_02_01).
+end_(alice_employer_s3306_c_B_neg,d2017_09_02).
+location_(alice_employer_s3306_c_B_neg,caracas_venezuela).
+country_(caracas_venezuela,venezuela).
+payment_(alice_pays_s3306_c_B_neg).
+agent_(alice_pays_s3306_c_B_neg,alice_s3306_c_B_neg).
+patient_(alice_pays_s3306_c_B_neg,bob_s3306_c_B_neg).
+start_(alice_pays_s3306_c_B_neg,d2017_09_02).
+purpose_(alice_pays_s3306_c_B_neg,alice_employer_s3306_c_B_neg).
+amount_(alice_pays_s3306_c_B_neg,3200).
+citizenship_(alice_is_venezuelan_s3306_c_B_neg).
+agent_(alice_is_venezuelan_s3306_c_B_neg,alice_s3306_c_B_neg).
+patient_(alice_is_venezuelan_s3306_c_B_neg,venezuela).
+citizenship_(bob_is_american_s3306_c_B_neg).
+agent_(bob_is_american_s3306_c_B_neg,bob_s3306_c_B_neg).
+patient_(bob_is_american_s3306_c_B_neg,usa).
+
+% Text
+% Alice has paid $3200 to Bob for work done from Feb 1st, 2017 to Sep 2nd, 2017, in Caracas, Venezuela. Bob is an American citizen and Alice is an American employer.
+
+% Question
+% Section 3306(c)(B) applies to Alice employing Bob for the year 2017. Entailment
+
+% Facts
+person(alice_s3306_c_B_pos).
+person(bob_s3306_c_B_pos).
+
+year(2017).
+date(d2017_01_01).
+date_split(d2017_01_01, 2017, 1, 1).
+date(d2017_02_01).
+date_split(d2017_02_01, 2017, 2, 1).
+date(d2017_09_02).
+date_split(d2017_09_02, 2017, 9, 2).
+date(d2017_12_31).
+date_split(d2017_12_31, 2017, 12, 31).
+
+location_name(caracas_venezuela).
+country_name(venezuela).
+finance(3200).
+
+service_(alice_employer_s3306_c_B_pos).
+patient_(alice_employer_s3306_c_B_pos,alice_s3306_c_B_pos).
+agent_(alice_employer_s3306_c_B_pos,bob_s3306_c_B_pos).
+start_(alice_employer_s3306_c_B_pos,d2017_02_01).
+end_(alice_employer_s3306_c_B_pos,d2017_09_02).
+location_(alice_employer_s3306_c_B_pos,caracas_venezuela).
+country_(caracas_venezuela,venezuela).
+payment_(alice_pays_s3306_c_B_pos).
+agent_(alice_pays_s3306_c_B_pos,alice_s3306_c_B_pos).
+patient_(alice_pays_s3306_c_B_pos,bob_s3306_c_B_pos).
+start_(alice_pays_s3306_c_B_pos,d2017_09_02).
+purpose_(alice_pays_s3306_c_B_pos,alice_employer_s3306_c_B_pos).
+amount_(alice_pays_s3306_c_B_pos,3200).
+american_employer_(alice_is_american_employer_s3306_c_B_pos).
+agent_(alice_is_american_employer_s3306_c_B_pos,alice_s3306_c_B_pos).
+citizenship_(bob_is_american_s3306_c_B_pos).
+agent_(bob_is_american_s3306_c_B_pos,bob_s3306_c_B_pos).
+patient_(bob_is_american_s3306_c_B_pos,usa).
+
+
+location_name(london_uk).
+location_name(kent).
+country_name(uk).
+
+person(charlie).
+agent_(alice_employer_s3306_c_B_pos,charlie).
+citizenship_(charlie_american).
+agent_(charlie_american,charlie).
+patient_(charlie_american,usa).
+
+person(charlie2).
+agent_(alice_employer_s3306_c_B_pos,charlie2).
+citizenship_(charlie_american2).
+agent_(charlie_american2,charlie2).
+patient_(charlie_american2,usa).
+unemployment_compensation_agreement_(charlie2_agreement).
+agent_(charlie2_agreement,venezuela).
+agent_(charlie2_agreement,caracas_venezuela).
+
+person(charlie3).
+agent_(alice_employer_s3306_c_B_pos,charlie3).
+citizenship_(charlie_british).
+agent_(charlie_british,charlie3).
+patient_(charlie_british,uk).
+
+service_(alice_employ).
+person(charlie4).
+patient_(alice_employ,alice_s3306_c_B_pos).
+agent_(alice_employ,charlie4).
+location_(alice_employ,kent).
+country_(kent,uk).
+citizenship_(charlie_american4).
+agent_(charlie_american4,charlie4).
+patient_(charlie_american4,usa).
+unemployment_compensation_agreement_(kent_agreement).
+agent_(kent_agreement,usa).
+agent_(kent_agreement,kent).
+
+person(dave).
+service_(dave_employ).
+agent_(dave_employ,dave).
+patient_(dave_employ, charlie).
+patient_(dave_employ, charlie2).
+patient_(dave_employ).
+american_employer_(dave_employ_american).
+agent_(dave_employ_american,dave).
+location_(dave_employ,london_uk).
+country_(london_uk,uk).
+
+%positives(8):s3306_c_B(alice_employer_s3306_c_B_pos, alice_s3306_c_B_pos, bob_s3306_c_B_pos, caracas_venezuela),s3306_c_B(alice_employer_s3306_c_B_pos, alice_s3306_c_B_pos, bob_s3306_c_B_pos, london_uk),s3306_c_B(alice_employer_s3306_c_B_pos, alice_s3306_c_B_pos, charlie, caracas_venezuela),s3306_c_B(alice_employer_s3306_c_B_pos, alice_s3306_c_B_pos, charlie, london_uk),s3306_c_B(alice_employer_s3306_c_B_pos, alice_s3306_c_B_pos, charlie2, caracas_venezuela),s3306_c_B(alice_employer_s3306_c_B_pos, alice_s3306_c_B_pos, charlie2, london_uk),s3306_c_B(alice_employ, alice_s3306_c_B_pos, charlie4, caracas_venezuela),s3306_c_B(alice_employ, alice_s3306_c_B_pos, charlie4, london_uk)
+%negatives(8):s3306_c_B(alice_employer_s3306_c_B_pos, alice_s3306_c_B_pos, bob_s3306_c_B_pos, caracas_venezuela),s3306_c_B(alice_employer_s3306_c_B_pos, alice_s3306_c_B_pos, bob_s3306_c_B_pos, london_uk),s3306_c_B(alice_employer_s3306_c_B_pos, alice_s3306_c_B_pos, charlie, caracas_venezuela),s3306_c_B(alice_employer_s3306_c_B_pos, alice_s3306_c_B_pos, charlie, london_uk),s3306_c_B(alice_employer_s3306_c_B_pos, alice_s3306_c_B_pos, charlie2, caracas_venezuela),s3306_c_B(alice_employer_s3306_c_B_pos, alice_s3306_c_B_pos, charlie2, london_uk),s3306_c_B(alice_employ, alice_s3306_c_B_pos, charlie4, caracas_venezuela),s3306_c_B(alice_employ, alice_s3306_c_B_pos, charlie4, london_uk)
+
+
+%pos:s3306_c_B(alice_employer_s3306_c_B_pos,alice_s3306_c_B_pos,bob_s3306_c_B_pos,caracas_venezuela).
+%neg:s3306_c_B(alice_employer_s3306_c_B_neg,alice_s3306_c_B_neg,bob_s3306_c_B_neg,caracas_venezuela).
+
+% aba_asp('./experiments/s3306_c_B_learning.bk',[s3306_c_B(alice_employer_s3306_c_B_pos,alice_s3306_c_B_pos,bob_s3306_c_B_pos,caracas_venezuela)],[s3306_c_B(alice_employer_s3306_c_B_neg,alice_s3306_c_B_neg,bob_s3306_c_B_neg,caracas_venezuela)]).

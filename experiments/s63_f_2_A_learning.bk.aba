@@ -9,7 +9,7 @@
 %not_s63_f_2_A(Taxp,Taxy) :- person(Taxp), year(Taxy), not s63_f_2_A(Taxp,Taxy).
 
 %#show is_before/2.
-%#show not_s63_f_2_A/2.
+%#show s63_f_2_A/2.
 
 %is_before(Day1,Day2):-
 %    date_split(Day1,Y1,M1,D1),
@@ -158,7 +158,16 @@ start_(bob_is_blind,d2018_01_01).
 %TEST: aba_asp('./experiments/s63_f_2_A_learning.bk', [s63_f_2_A(alice_s63_f_2_A_neg,2015), s63_f_2_A(alice_s63_f_2_A_neg,2017), s63_f_2_A(alice_s63_f_2_A_neg,2016), s63_f_2_A(alice_s63_f_2_A_neg,2018), s63_f_2_A(alice_s63_f_2_A_neg,2019), s63_f_2_A(alice_s63_f_2_A_pos,2016), s63_f_2_A(alice_s63_f_2_A_pos,2017), s63_f_2_A(alice_s63_f_2_A_pos,2018), s63_f_2_A(alice_s63_f_2_A_pos,2019)], [s63_f_2_A(bob_s63_f_2_A_neg,2015), s63_f_2_A(bob_s63_f_2_A_neg,2017), s63_f_2_A(bob_s63_f_2_A_neg,2016), s63_f_2_A(bob_s63_f_2_A_neg,2018), s63_f_2_A(bob_s63_f_2_A_neg,2019), s63_f_2_A(alice_s63_f_2_A_pos,2015), s63_f_2_A(bob_s63_f_2_A_pos,2015), s63_f_2_A(bob_s63_f_2_A_pos,2017), s63_f_2_A(bob_s63_f_2_A_pos,2016), s63_f_2_A(bob_s63_f_2_A_pos,2018), s63_f_2_A(bob_s63_f_2_A_pos,2019)]).
 %aba_asp('./experiments/s63_f_2_A_learning.bk',[s63_f_2_A(alice_s63_f_2_A_neg,2015), s63_f_2_A(alice_s63_f_2_A_neg,2017), s63_f_2_A(alice_s63_f_2_A_neg,2016), s63_f_2_A(alice_s63_f_2_A_pos,2016), s63_f_2_A(alice_s63_f_2_A_pos,2017)],[s63_f_2_A(bob_s63_f_2_A_neg,2015), s63_f_2_A(alice_s63_f_2_A_pos,2015), s63_f_2_A(bob_s63_f_2_A_pos,2015), s63_f_2_A(bob_s63_f_2_A_neg,2017), s63_f_2_A(bob_s63_f_2_A_pos,2017), s63_f_2_A(bob_s63_f_2_A_neg,2016), s63_f_2_A(bob_s63_f_2_A_pos,2016)])
 
+%positives(9):s63_f_2_A(alice_s63_f_2_A_neg,2015), s63_f_2_A(alice_s63_f_2_A_neg,2017), s63_f_2_A(alice_s63_f_2_A_pos,2017), s63_f_2_A(alice_s63_f_2_A_pos,2016), s63_f_2_A(alice_s63_f_2_A_neg,2016), s63_f_2_A(alice_s63_f_2_A_neg,2018), s63_f_2_A(alice_s63_f_2_A_pos,2018), s63_f_2_A(alice_s63_f_2_A_neg,2019), s63_f_2_A(alice_s63_f_2_A_pos,2019)
+%negatives(11):s63_f_2_A(bob_s63_f_2_A_neg,2015), s63_f_2_A(bob_s63_f_2_A_neg,2017), s63_f_2_A(bob_s63_f_2_A_neg,2016), s63_f_2_A(bob_s63_f_2_A_neg,2018), s63_f_2_A(bob_s63_f_2_A_neg,2019), s63_f_2_A(alice_s63_f_2_A_pos,2015), s63_f_2_A(bob_s63_f_2_A_pos,2015), s63_f_2_A(bob_s63_f_2_A_pos,2017), s63_f_2_A(bob_s63_f_2_A_pos,2016), s63_f_2_A(bob_s63_f_2_A_pos,2018), s63_f_2_A(bob_s63_f_2_A_pos,2019)
+
+
 
 %aba_asp('./experiments/s63_f_2_A_learning.bk',[s63_f_2_A(alice_s63_f_2_A_pos,2017)],[s63_f_2_A(bob_s63_f_2_A_neg,2017)])
 
 %aba_asp('./experiments/s63_f_2_A_learning.bk', [s63_f_2_A(alice,2017),s63_f_2_A(alice,2016),s63_f_2_A(bob,2018),s63_f_2_A(bob,2019),s63_f_2_A(alice_s63_f_2_A_neg,2015), s63_f_2_A(alice_s63_f_2_A_neg,2017), s63_f_2_A(alice_s63_f_2_A_neg,2016), s63_f_2_A(alice_s63_f_2_A_neg,2018), s63_f_2_A(alice_s63_f_2_A_neg,2019), s63_f_2_A(alice_s63_f_2_A_pos,2016), s63_f_2_A(alice_s63_f_2_A_pos,2017), s63_f_2_A(alice_s63_f_2_A_pos,2018), s63_f_2_A(alice_s63_f_2_A_pos,2019)], [s63_f_2_A(bob_s63_f_2_A_neg,2015), s63_f_2_A(bob_s63_f_2_A_neg,2017), s63_f_2_A(bob_s63_f_2_A_neg,2016), s63_f_2_A(bob_s63_f_2_A_neg,2018), s63_f_2_A(bob_s63_f_2_A_neg,2019), s63_f_2_A(alice_s63_f_2_A_pos,2015), s63_f_2_A(bob_s63_f_2_A_pos,2015), s63_f_2_A(bob_s63_f_2_A_pos,2017), s63_f_2_A(bob_s63_f_2_A_pos,2016), s63_f_2_A(bob_s63_f_2_A_pos,2018), s63_f_2_A(bob_s63_f_2_A_pos,2019),s63_f_2_A(bob,2015),s63_f_2_A(bob,2017),s63_f_2_A(bob,2016),s63_f_2_A(alice,2015)]).
+
+%ACCURACY_BRAVE: 19/19
+%ACCURACY_CAUTIOUS: 19/19
+%WRONG POSITIVES: []
+%WRONG NEGATIVES: []

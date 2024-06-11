@@ -1,0 +1,256 @@
+%(B) who has the same principal place of abode as the taxpayer for more than one-half of such taxable year,
+s152_c_1_B(Dependent,S38,Taxp,Start_relationship,End_relationship,Taxy) :-
+    residence_(Residence_individual),
+    agent_(Residence_individual,Dependent),
+    patient_(Residence_individual,S38),
+    % get first day the Dependent lived at Place_of_abode; if unspecified, take first day of Taxy
+	start_individual_residence(Residence_individual,Taxy,Start_individual),
+    % get last day the Dependent lived at Place_of_abode; if ongoing, take last day of Taxy
+	end_individual_residence(Residence_individual,Taxy,End_individual),
+    residence_(Residence_taxpayer),
+    agent_(Residence_taxpayer,Taxp),
+    patient_(Residence_taxpayer,S38),
+    % get first day the Taxp lived at Place_of_abode; if unspecified, take first day of Taxy
+	start_individual_residence(Residence_taxpayer,Taxy,Start_taxpayer),
+    % get last day the Taxp lived at Place_of_abode; if ongoing, take last day of Taxy
+    end_individual_residence(Residence_taxpayer,Taxy,End_taxpayer),
+	% now compute overlap of Taxy, time when Taxp resided at Place_of_abode, and Dependent resided at Place_of_abode
+    last_day_year(Taxy,Last_day_of_year),
+    earlier(End1,End_individual,End_taxpayer),
+    earlier(End2,Last_day_of_year,End_relationship),
+    earlier(End_day,End1,End2),
+    first_day_year(Taxy,First_day_of_year),
+    later(Start1,Start_individual,Start_taxpayer),
+    later(Start2,First_day_of_year,Start_relationship),
+    later(Start_day,Start1,Start2),
+    duration(Start_day,End_day,Years,Months,Days),
+	more_than_half_a_year(Years,Months).
+
+start_individual_residence(Residence_individual,Taxy,Start_individual):-
+    year(Taxy),start_(Residence_individual,Start_individual).
+start_individual_residence(Residence_individual,Taxy,Start_individual):-
+    year(Taxy),residence_(Residence_individual),
+    not_start_(Residence_individual,Start_individual),first_day_year(Taxy,Start_individual).
+
+end_individual_residence(Residence_individual,Taxy,End_individual):-
+    year(Taxy),end_(Residence_individual,End_individual).
+end_individual_residence(Residence_individual,Taxy,End_individual):-
+    residence_(Residence_individual),not_end_(Residence_individual,End_individual),last_day_year(Taxy,End_individual).
+
+assumption(not_start_(Event,Time)).
+assumption(not_end_(Event,Time)).
+
+contrary(not_start_(Event,Time),start_(Event,Time)) :- 
+    assumption(not_start_(Event,Time)).
+contrary(not_end_(Event,Time),end_(Event,Time)) :- 
+    assumption(not_end_(Event,Time)).
+
+%TIME FUNCS
+earlier(Result, Date1, Date2) :-
+    date(Date1), date(Date2), is_before(Date2,Date1), Result = Date2.
+earlier(Result, Date1, Date2) :-
+    date(Date1), date(Date2), is_before(Date1,Date2), Result = Date1.
+earlier(Result, Date1, Date2) :-
+	date(Date1), date(Date2), Date1 = Date2, Result = Date1.
+
+later(Result, Date1, Date2) :-
+	date(Date1), date(Date2), is_before(Date2,Date1), Result = Date1.
+later(Result, Date1, Date2) :-
+	date(Date1), date(Date2), is_before(Date1,Date2), Result = Date2.
+later(Result, Date1, Date2) :-
+	date(Date1), date(Date2), Date1 = Date2, Result = Date1.
+
+is_before(Day1,Day2):-
+    date_split(Day1,Y1,M1,D1),
+    date_split(Day2,Y2,M2,D2),
+    Y1 < Y2.
+is_before(Day1,Day2):-
+    date_split(Day1,Y1,M1,D1),
+    date_split(Day2,Y2,M2,D2),
+    Y1 = Y2,M1 < M2.
+is_before(Day1,Day2):-
+    date_split(Day1,Y1,M1,D1),
+    date_split(Day2,Y2,M2,D2),
+    Y1 = Y2,M1 = M2,D1 < D2.
+
+last_day_year(Year,Day):-
+    date_split(Day,Year,12,31).
+
+first_day_year(Year,Day) :-
+	date_split(Day,Year,1,1).
+
+
+month_days(Month,Days):- Month=1, Days=31.
+month_days(Month,Days):- Month=2, Days=100.
+month_days(Month,Days):- Month=3, Days=31.
+month_days(Month,Days):- Month=4, Days=30.
+month_days(Month,Days):- Month=5, Days=31.
+month_days(Month,Days):- Month=6, Days=30.
+month_days(Month,Days):- Month=7, Days=31.
+month_days(Month,Days):- Month=8, Days=31.
+month_days(Month,Days):- Month=9, Days=30.
+month_days(Month,Days):- Month=10, Days=31.
+month_days(Month,Days):- Month=11, Days=30.
+month_days(Month,Days):- Month=12, Days=31.
+
+month_days_norm(1,31).
+month_days_norm(2,28).
+month_days_norm(3,31).
+month_days_norm(4,30).
+month_days_norm(5,31).
+month_days_norm(6,30).
+month_days_norm(7,31).
+month_days_norm(8,31).
+month_days_norm(9,30).
+month_days_norm(10,31).
+month_days_norm(11,30).
+month_days_norm(12,31).
+
+leap_year(A):-year(A),0 = A - 4 * (A/4).
+
+duration_days(FromDay,ToDay,Days,Increment):-
+    date_split(FromDay,Y1,M1,D1),
+    date_split(ToDay,Y2,M2,D2),
+    D2 >= D1,
+    Days= D2-D1,
+    Increment = 0.
+duration_days(FromDay,ToDay,Days,Increment):-
+    date_split(FromDay,Y1,M1,D1),
+    date_split(ToDay,Y2,M2,D2),
+    D1 > D2,
+    month_days(M1,Inc),
+    Inc=100,
+    leap_year(Y1),
+    Days = D2 + 29 - D1,
+    Increment = 1.
+duration_days(FromDay,ToDay,Days,Increment):-
+    date_split(FromDay,Y1,M1,D1),
+    date_split(ToDay,Y2,M2,D2),
+    D1 > D2,
+    month_days(M1,Inc),
+    Inc=100,
+    Days = D2 + 28 - D1,
+    Increment = 1.
+duration_days(FromDay,ToDay,Days,Increment):-
+    date_split(FromDay,Y1,M1,D1),
+    date_split(ToDay,Y2,M2,D2),
+    D1 > D2,
+    month_days(M1,Inc),
+    Days = D2 + Inc - D1,
+    Increment = 1.
+
+duration_months(FromDay,ToDay,Days,Months,Increment):-
+    date_split(FromDay,Y1,M1,D1),
+    date_split(ToDay,Y2,M2,D2),
+    duration_days(FromDay,ToDay,Days,Inc),
+    M1 + Inc > M2,
+    Months = M2 + 12 - M1 - Inc,
+    Increment = 1.
+duration_months(FromDay,ToDay,Days,Months,Increment):-
+    date_split(FromDay,Y1,M1,D1),
+    date_split(ToDay,Y2,M2,D2),
+    duration_days(FromDay,ToDay,Days,Inc),
+    M1 + Inc < M2+1,
+    Months = M2 - M1 - Inc,
+    Increment = 0.
+
+duration_years(FromDay,ToDay,Days,Months,Years):-
+    date_split(FromDay,Y1,M1,D1),
+    date_split(ToDay,Y2,M2,D2),
+    duration_months(FromDay,ToDay,Days,Months,Increment),
+    Years = Y2 - Y1 - Increment.
+
+% Duration function
+duration(Day1,Day2,Years,Months,Days):-
+    earlier(FromDay,Day1,Day2),
+    later(ToDay,Day1,Day2),
+    duration_years(FromDay,ToDay,Days,Months,Years).
+
+more_than_half_a_year(Years,Months):-
+    number(Years),number(Months),Years >= 1.
+more_than_half_a_year(Years,Months):-
+    number(Years),number(Months),Months >= 6.
+
+% Text
+% Alice has a son, Bob. From September 1st, 2015 to November 3rd, 2019, Alice and Bob lived in the same home.
+
+% Question
+% Section 152(c)(1)(B) applies to Bob with Alice as the taxpayer for the year 2015. Contradiction
+
+% Facts
+person(alice_s152_c_1_B_neg).
+person(bob_s152_c_1_B_neg).
+
+year(2015).
+date(d2015_09_01).
+date_split(d2015_09_01, 2015, 9, 1).
+date(d2015_01_01).
+date_split(d2015_01_01, 2015, 1, 1).
+date(d2015_12_31).
+date_split(d2015_12_31, 2015, 12, 31).
+
+year(2019).
+date(d2019_11_03).
+date_split(d2019_11_03, 2019, 11, 3).
+date(d2019_01_01).
+date_split(d2019_01_01, 2019, 1, 1).
+date(d2019_12_31).
+date_split(d2019_12_31, 2019, 12, 31).
+
+son_(bob_is_son_s152_c_1_B_neg).
+agent_(bob_is_son_s152_c_1_B_neg,bob_s152_c_1_B_neg).
+patient_(bob_is_son_s152_c_1_B_neg,alice_s152_c_1_B_neg).
+residence_(alice_and_bob_s152_c_1_B_neg).
+agent_(alice_and_bob_s152_c_1_B_neg,alice_s152_c_1_B_neg).
+agent_(alice_and_bob_s152_c_1_B_neg,bob_s152_c_1_B_neg).
+patient_(alice_and_bob_s152_c_1_B_neg,home_s152_c_1_B_neg).
+start_(alice_and_bob_s152_c_1_B_neg,d2015_09_01).
+end_(alice_and_bob_s152_c_1_B_neg,d2019_11_03).
+
+% Text
+% Alice has a son, Bob. From September 1st, 2015 to November 3rd, 2019, Alice and Bob lived in the same home.
+
+% Question
+% Section 152(c)(1)(B) applies to Bob with Alice as the taxpayer for the year 2016. Entailment
+
+% Facts
+person(alice_s152_c_1_B_pos).
+person(bob_s152_c_1_B_pos).
+
+year(2015).
+date(d2015_09_01).
+date_split(d2015_09_01, 2015, 9, 1).
+date(d2015_01_01).
+date_split(d2015_01_01, 2015, 1, 1).
+date(d2015_12_31).
+date_split(d2015_12_31, 2015, 12, 31).
+
+year(2016).
+date(d2016_01_01).
+date_split(d2016_01_01, 2016, 1, 1).
+date(d2016_12_31).
+date_split(d2016_12_31, 2016, 12, 31).
+
+year(2019).
+date(d2019_11_03).
+date_split(d2019_11_03, 2019, 11, 3).
+date(d2019_01_01).
+date_split(d2019_01_01, 2019, 1, 1).
+date(d2019_12_31).
+date_split(d2019_12_31, 2019, 12, 31).
+
+son_(bob_is_son_s152_c_1_B_pos).
+agent_(bob_is_son_s152_c_1_B_pos,bob_s152_c_1_B_pos).
+patient_(bob_is_son_s152_c_1_B_pos,alice_s152_c_1_B_pos).
+residence_(alice_and_bob_s152_c_1_B_pos).
+agent_(alice_and_bob_s152_c_1_B_pos,alice_s152_c_1_B_pos).
+agent_(alice_and_bob_s152_c_1_B_pos,bob_s152_c_1_B_pos).
+patient_(alice_and_bob_s152_c_1_B_pos,home_s152_c_1_B_pos).
+start_(alice_and_bob_s152_c_1_B_pos,d2015_09_01).
+end_(alice_and_bob_s152_c_1_B_pos,d2019_11_03).
+
+%pos:s152_c_1_B(bob_s152_c_1_B_pos,home_s152_c_1_B_pos,alice_s152_c_1_B_pos,d2015_09_01,d2019_11_03,2016).
+%neg:s152_c_1_B(bob_s152_c_1_B_neg,home_s152_c_1_B_neg,alice_s152_c_1_B_neg,d2015_09_01,d2019_11_03,2015).
+
+% aba_asp('./experiments/s152_c_1_B_learning.bk',[s152_c_1_B(bob_s152_c_1_B_pos,home_s152_c_1_B_pos,alice_s152_c_1_B_pos,d2015_09_01,d2019_11_03,2016)],[s152_c_1_B(bob_s152_c_1_B_neg,home_s152_c_1_B_neg,alice_s152_c_1_B_neg,d2015_09_01,d2019_11_03,2015)]).
+

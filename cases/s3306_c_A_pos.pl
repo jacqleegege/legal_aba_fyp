@@ -39,3 +39,4 @@ amount_(alice_pays_s3306_c_A_pos,3200).
 % Test
 :- s3306_c_A(alice_employer_s3306_c_A_pos,alice_s3306_c_A_pos,bob_s3306_c_A_pos).
 :- halt.
+ 

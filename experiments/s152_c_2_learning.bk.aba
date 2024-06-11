@@ -1,0 +1,228 @@
+%For purposes of paragraph (1)(A), an individual bears a relationship to the taxpayer described in this paragraph if such individual is-
+s152_c_2(Dependent,Taxp,Start_relationship,End_relationship) :-
+    s152_c_2_A(Dependent,Taxp,_,Start_relationship,End_relationship).
+s152_c_2(Dependent,Taxp,Start_relationship,End_relationship) :-
+    s152_c_2_B(Dependent,Taxp,_,Start_relationship,End_relationship).
+
+%(A) a child of the taxpayer or a descendant of such a child, or
+s152_c_2_A(Dependent,Taxp,Childc2a,Start_relationship,End_relationship) :-
+	is_child_of(Childc2a,Taxp,Start_child,End_child),
+    Dependent=Childc2a,
+    Start_relationship=Start_child,
+    End_relationship=End_child.
+s152_c_2_A(Dependent,Taxp,Childc2a,Start_relationship,End_relationship) :-
+    is_child_of(Childc2a,Taxp,Start_child,End_child),
+    not_same_person(Dependent,Childc2a),
+    is_descendent_of(Dependent,Childc2a,Start_relationship,End_relationship).
+
+is_descendent_of(X,Y,Day_start,Day_end) :- % X is a descendent of Y if
+	% as a base case, X is a descendent of Y if X is a child of Y
+    is_child_of(X,Y,Day_start,Day_end).
+is_descendent_of(X,Y,Day_start,Day_end) :- 
+	% else
+    is_child_of(Z,Y,_,_), % Z is a child of Y and
+    is_descendent_of(X,Z,Day_start,Day_end). % X is a descendent of Z
+
+is_child_of(X,Y,Day_start,Day_end) :- % X is the child of Y from Day_start to Day_end if...
+	% what kind of relationship exists between X and Y
+	child_or_parent(X,Y,Relationship),
+    not_same_person(X,Y),
+	relationship_start(Relationship,Day_start),
+	% if no end to Relationship then it's still ongoing
+    relationship_end(Relationship,Day_end).
+
+child_or_parent(X,Y,Relationship):-
+    % X is child of Y, or
+    son_or_daughter(Relationship),
+    agent_(Relationship,X),
+    patient_(Relationship,Y).
+child_or_parent(X,Y,Relationship):-
+    % Y is parent of X
+    father_or_mother(Relationship),
+    agent_(Relationship,Y),
+    patient_(Relationship,X).
+
+son_or_daughter(Relationship):-
+    son_(Relationship).
+son_or_daughter(Relationship):-
+    daughter_(Relationship).
+
+father_or_mother(Relationship):-
+    father_(Relationship).
+father_or_mother(Relationship):-
+    mother_(Relationship).
+
+relationship(Relationship):-
+    agent_(Relationship,_).
+relationship(Relationship):-
+    patient_(Relationship,_).
+
+relationship_start(Relationship,Day_start):-
+    relationship(Relationship),date(Day_start),not_start_(Relationship,_).
+relationship_start(Relationship,Day_start):-   
+    start_(Relationship,Day_start).
+
+relationship_end(Relationship,Day_end):-
+    relationship(Relationship),date(Day_end),not_end_(Relationship,_).
+relationship_end(Relationship,Day_end):-
+    end_(Relationship,Day_end). 
+
+same_person(P1,P2):-
+    person(P1),person(P2),P1=P2.
+
+assumption(not_same_person(P1,P2)).
+assumption(not_start_(Event,Time)).
+assumption(not_end_(Event,Time)).
+
+contrary(not_same_person(P1,P2),same_person(P1,P2)):-
+    assumption(not_same_person(P1,P2)).
+contrary(not_start_(Event,Time),start_(Event,Time)) :- 
+    assumption(not_start_(Event,Time)).
+contrary(not_end_(Event,Time),end_(Event,Time)) :- 
+    assumption(not_end_(Event,Time)).
+
+%(B) a brother, sister, stepbrother, or stepsister of the taxpayer or a descendant of any such relative.
+s152_c_2_B(S65,Taxp,Bsssc2b,Start_relationship,End_relationship) :-
+	% a brother, sister, stepbrother, or stepsister of the taxpayer
+	s152_c_2_B_sibling(Bsssc2b,Taxp,Start_relationship,End_relationship),
+    s152_c_2_B_S65(S65,Bsssc2b,Start_relationship,End_relationship).
+
+s152_c_2_B_sibling(Bsssc2b,Taxp,Start_relationship,End_relationship):-
+    is_sibling_of(Bsssc2b,Taxp,Start_relationship,End_relationship).
+s152_c_2_B_sibling(Bsssc2b,Taxp,Start_relationship,End_relationship):-
+    is_stepsibling_of(Bsssc2b,Taxp,Start_relationship,End_relationship).
+
+s152_c_2_B_S65(S65,Bsssc2b,Start_relationship,End_relationship):-
+    person(Bsssc2b),date(Start_relationship),date(End_relationship),
+    S65 = Bsssc2b.
+s152_c_2_B_S65(S65,Bsssc2b,Start_relationship,End_relationship):-
+    % or a descendant of any such relative
+    is_descendent_of(S65,Bsssc2b,Start_relationship,End_relationship).
+
+is_sibling_of(X,Y,Day_start,Day_end) :- % X is the sibling of Y on from Day_start to Day_end if...
+	% there is a brother or sister relationship
+	brother_and_sister(Relationship),
+	% X is somehow involved in it
+	agent_or_patient(Relationship,X),
+	% and so is Y
+    agent_or_patient(Relationship,Y),
+    not_same_person(X,Y),
+	relationship_start(Relationship,Day_start),
+	% if no end to Relationship then it's still ongoing
+	relationship_end(Relationship,Day_end).
+
+brother_and_sister(Relationship):-
+    brother_(Relationship).
+brother_and_sister(Relationship):-
+    sister_(Relationship).
+
+agent_or_patient(Relationship,X):-
+    agent_(Relationship,X).
+agent_or_patient(Relationship,X):-
+    patient_(Relationship,X).
+
+is_stepsibling_of(X,Y,Day_start,Day_end) :- % X is stepsibling of Y if
+	is_child_of(Y,ParentY,Day_start_x,Day_end_x), % one of the parents of Y
+	is_child_of(X,ParentX,Day_start_y,Day_end_y), % and one of the parents of X
+	marriage_(Marriage), % got married
+	agent_(Marriage,ParentY),
+	agent_(Marriage,ParentX),
+    not_same_person(X,Y),
+    wedding_start(Marriage,Start_time),
+    later(Day_start_2,Day_start_x,Day_start_y),
+    later(Day_start,Day_start_2,Start_time),
+    wedding_end(Marriage,End_time),
+    earlier(Day_end_2,Day_end_x,Day_end_y),
+    earlier(Day_end,Day_end_2,End_time).
+
+wedding_start(Marriage,Day_start):-
+    marriage_(Marriage),date(Day_start),not_start_(Marriage,_).
+wedding_start(Marriage,Day_start):-   
+    start_(Marriage,Day_start).
+
+wedding_end(Marriage,Day_end):-
+    marriage_(Marriage),date(Day_end),not_end_(Marriage,_).
+wedding_end(Marriage,Day_end):-
+    end_(Marriage,Day_end).
+
+earlier(Result, Date1, Date2) :-
+    date(Date1), date(Date2), is_before(Date2,Date1), Result = Date2.
+earlier(Result, Date1, Date2) :-
+    date(Date1), date(Date2), is_before(Date1,Date2), Result = Date1.
+earlier(Result, Date1, Date2) :-
+	date(Date1), date(Date2), Date1 = Date2, Result = Date1.
+
+later(Result, Date1, Date2) :-
+	date(Date1), date(Date2), is_before(Date2,Date1), Result = Date1.
+later(Result, Date1, Date2) :-
+	date(Date1), date(Date2), is_before(Date1,Date2), Result = Date2.
+later(Result, Date1, Date2) :-
+	date(Date1), date(Date2), Date1 = Date2, Result = Date1.
+
+is_before(Day1,Day2):-
+    date_split(Day1,Y1,M1,D1),
+    date_split(Day2,Y2,M2,D2),
+    Y1 < Y2.
+is_before(Day1,Day2):-
+    date_split(Day1,Y1,M1,D1),
+    date_split(Day2,Y2,M2,D2),
+    Y1 = Y2,M1 < M2.
+is_before(Day1,Day2):-
+    date_split(Day1,Y1,M1,D1),
+    date_split(Day2,Y2,M2,D2),
+    Y1 = Y2,M1 = M2,D1 < D2.
+
+% Text
+% Alice has a son, Bob, who was born January 31st, 2014.
+
+% Question
+% Alice bears a relationship to Bob under section 152(c)(2). Contradiction
+
+% Facts
+person(alice_s152_c_2_neg).
+person(bob_s152_c_2_neg).
+
+year(2014).
+date(d2014_01_31).
+date_split(d2014_01_31, 2014, 1, 31).
+date(d2014_01_01).
+date_split(d2014_01_01, 2014, 1, 1).
+date(d2014_12_31).
+date_split(d2014_12_31, 2014, 12, 31).
+date(d2100_01_01).
+date_split(d2100_01_01, 2100, 1, 1).
+
+son_(alice_and_bob_s152_c_2_neg).
+agent_(alice_and_bob_s152_c_2_neg,bob_s152_c_2_neg).
+patient_(alice_and_bob_s152_c_2_neg,alice_s152_c_2_neg).
+start_(alice_and_bob_s152_c_2_neg,d2014_01_31).
+
+% Text
+% Alice has a son, Bob, who was born January 31st, 2014.
+
+% Question
+% Bob bears a relationship to Alice under section 152(c)(2). Entailment
+
+% Facts
+person(alice_s152_c_2_pos).
+person(bob_s152_c_2_pos).
+
+year(2014).
+date(d2014_01_31).
+date_split(d2014_01_31, 2014, 1, 31).
+date(d2014_01_01).
+date_split(d2014_01_01, 2014, 1, 1).
+date(d2014_12_31).
+date_split(d2014_12_31, 2014, 12, 31).
+date(d2100_01_01).
+date_split(d2100_01_01, 2100, 1, 1).
+
+son_(alice_and_bob_s152_c_2_pos).
+agent_(alice_and_bob_s152_c_2_pos,bob_s152_c_2_pos).
+patient_(alice_and_bob_s152_c_2_pos,alice_s152_c_2_pos).
+start_(alice_and_bob_s152_c_2_pos,d2014_01_31).
+
+%pos:s152_c_2(bob_s152_c_2_pos,alice_s152_c_2_pos,d2014_01_31,d2100_01_01).
+%neg:s152_c_2(alice_s152_c_2_neg,bob_s152_c_2_neg,d2014_01_31,d2100_01_01).
+
+% aba_asp('./experiments/s152_c_2_learning.bk',[s152_c_2(bob_s152_c_2_pos,alice_s152_c_2_pos,d2014_01_31,d2100_01_01)],[s152_c_2(alice_s152_c_2_neg,bob_s152_c_2_neg,d2014_01_31,d2100_01_01)]).

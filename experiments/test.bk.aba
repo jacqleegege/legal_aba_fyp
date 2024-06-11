@@ -9,8 +9,39 @@ cool(stanley__wisconsin__usa).
 
 % UNABLE TO LEARN INCOMPLETE HEAD RULE
 
-ok(A):-slay(A),coolio(A).
+%ok(A):-slay(A),coolio(A).
 
 %coolio(A):-cool(A).
 
 % ABLE TO LEARN IF RULE IN BODY IS INCOMPLETE
+
+year(2000).
+year(1000).
+year(3000).
+year(5).
+year(2001).
+
+%s151_d_1(Ea) :-
+%    Ea = 2000.
+
+% NO EQUALITY???
+
+relationship_end(Relationship, Day_end) :- end_(Relationship, Day_end).
+relationship_end(Relationship, Day_end) :-
+    relationship(Relationship),
+    date(Day_end),
+    not end_(Relationship, _).
+
+relationship(rel1).
+relationship(rel2).
+
+date(d2024_05_31).
+date(d2024_06_01).
+
+end_(rel1, d2024_05_31).
+
+% Query:
+#show relationship_end/2.
+
+
+

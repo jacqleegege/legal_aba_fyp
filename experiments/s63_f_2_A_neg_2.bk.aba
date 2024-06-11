@@ -1,0 +1,170 @@
+%(A) for himself if he is blind at the close of the taxable year, and
+%s63_f_2_A(Taxp,Taxy) :-
+%    blindness_(Taxp_is_blind),
+%    agent_(Taxp_is_blind,Taxp),
+%    start_(Taxp_is_blind,Start_time),
+%    last_day_year(Taxy,Last_day_year),
+%    is_before(Start_time,Last_day_year).
+
+%not_s63_f_2_A(Taxp,Taxy) :- person(Taxp), year(Taxy), not s63_f_2_A(Taxp,Taxy).
+
+%#show is_before/2.
+%#show s63_f_2_A/2.
+
+%is_before(Day1,Day2):-
+%    date_split(Day1,Y1,M1,D1),
+%    date_split(Day2,Y2,M2,D2),
+%    Y1 < Y2.
+%is_before(Day1,Day2):-
+%    date_split(Day1,Y1,M1,D1),
+%    date_split(Day2,Y2,M2,D2),
+%    Y1 = Y2,M1 < M2.
+%is_before(Day1,Day2):-
+%    date_split(Day1,Y1,M1,D1),
+%    date_split(Day2,Y2,M2,D2),
+%    Y1 = Y2,M1 = M2,D1 < D2.
+
+%last_day_year(Year,Day):-
+%    date_split(Day,Year,12,31).
+
+last_day_year(2015,d2015_12_31).
+last_day_year(2017,d2017_12_31).
+last_day_year(2016,d2016_12_31).
+last_day_year(2018,d2018_12_31).
+last_day_year(2019,d2019_12_31).
+
+is_before(d2015_04_19,d2015_12_31).
+is_before(d2017_02_03,d2017_12_31).
+is_before(d2016_03_20,d2016_12_31).
+is_before(d2015_04_19,d2017_02_03).
+is_before(d2015_12_31,d2017_02_03).
+is_before(d2016_03_20,d2017_02_03).
+is_before(d2016_12_31,d2017_02_03).
+is_before(d2015_04_19,d2017_12_31).
+is_before(d2015_12_31,d2017_12_31).
+is_before(d2016_03_20,d2017_12_31).
+is_before(d2016_12_31,d2017_12_31).
+is_before(d2015_04_19,d2016_03_20).
+is_before(d2015_12_31,d2016_03_20).
+is_before(d2015_04_19,d2016_12_31).
+is_before(d2015_12_31,d2016_12_31).
+is_before(d2015_04_19,d2018_12_31).
+is_before(d2015_12_31,d2018_12_31).
+is_before(d2017_02_03,d2018_12_31).
+is_before(d2017_12_31,d2018_12_31).
+is_before(d2016_03_20,d2018_12_31).
+is_before(d2016_12_31,d2018_12_31).
+is_before(d2015_04_19,d2019_12_31).
+is_before(d2015_12_31,d2019_12_31).
+is_before(d2017_02_03,d2019_12_31).
+is_before(d2017_12_31,d2019_12_31).
+is_before(d2016_03_20,d2019_12_31).
+is_before(d2016_12_31,d2019_12_31).
+is_before(d2018_12_31,d2019_12_31).
+
+
+% Text
+% In 2017, Alice was paid $33200. Alice and Bob have been married since Feb 3rd, 2017. Alice and Bob file separate returns in 2017. Alice has been blind since April 19, 2015.
+
+% Question
+% Section 63(f)(2)(A) applies to Bob in 2017. Contradiction
+
+% Facts
+person(alice_s63_f_2_A_neg).
+person(bob_s63_f_2_A_neg).
+finance(33200).
+
+year(2015).
+date(d2015_04_19).
+date_split(d2015_04_19, 2015, 4, 19).
+date(d2015_12_31).
+date_split(d2015_12_31, 2015, 12, 31).
+
+year(2017).
+date(d2017_02_03).
+date_split(d2017_02_03, 2017, 2, 3).
+date(d2017_12_31).
+date_split(d2017_12_31, 2017, 12, 31).
+
+
+payment_(alice_is_paid_s63_f_2_A_neg).
+patient_(alice_is_paid_s63_f_2_A_neg,alice_s63_f_2_A_neg).
+start_(alice_is_paid_s63_f_2_A_neg,d2017_12_31).
+amount_(alice_is_paid_s63_f_2_A_neg,33200).
+marriage_(alice_and_bob_s63_f_2_A_neg).
+agent_(alice_and_bob_s63_f_2_A_neg,alice_s63_f_2_A_neg).
+agent_(alice_and_bob_s63_f_2_A_neg,bob_s63_f_2_A_neg).
+start_(alice_and_bob_s63_f_2_A_neg,d2017_02_03).
+blindness_(alice_is_blind_s63_f_2_A_neg).
+agent_(alice_is_blind_s63_f_2_A_neg,alice_s63_f_2_A_neg).
+start_(alice_is_blind_s63_f_2_A_neg,d2015_04_19).
+
+% Text
+% In 2017, Alice was paid $33200. Alice and Bob have been married since Feb 3rd, 2017. Alice has been blind since March 20, 2016.
+
+% Question
+% Section 63(f)(2)(A) applies to Alice in 2017. Entailment
+
+% Facts
+person(alice_s63_f_2_A_pos).
+person(bob_s63_f_2_A_pos).
+finance(33200).
+
+year(2016).
+date(d2016_03_20).
+date_split(d2016_03_20, 2016, 3, 20).
+date(d2016_12_31).
+date_split(d2016_12_31, 2016, 12, 31).
+
+year(2017).
+date(d2017_02_03).
+date_split(d2017_02_03, 2017, 2, 3).
+date(d2017_12_31).
+date_split(d2017_12_31, 2017, 12, 31).
+
+year(2018).
+date(d2018_12_31).
+date_split(d2018_12_31, 2018, 12, 31).
+
+year(2019).
+date(d2019_12_31).
+date_split(d2019_12_31, 2019, 12, 31).
+
+payment_(alice_is_paid_s63_f_2_A_pos).
+patient_(alice_is_paid_s63_f_2_A_pos,alice_s63_f_2_A_pos).
+start_(alice_is_paid_s63_f_2_A_pos,d2017_12_31).
+amount_(alice_is_paid_s63_f_2_A_pos,33200).
+marriage_(alice_and_bob_s63_f_2_A_pos).
+agent_(alice_and_bob_s63_f_2_A_pos,alice_s63_f_2_A_pos).
+agent_(alice_and_bob_s63_f_2_A_pos,bob_s63_f_2_A_pos).
+start_(alice_and_bob_s63_f_2_A_pos,d2017_02_03).
+blindness_(alice_is_blind_s63_f_2_A_pos).
+agent_(alice_is_blind_s63_f_2_A_pos,alice_s63_f_2_A_pos).
+start_(alice_is_blind_s63_f_2_A_pos,d2016_03_20).
+
+blindness_(alice_is_blind).
+agent_(alice_is_blind,alice).
+start_(alice_is_blind,d2016_01_01).
+%pos: s63_f_2_A(alice,2017),s63_f_2_A(alice,2016)
+%neg: s63_f_2_A(alice,2015)
+
+blindness_(bob_is_blind).
+agent_(bob_is_blind,bob).
+start_(bob_is_blind,d2018_01_01).
+%pos: s63_f_2_A(bob,2018),s63_f_2_A(bob,2019)
+%neg: s63_f_2_A(bob,2015),s63_f_2_A(bob,2017),s63_f_2_A(bob,2016)
+
+
+%TEST: aba_asp('./experiments/s63_f_2_A_learning.bk', [s63_f_2_A(alice_s63_f_2_A_neg,2015), s63_f_2_A(alice_s63_f_2_A_neg,2017), s63_f_2_A(alice_s63_f_2_A_neg,2016), s63_f_2_A(alice_s63_f_2_A_neg,2018), s63_f_2_A(alice_s63_f_2_A_neg,2019), s63_f_2_A(alice_s63_f_2_A_pos,2016), s63_f_2_A(alice_s63_f_2_A_pos,2017), s63_f_2_A(alice_s63_f_2_A_pos,2018), s63_f_2_A(alice_s63_f_2_A_pos,2019)], [s63_f_2_A(bob_s63_f_2_A_neg,2015), s63_f_2_A(bob_s63_f_2_A_neg,2017), s63_f_2_A(bob_s63_f_2_A_neg,2016), s63_f_2_A(bob_s63_f_2_A_neg,2018), s63_f_2_A(bob_s63_f_2_A_neg,2019), s63_f_2_A(alice_s63_f_2_A_pos,2015), s63_f_2_A(bob_s63_f_2_A_pos,2015), s63_f_2_A(bob_s63_f_2_A_pos,2017), s63_f_2_A(bob_s63_f_2_A_pos,2016), s63_f_2_A(bob_s63_f_2_A_pos,2018), s63_f_2_A(bob_s63_f_2_A_pos,2019)]).
+%aba_asp('./experiments/s63_f_2_A_learning.bk',[s63_f_2_A(alice_s63_f_2_A_neg,2015), s63_f_2_A(alice_s63_f_2_A_neg,2017), s63_f_2_A(alice_s63_f_2_A_neg,2016), s63_f_2_A(alice_s63_f_2_A_pos,2016), s63_f_2_A(alice_s63_f_2_A_pos,2017)],[s63_f_2_A(bob_s63_f_2_A_neg,2015), s63_f_2_A(alice_s63_f_2_A_pos,2015), s63_f_2_A(bob_s63_f_2_A_pos,2015), s63_f_2_A(bob_s63_f_2_A_neg,2017), s63_f_2_A(bob_s63_f_2_A_pos,2017), s63_f_2_A(bob_s63_f_2_A_neg,2016), s63_f_2_A(bob_s63_f_2_A_pos,2016)])
+
+%positives(9):s63_f_2_A(alice_s63_f_2_A_neg,2015), s63_f_2_A(alice_s63_f_2_A_neg,2017), s63_f_2_A(alice_s63_f_2_A_pos,2017), s63_f_2_A(alice_s63_f_2_A_pos,2016), s63_f_2_A(alice_s63_f_2_A_neg,2016), s63_f_2_A(alice_s63_f_2_A_neg,2018), s63_f_2_A(alice_s63_f_2_A_pos,2018), s63_f_2_A(alice_s63_f_2_A_neg,2019), s63_f_2_A(alice_s63_f_2_A_pos,2019)
+%negatives(11):s63_f_2_A(bob_s63_f_2_A_neg,2015), s63_f_2_A(bob_s63_f_2_A_neg,2017), s63_f_2_A(bob_s63_f_2_A_neg,2016), s63_f_2_A(bob_s63_f_2_A_neg,2018), s63_f_2_A(bob_s63_f_2_A_neg,2019), s63_f_2_A(alice_s63_f_2_A_pos,2015), s63_f_2_A(bob_s63_f_2_A_pos,2015), s63_f_2_A(bob_s63_f_2_A_pos,2017), s63_f_2_A(bob_s63_f_2_A_pos,2016), s63_f_2_A(bob_s63_f_2_A_pos,2018), s63_f_2_A(bob_s63_f_2_A_pos,2019)
+
+
+
+%aba_asp('./experiments/s63_f_2_A_learning.bk',[s63_f_2_A(alice_s63_f_2_A_pos,2017)],[s63_f_2_A(bob_s63_f_2_A_neg,2017)])
+
+%aba_asp('./experiments/s63_f_2_A_learning.bk', [s63_f_2_A(alice,2017),s63_f_2_A(alice,2016),s63_f_2_A(bob,2018),s63_f_2_A(bob,2019),s63_f_2_A(alice_s63_f_2_A_neg,2015), s63_f_2_A(alice_s63_f_2_A_neg,2017), s63_f_2_A(alice_s63_f_2_A_neg,2016), s63_f_2_A(alice_s63_f_2_A_neg,2018), s63_f_2_A(alice_s63_f_2_A_neg,2019), s63_f_2_A(alice_s63_f_2_A_pos,2016), s63_f_2_A(alice_s63_f_2_A_pos,2017), s63_f_2_A(alice_s63_f_2_A_pos,2018), s63_f_2_A(alice_s63_f_2_A_pos,2019)], [s63_f_2_A(bob_s63_f_2_A_neg,2015), s63_f_2_A(bob_s63_f_2_A_neg,2017), s63_f_2_A(bob_s63_f_2_A_neg,2016), s63_f_2_A(bob_s63_f_2_A_neg,2018), s63_f_2_A(bob_s63_f_2_A_neg,2019), s63_f_2_A(alice_s63_f_2_A_pos,2015), s63_f_2_A(bob_s63_f_2_A_pos,2015), s63_f_2_A(bob_s63_f_2_A_pos,2017), s63_f_2_A(bob_s63_f_2_A_pos,2016), s63_f_2_A(bob_s63_f_2_A_pos,2018), s63_f_2_A(bob_s63_f_2_A_pos,2019),s63_f_2_A(bob,2015),s63_f_2_A(bob,2017),s63_f_2_A(bob,2016),s63_f_2_A(alice,2015)]).
+
+%Test : not  s63_f_2_A(bob_s63_f_2_A_neg,2017)

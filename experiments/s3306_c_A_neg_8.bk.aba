@@ -1,0 +1,139 @@
+%(A) performed by an employee for the person employing him, irrespective of the citizenship or residence of either, within the United States, and
+%s3306_c_A(Service,Employer,Employee) :-
+%	agent_(Service,Employee),
+%	patient_(Service,Employer), 
+%   s3306_c_A_location(Service,Geographical_location),
+%    s3306_c_A_country(Geographical_location,Country).
+
+%not_s3306_c_A(Service,Employer,Employee) :-
+%	person(Employer),person(Employee),service_(Service), not s3306_c_A(Service,Employer,Employee).
+
+%#show s3306_c_A/3.
+
+s3306_c_A_location(Service,Geographical_location):-
+	location_(Service,Geographical_location).
+%s3306_c_A_location(Service,Geographical_location):-
+%	% by default, assume it's in the US
+%	service_(Service),
+%	not_location_(Service,_),
+%	Geographical_location = usa.
+
+s3306_c_A_country(Geographical_location,Country):-
+	country_(Geographical_location,Country),
+	Country=usa.
+%s3306_c_A_country(Geographical_location,Country):-
+%	country_name(Country),
+%	not_country_(Geographical_location,_),
+%	Geographical_location=usa.
+
+assumption(not_country_(Geographical_location,Country)).
+assumption(not_location_(Location)).
+
+contrary(not_country_(Geographical_location,Country),country_(Geographical_location,Country)) :-
+    assumption(not_country_(Geographical_location,Country)).
+contrary(not_location_(Service,Location),location_(Service,Location)) :-
+    assumption(not_location_(Service,Location)).
+
+% Text
+% Alice has paid $3200 to Bob for work done from Feb 1st, 2017 to Sep 2nd, 2017, in Toronto, Ontario, Canada.
+
+% Question
+% Section 3306(c)(A) applies to Alice employing Bob for the year 2017. Contradiction
+
+% Facts
+person(alice_s3306_c_A_neg).
+person(bob_s3306_c_A_neg).
+
+year(2017).
+date(d2017_01_01).
+date_split(d2017_01_01, 2017, 1, 1).
+date(d2017_02_01).
+date_split(d2017_02_01, 2017, 2, 1).
+date(d2017_09_02).
+date_split(d2017_09_02, 2017, 9, 2).
+date(d2017_12_31).
+date_split(d2017_12_31, 2017, 12, 31).
+
+location_name(toronto__ontario__canada).
+country_name(canada).
+finance(3200).
+
+service_(alice_employer_s3306_c_A_neg).
+patient_(alice_employer_s3306_c_A_neg,alice_s3306_c_A_neg).
+agent_(alice_employer_s3306_c_A_neg,bob_s3306_c_A_neg).
+start_(alice_employer_s3306_c_A_neg,d2017_02_01).
+end_(alice_employer_s3306_c_A_neg,d2017_09_02).
+location_(alice_employer_s3306_c_A_neg,toronto__ontario__canada).
+country_(toronto__ontario__canada,canada).
+payment_(alice_pays_s3306_c_A_neg).
+agent_(alice_pays_s3306_c_A_neg,alice_s3306_c_A_neg).
+patient_(alice_pays_s3306_c_A_neg,bob_s3306_c_A_neg).
+start_(alice_pays_s3306_c_A_neg,d2017_09_02).
+purpose_(alice_pays_s3306_c_A_neg,alice_employer_s3306_c_A_neg).
+amount_(alice_pays_s3306_c_A_neg,3200).
+
+% Text
+% Alice has paid $3200 to Bob for work done from Feb 1st, 2017 to Sep 2nd, 2017, in Baltimore, Maryland, USA.
+
+% Question
+% Section 3306(c)(A) applies to Alice employing Bob for the year 2017. Entailment
+
+% Facts
+person(alice_s3306_c_A_pos).
+person(bob_s3306_c_A_pos).
+
+year(2017).
+date(d2017_01_01).
+date_split(d2017_01_01, 2017, 1, 1).
+date(d2017_02_01).
+date_split(d2017_02_01, 2017, 2, 1).
+date(d2017_09_02).
+date_split(d2017_09_02, 2017, 9, 2).
+date(d2017_12_31).
+date_split(d2017_12_31, 2017, 12, 31).
+
+location_name(baltimore__maryland__usa).
+location_name(san_francisco__usa).
+country_name(usa).
+finance(3200).
+
+service_(alice_employer_s3306_c_A_pos).
+patient_(alice_employer_s3306_c_A_pos,alice_s3306_c_A_pos).
+agent_(alice_employer_s3306_c_A_pos,bob_s3306_c_A_pos).
+start_(alice_employer_s3306_c_A_pos,d2017_02_01).
+end_(alice_employer_s3306_c_A_pos,d2017_09_02).
+location_(alice_employer_s3306_c_A_pos,baltimore__maryland__usa).
+country_(baltimore__maryland__usa,usa).
+payment_(alice_pays_s3306_c_A_pos).
+agent_(alice_pays_s3306_c_A_pos,alice_s3306_c_A_pos).
+patient_(alice_pays_s3306_c_A_pos,bob_s3306_c_A_pos).
+start_(alice_pays_s3306_c_A_pos,d2017_09_02).
+purpose_(alice_pays_s3306_c_A_pos,alice_employer_s3306_c_A_pos).
+amount_(alice_pays_s3306_c_A_pos,3200).
+
+person(charlie).
+person(charlie2).
+person(charlie3).
+agent_(alice_employer_s3306_c_A_pos,charlie).
+agent_(alice_employer_s3306_c_A_pos,charlie2).
+agent_(alice_employer_s3306_c_A_pos,charlie3).
+agent_(alice_employer_s3306_c_A_pos,dave).
+
+person(dave).
+service_(dave_employer).
+patient_(dave_employer,dave).
+agent_(dave_employer,charlie).
+agent_(dave_employer,charlie2).
+agent_(dave_employer,charlie3).
+location_(dave_employer,san_francisco__usa).
+country_(san_francisco__usa,usa).
+
+%positives:s3306_c_A(alice_employer_s3306_c_A_pos, alice_s3306_c_A_pos, bob_s3306_c_A_pos),s3306_c_A(alice_employer_s3306_c_A_pos, alice_s3306_c_A_pos, charlie),s3306_c_A(alice_employer_s3306_c_A_pos, alice_s3306_c_A_pos, charlie2),s3306_c_A(alice_employer_s3306_c_A_pos, alice_s3306_c_A_pos, charlie3),s3306_c_A(alice_employer_s3306_c_A_pos, alice_s3306_c_A_pos, dave),s3306_c_A(dave_employer, dave, charlie),s3306_c_A(dave_employer, dave, charlie2),s3306_c_A(dave_employer, dave, charlie3)
+%negatives:s3306_c_A(alice_employer_s3306_c_A_neg,alice_s3306_c_A_neg,bob_s3306_c_A_neg),s3306_c_A(alice_employer_s3306_c_A_neg,alice_s3306_c_A_pos,alice_s3306_c_A_pos),s3306_c_A(alice_employer_s3306_c_A_pos,bob_s3306_c_A_pos,bob_s3306_c_A_neg),s3306_c_A(alice_employer_s3306_c_A_pos,dave,dave),s3306_c_A(dave_employer,alice_s3306_c_A_neg,alice_s3306_c_A_pos),s3306_c_A(dave_employer,alice_s3306_c_A_neg,bob_s3306_c_A_pos),s3306_c_A(dave_employer,alice_s3306_c_A_pos,charlie),s3306_c_A(dave_employer,charlie,charlie2),s3306_c_A(dave_employer,bob_s3306_c_A_pos,dave)
+
+%pos:s3306_c_A(alice_employer_s3306_c_A_pos,alice_s3306_c_A_pos,bob_s3306_c_A_pos).
+%neg:s3306_c_A(alice_employer_s3306_c_A_neg,alice_s3306_c_A_neg,bob_s3306_c_A_neg).
+
+% aba_asp('./experiments/s3306_c_A_learning.bk',[s3306_c_A(alice_employer_s3306_c_A_pos,alice_s3306_c_A_pos,bob_s3306_c_A_pos)],[s3306_c_A(alice_employer_s3306_c_A_neg,alice_s3306_c_A_neg,bob_s3306_c_A_neg)]).
+
+%Test : not s3306_c_A(dave_employer,charlie,charlie2)

@@ -1,0 +1,275 @@
+%(i) by a student who is enrolled and is regularly attending classes at such school, college, or university, or
+%s3306_c_10_A_i(Student,Employer,Workday) :-
+%	enrollment_(Student_is_enrolled),
+%	agent_(Student_is_enrolled,Student),
+%	patient_(Student_is_enrolled,Employer),
+%	start_(Student_is_enrolled,Start_enrollment),
+%	attending_classes_(Student_attends_classes),
+%	agent_(Student_attends_classes,Student),
+%	location_(Student_attends_classes,Employer),
+%	start_(Student_attends_classes,Start_attendance),
+%	is_before(Start_enrollment,Workday),
+%	is_before(Start_attendance,Workday),
+%	s3306_c_13_student(Student_is_enrolled,Stop_enrollment,Workday),
+%	s3306_c_13_student(Student_attends_classes,Stop_attendance,Workday).
+
+%not_s3306_c_10_A_i(Student,Employer,Workday) :- person(Student),patient_(_,Employer),date(Workday), not s3306_c_10_A_i(Student,Employer,Workday).
+
+%#show is_before/2.
+
+%s3306_c_13_student(Student_is_enrolled,Stop_enrollment,Workday):-
+%	enrollment_(Student_is_enrolled),date(Stop_enrollment),
+%	date(Workday),not_end_(Student_is_enrolled,_).
+s3306_c_13_student(Student_is_enrolled,Stop_enrollment,Workday):-
+	end_(Student_is_enrolled,Stop_enrollment),
+	is_before(Workday,Stop_enrollment).
+
+%is_before(Day1,Day2):-
+%    date_split(Day1,Y1,M1,D1),
+%    date_split(Day2,Y2,M2,D2),
+%    Y1 < Y2.
+%is_before(Day1,Day2):-
+%    date_split(Day1,Y1,M1,D1),
+%    date_split(Day2,Y2,M2,D2),
+%    Y1 = Y2,M1 < M2.
+%is_before(Day1,Day2):-
+%    date_split(Day1,Y1,M1,D1),
+%    date_split(Day2,Y2,M2,D2),
+%    Y1 = Y2,M1 = M2,D1 < D2.
+
+assumption(not_end_(Event,Time)).
+
+contrary(not_end_(Event,Time),end_(Event,Time)) :- 
+    assumption(not_end_(Event,Time)).
+
+is_before(d2017_01_01,d2017_12_31). 
+is_before(d2011_01_01,d2011_08_27). 
+is_before(d2011_01_01,d2011_12_31). 
+is_before(d2011_08_27,d2011_12_31). 
+is_before(d2016_01_01,d2016_05_29). 
+is_before(d2016_01_01,d2016_12_31). 
+is_before(d2016_05_29,d2016_12_31). 
+is_before(d2015_01_01,d2015_08_29). 
+is_before(d2015_01_01,d2015_12_31). 
+is_before(d2015_08_29,d2015_12_31). 
+is_before(d2019_01_01,d2019_05_30). 
+is_before(d2019_01_01,d2019_12_31). 
+is_before(d2019_05_30,d2019_12_31). 
+is_before(d2011_01_01,d2017_01_01). 
+is_before(d2011_08_27,d2017_01_01). 
+is_before(d2011_12_31,d2017_01_01). 
+is_before(d2016_01_01,d2017_01_01). 
+is_before(d2016_05_29,d2017_01_01). 
+is_before(d2016_12_31,d2017_01_01). 
+is_before(d2015_01_01,d2017_01_01). 
+is_before(d2015_08_29,d2017_01_01). 
+is_before(d2015_12_31,d2017_01_01). 
+is_before(d2011_01_01,d2017_12_31). 
+is_before(d2011_08_27,d2017_12_31). 
+is_before(d2011_12_31,d2017_12_31). 
+is_before(d2016_01_01,d2017_12_31). 
+is_before(d2016_05_29,d2017_12_31). 
+is_before(d2016_12_31,d2017_12_31). 
+is_before(d2015_01_01,d2017_12_31). 
+is_before(d2015_08_29,d2017_12_31). 
+is_before(d2015_12_31,d2017_12_31). 
+is_before(d2011_01_01,d2016_01_01). 
+is_before(d2011_08_27,d2016_01_01). 
+is_before(d2011_12_31,d2016_01_01). 
+is_before(d2015_01_01,d2016_01_01). 
+is_before(d2015_08_29,d2016_01_01). 
+is_before(d2015_12_31,d2016_01_01). 
+is_before(d2011_01_01,d2016_05_29). 
+is_before(d2011_08_27,d2016_05_29). 
+is_before(d2011_12_31,d2016_05_29). 
+is_before(d2015_01_01,d2016_05_29). 
+is_before(d2015_08_29,d2016_05_29). 
+is_before(d2015_12_31,d2016_05_29). 
+is_before(d2011_01_01,d2016_12_31). 
+is_before(d2011_08_27,d2016_12_31). 
+is_before(d2011_12_31,d2016_12_31). 
+is_before(d2015_01_01,d2016_12_31). 
+is_before(d2015_08_29,d2016_12_31).
+is_before(d2015_12_31,d2016_12_31). 
+is_before(d2011_01_01,d2015_01_01). 
+is_before(d2011_08_27,d2015_01_01). 
+is_before(d2011_12_31,d2015_01_01). 
+is_before(d2011_01_01,d2015_08_29). 
+is_before(d2011_08_27,d2015_08_29). 
+is_before(d2011_12_31,d2015_08_29). 
+is_before(d2011_01_01,d2015_12_31). 
+is_before(d2011_08_27,d2015_12_31). 
+is_before(d2011_12_31,d2015_12_31). 
+is_before(d2017_01_01,d2019_01_01). 
+is_before(d2017_12_31,d2019_01_01). 
+is_before(d2011_01_01,d2019_01_01). 
+is_before(d2011_08_27,d2019_01_01). 
+is_before(d2011_12_31,d2019_01_01). 
+is_before(d2016_01_01,d2019_01_01). 
+is_before(d2016_05_29,d2019_01_01). 
+is_before(d2016_12_31,d2019_01_01). 
+is_before(d2015_01_01,d2019_01_01). 
+is_before(d2015_08_29,d2019_01_01). 
+is_before(d2015_12_31,d2019_01_01). 
+is_before(d2017_01_01,d2019_05_30). 
+is_before(d2017_12_31,d2019_05_30). 
+is_before(d2011_01_01,d2019_05_30). 
+is_before(d2011_08_27,d2019_05_30). 
+is_before(d2011_12_31,d2019_05_30). 
+is_before(d2016_01_01,d2019_05_30). 
+is_before(d2016_05_29,d2019_05_30). 
+is_before(d2016_12_31,d2019_05_30). 
+is_before(d2015_01_01,d2019_05_30). 
+is_before(d2015_08_29,d2019_05_30). 
+is_before(d2015_12_31,d2019_05_30). 
+is_before(d2017_01_01,d2019_12_31). 
+is_before(d2017_12_31,d2019_12_31). 
+is_before(d2011_01_01,d2019_12_31). 
+is_before(d2011_08_27,d2019_12_31). 
+is_before(d2011_12_31,d2019_12_31). 
+is_before(d2016_01_01,d2019_12_31). 
+is_before(d2016_05_29,d2019_12_31). 
+is_before(d2016_12_31,d2019_12_31). 
+is_before(d2015_01_01,d2019_12_31). 
+is_before(d2015_08_29,d2019_12_31). 
+is_before(d2015_12_31,d2019_12_31).
+
+
+% Text
+% Alice was paid $3200 in 2017 for services performed for Johns Hopkins University. Alice was enrolled at Johns Hopkins University and attending classes from August 27, 2011 to May 29th, 2016.
+
+% Question
+% Section 3306(c)(10)(A)(i) applies to Alice's employment situation in 2017. Contradiction
+
+% Facts
+person(alice_s3306_c_10_A_i_neg).
+
+year(2017).
+date(d2017_01_01).
+date_split(d2017_01_01, 2017, 1, 1).
+date(d2017_12_31).
+date_split(d2017_12_31, 2017, 12, 31).
+
+year(2011).
+date(d2011_01_01).
+date_split(d2011_01_01, 2011, 1, 1).
+date(d2011_08_27).
+date_split(d2011_08_27, 2011, 8, 27).
+date(d2011_12_31).
+date_split(d2011_12_31, 2011, 12, 31).
+
+year(2016).
+date(d2016_01_01).
+date_split(d2016_01_01, 2016, 1, 1).
+date(d2016_05_29).
+date_split(d2016_05_29, 2016, 5, 29).
+date(d2016_12_31).
+date_split(d2016_12_31, 2016, 12, 31).
+
+location_name(baltimore).
+location_name(maryland).
+location_name(usa).
+
+finance(3200).
+
+educational_institution_(hopkins_is_a_university_s3306_c_10_A_i_neg).
+agent_(hopkins_is_a_university_s3306_c_10_A_i_neg,johns_hopkins_university).
+service_(alice_employed_s3306_c_10_A_i_neg).
+patient_(alice_employed_s3306_c_10_A_i_neg,johns_hopkins_university).
+agent_(alice_employed_s3306_c_10_A_i_neg,alice_s3306_c_10_A_i_neg).
+start_(alice_employed_s3306_c_10_A_i_neg,d2017_01_01).
+end_(alice_employed_s3306_c_10_A_i_neg,d2017_12_31).
+location_(alice_employed_s3306_c_10_A_i_neg,baltimore).
+location_(alice_employed_s3306_c_10_A_i_neg,maryland).
+location_(alice_employed_s3306_c_10_A_i_neg,usa).
+payment_(alice_is_paid_s3306_c_10_A_i_neg).
+agent_(alice_is_paid_s3306_c_10_A_i_neg,johns_hopkins_university).
+patient_(alice_is_paid_s3306_c_10_A_i_neg,alice_s3306_c_10_A_i_neg).
+start_(alice_is_paid_s3306_c_10_A_i_neg,d2017_12_31).
+purpose_(alice_is_paid_s3306_c_10_A_i_neg,alice_employed_s3306_c_10_A_i_neg).
+amount_(alice_is_paid_s3306_c_10_A_i_neg,3200).
+enrollment_(alice_goes_to_hopkins_s3306_c_10_A_i_neg).
+agent_(alice_goes_to_hopkins_s3306_c_10_A_i_neg,alice_s3306_c_10_A_i_neg).
+patient_(alice_goes_to_hopkins_s3306_c_10_A_i_neg,johns_hopkins_university).
+start_(alice_goes_to_hopkins_s3306_c_10_A_i_neg,d2011_08_27).
+end_(alice_goes_to_hopkins_s3306_c_10_A_i_neg,d2016_05_29).
+attending_classes_(alice_goes_to_class_s3306_c_10_A_i_neg).
+agent_(alice_goes_to_class_s3306_c_10_A_i_neg,alice_s3306_c_10_A_i_neg).
+location_(alice_goes_to_class_s3306_c_10_A_i_neg,johns_hopkins_university).
+start_(alice_goes_to_class_s3306_c_10_A_i_neg,d2011_08_27).
+end_(alice_goes_to_class_s3306_c_10_A_i_neg,d2016_05_29).
+
+% Text
+% Alice was paid $3200 in 2017 for services performed for Johns Hopkins University. Alice was enrolled at Johns Hopkins University and attending classes from August 29, 2015 to May 30th, 2019.
+
+% Question
+% Section 3306(c)(10)(A)(i) applies to Alice's employment situation in 2017. Entailment
+
+% Facts
+person(alice_s3306_c_10_A_i_pos).
+
+year(2017).
+date(d2017_01_01).
+date_split(d2017_01_01, 2017, 1, 1).
+date(d2017_12_31).
+date_split(d2017_12_31, 2017, 12, 31).
+
+year(2015).
+date(d2015_01_01).
+date_split(d2015_01_01, 2015, 1, 1).
+date(d2015_08_29).
+date_split(d2015_08_29, 2015, 8, 29).
+date(d2015_12_31).
+date_split(d2015_12_31, 2015, 12, 31).
+
+year(2019).
+date(d2019_01_01).
+date_split(d2019_01_01, 2019, 1, 1).
+date(d2019_05_30).
+date_split(d2019_05_30, 2019, 5, 30).
+date(d2019_12_31).
+date_split(d2019_12_31, 2019, 12, 31).
+
+location_name(baltimore).
+location_name(maryland).
+location_name(usa).
+location_name(johns_hopkins_university).
+
+finance(3200).
+
+service_(alice_employed_s3306_c_10_A_i_pos).
+patient_(alice_employed_s3306_c_10_A_i_pos,johns_hopkins_university).
+agent_(alice_employed_s3306_c_10_A_i_pos,alice_s3306_c_10_A_i_pos).
+start_(alice_employed_s3306_c_10_A_i_pos,d2017_01_01).
+end_(alice_employed_s3306_c_10_A_i_pos,d2017_12_31).
+location_(alice_employed_s3306_c_10_A_i_pos,baltimore).
+location_(alice_employed_s3306_c_10_A_i_pos,maryland).
+location_(alice_employed_s3306_c_10_A_i_pos,usa).
+payment_(alice_is_paid_s3306_c_10_A_i_pos).
+agent_(alice_is_paid_s3306_c_10_A_i_pos,johns_hopkins_university).
+patient_(alice_is_paid_s3306_c_10_A_i_pos,alice_s3306_c_10_A_i_pos).
+start_(alice_is_paid_s3306_c_10_A_i_pos,d2017_12_31).
+purpose_(alice_is_paid_s3306_c_10_A_i_pos,alice_employed_s3306_c_10_A_i_pos).
+amount_(alice_is_paid_s3306_c_10_A_i_pos,3200).
+educational_institution_(hopkins_is_a_university_s3306_c_10_A_i_pos).
+agent_(hopkins_is_a_university_s3306_c_10_A_i_pos,johns_hopkins_university).
+enrollment_(alice_goes_to_hopkins_s3306_c_10_A_i_pos).
+agent_(alice_goes_to_hopkins_s3306_c_10_A_i_pos,alice_s3306_c_10_A_i_pos).
+patient_(alice_goes_to_hopkins_s3306_c_10_A_i_pos,johns_hopkins_university).
+start_(alice_goes_to_hopkins_s3306_c_10_A_i_pos,d2015_08_29).
+end_(alice_goes_to_hopkins_s3306_c_10_A_i_pos,d2019_05_30).
+attending_classes_(alice_goes_to_class_s3306_c_10_A_i_pos).
+agent_(alice_goes_to_class_s3306_c_10_A_i_pos,alice_s3306_c_10_A_i_pos).
+location_(alice_goes_to_class_s3306_c_10_A_i_pos,johns_hopkins_university).
+start_(alice_goes_to_class_s3306_c_10_A_i_pos,d2015_08_29).
+end_(alice_goes_to_class_s3306_c_10_A_i_pos,d2019_05_30).
+
+%positives(10):s3306_c_10_A_i(alice_s3306_c_10_A_i_pos, johns_hopkins_university, d2017_01_01),s3306_c_10_A_i(alice_s3306_c_10_A_i_neg, johns_hopkins_university, d2016_01_01),s3306_c_10_A_i(alice_s3306_c_10_A_i_neg, johns_hopkins_university, d2011_12_31),s3306_c_10_A_i(alice_s3306_c_10_A_i_neg, johns_hopkins_university, d2015_01_01),s3306_c_10_A_i(alice_s3306_c_10_A_i_neg, johns_hopkins_university, d2015_08_29),s3306_c_10_A_i(alice_s3306_c_10_A_i_neg, johns_hopkins_university, d2015_12_31),s3306_c_10_A_i(alice_s3306_c_10_A_i_pos, johns_hopkins_university, d2019_01_01),s3306_c_10_A_i(alice_s3306_c_10_A_i_pos, johns_hopkins_university, d2017_12_31),s3306_c_10_A_i(alice_s3306_c_10_A_i_pos, johns_hopkins_university, d2016_01_01),s3306_c_10_A_i(alice_s3306_c_10_A_i_pos, johns_hopkins_university, d2016_05_29)
+%negatives(12): s3306_c_10_A_i(alice_s3306_c_10_A_i_neg,johns_hopkins_university,d2017_01_01)
+%s3306_c_10_A_i(alice_s3306_c_10_A_i_neg,johns_hopkins_university,d2011_01_01),s3306_c_10_A_i(alice_s3306_c_10_A_i_neg,alice_s3306_c_10_A_i_neg,d2011_01_01),s3306_c_10_A_i(alice_s3306_c_10_A_i_neg,alice_s3306_c_10_A_i_neg,d2016_01_01),s3306_c_10_A_i(alice_s3306_c_10_A_i_neg,alice_s3306_c_10_A_i_neg,d2015_01_01),s3306_c_10_A_i(alice_s3306_c_10_A_i_neg,alice_s3306_c_10_A_i_neg,d2015_08_29),s3306_c_10_A_i(alice_s3306_c_10_A_i_neg,alice_s3306_c_10_A_i_pos,d2011_08_27),s3306_c_10_A_i(alice_s3306_c_10_A_i_neg,alice_s3306_c_10_A_i_pos,d2019_05_30),s3306_c_10_A_i(alice_s3306_c_10_A_i_pos,alice_s3306_c_10_A_i_pos,d2011_08_27),s3306_c_10_A_i(alice_s3306_c_10_A_i_pos,alice_s3306_c_10_A_i_pos,d2016_05_29),s3306_c_10_A_i(alice_s3306_c_10_A_i_pos,alice_s3306_c_10_A_i_pos,d2019_01_01),s3306_c_10_A_i(alice_s3306_c_10_A_i_pos,alice_s3306_c_10_A_i_pos,d2019_12_31)
+
+%pos:s3306_c_10_A_i(alice_s3306_c_10_A_i_pos,johns_hopkins_university,d2017_01_01).
+%neg:s3306_c_10_A_i(alice_s3306_c_10_A_i_neg,johns_hopkins_university,d2017_01_01).
+
+% aba_asp('./experiments/s3306_c_10_A_i_learning.bk',[s3306_c_10_A_i(alice_s3306_c_10_A_i_pos,johns_hopkins_university,d2017_01_01)],[s3306_c_10_A_i(alice_s3306_c_10_A_i_neg,johns_hopkins_university,d2017_01_01)]).
+%Test : s3306_c_10_A_i(alice_s3306_c_10_A_i_neg, johns_hopkins_university, d2011_12_31)

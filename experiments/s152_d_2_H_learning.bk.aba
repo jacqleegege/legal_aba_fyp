@@ -1,0 +1,163 @@
+%(H) An individual (other than an individual who at any time during the taxable year was the spouse, determined without regard to section 7703, of the taxpayer) who, for the taxable year of the taxpayer, has the same principal place of abode as the taxpayer and is a member of the taxpayer's household.
+s152_d_2_H(Dependent,Taxp,Taxy,S143,Start_day,End_day) :-
+    not_same_person(Dependent,Taxp),
+    first_day_year(Taxy,First_day_year),
+    last_day_year(Taxy,Last_day_year),
+    not_s152_d_2_H_end_marriage(Dependent,Taxp,Last_day_year,First_day_year),
+    residence_(Taxpayer_residence),
+    agent_(Taxpayer_residence,Taxp),
+    patient_(Taxpayer_residence,S145),
+    start_(Taxpayer_residence,Start_taxpayer_residence),
+    is_before(Start_taxpayer_residence,First_day_year),
+	s152_d_2_H_end_residence(Taxpayer_residence,End_taxpayer_residence,Last_day_year),
+    residence_(Individual_residence),
+    agent_(Individual_residence,Dependent),
+    patient_(Individual_residence,S143),
+    start_(Individual_residence,Start_individual_residence),
+    is_before(Start_individual_residence,First_day_year),
+	s152_d_2_H_end_residence(Individual_residence,End_individual_residence,Last_day_year),
+    later(Start_day,Start_taxpayer_residence,Start_individual_residence),
+    earliest(End_day,End_taxpayer_residence,End_individual_residence),
+	S145=S143.
+
+s152_d_2_H_end_marriage(Dependent,Taxp,Last_day_year,First_day_year):-
+    marriage_(Marriage),
+    agent_(Marriage,Dependent),
+    agent_(Marriage,Taxp),
+    start_(Marriage,Start),
+    is_before(Start,Last_day_year),
+    end_(Marriage,End),
+    is_before(First_day_year,End).
+s152_d_2_H_end_marriage(Dependent,Taxp,Last_day_year,First_day_year):-
+    date(First_day_year),
+    marriage_(Marriage),
+    agent_(Marriage,Dependent),
+    agent_(Marriage,Taxp),
+    start_(Marriage,Start),
+    is_before(Start,Last_day_year),
+    not_end_(Marriage,_).
+
+s152_d_2_H_end_residence(Individual_residence,End_individual_residence,Last_day_year):-
+    end_(Individual_residence,End_individual_residence),is_before(Last_day_year,End_individual_residence).
+s152_d_2_H_end_residence(Individual_residence,End_individual_residence,Last_day_year):-
+    residence_(Individual_residence),date(End_individual_residence),date(Last_day_year),
+    not_end_(Individual_residence,_).
+
+is_before(Day1,Day2):-
+    date_split(Day1,Y1,M1,D1),
+    date_split(Day2,Y2,M2,D2),
+    Y1 < Y2.
+is_before(Day1,Day2):-
+    date_split(Day1,Y1,M1,D1),
+    date_split(Day2,Y2,M2,D2),
+    Y1 = Y2,M1 < M2.
+is_before(Day1,Day2):-
+    date_split(Day1,Y1,M1,D1),
+    date_split(Day2,Y2,M2,D2),
+    Y1 = Y2,M1 = M2,D1 < D2.
+
+last_day_year(Year,Day):-
+    date_split(Day,Year,12,31).
+
+first_day_year(Year,Day) :-
+	date_split(Day,Year,1,1).
+
+earlier(Result, Date1, Date2) :-
+    date(Date1), date(Date2), is_before(Date2,Date1), Result = Date2.
+earlier(Result, Date1, Date2) :-
+    date(Date1), date(Date2), is_before(Date1,Date2), Result = Date1.
+earlier(Result, Date1, Date2) :-
+	date(Date1), date(Date2), Date1 = Date2, Result = Date1.
+
+later(Result, Date1, Date2) :-
+	date(Date1), date(Date2), is_before(Date2,Date1), Result = Date1.
+later(Result, Date1, Date2) :-
+	date(Date1), date(Date2), is_before(Date1,Date2), Result = Date2.
+later(Result, Date1, Date2) :-
+	date(Date1), date(Date2), Date1 = Date2, Result = Date1.
+
+same_person(P1,P2):-
+    person(P1),person(P2),P1=P2.
+
+assumption(not_same_person(P1,P2)).
+assumption(not_start_(Event,Time)).
+assumption(not_end_(Event,Time)).
+
+contrary(not_same_person(P1,P2),same_person(P1,P2)):-
+    assumption(not_same_person(P1,P2)).
+contrary(not_start_(Event,Time),start_(Event,Time)) :- 
+    assumption(not_start_(Event,Time)).
+contrary(not_end_(Event,Time),end_(Event,Time)) :- 
+    assumption(not_end_(Event,Time)).
+
+% Text
+% Bob is Alice's father since April 15th, 1994. In 2015, Alice and Bob live in separate houses.
+
+% Question
+% Alice bears a relationship to Bob under section 152(d)(2)(H) for the year 2015. Contradiction
+
+% Facts
+person(alice_s152_d_2_H_neg).
+person(bob_s152_d_2_H_neg).
+
+year(1994).
+date(d1994_04_15).
+date_split(d1994_04_15, 1994, 4, 15).
+date(d1994_01_01).
+date_split(d1994_01_01, 1994, 1, 1).
+date(d1994_12_31).
+date_split(d1994_12_31, 1994, 12, 31).
+
+year(2015).
+date(d2015_01_01).
+date_split(d2015_01_01, 2015, 1, 1).
+date(d2015_12_31).
+date_split(d2015_12_31, 2015, 12, 31).
+
+year(2100).
+date(d2100_01_01).
+date_split(d2100_01_01, 2100, 1, 1).
+
+father_(alice_and_bob_s152_d_2_H_neg).
+agent_(alice_and_bob_s152_d_2_H_neg,bob_s152_d_2_H_neg).
+patient_(alice_and_bob_s152_d_2_H_neg,alice_s152_d_2_H_neg).
+start_(alice_and_bob_s152_d_2_H_neg,d1994_04_15).
+
+% Text
+% Alice and Bob started living together on April 15th, 2014. Alice and Bob are not married.
+
+% Question
+% Alice bears a relationship to Bob under section 152(d)(2)(H) for the year 2018. Entailment
+
+% Facts
+person(alice_s152_d_2_H_pos).
+person(bob_s152_d_2_H_pos).
+
+year(2014).
+date(d2014_04_15).
+date_split(d2014_04_15, 2014, 4, 15).
+date(d2014_01_01).
+date_split(d2014_01_01, 2014, 1, 1).
+date(d2014_12_31).
+date_split(d2014_12_31, 2014, 12, 31).
+
+year(2018).
+date(d2018_01_01).
+date_split(d2018_01_01, 2018, 1, 1).
+date(d2018_12_31).
+date_split(d2018_12_31, 2018, 12, 31).
+
+year(2100).
+date(d2100_01_01).
+date_split(d2100_01_01, 2100, 1, 1).
+
+residence_(alice_and_bob_s152_d_2_H_pos).
+agent_(alice_and_bob_s152_d_2_H_pos,alice_s152_d_2_H_pos).
+agent_(alice_and_bob_s152_d_2_H_pos,bob_s152_d_2_H_pos).
+start_(alice_and_bob_s152_d_2_H_pos,d2014_04_15).
+patient_(alice_and_bob_s152_d_2_H_pos,home_s152_d_2_H_pos).
+
+%pos:s152_d_2_H(alice_s152_d_2_H_pos,bob_s152_d_2_H_pos,2018,home_s152_d_2_H_pos,d2014_04_15,d2100_01_01).
+%neg:s152_d_2_H(alice_s152_d_2_H_neg,bob_s152_d_2_H_neg,2015,home_s152_d_2_H_neg,d1994_04_15,d2100_01_01).
+
+% aba_asp('./experiments/s152_d_2_H_learning.bk',[s152_d_2_H(alice_s152_d_2_H_pos,bob_s152_d_2_H_pos,2018,home_s152_d_2_H_pos,d2014_04_15,d2100_01_01)],[s152_d_2_H(alice_s152_d_2_H_neg,bob_s152_d_2_H_neg,2015,home_s152_d_2_H_neg,d1994_04_15,d2100_01_01)]).

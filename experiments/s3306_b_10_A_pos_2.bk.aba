@@ -1,0 +1,183 @@
+%(A) upon or after the termination of an employee's employment relationship because of (i) death, or (ii) retirement for disability, and
+%s3306_b_10_A(Remuneration,Employment,Employee,Employer,S101,S105) :-
+%	start_(Remuneration,Start_remuneration),
+%	termination_(S101),
+%   agent_(S101,Employer),
+%	patient_(S101,Employment),
+%	s3306_b_10_A_start_end(S101,Start_termination,Employment),
+%   is_before(Start_termination,Start_remuneration),
+%	reason_(S101,S105),
+%	s3306_b_10_A_disability_or_death(S105),
+%	agent_(S105,Employee).
+
+%not_s3306_b_10_A(Remuneration,Employment,Employee,Employer,S101,S105) :- start_(Remuneration,_),person(Employee),person(Employer),service_(Employment),termination_(S101),s3306_b_10_A_disability_or_death(S105),not s3306_b_10_A(Remuneration,Employment,Employee,Employer,S101,S105).
+
+%#show not_s3306_b_10_A/6.
+%#show is_before/2.
+
+s3306_b_10_A_start_end(S101,Start_termination,Employment):-
+	service_(Employment),start_(S101,Start_termination).
+s3306_b_10_A_start_end(S101,Start_termination,Employment):-
+	termination_(S101),end_(Employment,Start_termination).
+
+s3306_b_10_A_disability_or_death(S105):-
+	disability_(S105).
+s3306_b_10_A_disability_or_death(S105):-
+	death_(S105).
+
+%is_before(Day1,Day2):-
+%    date_split(Day1,Y1,M1,D1),
+%    date_split(Day2,Y2,M2,D2),
+%    Y1 < Y2.
+%is_before(Day1,Day2):-
+%    date_split(Day1,Y1,M1,D1),
+%    date_split(Day2,Y2,M2,D2),
+%    Y1 = Y2,M1 < M2.
+%is_before(Day1,Day2):-
+%    date_split(Day1,Y1,M1,D1),
+%    date_split(Day2,Y2,M2,D2),
+%    Y1 = Y2,M1 = M2,D1 <= D2.
+
+is_before(d2011_01_01,d2011_01_01).
+is_before(d2011_01_01,d2011_01_02).
+is_before(d2011_01_02,d2011_01_02).
+is_before(d2011_12_31,d2011_12_31).
+is_before(d2019_01_01,d2019_01_01).
+is_before(d2019_10_10,d2019_10_10).
+is_before(d2019_12_31,d2019_12_31).
+is_before(d2011_01_01,d2011_12_31).
+is_before(d2011_01_02,d2011_12_31).
+is_before(d2019_01_01,d2019_10_10).
+is_before(d2019_01_01,d2019_12_31).
+is_before(d2019_10_10,d2019_12_31).
+is_before(d2011_01_01,d2019_01_01).
+is_before(d2011_01_02,d2019_01_01).
+is_before(d2011_12_31,d2019_01_01).
+is_before(d2011_01_01,d2019_10_10).
+is_before(d2011_01_02,d2019_10_10).
+is_before(d2011_12_31,d2019_10_10).
+is_before(d2011_01_01,d2019_12_31).
+is_before(d2011_01_02,d2019_12_31).
+is_before(d2011_12_31,d2019_12_31).
+
+
+% Text
+% Alice has employed Bob from Jan 2nd, 2011 to Oct 10, 2019. On Oct 10, 2019 Bob retired because he reached age 65. Alice paid Bob $12980 as a retirement bonus.
+
+% Question
+% Section 3306(b)(10)(A) applies to the payment of $12980 that Alice made in 2019. Contradiction
+
+% Facts
+person(alice_s3306_b_10_A_neg).
+person(bob_s3306_b_10_A_neg).
+
+year(2011).
+date(d2011_01_01).
+date_split(d2011_01_01, 2011, 1, 1).
+date(d2011_01_02).
+date_split(d2011_01_02, 2011, 1, 2).
+date(d2011_12_31).
+date_split(d2011_12_31, 2011, 12, 31).
+
+year(2019).
+date(d2019_01_01).
+date_split(d2019_01_01, 2019, 1, 1).
+date(d2019_10_10).
+date_split(d2019_10_10, 2019, 10, 10).
+date(d2019_12_31).
+date_split(d2019_12_31, 2019, 12, 31).
+
+finance(12980).
+
+service_(alice_employer_s3306_b_10_A_neg).
+patient_(alice_employer_s3306_b_10_A_neg,alice_s3306_b_10_A_neg).
+agent_(alice_employer_s3306_b_10_A_neg,bob_s3306_b_10_A_neg).
+start_(alice_employer_s3306_b_10_A_neg,d2011_01_02).
+end_(alice_employer_s3306_b_10_A_neg,d2019_10_10).
+termination_(alice_lays_bob_off_s3306_b_10_A_neg).
+agent_(alice_lays_bob_off_s3306_b_10_A_neg,alice_s3306_b_10_A_neg).
+patient_(alice_lays_bob_off_s3306_b_10_A_neg,alice_employer_s3306_b_10_A_neg).
+retirement_(bob_retires_s3306_b_10_A_neg).
+agent_(bob_retires_s3306_b_10_A_neg,bob_s3306_b_10_A_neg).
+start_(bob_retires_s3306_b_10_A_neg,d2019_10_10).
+reason_(bob_retires_s3306_b_10_A_neg,reached_age_65).
+payment_(alice_pays_s3306_b_10_A_neg).
+agent_(alice_pays_s3306_b_10_A_neg,alice_s3306_b_10_A_neg).
+patient_(alice_pays_s3306_b_10_A_neg,bob_s3306_b_10_A_neg).
+start_(alice_pays_s3306_b_10_A_neg,d2019_10_10).
+purpose_(alice_pays_s3306_b_10_A_neg,alice_lays_bob_off_s3306_b_10_A_neg).
+amount_(alice_pays_s3306_b_10_A_neg,12980).
+
+% Text
+% Alice has employed Bob from Jan 2nd, 2011 to Oct 10, 2019. On Oct 10, 2019 Bob was diagnosed as disabled and retired. Alice paid Bob $12980 because she had to terminate their contract due to Bob's disability.
+
+% Question
+% Section 3306(b)(10)(A) applies to the payment of $12980 that Alice made in 2019. Entailment
+
+% Facts
+person(alice_s3306_b_10_A_pos).
+person(bob_s3306_b_10_A_pos).
+
+year(2011).
+date(d2011_01_01).
+date_split(d2011_01_01, 2011, 1, 1).
+date(d2011_01_02).
+date_split(d2011_01_02, 2011, 1, 2).
+date(d2011_12_31).
+date_split(d2011_12_31, 2011, 12, 31).
+
+year(2019).
+date(d2019_01_01).
+date_split(d2019_01_01, 2019, 1, 1).
+date(d2019_10_10).
+date_split(d2019_10_10, 2019, 10, 10).
+date(d2019_12_31).
+date_split(d2019_12_31, 2019, 12, 31).
+
+finance(12980).
+
+service_(alice_employer_s3306_b_10_A_pos).
+patient_(alice_employer_s3306_b_10_A_pos,alice_s3306_b_10_A_pos).
+agent_(alice_employer_s3306_b_10_A_pos,bob_s3306_b_10_A_pos).
+start_(alice_employer_s3306_b_10_A_pos,d2011_01_02).
+end_(alice_employer_s3306_b_10_A_pos,d2019_10_10).
+disability_(bob_is_disabled_s3306_b_10_A_pos).
+agent_(bob_is_disabled_s3306_b_10_A_pos,bob_s3306_b_10_A_pos).
+start_(bob_is_disabled_s3306_b_10_A_pos,d2019_10_10).
+termination_(alice_lays_bob_off_s3306_b_10_A_pos).
+agent_(alice_lays_bob_off_s3306_b_10_A_pos,alice_s3306_b_10_A_pos).
+patient_(alice_lays_bob_off_s3306_b_10_A_pos,alice_employer_s3306_b_10_A_pos).
+reason_(alice_lays_bob_off_s3306_b_10_A_pos,bob_is_disabled_s3306_b_10_A_pos).
+retirement_(bob_retires_s3306_b_10_A_pos).
+agent_(bob_retires_s3306_b_10_A_pos,bob_s3306_b_10_A_pos).
+start_(bob_retires_s3306_b_10_A_pos,d2019_10_10).
+reason_(bob_retires_s3306_b_10_A_pos,disability).
+payment_(alice_pays_s3306_b_10_A_pos).
+agent_(alice_pays_s3306_b_10_A_pos,alice_s3306_b_10_A_pos).
+patient_(alice_pays_s3306_b_10_A_pos,bob_s3306_b_10_A_pos).
+start_(alice_pays_s3306_b_10_A_pos,d2019_10_10).
+purpose_(alice_pays_s3306_b_10_A_pos,alice_lays_bob_off_s3306_b_10_A_pos).
+amount_(alice_pays_s3306_b_10_A_pos,12980).
+
+person(charlie).
+service_(bob_employment).
+death_(charlie_dead).
+agent_(charlie_dead,charlie).
+start_(charlie_dead,d2011_12_31).
+termination_(bob_lays_charlie_off).
+agent_(bob_lays_charlie_off,bob_s3306_b_10_A_pos).
+patient_(bob_lays_charlie_off,bob_employment).
+start_(bob_lays_charlie_off,d2011_12_31).
+reason_(bob_lays_charlie_off,charlie_dead).
+
+
+%positives(12):s3306_b_10_A(charlie_dead,bob_employment,charlie,bob_s3306_b_10_A_pos,bob_lays_charlie_off,charlie_dead),s3306_b_10_A(bob_lays_charlie_off,bob_employment,charlie,bob_s3306_b_10_A_pos,bob_lays_charlie_off,charlie_dead),s3306_b_10_A(bob_retires_s3306_b_10_A_neg,bob_employment,charlie,bob_s3306_b_10_A_pos,bob_lays_charlie_off,charlie_dead),s3306_b_10_A(alice_pays_s3306_b_10_A_neg,bob_employment,charlie,bob_s3306_b_10_A_pos,bob_lays_charlie_off,charlie_dead),s3306_b_10_A(bob_is_disabled_s3306_b_10_A_pos,bob_employment,charlie,bob_s3306_b_10_A_pos,bob_lays_charlie_off,charlie_dead),s3306_b_10_A(bob_retires_s3306_b_10_A_pos,bob_employment,charlie,bob_s3306_b_10_A_pos,bob_lays_charlie_off,charlie_dead),s3306_b_10_A(alice_pays_s3306_b_10_A_pos,bob_employment,charlie,bob_s3306_b_10_A_pos,bob_lays_charlie_off,charlie_dead),s3306_b_10_A(bob_retires_s3306_b_10_A_neg,alice_employer_s3306_b_10_A_pos,bob_s3306_b_10_A_pos,alice_s3306_b_10_A_pos,alice_lays_bob_off_s3306_b_10_A_pos,bob_is_disabled_s3306_b_10_A_pos),s3306_b_10_A(alice_pays_s3306_b_10_A_neg,alice_employer_s3306_b_10_A_pos,bob_s3306_b_10_A_pos,alice_s3306_b_10_A_pos,alice_lays_bob_off_s3306_b_10_A_pos,bob_is_disabled_s3306_b_10_A_pos),s3306_b_10_A(bob_is_disabled_s3306_b_10_A_pos,alice_employer_s3306_b_10_A_pos,bob_s3306_b_10_A_pos,alice_s3306_b_10_A_pos,alice_lays_bob_off_s3306_b_10_A_pos,bob_is_disabled_s3306_b_10_A_pos),s3306_b_10_A(bob_retires_s3306_b_10_A_pos,alice_employer_s3306_b_10_A_pos,bob_s3306_b_10_A_pos,alice_s3306_b_10_A_pos,alice_lays_bob_off_s3306_b_10_A_pos,bob_is_disabled_s3306_b_10_A_pos),s3306_b_10_A(alice_pays_s3306_b_10_A_pos,alice_employer_s3306_b_10_A_pos,bob_s3306_b_10_A_pos,alice_s3306_b_10_A_pos,alice_lays_bob_off_s3306_b_10_A_pos,bob_is_disabled_s3306_b_10_A_pos)
+%negatives(10):s3306_b_10_A(alice_pays_s3306_b_10_A_neg,alice_employer_s3306_b_10_A_neg,bob_s3306_b_10_A_neg,alice_s3306_b_10_A_neg,alice_lays_bob_off_s3306_b_10_A_neg,bob_retires_s3306_b_10_A_neg),s3306_b_10_A(alice_pays_s3306_b_10_A_neg,alice_employer_s3306_b_10_A_neg,bob_s3306_b_10_A_neg,alice_s3306_b_10_A_pos,alice_lays_bob_off_s3306_b_10_A_neg,charlie_dead),s3306_b_10_A(alice_pays_s3306_b_10_A_neg,alice_employer_s3306_b_10_A_neg,bob_s3306_b_10_A_neg,alice_s3306_b_10_A_neg,alice_lays_bob_off_s3306_b_10_A_pos,charlie_dead),s3306_b_10_A(alice_pays_s3306_b_10_A_neg,alice_employer_s3306_b_10_A_neg,bob_s3306_b_10_A_neg,alice_s3306_b_10_A_neg,bob_lays_charlie_off,charlie_dead),s3306_b_10_A(alice_pays_s3306_b_10_A_pos,alice_employer_s3306_b_10_A_neg,bob_s3306_b_10_A_pos,alice_s3306_b_10_A_pos,alice_lays_bob_off_s3306_b_10_A_pos,bob_is_disabled_s3306_b_10_A_pos),s3306_b_10_A(alice_pays_s3306_b_10_A_pos,alice_employer_s3306_b_10_A_pos,bob_s3306_b_10_A_pos,alice_s3306_b_10_A_pos,alice_lays_bob_off_s3306_b_10_A_neg,bob_is_disabled_s3306_b_10_A_pos),s3306_b_10_A(bob_retires_s3306_b_10_A_pos,alice_employer_s3306_b_10_A_neg,bob_s3306_b_10_A_neg,bob_s3306_b_10_A_neg,alice_lays_bob_off_s3306_b_10_A_pos,bob_is_disabled_s3306_b_10_A_pos),s3306_b_10_A(bob_retires_s3306_b_10_A_pos,alice_employer_s3306_b_10_A_pos,alice_s3306_b_10_A_neg,alice_s3306_b_10_A_neg,alice_lays_bob_off_s3306_b_10_A_neg,bob_is_disabled_s3306_b_10_A_pos),s3306_b_10_A(alice_pays_s3306_b_10_A_pos,alice_employer_s3306_b_10_A_pos,alice_s3306_b_10_A_pos,alice_s3306_b_10_A_neg,alice_lays_bob_off_s3306_b_10_A_pos,bob_is_disabled_s3306_b_10_A_pos),s3306_b_10_A(alice_pays_s3306_b_10_A_pos,alice_employer_s3306_b_10_A_pos,bob_s3306_b_10_A_pos,bob_s3306_b_10_A_pos,alice_lays_bob_off_s3306_b_10_A_pos,bob_is_disabled_s3306_b_10_A_pos)
+
+%pos:s3306_b_10_A(alice_pays_s3306_b_10_A_pos,alice_employer_s3306_b_10_A_pos,bob_s3306_b_10_A_pos,alice_s3306_b_10_A_pos,alice_lays_bob_off_s3306_b_10_A_pos,bob_is_disabled_s3306_b_10_A_pos).
+%neg:s3306_b_10_A(alice_pays_s3306_b_10_A_neg,alice_employer_s3306_b_10_A_neg,bob_s3306_b_10_A_neg,alice_s3306_b_10_A_neg,alice_lays_bob_off_s3306_b_10_A_neg,bob_retires_s3306_b_10_A_neg).
+
+% aba_asp('./experiments/s3306_b_10_A_learning.bk',[s3306_b_10_A(alice_pays_s3306_b_10_A_pos,alice_employer_s3306_b_10_A_pos,bob_s3306_b_10_A_pos,alice_s3306_b_10_A_pos,alice_lays_bob_off_s3306_b_10_A_pos,bob_is_disabled_s3306_b_10_A_pos)],[s3306_b_10_A(alice_pays_s3306_b_10_A_neg,alice_employer_s3306_b_10_A_neg,bob_s3306_b_10_A_neg,alice_s3306_b_10_A_neg,alice_lays_bob_off_s3306_b_10_A_neg,bob_retires_s3306_b_10_A_neg)]).
+%aba_asp('./experiments/s3306_b_10_A_learning.bk',[s3306_b_10_A(charlie_dead,bob_employment,charlie,bob_s3306_b_10_A_pos,bob_lays_charlie_off,charlie_dead),s3306_b_10_A(alice_pays_s3306_b_10_A_pos,alice_employer_s3306_b_10_A_pos,bob_s3306_b_10_A_pos,alice_s3306_b_10_A_pos,alice_lays_bob_off_s3306_b_10_A_pos,bob_is_disabled_s3306_b_10_A_pos)],[s3306_b_10_A(alice_pays_s3306_b_10_A_neg,alice_employer_s3306_b_10_A_neg,bob_s3306_b_10_A_neg,alice_s3306_b_10_A_neg,alice_lays_bob_off_s3306_b_10_A_neg,bob_retires_s3306_b_10_A_neg),s3306_b_10_A(alice_pays_s3306_b_10_A_neg,alice_employer_s3306_b_10_A_neg,bob_s3306_b_10_A_neg,alice_s3306_b_10_A_neg,alice_lays_bob_off_s3306_b_10_A_neg,bob_retires_s3306_b_10_A_neg)]).
+%ACCURACY_BRAVE: 22/22
+%ACCURACY_CAUTIOUS: 22/22%Test : s3306_b_10_A(bob_lays_charlie_off,bob_employment,charlie,bob_s3306_b_10_A_pos,bob_lays_charlie_off,charlie_dead)

@@ -1,0 +1,138 @@
+%other than any such payment or series of payments which would have been paid if the employee's employment relationship had not been so terminated;
+%EXCEPTION
+%(11) remuneration for agricultural labor paid in any medium other than cash;
+%s3306_b_11(Remuneration,Service,Medium) :-
+%    service_(Service),
+%	purpose_(Service,agricultural_labor),
+%	patient_(Service,Employer),
+%	agent_(Service,Employee),
+%    agent_(Remuneration,Employer),
+%	patient_(Remuneration,Employee),
+%	purpose_(Remuneration,Service),
+%	means_(Remuneration,Medium),
+%   not_medium_is_cash(Medium).
+
+%not_s3306_b_11(Remuneration,Service,Medium) :-medium(Medium), service_(Service), means_(Remuneration,_), not s3306_b_11(Remuneration,Service,Medium).
+
+%#show not_s3306_b_11/3.
+
+medium_is_cash(Medium):-
+	medium(Medium),Medium=cash.
+
+assumption(not_medium_is_cash(Medium)).
+contrary(not_medium_is_cash(Medium),medium_is_cash(Medium)) :-
+    assumption(not_medium_is_cash(Medium)).
+
+% Text
+% Alice has paid $3200 to Bob for repairing her roof from Feb 1st, 2017 to Sep 2nd, 2017. Alice paid Bob with eggs, grapes and hay.
+
+% Question
+% Section 3306(b)(11) applies to the payment that Alice made to Bob for the year 2017. Contradiction
+
+% Facts
+person(alice_s3306_b_11_neg).
+person(bob_s3306_b_11_neg).
+
+year(2017).
+date(d2017_01_01).
+date_split(d2017_01_01, 2017, 1, 1).
+date(d2017_02_01).
+date_split(d2017_02_01, 2017, 2, 1).
+date(d2017_09_02).
+date_split(d2017_09_02, 2017, 9, 2).
+date(d2017_12_31).
+date_split(d2017_12_31, 2017, 12, 31).
+
+finance(3200).
+medium(kind).
+
+service_(alice_employer_s3306_b_11_neg).
+patient_(alice_employer_s3306_b_11_neg,alice_s3306_b_11_neg).
+agent_(alice_employer_s3306_b_11_neg,bob_s3306_b_11_neg).
+start_(alice_employer_s3306_b_11_neg,d2017_02_01).
+end_(alice_employer_s3306_b_11_neg,d2017_09_02).
+payment_(alice_pays_s3306_b_11_neg).
+agent_(alice_pays_s3306_b_11_neg,alice_s3306_b_11_neg).
+patient_(alice_pays_s3306_b_11_neg,bob_s3306_b_11_neg).
+start_(alice_pays_s3306_b_11_neg,d2017_09_02).
+purpose_(alice_pays_s3306_b_11_neg,alice_employer_s3306_b_11_neg).
+amount_(alice_pays_s3306_b_11_neg,3200).
+means_(alice_pays_s3306_b_11_neg,kind).
+
+% Text
+% Alice has paid $3200 to Bob for agricultural labor done from Feb 1st, 2017 to Sep 2nd, 2017. Alice paid Bob with eggs, grapes and hay.
+
+% Question
+% Section 3306(b)(11) applies to the payment that Alice made to Bob for the year 2017. Entailment
+
+% Facts
+person(alice_s3306_b_11_pos).
+person(bob_s3306_b_11_pos).
+
+year(2017).
+date(d2017_01_01).
+date_split(d2017_01_01, 2017, 1, 1).
+date(d2017_02_01).
+date_split(d2017_02_01, 2017, 2, 1).
+date(d2017_09_02).
+date_split(d2017_09_02, 2017, 9, 2).
+date(d2017_12_31).
+date_split(d2017_12_31, 2017, 12, 31).
+
+finance(3200).
+medium(kind).
+medium(credit).
+medium(share).
+medium(cash).
+
+service_(alice_employer_s3306_b_11_pos).
+patient_(alice_employer_s3306_b_11_pos,alice_s3306_b_11_pos).
+agent_(alice_employer_s3306_b_11_pos,bob_s3306_b_11_pos).
+start_(alice_employer_s3306_b_11_pos,d2017_02_01).
+end_(alice_employer_s3306_b_11_pos,d2017_09_02).
+purpose_(alice_employer_s3306_b_11_pos,agricultural_labor).
+payment_(alice_pays_s3306_b_11_pos).
+agent_(alice_pays_s3306_b_11_pos,alice_s3306_b_11_pos).
+patient_(alice_pays_s3306_b_11_pos,bob_s3306_b_11_pos).
+start_(alice_pays_s3306_b_11_pos,d2017_09_02).
+purpose_(alice_pays_s3306_b_11_pos,alice_employer_s3306_b_11_pos).
+amount_(alice_pays_s3306_b_11_pos,3200).
+means_(alice_pays_s3306_b_11_pos,kind).
+
+means_(alice_pays_s3306_b_11_pos,credit).
+means_(alice_pays_s3306_b_11_pos,share).
+
+person(charlie).
+person(charlie2).
+service_(bob_service).
+purpose_(bob_service,agricultural_labor).
+patient_(bob_service,bob_s3306_b_11_pos).
+agent_(bob_service,charlie).
+agent_(bob_remun,bob_s3306_b_11_pos).
+patient_(bob_remun,charlie).
+purpose_(bob_remun,bob_service).
+means_(bob_remun,kind).
+means_(bob_remun,credit).
+means_(bob_remun,share).
+means_(bob_remun,cash).
+
+service_(bob_service2).
+purpose_(bob_service2,agricultural_labor).
+patient_(bob_service2,bob_s3306_b_11_pos).
+agent_(bob_service2,charlie2).
+agent_(bob_remun2,bob_s3306_b_11_pos).
+patient_(bob_remun2,charlie2).
+purpose_(bob_remun2,bob_service2).
+means_(bob_remun2,kind).
+means_(bob_remun2,credit).
+means_(bob_remun2,share).
+means_(bob_remun,cash).
+
+%positives(9):s3306_b_11(alice_pays_s3306_b_11_pos,alice_employer_s3306_b_11_pos,kind),s3306_b_11(alice_pays_s3306_b_11_pos,alice_employer_s3306_b_11_pos,credit),s3306_b_11(alice_pays_s3306_b_11_pos,alice_employer_s3306_b_11_pos,share),s3306_b_11(bob_remun,bob_service,kind),s3306_b_11(bob_remun,bob_service,credit),s3306_b_11(bob_remun,bob_service,share),s3306_b_11(bob_remun2,bob_service2,kind),s3306_b_11(bob_remun2,bob_service2,credit),s3306_b_11(bob_remun2,bob_service2,share)
+%negatives(9):s3306_b_11(alice_pays_s3306_b_11_neg,alice_employer_s3306_b_11_neg,kind),s3306_b_11(alice_pays_s3306_b_11_neg,alice_employer_s3306_b_11_neg,cash),s3306_b_11(alice_pays_s3306_b_11_neg,alice_employer_s3306_b_11_pos,kind),s3306_b_11(alice_pays_s3306_b_11_neg,alice_employer_s3306_b_11_pos,credit),s3306_b_11(alice_pays_s3306_b_11_neg,alice_employer_s3306_b_11_pos,share),s3306_b_11(alice_pays_s3306_b_11_neg,alice_employer_s3306_b_11_pos,cash),s3306_b_11(alice_pays_s3306_b_11_neg,bob_service,kind),s3306_b_11(alice_pays_s3306_b_11_neg,bob_service,credit),s3306_b_11(alice_pays_s3306_b_11_neg,bob_service,share)
+
+%s3306_b_11(alice_pays_s3306_b_11_neg,alice_employer_s3306_b_11_neg,kind).
+%s3306_b_11(alice_pays_s3306_b_11_pos,alice_employer_s3306_b_11_pos,kind).
+
+%aba_asp('./experiments/s3306_b_11_learning.bk', [s3306_b_11(alice_pays_s3306_b_11_pos,alice_employer_s3306_b_11_pos,kind)],[s3306_b_11(alice_pays_s3306_b_11_neg,alice_employer_s3306_b_11_neg,kind)])
+%Test : not s3306_b_11(alice_pays_s3306_b_11_neg,alice_employer_s3306_b_11_pos,cash)

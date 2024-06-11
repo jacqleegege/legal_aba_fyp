@@ -1,5 +1,5 @@
 % BK
-innocent(X) :- defendant(X), not_guilty(X), age(X,Y), Y>18.
+innocent(X) :- defendant(X), not_guilty(X).
 
 age(mary, 30).
 

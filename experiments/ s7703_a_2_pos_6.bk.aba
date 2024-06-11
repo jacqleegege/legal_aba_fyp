@@ -1,0 +1,171 @@
+% TEST WITH ONE OF The RULES BEING DISJOINTED?
+%(2) an individual legally separated from his spouse under a decree of divorce or of separate maintenance shall not be considered as married.
+%s7703_a_2(Taxp,Spouse,Marriage,S19,Taxy) :-
+%    marriage_(Marriage),
+%    agent_(Marriage,Taxp),
+%    agent_(Marriage,Spouse),
+%	not_same_person(Taxp,Spouse),
+%	legal_separation_(S19),
+%	patient_(S19,Marriage),
+%	s7703_a_2_agent(S19),
+%	start_(S19,Divorce_time),
+%	last_day_year(Taxy,Last_day_year),
+%	is_before(Divorce_time,Last_day_year).
+
+%not_s7703_a_2(Taxp,Spouse,Marriage,S19,Taxy):-
+%    person(Taxp),person(Spouse), marriage_(Marriage), date(S19), year(Taxy), not s7703_a_2(Taxp,Spouse,Marriage,S19,Taxy).
+
+%#show s7703_a_2_agent/1.
+%#show last_day_year/2.
+
+%s7703_a_2_agent(S19) :-
+%	agent_(S19,decree_of_divorce).
+%s7703_a_2_agent(S19) :-
+%	agent_(S19,decree_of_separate_maintenance).
+
+s7703_a_2_agent(alice_and_bob_divorce_s7703_a_2_neg). 
+s7703_a_2_agent(alice_and_bob_divorce_s7703_a_2_pos).
+
+%is_before(Day1,Day2):-
+%    date_split(Day1,Y1,M1,D1),
+%    date_split(Day2,Y2,M2,D2),
+%    Y1 < Y2.
+%is_before(Day1,Day2):-
+%    date_split(Day1,Y1,M1,D1),
+%    date_split(Day2,Y2,M2,D2),
+%    Y1 = Y2,M1 < M2.
+%is_before(Day1,Day2):-
+%    date_split(Day1,Y1,M1,D1),
+%    date_split(Day2,Y2,M2,D2),
+%    Y1 = Y2,M1 = M2,D1 < D2.
+
+%last_day_year(Year,Day):-
+%    date_split(Day,Year,12,31).
+
+same_person(P1,P2):-
+    person(P1),person(P2),P1=P2.
+
+assumption(not_same_person(P1,P2)).
+contrary(not_same_person(P1,P2),same_person(P1,P2)):-
+    assumption(not_same_person(P1,P2)).
+
+is_before(d2012_01_01, d2012_04_05).
+is_before(d2012_01_01, d2012_12_31).
+is_before(d2012_04_05, d2012_12_31).
+is_before(d2017_01_01, d2017_09_16).
+is_before(d2017_01_01, d2017_12_31).
+is_before(d2017_09_16, d2017_12_31).
+is_before(d2018_01_01, d2018_12_31).
+is_before(d2012_01_01, d2017_01_01).
+is_before(d2012_04_05, d2017_01_01).
+is_before(d2012_12_31, d2017_01_01).
+is_before(d2012_01_01, d2017_09_16).
+is_before(d2012_04_05, d2017_09_16).
+is_before(d2012_12_31, d2017_09_16).
+is_before(d2012_01_01, d2017_12_31).
+is_before(d2012_04_05, d2017_12_31).
+is_before(d2012_12_31, d2017_12_31).
+is_before(d2012_01_01, d2018_01_01).
+is_before(d2012_04_05, d2018_01_01).
+is_before(d2012_12_31, d2018_01_01).
+is_before(d2017_01_01, d2018_01_01).
+is_before(d2017_09_16, d2018_01_01).
+is_before(d2017_12_31, d2018_01_01).
+is_before(d2012_01_01, d2018_12_31).
+is_before(d2012_04_05, d2018_12_31).
+is_before(d2012_12_31, d2018_12_31).
+is_before(d2017_01_01, d2018_12_31).
+is_before(d2017_09_16, d2018_12_31).
+is_before(d2017_12_31, d2018_12_31).
+
+last_day_year(2012,d2012_12_31).
+last_day_year(2017,d2017_12_31).
+last_day_year(2018,d2018_12_31).
+
+% Text
+% Alice and Bob got married on April 5th, 2012. Alice and Bob were legally separated under a decree of divorce on September 16th, 2017.
+
+% Question
+% Section 7703(a)(2) applies to Alice for the year 2012. Contradiction
+
+% Facts
+person(alice_s7703_a_2_neg).
+person(bob_s7703_a_2_neg).
+
+year(2012).
+date(d2012_01_01).
+date_split(d2012_01_01, 2012, 1, 1).
+date(d2012_04_05).
+date_split(d2012_04_05, 2012, 4, 5).
+date(d2012_12_31).
+date_split(d2012_12_31, 2012, 12, 31).
+
+year(2017).
+date(d2017_01_01).
+date_split(d2017_01_01, 2017, 1, 1).
+date(d2017_09_16).
+date_split(d2017_09_16, 2017, 9, 16).
+date(d2017_12_31).
+date_split(d2017_12_31, 2017, 12, 31).
+
+marriage_(alice_and_bob_s7703_a_2_neg).
+agent_(alice_and_bob_s7703_a_2_neg,alice_s7703_a_2_neg).
+agent_(alice_and_bob_s7703_a_2_neg,bob_s7703_a_2_neg).
+start_(alice_and_bob_s7703_a_2_neg,d2012_04_05).
+legal_separation_(alice_and_bob_divorce_s7703_a_2_neg).
+patient_(alice_and_bob_divorce_s7703_a_2_neg,alice_and_bob_s7703_a_2_neg).
+agent_(alice_and_bob_divorce_s7703_a_2_neg,decree_of_divorce).
+start_(alice_and_bob_divorce_s7703_a_2_neg,d2017_09_16).
+
+% Text
+% Alice and Bob got married on April 5th, 2012. Alice and Bob were legally separated under a decree of divorce on September 16th, 2017.
+
+% Question
+% Section 7703(a)(2) applies to Alice for the year 2018. Entailment
+
+% Facts
+person(alice_s7703_a_2_pos).
+person(bob_s7703_a_2_pos).
+
+year(2012).
+date(d2012_01_01).
+date_split(d2012_01_01, 2012, 1, 1).
+date(d2012_04_05).
+date_split(d2012_04_05, 2012, 4, 5).
+date(d2012_12_31).
+date_split(d2012_12_31, 2012, 12, 31).
+
+year(2017).
+date(d2017_01_01).
+date_split(d2017_01_01, 2017, 1, 1).
+date(d2017_09_16).
+date_split(d2017_09_16, 2017, 9, 16).
+date(d2017_12_31).
+date_split(d2017_12_31, 2017, 12, 31).
+
+year(2018).
+date(d2018_01_01).
+date_split(d2018_01_01, 2018, 1, 1).
+date(d2018_12_31).
+date_split(d2018_12_31, 2018, 12, 31).
+
+marriage_(alice_and_bob_s7703_a_2_pos).
+agent_(alice_and_bob_s7703_a_2_pos,alice_s7703_a_2_pos).
+agent_(alice_and_bob_s7703_a_2_pos,bob_s7703_a_2_pos).
+start_(alice_and_bob_s7703_a_2_pos,d2012_04_05).
+legal_separation_(alice_and_bob_divorce_s7703_a_2_pos).
+patient_(alice_and_bob_divorce_s7703_a_2_pos,alice_and_bob_s7703_a_2_pos).
+agent_(alice_and_bob_divorce_s7703_a_2_pos,decree_of_divorce).
+start_(alice_and_bob_divorce_s7703_a_2_pos,d2017_09_16).
+
+%positives(8): s7703_a_2(alice_s7703_a_2_pos,bob_s7703_a_2_pos,alice_and_bob_s7703_a_2_pos,alice_and_bob_divorce_s7703_a_2_pos,2018),s7703_a_2(alice_s7703_a_2_neg,bob_s7703_a_2_neg,alice_and_bob_s7703_a_2_neg,alice_and_bob_divorce_s7703_a_2_neg,2017), s7703_a_2(alice_s7703_a_2_neg,bob_s7703_a_2_neg,alice_and_bob_s7703_a_2_neg,alice_and_bob_divorce_s7703_a_2_neg,2018), s7703_a_2(bob_s7703_a_2_neg,alice_s7703_a_2_neg,alice_and_bob_s7703_a_2_neg,alice_and_bob_divorce_s7703_a_2_neg,2017), s7703_a_2(bob_s7703_a_2_neg,alice_s7703_a_2_neg,alice_and_bob_s7703_a_2_neg,alice_and_bob_divorce_s7703_a_2_neg,2018), s7703_a_2(alice_s7703_a_2_pos,bob_s7703_a_2_pos,alice_and_bob_s7703_a_2_pos,alice_and_bob_divorce_s7703_a_2_pos,2017), s7703_a_2(bob_s7703_a_2_pos,alice_s7703_a_2_pos,alice_and_bob_s7703_a_2_pos,alice_and_bob_divorce_s7703_a_2_pos,2017), s7703_a_2(bob_s7703_a_2_pos,alice_s7703_a_2_pos,alice_and_bob_s7703_a_2_pos,alice_and_bob_divorce_s7703_a_2_pos,2018)
+%negatives(8): s7703_a_2(alice_s7703_a_2_neg,bob_s7703_a_2_neg,alice_and_bob_s7703_a_2_neg,alice_and_bob_divorce_s7703_a_2_neg,2012), s7703_a_2(alice_s7703_a_2_neg,alice_s7703_a_2_neg,alice_and_bob_s7703_a_2_neg,d2012_01_01,2012), s7703_a_2(alice_s7703_a_2_neg,alice_s7703_a_2_neg,alice_and_bob_s7703_a_2_neg,d2018_12_31,2012), s7703_a_2(alice_s7703_a_2_neg,bob_s7703_a_2_neg,alice_and_bob_s7703_a_2_pos,d2018_01_01,2012), s7703_a_2(bob_s7703_a_2_neg,alice_s7703_a_2_pos,alice_and_bob_s7703_a_2_pos,d2012_12_31,2012),s7703_a_2(bob_s7703_a_2_pos,bob_s7703_a_2_pos,alice_and_bob_s7703_a_2_pos,d2017_09_16,2017),s7703_a_2(alice_s7703_a_2_neg,bob_s7703_a_2_neg,alice_and_bob_s7703_a_2_pos,d2012_01_01,2018),s7703_a_2(bob_s7703_a_2_neg,alice_s7703_a_2_neg,alice_and_bob_s7703_a_2_pos,d2017_12_31,2018),s7703_a_2(bob_s7703_a_2_neg,bob_s7703_a_2_pos,alice_and_bob_s7703_a_2_pos,d2012_01_01,2018),s7703_a_2(alice_s7703_a_2_pos,bob_s7703_a_2_pos,alice_and_bob_s7703_a_2_pos,d2012_01_01,2018)
+% aba_asp('./experiments/s7703_a_2_learning.bk',[s7703_a_2(alice_s7703_a_2_neg,bob_s7703_a_2_neg,alice_and_bob_s7703_a_2_neg,alice_and_bob_divorce_s7703_a_2_neg,2017), s7703_a_2(alice_s7703_a_2_neg,bob_s7703_a_2_neg,alice_and_bob_s7703_a_2_neg,alice_and_bob_divorce_s7703_a_2_neg,2018), s7703_a_2(bob_s7703_a_2_neg,alice_s7703_a_2_neg,alice_and_bob_s7703_a_2_neg,alice_and_bob_divorce_s7703_a_2_neg,2017), s7703_a_2(bob_s7703_a_2_neg,alice_s7703_a_2_neg,alice_and_bob_s7703_a_2_neg,alice_and_bob_divorce_s7703_a_2_neg,2018), s7703_a_2(alice_s7703_a_2_pos,bob_s7703_a_2_pos,alice_and_bob_s7703_a_2_pos,alice_and_bob_divorce_s7703_a_2_pos,2017), s7703_a_2(alice_s7703_a_2_pos,bob_s7703_a_2_pos,alice_and_bob_s7703_a_2_pos,alice_and_bob_divorce_s7703_a_2_pos,2018), s7703_a_2(bob_s7703_a_2_pos,alice_s7703_a_2_pos,alice_and_bob_s7703_a_2_pos,alice_and_bob_divorce_s7703_a_2_pos,2017), s7703_a_2(bob_s7703_a_2_pos,alice_s7703_a_2_pos,alice_and_bob_s7703_a_2_pos,alice_and_bob_divorce_s7703_a_2_pos,2018)],[s7703_a_2(alice_s7703_a_2_neg,bob_s7703_a_2_neg,alice_and_bob_s7703_a_2_neg,alice_and_bob_divorce_s7703_a_2_neg,2012), s7703_a_2(alice_s7703_a_2_neg,alice_s7703_a_2_neg,alice_and_bob_s7703_a_2_neg,d2012_01_01,2012), s7703_a_2(alice_s7703_a_2_neg,alice_s7703_a_2_neg,alice_and_bob_s7703_a_2_neg,d2018_12_31,2012), s7703_a_2(alice_s7703_a_2_neg,bob_s7703_a_2_neg,alice_and_bob_s7703_a_2_pos,d2018_01_01,2012), s7703_a_2(bob_s7703_a_2_neg,alice_s7703_a_2_pos,alice_and_bob_s7703_a_2_pos,d2012_12_31,2012),s7703_a_2(bob_s7703_a_2_pos,bob_s7703_a_2_pos,alice_and_bob_s7703_a_2_pos,d2017_09_16,2017),s7703_a_2(alice_s7703_a_2_neg,bob_s7703_a_2_neg,alice_and_bob_s7703_a_2_pos,d2012_01_01,2018),s7703_a_2(alice_s7703_a_2_pos,bob_s7703_a_2_pos,alice_and_bob_s7703_a_2_pos,d2012_01_01,2018)])
+
+%pos: s7703_a_2(alice_s7703_a_2_pos,bob_s7703_a_2_pos,alice_and_bob_s7703_a_2_pos,alice_and_bob_divorce_s7703_a_2_pos,2018).
+%neg: s7703_a_2(alice_s7703_a_2_neg,bob_s7703_a_2_neg,alice_and_bob_s7703_a_2_neg,alice_and_bob_divorce_s7703_a_2_neg,2012).
+
+%aba_asp('./experiments/s7703_a_2_learning.bk',[s7703_a_2(alice_s7703_a_2_pos,bob_s7703_a_2_pos,alice_and_bob_s7703_a_2_pos,alice_and_bob_divorce_s7703_a_2_pos,2018)],[s7703_a_2(alice_s7703_a_2_neg,bob_s7703_a_2_neg,alice_and_bob_s7703_a_2_neg,alice_and_bob_divorce_s7703_a_2_neg,2012)])
+
+
+%Test :  s7703_a_2(alice_s7703_a_2_pos,bob_s7703_a_2_pos,alice_and_bob_s7703_a_2_pos,alice_and_bob_divorce_s7703_a_2_pos,2017)

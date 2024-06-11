@@ -1,0 +1,156 @@
+%(B) a taxpayer shall be considered as not married at the close of his taxable year if at any time during the taxable year his spouse is a nonresident alien; and
+s2_b_2_B(Taxp,Spouse,Taxy) :-
+    first_day_year(Taxy,First_day_year),
+    last_day_year(Taxy,Last_day_year),
+    marriage_(Marriage),
+    agent_(Marriage,Taxp),
+    agent_(Marriage,Spouse),
+    nonresident_alien_(Spouse_is_nra),
+    agent_(Spouse_is_nra,Spouse),
+    start_spouse_is_nra(Spouse_is_nra,Start_nra,Last_day_year),
+    end_spouse_is_nra(Spouse_is_nra,Stop_nra,First_day_year).
+
+start_spouse_is_nra(Spouse_is_nra,Start_nra,Last_day_year):-
+    nonresident_alien_(Spouse_is_nra),date(Start_nra),date(Last_day_year),
+    not_start_(Spouse_is_nra,_).
+start_spouse_is_nra(Spouse_is_nra,Start_nra,Last_day_year):-
+    start_(Spouse_is_nra,Start_nra),
+    is_before(Start_nra,Last_day_year).
+
+end_spouse_is_nra(Spouse_is_nra,Stop_nra,First_day_year):-
+    date(First_day_year),nonresident_alien_(Spouse_is_nra),date(Stop_nra),
+    not_end_(Spouse_is_nra,_).
+end_spouse_is_nra(Spouse_is_nra,Stop_nra,First_day_year):-
+    end_(Spouse_is_nra,Stop_nra),
+    is_before(First_day_year,Stop_nra).
+
+first_day_year(Year,Day) :-
+	date_split(Day,Year,1,1).
+
+last_day_year(Year,Day):-
+    date_split(Day,Year,12,31).
+
+is_before(Day1,Day2):-
+    date_split(Day1,Y1,M1,D1),
+    date_split(Day2,Y2,M2,D2),
+    Y1 < Y2.
+is_before(Day1,Day2):-
+    date_split(Day1,Y1,M1,D1),
+    date_split(Day2,Y2,M2,D2),
+    Y1 = Y2,M1 < M2.
+is_before(Day1,Day2):-
+    date_split(Day1,Y1,M1,D1),
+    date_split(Day2,Y2,M2,D2),
+    Y1 = Y2,M1 = M2,D1 < D2.
+
+assumption(not_start_(Event,Time)).
+assumption(not_end_(Event,Time)).
+
+contrary(not_start_(Event,Time),start_(Event,Time)) :- 
+    assumption(not_start_(Event,Time)).
+contrary(not_end_(Event,Time),end_(Event,Time)) :- 
+    assumption(not_end_(Event,Time)).
+
+%INDIRECT RULE
+%(C) a taxpayer shall be considered as married at the close of his taxable year if his spouse (other than a spouse described in subparagraph (B)) died during the taxable year.
+s2_b_2_C(Taxp,Marriage,Spouse,Taxy) :-
+    first_day_year(Taxy,First_day_year),
+    last_day_year(Taxy,Last_day_year),
+    marriage_(Marriage),
+    agent_(Marriage,Taxp),
+    agent_(Marriage,Spouse),
+    not_s2_b_2_B(Taxp,Spouse,Taxy),
+    death_(Spouse_dies),
+    agent_(Spouse_dies,Spouse),
+    start_(Spouse_dies,Time_death),
+    died_and_married(Marriage,Time_death,End_marriage),  
+    is_before(First_day_year,Time_death),
+    is_before(Time_death,Last_day_year).
+
+died_and_married(Marriage,Time_death,End_marriage):-
+    marriage_(Marriage),date(Time_death),date(End_marriage),
+    not_end_(Marriage,_).
+died_and_married(Marriage,Time_death,End_marriage):-
+    end_(Marriage,End_marriage),
+    is_before(Time_death,End_marriage).
+
+assumption(not_s2_b_2_B(Taxp,Spouse,Taxy)).
+contrary(not_s2_b_2_B(Taxp,Spouse,Taxy),s2_b_2_B(Taxp,Spouse,Taxy)) :- 
+    assumption(not_s2_b_2_B(Taxp,Spouse,Taxy)).
+
+% Text
+% Alice and Bob got married on Feb 3rd, 1992. Alice was a nonresident alien until July 9th, 2014.
+
+% Question
+% Section 2(b)(2)(B) applies to Bob in 2015. Contradiction
+
+% Facts
+person(alice_s2_b_2_B_neg).
+person(bob_s2_b_2_B_neg).
+
+year(1992).
+date(d1992_02_03).
+date_split(d1992_02_03,1992,2,3).
+date(d1992_01_01).
+date_split(d1992_01_01,1992,1,1).
+date(d1992_12_31).
+date_split(d1992_12_31,1992,12,31).
+
+year(2014).
+date(d2014_07_09).
+date_split(d2014_07_09,2014,7,9).
+date(d2014_01_01).
+date_split(d2014_01_01,2014,1,1).
+date(d2014_12_31).
+date_split(d2014_12_31,2014,12,31).
+
+year(2015).
+
+marriage_(alice_and_bob_s2_b_2_B_neg).
+agent_(alice_and_bob_s2_b_2_B_neg,alice_s2_b_2_B_neg).
+agent_(alice_and_bob_s2_b_2_B_neg,bob_s2_b_2_B_neg).
+start_(alice_and_bob_s2_b_2_B_neg,d1992_02_03).
+nonresident_alien_(alice_is_a_nra_s2_b_2_B_neg).
+agent_(alice_is_a_nra_s2_b_2_B_neg,alice_s2_b_2_B_neg).
+end_(alice_is_a_nra_s2_b_2_B_neg,d2014_07_09).
+
+% Text
+% Alice and Bob got married on Feb 3rd, 1992. Alice was a nonresident alien until July 9th, 2014.
+
+% Question
+% Section 2(b)(2)(B) applies to Bob in 2013. Entailment
+
+% Facts
+person(alice_s2_b_2_B_pos).
+person(bob_s2_b_2_B_pos).
+
+year(1992).
+date(d1992_02_03).
+date_split(d1992_02_03,1992,2,3).
+date(d1992_01_01).
+date_split(d1992_01_01,1992,1,1).
+date(d1992_12_31).
+date_split(d1992_12_31,1992,12,31).
+
+year(2014).
+date(d2014_07_09).
+date_split(d2014_07_09,2014,7,9).
+date(d2014_01_01).
+date_split(d2014_01_01,2014,1,1).
+date(d2014_12_31).
+date_split(d2014_12_31,2014,12,31).
+
+year(2013).
+
+marriage_(alice_and_bob_s2_b_2_B_pos).
+agent_(alice_and_bob_s2_b_2_B_pos,alice_s2_b_2_B_pos).
+agent_(alice_and_bob_s2_b_2_B_pos,bob_s2_b_2_B_pos).
+start_(alice_and_bob_s2_b_2_B_pos,d1992_02_03).
+nonresident_alien_(alice_is_a_nra_s2_b_2_B_pos).
+agent_(alice_is_a_nra_s2_b_2_B_pos,alice_s2_b_2_B_pos).
+end_(alice_is_a_nra_s2_b_2_B_pos,d2014_07_09).
+
+%pos:s2_b_2_B(bob_s2_b_2_B_pos,alice_s2_b_2_B_pos,2013).
+%neg:s2_b_2_B(bob_s2_b_2_B_neg,alice_s2_b_2_B_neg,2015).
+
+% aba_asp('./experiments/s2_b_2_B_learning.bk',[s2_b_2_B(bob_s2_b_2_B_pos,alice_s2_b_2_B_pos,2013)],[s2_b_2_B(bob_s2_b_2_B_neg,alice_s2_b_2_B_neg,2015)]).

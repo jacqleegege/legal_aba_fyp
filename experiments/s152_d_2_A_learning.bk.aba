@@ -1,0 +1,131 @@
+%(A) A child or a descendant of a child.
+s152_d_2_A(Dependent,Taxp,Start_day,End_day) :-
+	is_child_of(Child,Taxp,Start_child,End_child),
+    Dependent=Child,
+    Start_day=Start_child,
+    End_day=End_child.
+s152_d_2_A(Dependent,Taxp,Start_day,End_day) :-
+    is_child_of(Child,Taxp,Start_child,End_child),
+    not_same_person(Dependent,Child),
+    is_descendent_of(Dependent,Child,Start_day,End_day).
+
+is_descendent_of(X,Y,Day_start,Day_end) :- % X is a descendent of Y if
+	% as a base case, X is a descendent of Y if X is a child of Y
+    is_child_of(X,Y,Day_start,Day_end).
+is_descendent_of(X,Y,Day_start,Day_end) :- 
+	% else
+    is_child_of(Z,Y,_,_), % Z is a child of Y and
+    is_descendent_of(X,Z,Day_start,Day_end). % X is a descendent of Z
+
+is_child_of(X,Y,Day_start,Day_end) :- % X is the child of Y from Day_start to Day_end if...
+	% what kind of relationship exists between X and Y
+	child_or_parent(X,Y,Relationship),
+    not_same_person(X,Y),
+	relationship_start(Relationship,Day_start),
+	% if no end to Relationship then it's still ongoing
+    relationship_end(Relationship,Day_end).
+
+child_or_parent(X,Y,Relationship):-
+    % X is child of Y, or
+    son_or_daughter(Relationship),
+    agent_(Relationship,X),
+    patient_(Relationship,Y).
+child_or_parent(X,Y,Relationship):-
+    % Y is parent of X
+    father_or_mother(Relationship),
+    agent_(Relationship,Y),
+    patient_(Relationship,X).
+
+son_or_daughter(Relationship):-
+    son_(Relationship).
+son_or_daughter(Relationship):-
+    daughter_(Relationship).
+
+father_or_mother(Relationship):-
+    father_(Relationship).
+father_or_mother(Relationship):-
+    mother_(Relationship).
+
+relationship(Relationship):-
+    agent_(Relationship,_).
+relationship(Relationship):-
+    patient_(Relationship,_).
+
+relationship_start(Relationship,Day_start):-
+    relationship(Relationship),date(Day_start),not_start_(Relationship,_).
+relationship_start(Relationship,Day_start):-   
+    start_(Relationship,Day_start).
+
+relationship_end(Relationship,Day_end):-
+    relationship(Relationship),date(Day_end),not_end_(Relationship,_).
+relationship_end(Relationship,Day_end):-
+    end_(Relationship,Day_end). 
+
+same_person(P1,P2):-
+    person(P1),person(P2),P1=P2.
+
+assumption(not_same_person(P1,P2)).
+assumption(not_start_(Event,Time)).
+assumption(not_end_(Event,Time)).
+
+contrary(not_same_person(P1,P2),same_person(P1,P2)):-
+    assumption(not_same_person(P1,P2)).
+contrary(not_start_(Event,Time),start_(Event,Time)) :- 
+    assumption(not_start_(Event,Time)).
+contrary(not_end_(Event,Time),end_(Event,Time)) :- 
+    assumption(not_end_(Event,Time)).
+
+% Text
+% Bob is Alice's brother since April 15th, 2014.
+
+% Question
+% Alice bears a relationship to Bob under section 152(d)(2)(A). Contradiction
+
+% Facts
+person(alice_s152_d_2_A_neg).
+person(bob_s152_d_2_A_neg).
+
+year(2014).
+date(d2014_04_15).
+date_split(d2014_04_15, 2014, 4, 15).
+date(d2014_01_01).
+date_split(d2014_01_01, 2014, 1, 1).
+date(d2014_12_31).
+date_split(d2014_12_31, 2014, 12, 31).
+date(d2100_01_01).
+date_split(d2100_01_01, 2100, 1, 1).
+
+brother_(alice_and_bob_s152_d_2_A_neg).
+agent_(alice_and_bob_s152_d_2_A_neg,bob_s152_d_2_A_neg).
+patient_(alice_and_bob_s152_d_2_A_neg,alice_s152_d_2_A_neg).
+start_(alice_and_bob_s152_d_2_A_neg,d2014_04_15).
+
+% Text
+% Bob is Alice's father since April 15th, 2014.
+
+% Question
+% Alice bears a relationship to Bob under section 152(d)(2)(A). Entailment
+
+% Facts
+person(alice_s152_d_2_A_pos).
+person(bob_s152_d_2_A_pos).
+
+year(2014).
+date(d2014_04_15).
+date_split(d2014_04_15, 2014, 4, 15).
+date(d2014_01_01).
+date_split(d2014_01_01, 2014, 1, 1).
+date(d2014_12_31).
+date_split(d2014_12_31, 2014, 12, 31).
+date(d2100_01_01).
+date_split(d2100_01_01, 2100, 1, 1).
+
+father_(alice_and_bob_s152_d_2_A_pos).
+agent_(alice_and_bob_s152_d_2_A_pos,bob_s152_d_2_A_pos).
+patient_(alice_and_bob_s152_d_2_A_pos,alice_s152_d_2_A_pos).
+start_(alice_and_bob_s152_d_2_A_pos,d2014_04_15).
+
+%pos:s152_d_2_A(alice_s152_d_2_A_pos,bob_s152_d_2_A_pos,d2014_04_15,d2100_01_01).
+%neg:s152_d_2_A(alice_s152_d_2_A_neg,bob_s152_d_2_A_neg,d2014_04_15,d2100_01_01).
+
+% aba_asp('./experiments/s152_d_2_A_learning.bk',[s152_d_2_A(alice_s152_d_2_A_pos,bob_s152_d_2_A_pos,d2014_04_15,d2100_01_01)],[s152_d_2_A(alice_s152_d_2_A_neg,bob_s152_d_2_A_neg,d2014_04_15,d2100_01_01)]).

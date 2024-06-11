@@ -1,0 +1,123 @@
+%(16) service performed in the employ of an international organization;
+%s3306_c_16(Service,Employer) :-
+%    service_(Service),
+%	patient_(Service,Employer),
+%	international_organization_(Employer_is_international_organization),
+%	agent_(Employer_is_international_organization,Employer).
+
+%not_s3306_c_16(Service,Employer) :- service_(Service),patient_(_,Employer), not s3306_c_16(Service,Employer).
+
+%#show not_s3306_c_16/2.
+
+% Text
+% Alice was paid $73200 in 2017 as an employee of the United States Government in Arlington, Virginia, USA.
+
+% Question
+% Section 3306(c)(16) applies to Alice's employment situation in 2017. Contradiction
+
+% Facts
+person(alice_s3306_c_16_neg).
+
+year(2017).
+date(d2017_01_01).
+date_split(d2017_01_01, 2017, 1, 1).
+date(d2017_12_31).
+date_split(d2017_12_31, 2017, 12, 31).
+
+location_name(arlington).
+location_name(virginia).
+location_name(usa).
+
+finance(73200).
+
+service_(alice_employed_s3306_c_16_neg).
+patient_(alice_employed_s3306_c_16_neg,united_states_government).
+agent_(alice_employed_s3306_c_16_neg,alice_s3306_c_16_neg).
+start_(alice_employed_s3306_c_16_neg,d2017_01_01).
+end_(alice_employed_s3306_c_16_neg,d2017_12_31).
+location_(alice_employed_s3306_c_16_neg,arlington).
+location_(alice_employed_s3306_c_16_neg,virginia).
+location_(alice_employed_s3306_c_16_neg,usa).
+payment_(alice_is_paid_s3306_c_16_neg).
+agent_(alice_is_paid_s3306_c_16_neg,united_states_government).
+patient_(alice_is_paid_s3306_c_16_neg,alice_s3306_c_16_neg).
+start_(alice_is_paid_s3306_c_16_neg,d2017_12_31).
+purpose_(alice_is_paid_s3306_c_16_neg,alice_employed_s3306_c_16_neg).
+amount_(alice_is_paid_s3306_c_16_neg,73200).
+
+% Text
+% Alice was paid $73200 in 2017 as an employee of the International Monetary Fund in Washington, D.C., USA.
+
+% Question
+% Section 3306(c)(16) applies to Alice's employment situation in 2017. Entailment
+
+% Facts
+person(alice_s3306_c_16_pos).
+
+year(2017).
+date(d2017_01_01).
+date_split(d2017_01_01, 2017, 1, 1).
+date(d2017_12_31).
+date_split(d2017_12_31, 2017, 12, 31).
+
+location_name(washington_dc).
+location_name(usa).
+
+finance(73200).
+
+international_organization_(imf_is_an_international_organization_s3306_c_16_pos).
+agent_(imf_is_an_international_organization_s3306_c_16_pos,international_monetary_fund).
+service_(alice_employed_s3306_c_16_pos).
+patient_(alice_employed_s3306_c_16_pos,international_monetary_fund).
+agent_(alice_employed_s3306_c_16_pos,alice_s3306_c_16_pos).
+start_(alice_employed_s3306_c_16_pos,d2017_01_01).
+end_(alice_employed_s3306_c_16_pos,d2017_12_31).
+location_(alice_employed_s3306_c_16_pos,washington_dc).
+location_(alice_employed_s3306_c_16_pos,usa).
+payment_(alice_is_paid_s3306_c_16_pos).
+agent_(alice_is_paid_s3306_c_16_pos,international_monetary_fund).
+patient_(alice_is_paid_s3306_c_16_pos,alice_s3306_c_16_pos).
+start_(alice_is_paid_s3306_c_16_pos,d2017_12_31).
+purpose_(alice_is_paid_s3306_c_16_pos,alice_employed_s3306_c_16_pos).
+amount_(alice_is_paid_s3306_c_16_pos,73200).
+
+service_(bob_employed).
+service_(charlie_employed).
+service_(charlie2_employed).
+patient_(bob_employed,international_monetary_fund).
+patient_(charlie_employed,international_monetary_fund).
+patient_(charlie2_employed,international_monetary_fund).
+
+international_organization_(unesco_is_an_international_organization).
+agent_(unesco_is_an_international_organization,unesco).
+service_(alice_employed2).
+service_(bob_employed2).
+service_(charlie_employed2).
+service_(charlie2_employed2).
+patient_(bob_employed2,unesco).
+patient_(charlie_employed2,unesco).
+patient_(charlie2_employed2,unesco).
+patient_(alice_employed2,unesco).
+
+%positives:s3306_c_16(alice_employed_s3306_c_16_pos, international_monetary_fund),s3306_c_16(bob_employed, international_monetary_fund),s3306_c_16(charlie_employed, international_monetary_fund),s3306_c_16(charlie2_employed, international_monetary_fund),s3306_c_16(bob_employed2, unesco),s3306_c_16(charlie_employed2, unesco),s3306_c_16(charlie2_employed2, unesco),s3306_c_16(alice_employed2, unesco)
+%negatives:s3306_c_16(alice_employed_s3306_c_16_neg,united_states_government),s3306_c_16(alice_employed_s3306_c_16_neg,unesco),s3306_c_16(charlie2_employed2,united_states_government),s3306_c_16(alice_employed_s3306_c_16_pos,united_states_government),s3306_c_16(bob_employed2,united_states_government),s3306_c_16(alice_employed_s3306_c_16_neg,international_monetary_fund),s3306_c_16(alice_employed_s3306_c_16_neg,alice_s3306_c_16_neg),s3306_c_16(charlie2_employed,unesco)
+
+%pos:s3306_c_16(alice_employed_s3306_c_16_pos,international_monetary_fund).
+%neg:s3306_c_16(alice_employed_s3306_c_16_neg,united_states_government).
+
+% aba_asp('./experiments/s3306_c_16_learning.bk',[s3306_c_16(alice_employed_s3306_c_16_pos,international_monetary_fund)],[s3306_c_16(alice_employed_s3306_c_16_neg,united_states_government)]).
+
+%ACCURACY_BRAVE: 14/16
+%ACCURACY_CAUTIOUS: 14/16
+%ACCURACY_BRAVE: 8/16
+%ACCURACY_CAUTIOUS: 8/16
+%ACCURACY_BRAVE: 8/16
+%ACCURACY_CAUTIOUS: 8/16
+%ACCURACY_BRAVE: 14/16
+%ACCURACY_CAUTIOUS: 14/16
+%WRONG POSITIVES: ['experiments/s3306_c_16_pos_1.bk.sol.asp', 'experiments/s3306_c_16_neg_1.bk.sol.asp', 'experiments/s3306_c_16_neg_2.bk.sol.asp', 'experiments/s3306_c_16_neg_3.bk.sol.asp', 'experiments/s3306_c_16_neg_4.bk.sol.asp', 'experiments/s3306_c_16_neg_5.bk.sol.asp', 'experiments/s3306_c_16_neg_6.bk.sol.asp', 'experiments/s3306_c_16_neg_7.bk.sol.asp', 'experiments/s3306_c_16_neg_8.bk.sol.asp']
+%WRONG NEGATIVES: []
+%ACCURACY_BRAVE: 14/16
+%ACCURACY_CAUTIOUS: 14/16
+%WRONG POSITIVES: ['experiments/s3306_c_16_pos_1.bk.sol.asp']
+%WRONG NEGATIVES: ['experiments/s3306_c_16_neg_1.bk.sol.asp', 'experiments/s3306_c_16_neg_2.bk.sol.asp', 'experiments/s3306_c_16_neg_3.bk.sol.asp', 'experiments/s3306_c_16_neg_4.bk.sol.asp', 'experiments/s3306_c_16_neg_5.bk.sol.asp', 'experiments/s3306_c_16_neg_6.bk.sol.asp', 'experiments/s3306_c_16_neg_7.bk.sol.asp', 'experiments/s3306_c_16_neg_8.bk.sol.asp']%Test : s3306_c_16(bob_employed2, unesco)

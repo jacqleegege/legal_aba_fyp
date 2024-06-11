@@ -13,7 +13,6 @@ date_split(d2017_01_01,2017,1,1).
 date_split(d2017_12_31,2017,12,31).
 finance(97407).
 finance(24056).
-% s2_b(alice,_,2017).
 s2_b(alice_s1_a_1_neg,alice_s1_a_1_neg,2017).
 s63(alice_s1_a_1_neg,2017,97407).
 

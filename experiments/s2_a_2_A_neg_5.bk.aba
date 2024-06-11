@@ -1,0 +1,216 @@
+%(A) if the taxpayer has remarried at any time before the close of the taxable year, or
+%s2_a_2_A(Taxp,Remarriage,Previous_marriage,S31,Taxy) :-
+%    marriage_(Previous_marriage),
+%    agent_(Previous_marriage,Taxp),
+%    start_(Previous_marriage,Start_previous_marriage),
+%    marriage_(Remarriage),
+%    agent_(Remarriage,Taxp),
+%    start_(Remarriage,S31),
+%    not_same_marriage(Remarriage,Previous_marriage),
+%    is_before(Start_previous_marriage,S31),
+%    last_day_year(Taxy,Last_day_year),
+%    is_before(S31,Last_day_year).
+
+%not_s2_a_2_A(Taxp,Remarriage,Previous_marriage,S31,Taxy) :-
+%    person(Taxp),
+%    marriage_(Previous_marriage),
+%    year(Taxy),
+%    date(S31),
+%    marriage_(Remarriage),
+%    not s2_a_2_A(Taxp,Remarriage,Previous_marriage,S31,Taxy).
+
+%#show s2_a_2_A/5.
+%#show same_marriage/2.
+
+is_before(d1992_01_01,d1992_02_03).
+is_before(d1992_02_03,d1992_12_31).
+is_before(d1992_01_01,d1992_12_31).
+is_before(d2014_01_01,d2014_07_09).
+is_before(d2014_07_09,d2014_12_31).
+is_before(d2014_01_01,d2014_12_31).
+is_before(d2015_01_01,d2015_09_14).
+is_before(d2015_09_14,d2015_12_31).
+is_before(d2015_01_01,d2015_12_31).
+is_before(d1992_02_03,d2014_07_09).
+is_before(d1992_01_01,d2014_07_09).
+is_before(d1992_12_31,d2014_07_09).
+is_before(d1992_02_03,d2014_01_01).
+is_before(d1992_01_01,d2014_01_01).
+is_before(d1992_12_31,d2014_01_01).
+is_before(d1992_02_03,d2014_12_31).
+is_before(d1992_01_01,d2014_12_31).
+is_before(d1992_12_31,d2014_12_31).
+is_before(d1992_02_03,d2015_09_14).
+is_before(d1992_01_01,d2015_09_14).
+is_before(d1992_12_31,d2015_09_14).
+is_before(d2014_07_09,d2015_09_14).
+is_before(d2014_01_01,d2015_09_14).
+is_before(d2014_12_31,d2015_09_14).
+is_before(d1992_02_03,d2015_01_01).
+is_before(d1992_01_01,d2015_01_01).
+is_before(d1992_12_31,d2015_01_01).
+is_before(d2014_07_09,d2015_01_01).
+is_before(d2014_01_01,d2015_01_01).
+is_before(d2014_12_31,d2015_01_01).
+is_before(d1992_02_03,d2015_12_31).
+is_before(d1992_01_01,d2015_12_31).
+is_before(d1992_12_31,d2015_12_31).
+is_before(d2014_07_09,d2015_12_31).
+is_before(d2014_01_01,d2015_12_31).
+is_before(d2014_12_31,d2015_12_31).
+
+last_day_year(1992,d1992_12_31).
+last_day_year(2014,d2014_12_31).
+last_day_year(2015,d2015_12_31).
+
+%last_day_year(Year,Day):-
+%    date_split(Day,Year,12,31).
+
+%is_before(Day1,Day2):-
+%    date_split(Day1,Y1,M1,D1),
+%    date_split(Day2,Y2,M2,D2),
+%    Y1 < Y2.
+%is_before(Day1,Day2):-
+%    date_split(Day1,Y1,M1,D1),
+%    date_split(Day2,Y2,M2,D2),
+%   Y1 = Y2,M1 < M2.
+%is_before(Day1,Day2):-
+%    date_split(Day1,Y1,M1,D1),
+%    date_split(Day2,Y2,M2,D2),
+%    Y1 = Y2,M1 = M2,D1 < D2.
+
+%same_marriage(M1,M2):-
+%    marriage_(M1),marriage_(M2),M1=M2.
+
+same_marriage(alice_and_bob_s2_a_2_A_neg,alice_and_bob_s2_a_2_A_neg).
+same_marriage(alice_and_charlie_s2_a_2_A_neg,alice_and_charlie_s2_a_2_A_neg).
+same_marriage(alice_and_bob_s2_a_2_A_pos,alice_and_bob_s2_a_2_A_pos).
+same_marriage(bob_and_charlie_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos).
+
+%not_same_marriage(M1,M2):-
+%    marriage_(M1),marriage_(M2),not same_marriage(M1,M2).
+
+assumption(not_same_marriage(M1,M2)).
+contrary(not_same_marriage(M1,M2),same_marriage(M1,M2)):-
+    assumption(not_same_marriage(M1,M2)).
+    
+% Text
+% Alice and Bob got married on Feb 3rd, 1992. Alice died on July 9th, 2014. Bob married Charlie on September 14th, 2015.
+
+% Question
+% Section 2(a)(2)(A) applies to Bob in 2014. Contradiction
+
+% Facts
+person(alice_s2_a_2_A_neg).
+person(bob_s2_a_2_A_neg).
+person(charlie_s2_a_2_A_neg).
+
+year(1992).
+date(d1992_02_03).
+date_split(d1992_02_03,1992,2,3).
+date(d1992_01_01).
+date_split(d1992_01_01,1992,1,1).
+date(d1992_12_31).
+date_split(d1992_12_31,1992,12,31).
+
+year(2014).
+date(d2014_07_09).
+date_split(d2014_07_09,2014,7,9).
+date(d2014_01_01).
+date_split(d2014_01_01,2014,1,1).
+date(d2014_12_31).
+date_split(d2014_12_31,2014,12,31).
+
+year(2015).
+date(d2015_09_14).
+date_split(d2015_09_14,2015,9,14).
+date(d2015_01_01).
+date_split(d2015_01_01,2015,1,1).
+date(d2015_12_31).
+date_split(d2015_12_31,2015,12,31).
+
+marriage_(alice_and_bob_s2_a_2_A_neg).
+agent_(alice_and_bob_s2_a_2_A_neg,alice_s2_a_2_A_neg).
+agent_(alice_and_bob_s2_a_2_A_neg,bob_s2_a_2_A_neg).
+start_(alice_and_bob_s2_a_2_A_neg,d1992_02_03).
+death_(alice_dies_s2_a_2_A_neg).
+agent_(alice_dies_s2_a_2_A_neg,alice_s2_a_2_A_neg).
+start_(alice_dies_s2_a_2_A_neg,d2014_07_09).
+end_(alice_dies_s2_a_2_A_neg,d2014_07_09).
+marriage_(alice_and_charlie_s2_a_2_A_neg).
+agent_(alice_and_charlie_s2_a_2_A_neg,charlie_s2_a_2_A_neg).
+agent_(alice_and_charlie_s2_a_2_A_neg,bob_s2_a_2_A_neg).
+start_(alice_and_charlie_s2_a_2_A_neg,d2015_09_14).
+
+% Text
+% Alice and Bob got married on Feb 3rd, 1992. Alice died on July 9th, 2014. Bob married Charlie on September 14th, 2015.
+
+% Question
+% Section 2(a)(2)(A) applies to Bob in 2015. Entailment
+
+% Facts
+person(alice_s2_a_2_A_pos).
+person(bob_s2_a_2_A_pos).
+person(charlie_s2_a_2_A_pos).
+
+year(1992).
+date(d1992_02_03).
+date_split(d1992_02_03,1992,2,3).
+date(d1992_01_01).
+date_split(d1992_01_01,1992,1,1).
+date(d1992_12_31).
+date_split(d1992_12_31,1992,12,31).
+
+year(2014).
+date(d2014_07_09).
+date_split(d2014_07_09,2014,7,9).
+date(d2014_01_01).
+date_split(d2014_01_01,2014,1,1).
+date(d2014_12_31).
+date_split(d2014_12_31,2014,12,31).
+
+year(2015).
+date(d2015_09_14).
+date_split(d2015_09_14,2015,9,14).
+date(d2015_01_01).
+date_split(d2015_01_01,2015,1,1).
+date(d2015_12_31).
+date_split(d2015_12_31,2015,12,31).
+
+marriage_(alice_and_bob_s2_a_2_A_pos).
+agent_(alice_and_bob_s2_a_2_A_pos,alice_s2_a_2_A_pos).
+agent_(alice_and_bob_s2_a_2_A_pos,bob_s2_a_2_A_pos).
+start_(alice_and_bob_s2_a_2_A_pos,d1992_02_03).
+death_(alice_dies_s2_a_2_A_pos).
+agent_(alice_dies_s2_a_2_A_pos,alice_s2_a_2_A_pos).
+start_(alice_dies_s2_a_2_A_pos,d2014_07_09).
+end_(alice_dies_s2_a_2_A_pos,d2014_07_09).
+marriage_(bob_and_charlie_s2_a_2_A_pos).
+agent_(bob_and_charlie_s2_a_2_A_pos,charlie_s2_a_2_A_pos).
+agent_(bob_and_charlie_s2_a_2_A_pos,bob_s2_a_2_A_pos).
+start_(bob_and_charlie_s2_a_2_A_pos,d2015_09_14).
+
+%pos example: s2_a_2_A(bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,alice_and_bob_s2_a_2_A_pos,d2015_09_14,2015)
+%neg example: s2_a_2_A(bob_s2_a_2_A_neg,alice_and_charlie_s2_a_2_A_neg,alice_and_bob_s2_a_2_A_neg,d2015_09_14,2014)
+
+% Test
+% aba_asp('./experiments/s2_a_2_A_learning.bk',[s2_a_2_A(bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,alice_and_bob_s2_a_2_A_pos,d2015_09_14,2015)],[s2_a_2_A(bob_s2_a_2_A_neg,alice_and_charlie_s2_a_2_A_neg,alice_and_bob_s2_a_2_A_neg,d2015_09_14,2014)]).
+% aba_asp('./experiments/s2_a_2_A_learning.bk',[s2_a_2_A(bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,alice_and_bob_s2_a_2_A_pos,d2015_09_14,2015),s2_a_2_A(bob_s2_a_2_A_neg,alice_and_charlie_s2_a_2_A_neg,alice_and_bob_s2_a_2_A_neg,d2015_09_14,2015)],[s2_a_2_A(charlie_s2_a_2_A_neg,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d1992_02_03,2015), s2_a_2_A(charlie_s2_a_2_A_neg,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d1992_01_01,2015), s2_a_2_A(charlie_s2_a_2_A_neg,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d1992_12_31,2015), s2_a_2_A(charlie_s2_a_2_A_neg,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d2014_07_09,2015), s2_a_2_A(charlie_s2_a_2_A_neg,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d2014_01_01,2015), s2_a_2_A(charlie_s2_a_2_A_neg,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d2014_12_31,2015), s2_a_2_A(charlie_s2_a_2_A_neg,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d2015_09_14,2015), s2_a_2_A(charlie_s2_a_2_A_neg,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d2015_01_01,2015), s2_a_2_A(charlie_s2_a_2_A_neg,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d2015_12_31,2015),s2_a_2_A(bob_s2_a_2_A_neg,alice_and_charlie_s2_a_2_A_neg,alice_and_bob_s2_a_2_A_neg,d2015_09_14,2014)).
+% neg: s2_a_2_A(charlie_s2_a_2_A_neg,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d1992_02_03,2015), s2_a_2_A(charlie_s2_a_2_A_neg,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d1992_01_01,2015), s2_a_2_A(charlie_s2_a_2_A_neg,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d1992_12_31,2015), s2_a_2_A(charlie_s2_a_2_A_neg,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d2014_07_09,2015), s2_a_2_A(charlie_s2_a_2_A_neg,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d2014_01_01,2015), s2_a_2_A(charlie_s2_a_2_A_neg,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d2014_12_31,2015), s2_a_2_A(charlie_s2_a_2_A_neg,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d2015_09_14,2015), s2_a_2_A(charlie_s2_a_2_A_neg,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d2015_01_01,2015), s2_a_2_A(charlie_s2_a_2_A_neg,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d2015_12_31,2015), s2_a_2_A(alice_s2_a_2_A_pos,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d1992_02_03,2015), s2_a_2_A(alice_s2_a_2_A_pos,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d1992_01_01,2015), s2_a_2_A(alice_s2_a_2_A_pos,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d1992_12_31,2015), s2_a_2_A(alice_s2_a_2_A_pos,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d2014_07_09,2015), s2_a_2_A(alice_s2_a_2_A_pos,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d2014_01_01,2015), s2_a_2_A(alice_s2_a_2_A_pos,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d2014_12_31,2015), s2_a_2_A(alice_s2_a_2_A_pos,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d2015_09_14,2015), s2_a_2_A(alice_s2_a_2_A_pos,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d2015_01_01,2015), s2_a_2_A(alice_s2_a_2_A_pos,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d2015_12_31,2015), s2_a_2_A(bob_s2_a_2_A_pos,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d1992_02_03,2015), s2_a_2_A(bob_s2_a_2_A_pos,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d1992_01_01,2015), s2_a_2_A(bob_s2_a_2_A_pos,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d1992_12_31,2015), s2_a_2_A(bob_s2_a_2_A_pos,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d2014_07_09,2015), s2_a_2_A(bob_s2_a_2_A_pos,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d2014_01_01,2015), s2_a_2_A(bob_s2_a_2_A_pos,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d2014_12_31,2015), s2_a_2_A(bob_s2_a_2_A_pos,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d2015_09_14,2015), s2_a_2_A(bob_s2_a_2_A_pos,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d2015_01_01,2015), s2_a_2_A(bob_s2_a_2_A_pos,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d2015_12_31,2015), s2_a_2_A(charlie_s2_a_2_A_pos,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d1992_02_03,2015), s2_a_2_A(charlie_s2_a_2_A_pos,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d1992_01_01,2015), s2_a_2_A(charlie_s2_a_2_A_pos,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d1992_12_31,2015), s2_a_2_A(charlie_s2_a_2_A_pos,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d2014_07_09,2015), s2_a_2_A(charlie_s2_a_2_A_pos,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d2014_01_01,2015), s2_a_2_A(charlie_s2_a_2_A_pos,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d2014_12_31,2015), s2_a_2_A(charlie_s2_a_2_A_pos,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d2015_09_14,2015), s2_a_2_A(charlie_s2_a_2_A_pos,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d2015_01_01,2015), s2_a_2_A(charlie_s2_a_2_A_pos,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d2015_12_31,2015), s2_a_2_A(alice_s2_a_2_A_neg,bob_and_charlie_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d1992_02_03,2015), s2_a_2_A(alice_s2_a_2_A_neg,bob_and_charlie_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d1992_01_01,2015), s2_a_2_A(alice_s2_a_2_A_neg,bob_and_charlie_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d1992_12_31,2015), s2_a_2_A(alice_s2_a_2_A_neg,bob_and_charlie_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d2014_07_09,2015), s2_a_2_A(alice_s2_a_2_A_neg,bob_and_charlie_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d2014_01_01,2015), s2_a_2_A(alice_s2_a_2_A_neg,bob_and_charlie_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d2014_12_31,2015), s2_a_2_A(alice_s2_a_2_A_neg,bob_and_charlie_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d2015_09_14,2015), s2_a_2_A(alice_s2_a_2_A_neg,bob_and_charlie_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d2015_01_01,2015), s2_a_2_A(alice_s2_a_2_A_neg,bob_and_charlie_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d2015_12_31,2015), s2_a_2_A(bob_s2_a_2_A_neg,bob_and_charlie_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d1992_02_03,2015), s2_a_2_A(bob_s2_a_2_A_neg,bob_and_charlie_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d1992_01_01,2015), s2_a_2_A(bob_s2_a_2_A_neg,bob_and_charlie_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d1992_12_31,2015), s2_a_2_A(bob_s2_a_2_A_neg,bob_and_charlie_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d2014_07_09,2015), s2_a_2_A(bob_s2_a_2_A_neg,bob_and_charlie_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d2014_01_01,2015), s2_a_2_A(bob_s2_a_2_A_neg,bob_and_charlie_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d2014_12_31,2015), s2_a_2_A(bob_s2_a_2_A_neg,bob_and_charlie_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d2015_09_14,2015), s2_a_2_A(bob_s2_a_2_A_neg,bob_and_charlie_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d2015_01_01,2015), s2_a_2_A(bob_s2_a_2_A_neg,bob_and_charlie_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d2015_12_31,2015), s2_a_2_A(charlie_s2_a_2_A_neg,bob_and_charlie_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d1992_02_03,2015), s2_a_2_A(charlie_s2_a_2_A_neg,bob_and_charlie_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d1992_01_01,2015), s2_a_2_A(charlie_s2_a_2_A_neg,bob_and_charlie_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d1992_12_31,2015), s2_a_2_A(charlie_s2_a_2_A_neg,bob_and_charlie_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d2014_07_09,2015), s2_a_2_A(charlie_s2_a_2_A_neg,bob_and_charlie_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d2014_01_01,2015), 
+
+%positives(2):s2_a_2_A(bob_s2_a_2_A_neg,alice_and_charlie_s2_a_2_A_neg,alice_and_bob_s2_a_2_A_neg,d2015_09_14,2015),s2_a_2_A(bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,alice_and_bob_s2_a_2_A_pos,d2015_09_14,2015)
+%negatives(10):s2_a_2_A(bob_s2_a_2_A_neg,alice_and_charlie_s2_a_2_A_neg,alice_and_bob_s2_a_2_A_neg,d2015_09_14,2014),s2_a_2_A(charlie_s2_a_2_A_neg,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d1992_02_03,2015), s2_a_2_A(charlie_s2_a_2_A_neg,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d1992_01_01,2015), s2_a_2_A(charlie_s2_a_2_A_neg,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d1992_12_31,2015), s2_a_2_A(charlie_s2_a_2_A_neg,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d2014_07_09,2015), s2_a_2_A(charlie_s2_a_2_A_neg,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d2014_01_01,2015), s2_a_2_A(charlie_s2_a_2_A_neg,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d2014_12_31,2015), s2_a_2_A(charlie_s2_a_2_A_neg,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d2015_09_14,2015), s2_a_2_A(charlie_s2_a_2_A_neg,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d2015_01_01,2015), s2_a_2_A(charlie_s2_a_2_A_neg,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d2015_12_31,2015)
+
+%ACCURACY_BRAVE: 9/11
+%ACCURACY_CAUTIOUS: 9/11
+%WRONG POSITIVES: []
+%WRONG NEGATIVES: ['experiments/s2_a_2_A_neg_1.bk.sol.asp', 'experiments/s2_a_2_A_neg_2.bk.sol.asp']
+%ACCURACY_BRAVE: 9/11
+%ACCURACY_CAUTIOUS: 9/11
+%WRONG POSITIVES: []
+%WRONG NEGATIVES: ['experiments/s2_a_2_A_neg_1.bk.sol.asp', 'experiments/s2_a_2_A_neg_2.bk.sol.asp']
+%ACCURACY_BRAVE: 9/11
+%ACCURACY_CAUTIOUS: 9/11
+%WRONG POSITIVES: []
+%WRONG NEGATIVES: ['experiments/s2_a_2_A_neg_1.bk.sol.asp', 'experiments/s2_a_2_A_neg_2.bk.sol.asp']
+%Test : not  s2_a_2_A(charlie_s2_a_2_A_neg,alice_and_bob_s2_a_2_A_pos,bob_and_charlie_s2_a_2_A_pos,d2014_07_09,2015)
